@@ -1,0 +1,576 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		18240D6618C6CA5600590D9A /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 18240D6518C6CA5600590D9A /* Foundation.framework */; };
+		18240D7418C6CA5600590D9A /* XCTest.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 18240D7318C6CA5600590D9A /* XCTest.framework */; };
+		18240D7518C6CA5600590D9A /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 18240D6518C6CA5600590D9A /* Foundation.framework */; };
+		18240D7718C6CA5600590D9A /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 18240D7618C6CA5600590D9A /* UIKit.framework */; };
+		18240D7A18C6CA5600590D9A /* libNoArcTools.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 18240D6218C6CA5600590D9A /* libNoArcTools.a */; };
+		18240D8018C6CA5600590D9A /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 18240D7E18C6CA5600590D9A /* InfoPlist.strings */; };
+		18240D8218C6CA5600590D9A /* NoArcToolsTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 18240D8118C6CA5600590D9A /* NoArcToolsTests.m */; };
+		18357F7B18D8245900D3177F /* ASIAuthenticationDialog.m in Sources */ = {isa = PBXBuildFile; fileRef = 18357F6618D8245900D3177F /* ASIAuthenticationDialog.m */; };
+		18357F7C18D8245900D3177F /* ASIDataCompressor.m in Sources */ = {isa = PBXBuildFile; fileRef = 18357F6918D8245900D3177F /* ASIDataCompressor.m */; };
+		18357F7D18D8245900D3177F /* ASIDataDecompressor.m in Sources */ = {isa = PBXBuildFile; fileRef = 18357F6B18D8245900D3177F /* ASIDataDecompressor.m */; };
+		18357F7E18D8245900D3177F /* ASIDownloadCache.m in Sources */ = {isa = PBXBuildFile; fileRef = 18357F6D18D8245900D3177F /* ASIDownloadCache.m */; };
+		18357F7F18D8245900D3177F /* ASIFormDataRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 18357F6F18D8245900D3177F /* ASIFormDataRequest.m */; };
+		18357F8018D8245900D3177F /* ASIHTTPRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 18357F7118D8245900D3177F /* ASIHTTPRequest.m */; };
+		18357F8118D8245900D3177F /* ASIInputStream.m in Sources */ = {isa = PBXBuildFile; fileRef = 18357F7518D8245900D3177F /* ASIInputStream.m */; };
+		18357F8218D8245900D3177F /* ASINetworkQueue.m in Sources */ = {isa = PBXBuildFile; fileRef = 18357F7718D8245900D3177F /* ASINetworkQueue.m */; };
+		18357F8618D824A400D3177F /* Reachability.m in Sources */ = {isa = PBXBuildFile; fileRef = 18357F8518D824A400D3177F /* Reachability.m */; };
+		188E182F18D821E3002F0EBB /* RTLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = 188E181818D821E3002F0EBB /* RTLabel.m */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		18240D7818C6CA5600590D9A /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 18240D5A18C6CA5600590D9A /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 18240D6118C6CA5600590D9A;
+			remoteInfo = NoArcTools;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		18240D6018C6CA5600590D9A /* CopyFiles */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "include/$(PRODUCT_NAME)";
+			dstSubfolderSpec = 16;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
+/* Begin PBXFileReference section */
+		18240D6218C6CA5600590D9A /* libNoArcTools.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libNoArcTools.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		18240D6518C6CA5600590D9A /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
+		18240D7218C6CA5600590D9A /* NoArcToolsTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = NoArcToolsTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		18240D7318C6CA5600590D9A /* XCTest.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = XCTest.framework; path = Library/Frameworks/XCTest.framework; sourceTree = DEVELOPER_DIR; };
+		18240D7618C6CA5600590D9A /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = Library/Frameworks/UIKit.framework; sourceTree = DEVELOPER_DIR; };
+		18240D7D18C6CA5600590D9A /* NoArcToolsTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "NoArcToolsTests-Info.plist"; sourceTree = "<group>"; };
+		18240D7F18C6CA5600590D9A /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		18240D8118C6CA5600590D9A /* NoArcToolsTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = NoArcToolsTests.m; sourceTree = "<group>"; };
+		18357F6518D8245900D3177F /* ASIAuthenticationDialog.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ASIAuthenticationDialog.h; sourceTree = "<group>"; };
+		18357F6618D8245900D3177F /* ASIAuthenticationDialog.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ASIAuthenticationDialog.m; sourceTree = "<group>"; };
+		18357F6718D8245900D3177F /* ASICacheDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ASICacheDelegate.h; sourceTree = "<group>"; };
+		18357F6818D8245900D3177F /* ASIDataCompressor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ASIDataCompressor.h; sourceTree = "<group>"; };
+		18357F6918D8245900D3177F /* ASIDataCompressor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ASIDataCompressor.m; sourceTree = "<group>"; };
+		18357F6A18D8245900D3177F /* ASIDataDecompressor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ASIDataDecompressor.h; sourceTree = "<group>"; };
+		18357F6B18D8245900D3177F /* ASIDataDecompressor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ASIDataDecompressor.m; sourceTree = "<group>"; };
+		18357F6C18D8245900D3177F /* ASIDownloadCache.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ASIDownloadCache.h; sourceTree = "<group>"; };
+		18357F6D18D8245900D3177F /* ASIDownloadCache.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ASIDownloadCache.m; sourceTree = "<group>"; };
+		18357F6E18D8245900D3177F /* ASIFormDataRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ASIFormDataRequest.h; sourceTree = "<group>"; };
+		18357F6F18D8245900D3177F /* ASIFormDataRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ASIFormDataRequest.m; sourceTree = "<group>"; };
+		18357F7018D8245900D3177F /* ASIHTTPRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ASIHTTPRequest.h; sourceTree = "<group>"; };
+		18357F7118D8245900D3177F /* ASIHTTPRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ASIHTTPRequest.m; sourceTree = "<group>"; };
+		18357F7218D8245900D3177F /* ASIHTTPRequestConfig.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ASIHTTPRequestConfig.h; sourceTree = "<group>"; };
+		18357F7318D8245900D3177F /* ASIHTTPRequestDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ASIHTTPRequestDelegate.h; sourceTree = "<group>"; };
+		18357F7418D8245900D3177F /* ASIInputStream.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ASIInputStream.h; sourceTree = "<group>"; };
+		18357F7518D8245900D3177F /* ASIInputStream.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ASIInputStream.m; sourceTree = "<group>"; };
+		18357F7618D8245900D3177F /* ASINetworkQueue.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ASINetworkQueue.h; sourceTree = "<group>"; };
+		18357F7718D8245900D3177F /* ASINetworkQueue.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ASINetworkQueue.m; sourceTree = "<group>"; };
+		18357F7818D8245900D3177F /* ASIProgressDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ASIProgressDelegate.h; sourceTree = "<group>"; };
+		18357F8418D824A400D3177F /* Reachability.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Reachability.h; sourceTree = "<group>"; };
+		18357F8518D824A400D3177F /* Reachability.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Reachability.m; sourceTree = "<group>"; };
+		188E181718D821E3002F0EBB /* RTLabel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RTLabel.h; sourceTree = "<group>"; };
+		188E181818D821E3002F0EBB /* RTLabel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RTLabel.m; sourceTree = "<group>"; };
+		188E181C18D821E3002F0EBB /* NoArcTools-Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NoArcTools-Prefix.pch"; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		18240D5F18C6CA5600590D9A /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				18240D6618C6CA5600590D9A /* Foundation.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		18240D6F18C6CA5600590D9A /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				18240D7418C6CA5600590D9A /* XCTest.framework in Frameworks */,
+				18240D7A18C6CA5600590D9A /* libNoArcTools.a in Frameworks */,
+				18240D7718C6CA5600590D9A /* UIKit.framework in Frameworks */,
+				18240D7518C6CA5600590D9A /* Foundation.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		18240D5918C6CA5600590D9A = {
+			isa = PBXGroup;
+			children = (
+				188E17F018D821E3002F0EBB /* NoArcTools */,
+				18240D7B18C6CA5600590D9A /* NoArcToolsTests */,
+				18240D6418C6CA5600590D9A /* Frameworks */,
+				18240D6318C6CA5600590D9A /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		18240D6318C6CA5600590D9A /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				18240D6218C6CA5600590D9A /* libNoArcTools.a */,
+				18240D7218C6CA5600590D9A /* NoArcToolsTests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		18240D6418C6CA5600590D9A /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				18240D6518C6CA5600590D9A /* Foundation.framework */,
+				18240D7318C6CA5600590D9A /* XCTest.framework */,
+				18240D7618C6CA5600590D9A /* UIKit.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		18240D7B18C6CA5600590D9A /* NoArcToolsTests */ = {
+			isa = PBXGroup;
+			children = (
+				18240D8118C6CA5600590D9A /* NoArcToolsTests.m */,
+				18240D7C18C6CA5600590D9A /* Supporting Files */,
+			);
+			path = NoArcToolsTests;
+			sourceTree = "<group>";
+		};
+		18240D7C18C6CA5600590D9A /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				18240D7D18C6CA5600590D9A /* NoArcToolsTests-Info.plist */,
+				18240D7E18C6CA5600590D9A /* InfoPlist.strings */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		18357F6418D8245900D3177F /* ASI */ = {
+			isa = PBXGroup;
+			children = (
+				18357F6518D8245900D3177F /* ASIAuthenticationDialog.h */,
+				18357F6618D8245900D3177F /* ASIAuthenticationDialog.m */,
+				18357F6718D8245900D3177F /* ASICacheDelegate.h */,
+				18357F6818D8245900D3177F /* ASIDataCompressor.h */,
+				18357F6918D8245900D3177F /* ASIDataCompressor.m */,
+				18357F6A18D8245900D3177F /* ASIDataDecompressor.h */,
+				18357F6B18D8245900D3177F /* ASIDataDecompressor.m */,
+				18357F6C18D8245900D3177F /* ASIDownloadCache.h */,
+				18357F6D18D8245900D3177F /* ASIDownloadCache.m */,
+				18357F6E18D8245900D3177F /* ASIFormDataRequest.h */,
+				18357F6F18D8245900D3177F /* ASIFormDataRequest.m */,
+				18357F7018D8245900D3177F /* ASIHTTPRequest.h */,
+				18357F7118D8245900D3177F /* ASIHTTPRequest.m */,
+				18357F7218D8245900D3177F /* ASIHTTPRequestConfig.h */,
+				18357F7318D8245900D3177F /* ASIHTTPRequestDelegate.h */,
+				18357F7418D8245900D3177F /* ASIInputStream.h */,
+				18357F7518D8245900D3177F /* ASIInputStream.m */,
+				18357F7618D8245900D3177F /* ASINetworkQueue.h */,
+				18357F7718D8245900D3177F /* ASINetworkQueue.m */,
+				18357F7818D8245900D3177F /* ASIProgressDelegate.h */,
+				18357F7918D8245900D3177F /* ASIWebPageRequest */,
+				18357F7A18D8245900D3177F /* Reachability */,
+			);
+			path = ASI;
+			sourceTree = "<group>";
+		};
+		18357F7918D8245900D3177F /* ASIWebPageRequest */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = ASIWebPageRequest;
+			sourceTree = "<group>";
+		};
+		18357F7A18D8245900D3177F /* Reachability */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Reachability;
+			sourceTree = "<group>";
+		};
+		18357F8318D824A400D3177F /* Reachability */ = {
+			isa = PBXGroup;
+			children = (
+				18357F8418D824A400D3177F /* Reachability.h */,
+				18357F8518D824A400D3177F /* Reachability.m */,
+			);
+			path = Reachability;
+			sourceTree = "<group>";
+		};
+		188E17F018D821E3002F0EBB /* NoArcTools */ = {
+			isa = PBXGroup;
+			children = (
+				188E17F118D821E3002F0EBB /* Additions */,
+				188E181518D821E3002F0EBB /* Common */,
+				188E181918D821E3002F0EBB /* CustomViews */,
+				188E181A18D821E3002F0EBB /* DataBase */,
+				188E181B18D821E3002F0EBB /* DataRequest */,
+				188E181C18D821E3002F0EBB /* NoArcTools-Prefix.pch */,
+				188E181D18D821E3002F0EBB /* Utils */,
+				188E181E18D821E3002F0EBB /* ViewControllers */,
+			);
+			path = NoArcTools;
+			sourceTree = "<group>";
+		};
+		188E17F118D821E3002F0EBB /* Additions */ = {
+			isa = PBXGroup;
+			children = (
+				18357F8318D824A400D3177F /* Reachability */,
+				18357F6418D8245900D3177F /* ASI */,
+			);
+			path = Additions;
+			sourceTree = "<group>";
+		};
+		188E181518D821E3002F0EBB /* Common */ = {
+			isa = PBXGroup;
+			children = (
+				188E181618D821E3002F0EBB /* RTLabel */,
+			);
+			path = Common;
+			sourceTree = "<group>";
+		};
+		188E181618D821E3002F0EBB /* RTLabel */ = {
+			isa = PBXGroup;
+			children = (
+				188E181718D821E3002F0EBB /* RTLabel.h */,
+				188E181818D821E3002F0EBB /* RTLabel.m */,
+			);
+			path = RTLabel;
+			sourceTree = "<group>";
+		};
+		188E181918D821E3002F0EBB /* CustomViews */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = CustomViews;
+			sourceTree = "<group>";
+		};
+		188E181A18D821E3002F0EBB /* DataBase */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = DataBase;
+			sourceTree = "<group>";
+		};
+		188E181B18D821E3002F0EBB /* DataRequest */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = DataRequest;
+			sourceTree = "<group>";
+		};
+		188E181D18D821E3002F0EBB /* Utils */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Utils;
+			sourceTree = "<group>";
+		};
+		188E181E18D821E3002F0EBB /* ViewControllers */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = ViewControllers;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		18240D6118C6CA5600590D9A /* NoArcTools */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 18240D8518C6CA5600590D9A /* Build configuration list for PBXNativeTarget "NoArcTools" */;
+			buildPhases = (
+				18240D5E18C6CA5600590D9A /* Sources */,
+				18240D5F18C6CA5600590D9A /* Frameworks */,
+				18240D6018C6CA5600590D9A /* CopyFiles */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = NoArcTools;
+			productName = NoArcTools;
+			productReference = 18240D6218C6CA5600590D9A /* libNoArcTools.a */;
+			productType = "com.apple.product-type.library.static";
+		};
+		18240D7118C6CA5600590D9A /* NoArcToolsTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 18240D8818C6CA5600590D9A /* Build configuration list for PBXNativeTarget "NoArcToolsTests" */;
+			buildPhases = (
+				18240D6E18C6CA5600590D9A /* Sources */,
+				18240D6F18C6CA5600590D9A /* Frameworks */,
+				18240D7018C6CA5600590D9A /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				18240D7918C6CA5600590D9A /* PBXTargetDependency */,
+			);
+			name = NoArcToolsTests;
+			productName = NoArcToolsTests;
+			productReference = 18240D7218C6CA5600590D9A /* NoArcToolsTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		18240D5A18C6CA5600590D9A /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 0500;
+				ORGANIZATIONNAME = Hongli;
+			};
+			buildConfigurationList = 18240D5D18C6CA5600590D9A /* Build configuration list for PBXProject "NoArcTools" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+			);
+			mainGroup = 18240D5918C6CA5600590D9A;
+			productRefGroup = 18240D6318C6CA5600590D9A /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				18240D6118C6CA5600590D9A /* NoArcTools */,
+				18240D7118C6CA5600590D9A /* NoArcToolsTests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		18240D7018C6CA5600590D9A /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				18240D8018C6CA5600590D9A /* InfoPlist.strings in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		18240D5E18C6CA5600590D9A /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				18357F7F18D8245900D3177F /* ASIFormDataRequest.m in Sources */,
+				18357F8018D8245900D3177F /* ASIHTTPRequest.m in Sources */,
+				18357F8618D824A400D3177F /* Reachability.m in Sources */,
+				18357F7B18D8245900D3177F /* ASIAuthenticationDialog.m in Sources */,
+				18357F8218D8245900D3177F /* ASINetworkQueue.m in Sources */,
+				18357F7E18D8245900D3177F /* ASIDownloadCache.m in Sources */,
+				18357F8118D8245900D3177F /* ASIInputStream.m in Sources */,
+				18357F7C18D8245900D3177F /* ASIDataCompressor.m in Sources */,
+				188E182F18D821E3002F0EBB /* RTLabel.m in Sources */,
+				18357F7D18D8245900D3177F /* ASIDataDecompressor.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		18240D6E18C6CA5600590D9A /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				18240D8218C6CA5600590D9A /* NoArcToolsTests.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		18240D7918C6CA5600590D9A /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 18240D6118C6CA5600590D9A /* NoArcTools */;
+			targetProxy = 18240D7818C6CA5600590D9A /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		18240D7E18C6CA5600590D9A /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				18240D7F18C6CA5600590D9A /* en */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		18240D8318C6CA5600590D9A /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ARCHS = "$(ARCHS_STANDARD_INCLUDING_64_BIT)";
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+			};
+			name = Debug;
+		};
+		18240D8418C6CA5600590D9A /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ARCHS = "$(ARCHS_STANDARD_INCLUDING_64_BIT)";
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = YES;
+				ENABLE_NS_ASSERTIONS = NO;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
+				SDKROOT = iphoneos;
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		18240D8618C6CA5600590D9A /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_ENABLE_OBJC_ARC = NO;
+				DSTROOT = /tmp/NoArcTools.dst;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "NoArcTools/NoArcTools-Prefix.pch";
+				OTHER_LDFLAGS = "-ObjC";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+			};
+			name = Debug;
+		};
+		18240D8718C6CA5600590D9A /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_ENABLE_OBJC_ARC = NO;
+				DSTROOT = /tmp/NoArcTools.dst;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "NoArcTools/NoArcTools-Prefix.pch";
+				OTHER_LDFLAGS = "-ObjC";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+			};
+			name = Release;
+		};
+		18240D8918C6CA5600590D9A /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD_INCLUDING_64_BIT)";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(SDKROOT)/Developer/Library/Frameworks",
+					"$(inherited)",
+					"$(DEVELOPER_FRAMEWORKS_DIR)",
+				);
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "NoArcTools/NoArcTools-Prefix.pch";
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				INFOPLIST_FILE = "NoArcToolsTests/NoArcToolsTests-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = xctest;
+			};
+			name = Debug;
+		};
+		18240D8A18C6CA5600590D9A /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD_INCLUDING_64_BIT)";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(SDKROOT)/Developer/Library/Frameworks",
+					"$(inherited)",
+					"$(DEVELOPER_FRAMEWORKS_DIR)",
+				);
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "NoArcTools/NoArcTools-Prefix.pch";
+				INFOPLIST_FILE = "NoArcToolsTests/NoArcToolsTests-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = xctest;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		18240D5D18C6CA5600590D9A /* Build configuration list for PBXProject "NoArcTools" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				18240D8318C6CA5600590D9A /* Debug */,
+				18240D8418C6CA5600590D9A /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		18240D8518C6CA5600590D9A /* Build configuration list for PBXNativeTarget "NoArcTools" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				18240D8618C6CA5600590D9A /* Debug */,
+				18240D8718C6CA5600590D9A /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		18240D8818C6CA5600590D9A /* Build configuration list for PBXNativeTarget "NoArcToolsTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				18240D8918C6CA5600590D9A /* Debug */,
+				18240D8A18C6CA5600590D9A /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 18240D5A18C6CA5600590D9A /* Project object */;
+}
