@@ -21,6 +21,7 @@
 
 
 - (void)changeShowType:(ShowType)myShowType{
+    showType = myShowType;
     if (myShowType == showSignUp) {
         self.eventName.text = @"报名时间";
     }else{
@@ -28,6 +29,13 @@
     }
 }
 
+- (void)setObject:(NSDictionary *)dict{
+    if (showType == showSignUp) {
+        
+    }else{
+        self.eventDetail.text = dict[@"voteName"];
+    }  
+}
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated
 {

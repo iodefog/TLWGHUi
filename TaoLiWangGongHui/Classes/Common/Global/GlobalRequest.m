@@ -17,39 +17,41 @@
 
 #pragma mark -   一、注册登陆相关功能接口
 
-// 1.用户登录接口
-+ (NSString *)userAction_Login_Url{
-    return [NSString stringWithFormat:@"%@%@",[GlobalRequest getBaseServiceUrl],@"UserAction!login.do"];
-}
 
-//	2.用户信息接口
+
+//	1.用户信息接口
 + (NSString *)userAction_queryUserInfo_Url{
  return [NSString stringWithFormat:@"%@%@",[GlobalRequest getBaseServiceUrl],@"UserAction!queryUserInfo.do"];
 }
 
-//	3.用户信息维护—手机号码修改接口
+//	2.用户信息维护—手机号码修改接口
 + (NSString *)userAction_UpdateMobile_Url{
     return [NSString stringWithFormat:@"%@%@",[GlobalRequest getBaseServiceUrl],@"UserAction!updateMobile.do"];
 }
 
-//	4.用户信息维护—邮箱修改接口
+//	3.用户信息维护—邮箱修改接口
 + (NSString *)userAction_UpdateEmail_Url{
     return [NSString stringWithFormat:@"%@%@",[GlobalRequest getBaseServiceUrl],@"UserAction!updateEmail.do"];
 }
 
-//  5.用户信息维护—密码修改接口
+//  4.用户信息维护—密码修改接口
 + (NSString *)userAction_UpdatePassword_Url{
     return [NSString stringWithFormat:@"%@%@",[GlobalRequest getBaseServiceUrl],@"UserAction!updatePassword.do"];
 }
 
-//  6.密码找回—短息找回接口
+//  5.密码找回—短息找回接口
 + (NSString *)userAction_QueryPasswordByMessage_Url{
     return [NSString stringWithFormat:@"%@%@",[GlobalRequest getBaseServiceUrl],@"UserAction!queryPasswordByMessage.do"];
 }
 
-//  7.密码找回—邮件找回接口
+//  6.密码找回—邮件找回接口
 + (NSString *)userAction_QueryPasswordByEmail_Url{
     return [NSString stringWithFormat:@"%@%@",[GlobalRequest getBaseServiceUrl],@"UserAction!queryPasswordByEmail.do"];
+}
+
+// 7.用户登录接口
++ (NSString *)userAction_Login_Url{
+    return [NSString stringWithFormat:@"%@%@",[GlobalRequest getBaseServiceUrl],@"UserAction!login.do"];
 }
 
 #pragma mark -  二、	首页
@@ -135,18 +137,18 @@
 
 // 25.	订阅栏目列表接口
 + (NSString *)articleAction_QuerySubscription_Url{
- return [NSString stringWithFormat:@"%@%@",[GlobalRequest getBaseServiceUrl],@"ArticleAction! querySubscription.do"];
+ return [NSString stringWithFormat:@"%@%@",[GlobalRequest getBaseServiceUrl],@"ArticleAction!querySubscription.do"];
 }
 
 // 26.	订阅/取消订阅接口
 + (NSString *)articleAction_DoSubscription_Url{
-    return [NSString stringWithFormat:@"%@%@",[GlobalRequest getBaseServiceUrl],@"ArticleAction! doSubscription.do"];
+    return [NSString stringWithFormat:@"%@%@",[GlobalRequest getBaseServiceUrl],@"ArticleAction!doSubscription.do"];
 }
 
 #pragma mark - 五、	我的活动
 // 27.	我的活动接口
 + (NSString *)articleAction_QueryMyActivityList_Url{
-    return [NSString stringWithFormat:@"%@%@",[GlobalRequest getBaseServiceUrl],@"ArticleAction! queryMyActivityList.do"];
+    return [NSString stringWithFormat:@"%@%@",[GlobalRequest getBaseServiceUrl],@"ArticleAction!queryMyActivityList.do"];
 }
 
 #pragma mark - 六、	个人中心

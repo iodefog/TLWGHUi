@@ -60,7 +60,7 @@
      *  保存用户信息
      */
     NSLog(@"resultDic  %@", resultDic);
-    [[UserHelper shareInstance] saveMenberID:resultDic];
+    [[UserHelper shareInstance] saveMemberID:resultDic];
     
     AppDelegate *appDelegate = [UIApplication sharedApplication].delegate;
     [appDelegate chageRootVC];

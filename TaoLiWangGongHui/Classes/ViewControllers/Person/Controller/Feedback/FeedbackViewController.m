@@ -33,13 +33,15 @@
 
 // 提交意见反馈
 - (IBAction)propertystrongnonatomicIBOutletUIButtonfeedbackCommitfeedbackCommit:(id)sender {
-    if (self.feedbackTextView.text) {
-        NSDictionary *params = [NSDictionary dictionaryWithObjectsAndKeys:
-                                @"memberId",[[UserHelper shareInstance] getMenberID],
-                                @"message",self.feedbackTextView.text,nil];
+    if (self.feedbackTextView.text.length > 0) {
+        NSDictionary *params = @{
+                                 @"memberId":[[UserHelper shareInstance] getMemberID],
+                                 @"message":self.feedbackTextView.text
+                                 };
+       
         [self commitRequestWithParams:params withUrl:[GlobalRequest userAction_Feedback_Url]];
     }else{
-        [UIAlertView popupAlertByDelegate:self title:@"提示" message:@"您还没有填写意见，请先填写"];
+        [UIAlertView popupAlertByDelegate:self andTag:1001 title:@"提示" message:@"您还没有填写意见，请先填写"];
     }
 }
 

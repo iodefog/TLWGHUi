@@ -11,5 +11,6 @@
 @interface MessageController : ViewController <UITableViewDataSource ,UITableViewDelegate>
 
 @property (nonatomic, strong) UITableView *messageTableView;  // 推送通知
+- (void)changeIsSelfResquestWithBool:(BOOL)selfBool;
 
 @end

@@ -27,11 +27,8 @@
     return self;
 }
 
-- (void)viewDidLoad
-{
-    [super viewDidLoad];
-    // Do any additional setup after loading the view from its nib.
-    self.navigationItem.title = @"信息确认";
+- (void)viewWillAppear:(BOOL)animated{
+    [super viewWillAppear:animated];
     NSArray *dbArray = [[UserAddressDataBase shareDataBase] readTableName];
     if ([dbArray count] > 0) {  // 条件避免
         addressModel = dbArray[0];
@@ -47,6 +44,13 @@
     self.goodImage.image = self.goodPic;
     self.goodTitle.text = self.goodText;
     self.goodID.text = self.goodIDText;
+}
+
+- (void)viewDidLoad
+{
+    [super viewDidLoad];
+    // Do any additional setup after loading the view from its nib.
+    self.navigationItem.title = @"信息确认";
 }
 
 // 创建收货人信息

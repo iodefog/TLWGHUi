@@ -23,6 +23,10 @@
 		18357F8118D8245900D3177F /* ASIInputStream.m in Sources */ = {isa = PBXBuildFile; fileRef = 18357F7518D8245900D3177F /* ASIInputStream.m */; };
 		18357F8218D8245900D3177F /* ASINetworkQueue.m in Sources */ = {isa = PBXBuildFile; fileRef = 18357F7718D8245900D3177F /* ASINetworkQueue.m */; };
 		18357F8618D824A400D3177F /* Reachability.m in Sources */ = {isa = PBXBuildFile; fileRef = 18357F8518D824A400D3177F /* Reachability.m */; };
+		18604F1918D84B6A00981E54 /* ImagePicker.m in Sources */ = {isa = PBXBuildFile; fileRef = 18604F1818D84B6A00981E54 /* ImagePicker.m */; };
+		18604F1C18D84BB600981E54 /* EncodeUtil.m in Sources */ = {isa = PBXBuildFile; fileRef = 18604F1B18D84BB600981E54 /* EncodeUtil.m */; };
+		18604F1E18D84BD800981E54 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 18604F1D18D84BD800981E54 /* UIKit.framework */; };
+		18604F2018D84BE100981E54 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 18604F1F18D84BE100981E54 /* CoreGraphics.framework */; };
 		188E182F18D821E3002F0EBB /* RTLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = 188E181818D821E3002F0EBB /* RTLabel.m */; };
 /* End PBXBuildFile section */
 
@@ -79,6 +83,12 @@
 		18357F7818D8245900D3177F /* ASIProgressDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ASIProgressDelegate.h; sourceTree = "<group>"; };
 		18357F8418D824A400D3177F /* Reachability.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Reachability.h; sourceTree = "<group>"; };
 		18357F8518D824A400D3177F /* Reachability.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Reachability.m; sourceTree = "<group>"; };
+		18604F1718D84B6A00981E54 /* ImagePicker.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ImagePicker.h; sourceTree = "<group>"; };
+		18604F1818D84B6A00981E54 /* ImagePicker.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ImagePicker.m; sourceTree = "<group>"; };
+		18604F1A18D84BB600981E54 /* EncodeUtil.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EncodeUtil.h; sourceTree = "<group>"; };
+		18604F1B18D84BB600981E54 /* EncodeUtil.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EncodeUtil.m; sourceTree = "<group>"; };
+		18604F1D18D84BD800981E54 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
+		18604F1F18D84BE100981E54 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
 		188E181718D821E3002F0EBB /* RTLabel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RTLabel.h; sourceTree = "<group>"; };
 		188E181818D821E3002F0EBB /* RTLabel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RTLabel.m; sourceTree = "<group>"; };
 		188E181C18D821E3002F0EBB /* NoArcTools-Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NoArcTools-Prefix.pch"; sourceTree = "<group>"; };
@@ -89,6 +99,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				18604F2018D84BE100981E54 /* CoreGraphics.framework in Frameworks */,
+				18604F1E18D84BD800981E54 /* UIKit.framework in Frameworks */,
 				18240D6618C6CA5600590D9A /* Foundation.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -129,6 +141,8 @@
 		18240D6418C6CA5600590D9A /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				18604F1F18D84BE100981E54 /* CoreGraphics.framework */,
+				18604F1D18D84BD800981E54 /* UIKit.framework */,
 				18240D6518C6CA5600590D9A /* Foundation.framework */,
 				18240D7318C6CA5600590D9A /* XCTest.framework */,
 				18240D7618C6CA5600590D9A /* UIKit.framework */,
@@ -206,6 +220,17 @@
 			path = Reachability;
 			sourceTree = "<group>";
 		};
+		18604F1618D84B6A00981E54 /* ImagePicker */ = {
+			isa = PBXGroup;
+			children = (
+				18604F1A18D84BB600981E54 /* EncodeUtil.h */,
+				18604F1B18D84BB600981E54 /* EncodeUtil.m */,
+				18604F1718D84B6A00981E54 /* ImagePicker.h */,
+				18604F1818D84B6A00981E54 /* ImagePicker.m */,
+			);
+			path = ImagePicker;
+			sourceTree = "<group>";
+		};
 		188E17F018D821E3002F0EBB /* NoArcTools */ = {
 			isa = PBXGroup;
 			children = (
@@ -224,6 +249,7 @@
 		188E17F118D821E3002F0EBB /* Additions */ = {
 			isa = PBXGroup;
 			children = (
+				18604F1618D84B6A00981E54 /* ImagePicker */,
 				18357F8318D824A400D3177F /* Reachability */,
 				18357F6418D8245900D3177F /* ASI */,
 			);
@@ -366,9 +392,11 @@
 				18357F7F18D8245900D3177F /* ASIFormDataRequest.m in Sources */,
 				18357F8018D8245900D3177F /* ASIHTTPRequest.m in Sources */,
 				18357F8618D824A400D3177F /* Reachability.m in Sources */,
+				18604F1C18D84BB600981E54 /* EncodeUtil.m in Sources */,
 				18357F7B18D8245900D3177F /* ASIAuthenticationDialog.m in Sources */,
 				18357F8218D8245900D3177F /* ASINetworkQueue.m in Sources */,
 				18357F7E18D8245900D3177F /* ASIDownloadCache.m in Sources */,
+				18604F1918D84B6A00981E54 /* ImagePicker.m in Sources */,
 				18357F8118D8245900D3177F /* ASIInputStream.m in Sources */,
 				18357F7C18D8245900D3177F /* ASIDataCompressor.m in Sources */,
 				188E182F18D821E3002F0EBB /* RTLabel.m in Sources */,

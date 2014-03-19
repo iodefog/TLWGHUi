@@ -29,7 +29,7 @@ static NSString *tableName = nil;
                                        @"basicPrice":@"VARCHAR",
                                        @"costPrice":@"VARCHAR",
                                        @"productType":@"VARCHAR"};
-             tableName = [NSString stringWithFormat:@"CarsList_%@",[[UserHelper shareInstance] getMenberID]];
+             tableName = [NSString stringWithFormat:@"CarsList_%@",[[UserHelper shareInstance] getMemberID]];
             [super createTable:tableName fieldName:fileName];
         }
     }

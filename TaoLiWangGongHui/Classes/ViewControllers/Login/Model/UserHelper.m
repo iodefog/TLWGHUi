@@ -18,11 +18,18 @@ static UserHelper *helper = nil;
     return helper;
 }
 
-- (NSString *)getMenberID{
+- (NSString *)getMemberID{
     return [[NSUserDefaults standardUserDefaults] objectForKey:@"memberID"];
+    [[NSUserDefaults standardUserDefaults] synchronize];
 }
 
-- (BOOL)saveMenberID:(NSDictionary *)dict{
+- (BOOL)removeMemberID{
+    [[NSUserDefaults standardUserDefaults] removeObjectForKey:@"memberID"];
+    [[NSUserDefaults standardUserDefaults] synchronize];
+    return YES;
+}
+
+- (BOOL)saveMemberID:(NSDictionary *)dict{
     BOOL mm = YES;
     NSString *memberID = nil;
     if ([dict[@"result"] isKindOfClass:[NSNumber class]]) {

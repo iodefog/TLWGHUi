@@ -112,7 +112,9 @@
 #pragma mark - UIAlertView Delegate Method
 - (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex{
     if (buttonIndex==1) {
-        NSLog(@"退出但未进行任何操作");
+        [[UserHelper shareInstance] removeMemberID];
+        AppDelegate *delegate = [UIApplication sharedApplication].delegate;
+        [delegate chageLoginVC];
     }
 }
 

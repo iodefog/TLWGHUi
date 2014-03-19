@@ -15,7 +15,7 @@
 {
     if ( self =[ super initWithFrame : frame ]) {
         icon =[[ UIImageView alloc ] initWithFrame :
-               CGRectMake ( 10 , 0 , frame . size . height , frame . size . height )];
+               CGRectMake ( 10 , 0 , 20 , 20 )];
         [ self setStyle : CheckButtonStyleDefault ]; // 默认风格为方框（多选）样式
         //self.backgroundColor=[UIColor grayColor];
         [ self addSubview : icon ];
@@ -23,7 +23,9 @@
                                                               frame . size . width - icon . frame . size . width - 24 ,
                                                               frame . size . height )];
         label . backgroundColor =[ UIColor clearColor ];
-        label . font =[ UIFont fontWithName : @"Arial" size : 20 ];
+        label.numberOfLines = 0;
+        label.lineBreakMode = NSLineBreakByCharWrapping;
+        label . font =[ UIFont fontWithName : @"Arial" size : 14 ];
         label . textColor =[ UIColor darkGrayColor];
         label . textAlignment = NSTextAlignmentLeft ;
         [ self addSubview : label ];

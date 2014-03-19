@@ -74,15 +74,17 @@
 #pragma mark BySMSGetInformation
 // 获取验证码
 - (IBAction)getCodeButtonClick:(id)sender {
-    // 尚未请求
-//    NSDictionary *params = @{@"member": [[UserHelper shareInstance] getMenberID], @"code":self.codeTextField.text};
-    
-//    [self commitRequestWithParams:params];
-    [self.byCodeButton setTitle:[NSString stringWithFormat:@"%d秒后再发",60] forState:UIControlStateDisabled];
-    self.byCodeButton.enabled = NO;
-    
-    if (![codeTimer isValid]) {
-        codeTimer = [NSTimer scheduledTimerWithTimeInterval:1 target:self selector:@selector(codeTimerTrigger:) userInfo:nil repeats:YES];
+    if([GlobalHelper isValidatePhone:self.phoneTetxField.text]){
+        NSDictionary *params = @{@"phone":self.phoneTetxField.text};
+        [self commitRequestWithParams:params withUrl:[GlobalRequest userAction_QueryPasswordByMessage_Url]];
+        [self.byCodeButton setTitle:[NSString stringWithFormat:@"%d秒后再发",60] forState:UIControlStateDisabled];
+        self.byCodeButton.enabled = NO;
+        
+        if (![codeTimer isValid]) {
+            codeTimer = [NSTimer scheduledTimerWithTimeInterval:1 target:self selector:@selector(codeTimerTrigger:) userInfo:nil repeats:YES];
+        }
+    }else{
+        [UIAlertView popupAlertByDelegate:self andTag:1000 title:@"提示" message:@"手机号码格式不正确"];
     }
 }
 
@@ -103,14 +105,14 @@ static int clickCount = 59;
 // 通过短信找回密码
 - (IBAction)submitSMSInfomation:(id)sender {
     if (self.phoneTetxField.text.length < 1 ) {
-        [UIAlertView popupAlertByDelegate:self title:@"提示" message:@"手机号码不能为空"];
+        [UIAlertView popupAlertByDelegate:self andTag:1001 title:@"提示" message:@"手机号码不能为空"];
     }else if (self.phoneTetxField.text.length != 11){
-         [UIAlertView popupAlertByDelegate:self title:@"提示" message:@"手机号码格式不正确"];
+         [UIAlertView popupAlertByDelegate:self andTag:1001 title:@"提示" message:@"手机号码格式不正确"];
     }else if (self.codeTextField.text.length < 1){
-        [UIAlertView popupAlertByDelegate:self title:@"提示" message:@"验证码不能为空"];
+        [UIAlertView popupAlertByDelegate:self andTag:1001 title:@"提示" message:@"验证码不能为空"];
     }else{
         NSDictionary *params = [NSDictionary dictionaryWithObjectsAndKeys:
-                                [[UserHelper shareInstance] getMenberID],@"member",
+                                [[UserHelper shareInstance] getMemberID],@"member",
                                 self.phoneTetxField.text ,@"phone",
                                 self.codeTextField.text, @"code",  nil];
 //   @{@"member": [[UserHelper shareInstance] getMenberID], @"phone":self.phoneTetxField.text};
@@ -136,19 +138,24 @@ static int clickCount = 59;
 - (IBAction)sendEmailBtnClick:(id)sender {
     
     if (self.emailTextField.text.length < 1) {
-        [UIAlertView popupAlertByDelegate:self title:@"提示" message:@"邮件不能为空"];
+        [UIAlertView popupAlertByDelegate:self andTag:1001 title:@"提示" message:@"邮件不能为空"];
     }else if (self.emailTextField.text.length != 11){
         if (![GlobalHelper isValidateEmail:self.emailTextField.text]) {
-             [UIAlertView popupAlertByDelegate:self title:@"提示" message:@"邮件格式不正确"];
+             [UIAlertView popupAlertByDelegate:self andTag:1001 title:@"提示" message:@"邮件格式不正确"];
         }
     }else{
        NSDictionary *params = [NSDictionary dictionaryWithObjectsAndKeys:
-                               @"member", [[UserHelper shareInstance] getMenberID],
+                               @"member", [[UserHelper shareInstance] getMemberID],
                                @"email",self.emailTextField.text,nil];
         [self commitRequestWithParams:params withUrl:[GlobalRequest userAction_QueryPasswordByEmail_Url]];
     }
 }
 
+- (void)responseSuccessWithResponse:(ITTBaseDataRequest *)request{
+        if ([request.requestUrl.lastPathComponent isEqualToString:@"UserAction!queryPasswordByMessage.do"]) {
+            [UIAlertView popupAlertByDelegate:self andTag:1000 title:@"提示" message:request.handleredResult[@"msg"]];
+    }
+}
 
 - (IBAction)loginEmail:(id)sender {
 

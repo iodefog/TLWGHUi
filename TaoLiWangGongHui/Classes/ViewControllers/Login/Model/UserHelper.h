@@ -13,9 +13,10 @@
 + (id) shareInstance;
 
 // 获取用户ID
-- (NSString *)getMenberID;
-
+- (NSString *)getMemberID;
+// 移除用户ID
+- (BOOL)removeMemberID;
 // 保存用户ID
-- (BOOL)saveMenberID:(NSDictionary *)dict;
+- (BOOL)saveMemberID:(NSDictionary *)dict;
 
 @end

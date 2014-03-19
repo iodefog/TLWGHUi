@@ -18,26 +18,26 @@ typedef enum {
 
 #pragma mark -   一、注册登陆相关功能接口
 
-//  1.用户登录接口
-+ (NSString *)userAction_Login_Url;
-
-//	2.用户信息接口
+//	1.用户信息接口
 + (NSString *)userAction_queryUserInfo_Url;
 
-//	3.用户信息维护—手机号码修改接口
+//	2.用户信息维护—手机号码修改接口
 + (NSString *)userAction_UpdateMobile_Url;
 
-//	4.用户信息维护—邮箱修改接口
+//	3.用户信息维护—邮箱修改接口
 + (NSString *)userAction_UpdateEmail_Url;
 
-//  5.用户信息维护—密码修改接口
+//  4.用户信息维护—密码修改接口
 + (NSString *)userAction_UpdatePassword_Url;
 
-//  6.密码找回—短息找回接口
+//  5.密码找回—短息找回接口
 + (NSString *)userAction_QueryPasswordByMessage_Url;
 
-//  7.密码找回—邮件找回接口
+//  6.密码找回—邮件找回接口
 + (NSString *)userAction_QueryPasswordByEmail_Url;
+
+//  7.用户登录接口
++ (NSString *)userAction_Login_Url;
 
 #pragma mark -  二、	首页
 // 8.首页接口

@@ -7,9 +7,16 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "MessageModel.h"
 
 @interface SubscribeCell : UITableViewCell
+
 @property (strong, nonatomic) IBOutlet UIImageView *preViewImage; //商品图片
 @property (strong, nonatomic) IBOutlet UILabel *goodCategory;
+@property (strong, nonatomic) IBOutlet UIButton *subscribeBtn;
+
+@property (strong, nonatomic) MessageModel *subscribeModel; // 商品信息
+
+- (void)setObject:(NSDictionary *)dict;
 
 @end

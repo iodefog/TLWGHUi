@@ -15,7 +15,11 @@
 
 #define CheckButtonCount 2
 
-@interface ActivitiesDetailController ()
+@interface ActivitiesDetailController (){
+    UIView *voteOrNotVoteView;  //保存当前显示的投票视图
+}
+
+@property (nonatomic, strong) NSMutableArray *voteListArray;
 
 @end
 
@@ -51,20 +55,25 @@
     self.baseScroll.backgroundColor  = RGBCOLOR(241, 241, 241);
     self.baseScroll.contentSize = CGSizeMake(self.view.width, 568);
     
+    [self showDiffrentMiddleViewWithType:activityType withDescription:nil];
+    
+    [self commitRequestWithParams:@{@"activityId":activityID} withUrl:[GlobalRequest activityAction_QueryActivityInfo_Url]];
+    
     if (activityType == TypeNone){ // 不显示报名和投票
         self.bottomView.hidden = YES;
-        
-        [self commitRequestWithParams:@{@"activityId":activityID} withUrl:[GlobalRequest activityAction_QueryActivityInfo_Url]];
     }
     else if (activityType == TypeSignUp) {  // 报名
-        [self.signUpButton setBackgroundImage:[UIImage imageNamed:@"union_signUp_selected"] forState:UIControlStateSelected];
-        [self.signUpButton setTitle:@"已报名" forState:UIControlStateSelected];
+        [self.signUpButton setTitle:@"已报名" forState:UIControlStateDisabled];
         [self.haveSignedButton setTitle:@"查看已报名会员" forState:UIControlStateNormal];
     }
     else{ // 投票
-        [self.signUpButton setBackgroundImage:[UIImage imageNamed:@"union_signUp_selected"] forState:UIControlStateSelected];
+        
+        NSDictionary *params = @{@"memberId": [[UserHelper shareInstance] getMemberID],
+                                 @"activityId":activityID};
+        [self commitRequestWithParams:params withUrl:[GlobalRequest activityAction_QueryActivityOptionList_Url]];
+        
         [self.signUpButton setTitle:@"投票" forState:UIControlStateNormal];
-        [self.signUpButton setTitle:@"已投票" forState:UIControlStateSelected];
+        [self.signUpButton setTitle:@"已投票" forState:UIControlStateDisabled];
         [self.haveSignedButton setTitle:@"查看投票记录" forState:UIControlStateNormal];
     }
 }
@@ -77,62 +86,106 @@
         self.middleScrollView.contentSize = CGSizeMake(self.middleScrollView.width, signDescription.optimumSize.height);
         [self.middleScrollView addSubview:signDescription];
     }else if(myActivityType == TypeVote){
-        RTLabel *signDescription = [[RTLabel alloc] initWithFrame:CGRectMake(10, 5, self.middleScrollView.width - 20, 0)];
-        signDescription.text = description;
-        signDescription.height =  signDescription.optimumSize.height +5 ;
-        [self.middleScrollView addSubview:signDescription];
-
-        NSArray *checkBtnTitleArray = [NSArray arrayWithObjects:@"同意本次活动，活动a很有意思不错，非常想参加",@"反对活动，不想参加", nil];
-        RadioGroup * radioGroup = [[RadioGroup alloc] init];
-        for (int i = 0; i < CheckButtonCount ; i++) {
-            CheckButton *checkBtn = [[CheckButton alloc] initWithFrame:CGRectMake(signDescription.left, signDescription.bottom + 40*i, signDescription.width, 20)];
-            [radioGroup add:checkBtn];
-            checkBtn.label.font = [UIFont systemFontOfSize:14];
-            checkBtn.label.text = checkBtnTitleArray[i];
-            checkBtn.value = [NSNumber numberWithInt:i];
-            checkBtn.style = CheckButtonStyleBox;
-            [self.middleScrollView addSubview:checkBtn];
-        }
-        self.middleScrollView.contentSize = CGSizeMake(self.middleScrollView.width, signDescription.bottom + 40*CheckButtonCount);
-
+        [self unHaveVotedWithDescription:description];
+//        [self haveVotedWithDescription:description];
     }
 }
 
+// 未投票时显示这个
+- (void)unHaveVotedWithDescription:(NSString *)description{
+    voteOrNotVoteView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, self.middleScrollView.width, self.middleScrollView.height)];
+                         
+    RTLabel *signDescription = [[RTLabel alloc] initWithFrame:CGRectMake(10, 5, self.middleScrollView.width - 20, 0)];
+    signDescription.text = description;
+    signDescription.height =  signDescription.optimumSize.height +5 ;
+    [voteOrNotVoteView addSubview:signDescription];
+    
+    NSArray *checkBtnTitleArray = [NSArray arrayWithObjects:@"同意本次活动，活动a很有意思不错，非常想参加同意本次活动。",@"反对活动，不想参加", nil];
+    RadioGroup * radioGroup = [[RadioGroup alloc] init];
+    float tempHeight = 0;
+    for (int i = 0; i < CheckButtonCount ; i++) {
+        RTLabel *temp = [[RTLabel alloc] initWithFrame:CGRectMake(signDescription.left, signDescription.bottom + 40*i, signDescription.width, 20)];
+        temp.font = [UIFont systemFontOfSize:14];
+        temp.text = checkBtnTitleArray[i];
+        
+        CheckButton *checkBtn = [[CheckButton alloc] initWithFrame:CGRectMake(signDescription.left, signDescription.bottom + tempHeight, signDescription.width, temp.optimumSize. height + 5)];
+        tempHeight += checkBtn.height;
+        
+        [radioGroup add:checkBtn];
+        checkBtn.label.text = checkBtnTitleArray[i];
+        checkBtn.label.numberOfLines = 0;
+        checkBtn.value = [NSNumber numberWithInt:i];
+        checkBtn.style = CheckButtonStyleBox;
+        [voteOrNotVoteView addSubview:checkBtn];
+    }
+    [self.middleScrollView addSubview:voteOrNotVoteView];
+    self.middleScrollView.contentSize = CGSizeMake(self.middleScrollView.width, signDescription.bottom + tempHeight);
+}
+
+// 已投票后显示这个
+- (void)haveVotedWithDescription:(NSString *)description{
+    NSArray *checkBtnTitleArray = [NSArray arrayWithObjects:@"A.同意本次活动，活动a很有意思不错，非常想参加同意本次活动。",@"B.反对活动，不想参加", nil];
+        UIView *mView1 = [self createActivityItemWithDescription:checkBtnTitleArray[0] withPersonNum:@"100" withPercent:@"1"];
+        UIView *mView2 = [self createActivityItemWithDescription:checkBtnTitleArray[1] withPersonNum:@"60" withPercent:@"0.6"];
+    mView1.top = 10;
+    mView2.top = mView1.bottom;
+    [self.middleScrollView addSubview:mView1];
+    [self.middleScrollView addSubview:mView2];
+    self.middleScrollView.contentSize = CGSizeMake(self.middleScrollView.width, 10 + mView1.height + mView2.height);
+
+}
+
+- (UIView *)createActivityItemWithDescription:(NSString *)description withPersonNum:(NSString *)personNum withPercent:(NSString *)percent{
+    UIView *view = [[UIView alloc] initWithFrame:CGRectMake(10, 0, 280, 0)];
+    
+    RTLabel *label = [[RTLabel alloc] initWithFrame:view.frame];
+    label.text = description;
+    label.font = [UIFont systemFontOfSize:14.];
+    label.height = label.optimumSize.height;
+    [view addSubview:label];
+    
+    UIImageView *numBackGroundView = [[UIImageView alloc] initWithFrame:CGRectMake(20, label.optimumSize.height + 5, 200, 20)];
+    UIImage *bgImage = [UIImage imageNamed:@"activityNumBg.png"] ;
+   bgImage = [bgImage stretchableImageWithLeftCapWidth:bgImage.size.width/2 topCapHeight:bgImage.size.height/2];
+    numBackGroundView.image = bgImage;
+    [view addSubview:numBackGroundView];
+    
+    RTLabel *numLabel = [[RTLabel alloc] initWithFrame:numBackGroundView.frame];
+    numLabel.text = personNum;
+    numLabel.textColor = [UIColor whiteColor];
+    numLabel.font = [UIFont systemFontOfSize:14.0];
+    [view addSubview:numLabel];
+    
+    numBackGroundView.width = 20 + 20 * (percent.floatValue * 100/10);
+    
+    RTLabel *percentLabel = [[RTLabel alloc] initWithFrame:CGRectMake(numBackGroundView.right+5, numBackGroundView.top, 40, numBackGroundView.height)];
+    percentLabel.text = [NSString stringWithFormat:@"%d%%",(int)(percent.floatValue * 100)];
+    percentLabel.font = [UIFont systemFontOfSize:14.0];
+    percentLabel.textColor = [UIColor grayColor];
+    [view addSubview:percentLabel];
+    
+    view.height = label.height + numBackGroundView.height + 10;
+    
+    return view;
+}
 
 // 我要报名
 // 我要投票
 - (IBAction)signUpClicked:(id)sender {
-    self.signUpButton.selected = !self.signUpButton.selected;
+    self.signUpButton.enabled = NO;
     
     if (activityType == TypeSignUp) {
-        NSDictionary *params = @{@"memberId": [[UserHelper shareInstance] getMenberID],
+        
+        NSDictionary *params = @{@"memberId": [[UserHelper shareInstance] getMemberID],
                                  @"activityId":activityID};
-        NSString *url = [GlobalRequest activityAction_EnterActivity_Url];
-        [ITTASIBaseDataRequest requestWithParameters:params withRequestUrl:url withIndicatorView:self.view withCancelSubject:nil onRequestStart:^(ITTBaseDataRequest *request) {
-            NSLog(@"request start");
-        } onRequestFinished:^(ITTBaseDataRequest *request) {
-//            [self setDataDic:request.handleredResult toManager:nil];
-            NSLog(@"signUpSuccess  request finish");
-        } onRequestCanceled:^(ITTBaseDataRequest *request) {
-            NSLog(@"signUpSuccess request cancel");
-        } onRequestFailed:^(ITTBaseDataRequest *request) {
-            NSLog(@"signUpSuccess  request fail");
-        }];
+        [self commitRequestWithParams:params withUrl:[GlobalRequest activityAction_EnterActivity_Url]];
+        
     }else if(activityType == TypeVote){
-        NSDictionary *params = @{@"memberId": [[UserHelper shareInstance] getMenberID],
+        [voteOrNotVoteView removeFromSuperview];
+        [self haveVotedWithDescription:nil];
+        NSDictionary *params = @{@"memberId": [[UserHelper shareInstance] getMemberID],
                                  @"activityId":activityID};
-        NSString *url = [GlobalRequest activityAction_EnterActivity_Url];
-        [ITTASIBaseDataRequest requestWithParameters:params withRequestUrl:url withIndicatorView:self.view withCancelSubject:nil onRequestStart:^(ITTBaseDataRequest *request) {
-            NSLog(@"request start");
-        } onRequestFinished:^(ITTBaseDataRequest *request) {
-            [self.model addObjectsFromArray:request.handleredResult[@"result"]];
-//            [self reloadNewData];
-            NSLog(@"voteSuccess  request finish");
-        } onRequestCanceled:^(ITTBaseDataRequest *request) {
-            NSLog(@"voteSuccess request cancel");
-        } onRequestFailed:^(ITTBaseDataRequest *request) {
-            NSLog(@"voteUpSuccess  request fail");
-        }];
+        [self commitRequestWithParams:params withUrl:[GlobalRequest activityAction_QueryActivityOptionList_Url]];
     }
 }
 
@@ -154,6 +207,25 @@
     self.activitiesTitle.text = activityModel.activityTitle;
     [self.headImage setImageWithURL:[NSURL URLWithString:activityModel.activityPic]];
     [self showDiffrentMiddleViewWithType:activityType withDescription:activityModel.description];
+}
+
+- (void)setDataDic:(NSDictionary *)resultDic toManager:(NSMutableArray *)baseManager{
+}
+
+- (void)responseCancelWithResponse:(ITTBaseDataRequest *)request{
+    if ([[request.requestUrl lastPathComponent] isEqualToString:@"ActivityAction!queryActivityOptionList.do"]) { // 投票完成的url
+        NSLog(@"resultDic  %@", request.handleredResult);
+        if (request.handleredResult[@"result"] && [request.handleredResult[@"result"] isKindOfClass:[NSArray class]]) {
+            [self.voteListArray addObjectsFromArray:request.handleredResult[@"result"]];
+
+        }
+    }else if([[request.requestUrl lastPathComponent] isEqualToString:@"ActivityAction!queryActivityInfo.do"]){ // 一进本页就请求本页的所有数据 的url
+        NSLog(@"resultDic  %@", request.handleredResult);
+        if (request.handleredResult[@"result"] && [request.handleredResult[@"result"] isKindOfClass:[NSArray class]]) {
+            [self.model addObjectsFromArray:request.handleredResult[@"result"]];
+            [self reloadNewData];
+        }
+    }
 }
 
 - (void)didReceiveMemoryWarning

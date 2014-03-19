@@ -6,8 +6,6 @@
 //  Copyright (c) 2014年 Hongli. All rights reserved.
 //
 
-#define ActivityExampleCount 3
-
 #import "ActivityNormalController.h"
 
 @interface ActivityNormalController ()
@@ -39,18 +37,24 @@
 {
     [super viewDidLoad];
     self.navigationItem.title = (showType == showSignUp)?@"已报名会员":@"投票详情";
-    
+    [self.tableView setTableFooterView:[[UIView alloc] init]];
     NSDictionary *params = nil;
     NSString *url = nil;
     
-    //	投票记录(activityVoteId) 未填写
-    params = @{@"memberId": [[UserHelper shareInstance] getMenberID],
-               @"activityId":activityID,
-               @"activityVoteId":@""
-               };
-    url = [GlobalRequest activityAction_AddVote_Url];
-    [self commitRequestWithParams:params withUrl:url];
-    
+    if(showType == showSignUp){
+        [self commitRequestWithParams:@{@"memberId": [[UserHelper shareInstance] getMemberID],
+                                        @"pageSize": PAGESIZE,
+                                        @"pageNo": @"0"} withUrl:[GlobalRequest activityAction_QueryActivityStatus_Url]];
+        
+    }else{
+        //	投票记录(activityVoteId) 未填写
+        params = @{@"memberId": [[UserHelper shareInstance] getMemberID],
+                   @"activityId":activityID,
+                   @"activityVoteId":@""
+                   };
+        url = [GlobalRequest activityAction_AddVote_Url];
+        [self commitRequestWithParams:params withUrl:url];
+    }
 }
 
 - (void)didReceiveMemoryWarning
@@ -70,7 +74,11 @@
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
     // Return the number of rows in the section.
-    return ActivityExampleCount;
+    NSInteger count = 0;
+    if ([self.model isKindOfClass:[NSArray class]]) {
+        count = [self.model count];
+    }
+    return count;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
@@ -84,6 +92,7 @@
     if (!cell) {
         cell = [[[NSBundle mainBundle] loadNibNamed:@"ActivityNormalCell" owner:nil options:nil] lastObject];
         [cell changeShowType:showType];
+        [cell setObject:self.model[indexPath.row]];
     }
     
     return cell;

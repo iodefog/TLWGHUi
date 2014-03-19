@@ -11,10 +11,12 @@
 @implementation ActivityInfoModel
 
 - (NSDictionary *)attributeMapDictionary{
-    return @{@"activityPic": @"activityPic",
+    return @{@"activityId":@"activityId",
+             @"activityPic": @"activityPic",
              @"activityTitle": @"activityTitle",
              @"description": @"description",
-             @"publishDatetime": @"publishDatetime"};
+             @"publishDatetime": @"publishDatetime",
+             @"status":@"status"};
 }
 
 @end

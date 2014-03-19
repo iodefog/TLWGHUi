@@ -8,6 +8,15 @@
 
 #import "AppDelegate.h"
 #import "LoginViewController.h"
+
+///支付宝
+#import "AlixPayResult.h"
+#import "DataVerifier.h"
+#import "PartnerConfig.h"
+
+#import "UIAlertView+ITTAdditions.h"
+
+
 @implementation AppDelegate
 @synthesize baseViewController;
 
@@ -27,10 +36,10 @@
     [[UINavigationBar appearance] setTitleTextAttributes:[NSDictionary dictionaryWithObjectsAndKeys:
         [UIColor whiteColor], UITextAttributeTextColor,nil]];
     
-    if (([[UserHelper shareInstance] getMenberID].intValue != 0) && [[UserHelper shareInstance] getMenberID]) {
+    if (([[UserHelper shareInstance] getMemberID].intValue != 0) && [[UserHelper shareInstance] getMemberID]) {
         [self chageRootVC];
     }else{
-        self.window.rootViewController = [[UINavigationController alloc] initWithRootViewController:[[LoginViewController alloc] init]];
+        [self chageLoginVC];
     }
     
     self.window.backgroundColor = [UIColor whiteColor];
@@ -42,6 +51,11 @@
 - (void)chageRootVC{
     self.baseViewController = [[BaseViewController alloc] init];
     self.window.rootViewController = self.baseViewController;
+}
+
+// 登陆成功后修改rootVC
+- (void)chageLoginVC{
+    self.window.rootViewController = [[UINavigationController alloc] initWithRootViewController:[[LoginViewController alloc] init]];
 }
 
 - (void)applicationWillResignActive:(UIApplication *)application
@@ -70,5 +84,80 @@
 {
     // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
 }
+
+//独立客户端回调函数
+- (BOOL)application:(UIApplication *)application handleOpenURL:(NSURL *)url {
+	
+	[self parse:url application:application];
+	return YES;
+}
+- (void)parse:(NSURL *)url application:(UIApplication *)application
+{
+    //结果处理
+    AlixPayResult* result = [self handleOpenURL:url];
+    NSLog(@"sss ==== %@",result);
+	if (result)
+    {
+		
+		if (result.statusCode == 9000)
+        {
+			/*
+			 *用公钥验证签名 严格验证请使用result.resultString与result.signString验签
+			 */
+            
+            //交易成功
+            NSString* key = AlipayPubKey;
+			id<DataVerifier> verifier;
+            verifier = CreateRSADataVerifier(key);
+            
+            ///小额支付 无法验证 支付宝公钥
+            [[NSNotificationCenter defaultCenter] postNotificationName:@"PaySuccess"
+                                                                object:nil
+                                                              userInfo:nil];
+            
+            
+			if ([verifier verifyString:result.resultString withSign:result.signString])
+            {
+                //验证签名成功，交易结果无篡改
+                [UIAlertView popupAlertByDelegate:self andTag:1001 title:@"信息" message:@"已经调到成功支付方法"];
+                [[NSNotificationCenter defaultCenter] postNotificationName:@"PaySuccess"
+                                                                    object:nil
+                                                                  userInfo:nil];
+			}
+            
+        }
+        else
+        {
+            //交易失败
+            [[NSNotificationCenter defaultCenter] postNotificationName:@"PayFaild"
+                                                                object:nil
+                                                              userInfo:nil];
+        }
+    }
+    else
+    {
+        //失败
+        [[NSNotificationCenter defaultCenter] postNotificationName:@"PayFaild"
+                                                            object:nil
+                                                          userInfo:nil];
+    }
+    
+}
+
+- (AlixPayResult *)resultFromURL:(NSURL *)url {
+	NSString * query = [[url query] stringByReplacingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
+	return [[AlixPayResult alloc] initWithString:query];
+}
+
+- (AlixPayResult *)handleOpenURL:(NSURL *)url {
+	AlixPayResult * result = nil;
+	
+	if (url != nil && [[url host] compare:@"safepay"] == 0) {
+		result = [self resultFromURL:url];
+	}
+    
+	return result;
+}
+
 
 @end

@@ -10,4 +10,6 @@
 
 @interface UserInfoUpdateViewController : ViewController
 
+@property (strong, nonatomic) IBOutlet UIImageView *userHeadImage; // 用户头像
+
 @end

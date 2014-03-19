@@ -37,7 +37,7 @@
     [super viewDidLoad];
     self.navigationItem.title = self.welfareType?@"节日福利领取":@"生日福利领取";
     NSDictionary *param = @{
-                            @"id":[[UserHelper shareInstance] getMenberID],
+                            @"id":[[UserHelper shareInstance] getMemberID],
                             (self.welfareType?@"type":@"productType"):self.welfareType?@"2":@"1",
                             @"pageNo":@"0",
                             @"pageSize":PAGESIZE

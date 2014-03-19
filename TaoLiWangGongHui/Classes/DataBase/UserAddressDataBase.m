@@ -31,7 +31,7 @@ static NSString *tableName = nil;
                                        @"ZipCode":@"VARCHAR",
                                        @"Type":@"VARCHAR",
                                        @"City":@"VARCHAR"};
-            tableName = [NSString stringWithFormat:@"UserAddress_%@",[[UserHelper shareInstance] getMenberID]];
+            tableName = [NSString stringWithFormat:@"UserAddress_%@",[[UserHelper shareInstance] getMemberID]];
             [super createTable:tableName fieldName:fileName];
         }
     }

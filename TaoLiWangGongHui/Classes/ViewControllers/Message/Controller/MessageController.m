@@ -15,8 +15,6 @@
 
 @end
 
-#define MsgExampleCount 3
-
 @implementation MessageController
 @synthesize messageTableView;
 
@@ -27,6 +25,12 @@
         // Custom initialization
     }
     return self;
+}
+
+static bool isSelfRequest = YES;
+
+- (void)changeIsSelfResquestWithBool:(BOOL)selfBool{
+    isSelfRequest = selfBool;
 }
 
 - (void)viewDidLoad
@@ -41,6 +45,11 @@
     [self.view addSubview:self.messageTableView];
      self.navigationItem.leftBarButtonItem = nil;
     self.navigationItem.rightBarButtonItem = [UIBarButtonItem barButtonWithTitle:@"订阅管理" image:nil target:self action:@selector(subscribeClicked:) font:[UIFont systemFontOfSize:12] titleColor:[UIColor whiteColor]];
+    
+    if (isSelfRequest) {
+        [self commitRequestWithParams:@{@"pageNo":@"0",
+                                        @"pageSize":PAGESIZE} withUrl:[GlobalRequest articleAction_QueryAdList_Url]];
+    }
 }
 
 // 订阅管理点击
@@ -73,7 +82,7 @@
 
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView{
-    return MsgExampleCount;
+    return [self.model count];
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section{

@@ -41,7 +41,7 @@
     self.navigationItem.title = @"商品详情";
     
     [self commitRequestWithParams:@{
-                                   @"memberId": [[UserHelper shareInstance] getMenberID],
+                                   @"memberId": [[UserHelper shareInstance] getMemberID],
                                    @"productId": productID
                                    } withUrl:
      [GlobalRequest productAction_QueryProducInfo_Url]];

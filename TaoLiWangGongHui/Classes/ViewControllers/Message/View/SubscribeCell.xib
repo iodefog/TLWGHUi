@@ -42,6 +42,7 @@
             <connections>
                 <outlet property="goodCategory" destination="48N-U9-fE8" id="Ufi-t1-mjz"/>
                 <outlet property="preViewImage" destination="lm1-vg-OoW" id="7cO-0x-M4T"/>
+                <outlet property="subscribeBtn" destination="BjR-vk-hGt" id="8Mv-Fl-7SI"/>
             </connections>
         </tableViewCell>
     </objects>

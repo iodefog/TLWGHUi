@@ -26,10 +26,8 @@
         [selected_navigation_controller() pushViewController:welfareConfirmVC animated:YES];
     }else if (self.welfareType == WelfareHoliday){
         CashConfirmViewController *cashConfirmVC = [[CashConfirmViewController alloc] initWithNibName:@"CashConfirmViewController" bundle:nil];
+        cashConfirmVC.goodsModel = self.goodsModel;
         [selected_navigation_controller() pushViewController:cashConfirmVC animated:YES];
-//        cashConfirmVC.goodImage.image = self.welfareGoodImage.image;
-//        cashConfirmVC.goodTitle.text = self.welfareGoodTitle.text;
-//        cashConfirmVC.goodID.text = self.welfareGoodID.text;
     }
 }
 

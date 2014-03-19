@@ -7,7 +7,6 @@
 //
 
 #import "MessageCell.h"
-
 @implementation MessageCell
 
 - (id)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier
@@ -17,6 +16,12 @@
         // Initialization code
     }
     return self;
+}
+
+- (void)setObject:(NSDictionary *)dict{
+    self.messageModel = [[MessageModel alloc] initWithDataDic:dict];
+    [self.goodImage setImageWithURL:[NSURL URLWithString:self.messageModel.newsPicPath]];
+    self.goodDescription.text = self.messageModel.newsTitle;
 }
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated

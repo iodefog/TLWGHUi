@@ -10,10 +10,14 @@
 #import "UpdatePhoneViewController.h"
 #import "UpdateEmailViewController.h"
 #import "UpdatePassWordViewController.h"
+#import "ImagePicker.h"
 
+@interface UserInfoUpdateViewController () <ImagePickerDelegate>{
+    ImagePicker *imagePicker;
+}
 
-@interface UserInfoUpdateViewController ()
 @property (nonatomic, strong) NSMutableArray *classNamesArray;
+
 @end
 
 @implementation UserInfoUpdateViewController
@@ -35,18 +39,25 @@
                             @"UpdatePhoneViewController",
                             @"UpdateEmailViewController",
                             @"UpdatePassWordViewController",nil];
+    imagePicker = [[ImagePicker alloc] init];
+    imagePicker.parent = self;
 }
 
 // 头像点击
 - (IBAction)headTapGesture:(id)sender {
     NSLog(@"头像点击");
+    [imagePicker tap:self inView:self.view inController:self toCut:YES];
+}
+
+
+#pragma mark - ImagePicker Delegate
+- (void)setViewPhoto:(NSString *)path sender:(id)sender{
+    [self.userHeadImage setImageWithURL:[NSURL fileURLWithPath:path]];
 }
 
 // 100 手机号码点击
 // 101 邮箱地址
 // 102 修改密码
-
-
 - (IBAction)actionClicked:(UIButton *)sender {
     Class class = NSClassFromString(self.classNamesArray[sender.tag - 100]);
     UIViewController *viewController = [[class alloc] init];

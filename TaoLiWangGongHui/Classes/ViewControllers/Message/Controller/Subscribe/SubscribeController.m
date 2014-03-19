@@ -11,8 +11,6 @@
 
 @interface SubscribeController ()
 
-@property (nonatomic, strong) NSMutableArray *model;
-
 @end
 
 @implementation SubscribeController
@@ -28,10 +26,13 @@
 {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
-    self.model = [NSMutableArray arrayWithObjects:[NSNull null],[NSNull null],[NSNull null],[NSNull null], nil];
     
     self.navigationItem.title = @"订阅管理";
     self.navigationItem.leftBarButtonItem = [UIBarButtonItem barButtonWithImage:@"navigation_Back.png" backgroundImage:nil target:self action:@selector(back)];
+    [self commitRequestWithParams:@{
+                                    @"memberId": [[UserHelper shareInstance] getMemberID],
+                                    @"pageNo": @"0",
+                                    @"pageSize":PAGESIZE ,} withUrl:[GlobalRequest articleAction_QuerySubscription_Url]];
     
     [self.tableView setTableFooterView:[[UIView alloc] init]];
 }
@@ -40,10 +41,14 @@
     [self.navigationController popViewControllerAnimated:YES];
 }
 
+- (void)reloadNewData{
+    [self.tableView reloadData];
+}
+
 #pragma mark - UITabelView dataSource
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
-    return self.model.count;
+    return [self.model count];
 }
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView{
@@ -60,6 +65,7 @@
     if (!cell) {
         cell = [[[NSBundle mainBundle] loadNibNamed:@"SubscribeCell" owner:nil options:nil] lastObject];
     }
+    [cell setObject:self.model[indexPath.row]];
     return cell;
 }
 

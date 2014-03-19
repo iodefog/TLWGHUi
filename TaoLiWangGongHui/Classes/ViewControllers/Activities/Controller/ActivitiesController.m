@@ -33,10 +33,10 @@
     
     self.navigationItem.leftBarButtonItem = nil;
     
-    NSDictionary *params = @{@"memberId": [[UserHelper shareInstance] getMenberID],
+    NSDictionary *params = @{@"memberId": [[UserHelper shareInstance] getMemberID],
                              @"pageSize": PAGESIZE,
                              @"pageNo": @"0"};
-    [self commitRequestWithParams:params withUrl:[GlobalRequest activityAction_QueryActivityStatus_Url]];
+    [self commitRequestWithParams:params withUrl:[GlobalRequest articleAction_QueryMyActivityList_Url]];
     
     self.activitiesTableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, self.view.width, self.view.height) style:UITableViewStylePlain];
     self.activitiesTableView.delegate = self;

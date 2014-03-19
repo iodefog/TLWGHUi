@@ -7,9 +7,13 @@
 //
 
 #import <UIKit/UIKit.h>
-
+#import "MessageModel.h"
 @interface MessageCell : UITableViewCell
 @property (strong, nonatomic) IBOutlet UIImageView *goodImage;
 @property (strong, nonatomic) IBOutlet UILabel *goodDescription;
+@property (strong, nonatomic) MessageModel *messageModel;
+
+- (void)setObject:(NSDictionary *)dict;
+
 
 @end

@@ -33,7 +33,7 @@
     
     self.navigationItem.title = @"优惠购物";
     NSDictionary *params = @{
-                             @"memberId": [[UserHelper shareInstance] getMenberID],
+                             @"memberId": [[UserHelper shareInstance] getMemberID],
                              @"pageNo": @"1",
                              @"Type":@"3",
                              @"pageSize": PAGESIZE,};

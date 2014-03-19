@@ -27,6 +27,7 @@
 
 - (void)viewDidLoad
 {
+    [self changeIsSelfResquestWithBool:NO];
     [super viewDidLoad];
 	// Do any additional setup after loading the view.
     self.navigationItem.title = @"工会活动";
@@ -35,7 +36,7 @@
     self.messageTableView.height = self.view.height - 64;
     
     NSDictionary *params = @{
-                             @"memberId":[[UserHelper shareInstance] getMenberID],
+                             @"memberId":[[UserHelper shareInstance] getMemberID],
                              @"pageSize":PAGESIZE,
                              @"pageNo":@"0"
                              };
@@ -50,7 +51,7 @@
     
     HomeListModel *homeModel = [[HomeListModel alloc] initWithDataDic:self.model[indexPath.row]];
 
-    ActivitiesDetailController *activiteVC = [[ActivitiesDetailController alloc] initWithActivityType:TypeNone withID:homeModel.activityId];
+    ActivitiesDetailController *activiteVC = [[ActivitiesDetailController alloc] initWithActivityType:indexPath.row+1 withID:homeModel.activityId];
     activiteVC.navigationItem.title = @"工会活动详情";
     [activiteVC setHidesBottomBarWhenPushed:YES];
     [self.navigationController pushViewController:activiteVC animated:YES];
@@ -66,6 +67,9 @@
     return [self.model count];
 }
 
+- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView{
+    return 1;
+}
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
     MessageCell *cell = (MessageCell *)[super tableView:tableView cellForRowAtIndexPath:indexPath];
