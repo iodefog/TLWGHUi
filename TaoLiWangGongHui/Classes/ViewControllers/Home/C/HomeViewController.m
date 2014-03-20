@@ -42,10 +42,14 @@
         self.baseScroll.contentSize = CGSizeMake(self.view.width, 568);
     }
     else{
-        self.baseScroll.contentSize = CGSizeMake(self.view.width, 400);
-        self.baseScroll.top = 0;
-        self.baseScroll.height = self.view.height - 49 ;
-        
+        if (isIOS7) {
+            self.baseScroll.contentSize = CGSizeMake(self.view.width, 400);
+            self.baseScroll.height = self.view.height - 49 ;
+        }else{
+//            self.baseScroll.height = self.view.height - 49 ;
+            self.baseScroll.top = 0;
+            self.baseScroll.contentSize = CGSizeMake(self.view.width, 568+64);
+        }
     }
     self.baseScroll.backgroundColor  = RGBCOLOR(241, 241, 241);
 }

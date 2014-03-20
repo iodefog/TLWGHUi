@@ -37,6 +37,7 @@
     [super viewDidLoad];
     self.navigationItem.title = @"选择收货地址";
     self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
+    self.tableView.backgroundView = [[UIView alloc] init];
 }
 
 
@@ -77,6 +78,7 @@
     if (indexPath.section == [self.model count]) {
         cell = (id)[[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:nil];
         cell.backgroundColor = [UIColor clearColor];
+        cell.selectionStyle = UITableViewCellSelectionStyleNone;
         UIButton *addAddressBtn = [UIButton createButton:@selector(addAddressClicked:) title:@"+新增收货地址" image:nil selectedBgImage:@"add_address_highted.png" backGroundImage:@"add_address_normal.png" backGroundTapeImage:@"add_address_highted.png" frame:CGRectMake(0, 10, 100, 40) tag:100 target:self];
         addAddressBtn.centerX = cell.centerX;
         [cell.contentView addSubview:addAddressBtn];

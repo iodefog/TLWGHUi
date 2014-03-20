@@ -7,7 +7,7 @@
 //
 
 #import "ShoppingCartCell.h"
-#import "ShoppingModel.h"
+#import "GoodsDetailDataBase.h"
 
 @implementation ShoppingCartCell
 
@@ -44,6 +44,8 @@
 
 // 删除按钮点击
 - (IBAction)deleteClicked:(id)sender {
+    [[GoodsDetailDataBase shareDataBase] deleteTableProductId:self.shoppingModel];
+    
     if (self.shoppingDelegate && [self.shoppingDelegate respondsToSelector:@selector(responseWithIndex:withData:)]) {
         [self.shoppingDelegate performSelector:@selector(responseWithIndex:withData:) withObject:currentIndex withObject:currentData];
     }
@@ -53,11 +55,11 @@
     currentIndex = index;
     currentData = data;
     
-    ShoppingModel *shoppingModel = [[ShoppingModel alloc] initWithDataDic:data];
-    self.GoodID.text = shoppingModel.productId;
-    self.GoodDescription.text = shoppingModel.productName;
-    [self.goodImage setImageWithURL:[NSURL URLWithString:shoppingModel.previewPicPath]];
-    self.GoodPrice.text = shoppingModel.costPrice;
+    self.shoppingModel = [[GoodsListModel alloc] initWithDataDic:data];
+    self.GoodID.text = self.shoppingModel.productId;
+    self.GoodDescription.text = self.shoppingModel.productName;
+    [self.goodImage setImageWithURL:[NSURL URLWithString:self.shoppingModel.previewPicPath]];
+    self.GoodPrice.text = self.shoppingModel.costPrice;
 }
 
 #pragma mark - textFieldDelegate

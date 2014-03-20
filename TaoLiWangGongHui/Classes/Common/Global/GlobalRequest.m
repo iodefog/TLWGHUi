@@ -192,4 +192,9 @@ return [NSString stringWithFormat:@"%@%@",[GlobalRequest getBaseServiceUrl],@"Us
     return [NSString stringWithFormat:@"%@%@",[GlobalRequest getBaseServiceUrl],@"UserAction!querySystemInfo.do"];
 }
 
+// 36.	用户信息维护—密码修改接口（没有原密码）
++ (NSString *)userAction_UpdatePasswordNotOld_Url{
+    return [NSString stringWithFormat:@"%@%@",[GlobalRequest getBaseServiceUrl],@"UserAction!updatePasswordNotOld.do"];
+}
+
 @end

@@ -10,4 +10,6 @@
 
 @interface MyOrderDetailViewController : WelfareOrderViewController
 
+@property (nonatomic, strong) NSString *orderId;
+
 @end

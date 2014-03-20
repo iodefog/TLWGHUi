@@ -71,16 +71,16 @@
 
 - (void)responseSuccessWithResponse:(ITTBaseDataRequest *)request{
     if ([request.handleredResult isKindOfClass:[NSDictionary class]]) {
-        [[TKAlertCenter defaultCenter] postAlertWithMessage:request.handleredResult[@"msg"]];
+        [UIAlertView popupAlertByDelegate:self andTag:1000 title:@"提示" message:request.handleredResult[@"msg"]];
     }
     
 }
 
 - (void)responseFailWithResponse:(ITTBaseDataRequest *)request{
     if ([request.handleredResult isKindOfClass:[NSDictionary class]]) {
-        [[TKAlertCenter defaultCenter] postAlertWithMessage:request.handleredResult[@"msg"]];
+         [UIAlertView popupAlertByDelegate:self andTag:1000 title:@"提示" message:request.handleredResult[@"msg"]];
     }else{
-        [[TKAlertCenter defaultCenter] postAlertWithMessage:@"手机号修改失败"];
+         [UIAlertView popupAlertByDelegate:self andTag:1000 title:@"提示" message:request.handleredResult[@"msg"]];
     }
     self.getCodeButton.enabled = YES;
     clickCount = 60;

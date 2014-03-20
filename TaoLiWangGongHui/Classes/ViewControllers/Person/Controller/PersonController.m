@@ -34,10 +34,14 @@
     [super viewDidLoad];
 	// Do any additional setup after loading the view.
     
-    self.personTableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, self.view.width, self.view.height) style:UITableViewStylePlain];
+    self.personTableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, self.view.width, self.view.height) style:UITableViewStyleGrouped];
+    self.personTableView.backgroundView = [[UIView alloc] init];
     self.personTableView.delegate = self;
     self.personTableView.dataSource = self;
-    self.personTableView.separatorStyle = UITableViewCellSeparatorStyleNone;
+    [self.personTableView setTableFooterView:[[UIView alloc] init]];
+    if (isIOS7) {
+        self.personTableView.separatorStyle = UITableViewCellSeparatorStyleNone;
+    }
     [self.view addSubview:self.personTableView];
     
     // 每个cell的文字，形成的一个数组
@@ -83,7 +87,6 @@
     cell.textLabel.text = [self.cellNameArray objectAtIndex:indexPath.row];
     cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
     cell.textLabel.font = [UIFont systemFontOfSize:14];
-    cell.selectionStyle = UITableViewCellSelectionStyleNone;
     if (indexPath.row == 0) {
         cell.customImage.image = [UIImage imageNamed:@"input_Top.png"];
     }else if (indexPath.row == [cellNameArray count] - 1){

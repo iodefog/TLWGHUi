@@ -39,6 +39,7 @@
 	NSMutableArray *_alerts;
 	BOOL _active;
 	TKAlertView *_alertView;
+    UIView      *_bgView;
 	CGRect _alertFrame;
 }
 

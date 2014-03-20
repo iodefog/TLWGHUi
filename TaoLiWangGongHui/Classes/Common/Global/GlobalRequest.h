@@ -123,4 +123,7 @@ typedef enum {
 
 // 35.	版本信息接口
 + (NSString *)userAction_QuerySystemInfo_Url;
+
+// 36.	用户信息维护—密码修改接口（没有原密码）
++ (NSString *)userAction_UpdatePasswordNotOld_Url;
 @end

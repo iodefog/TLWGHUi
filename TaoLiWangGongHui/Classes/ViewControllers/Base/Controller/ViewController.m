@@ -64,12 +64,12 @@
 
 #pragma mark - Response Fail
 - (void)responseFailWithResponse:(ITTBaseDataRequest *)request{
-    [[TKAlertCenter defaultCenter] postAlertWithMessage:@"请求失败，请稍后重试"];
+    [UIAlertView popupAlertByDelegate:self andTag:1000 title:@"提示" message:request.handleredResult[@"msg"]];
 }
 
 #pragma mark - Response Cancel
 - (void)responseCancelWithResponse:(ITTBaseDataRequest *)request{
-    [[TKAlertCenter defaultCenter] postAlertWithMessage:@"请求失败，请稍后重试"];
+     [UIAlertView popupAlertByDelegate:self andTag:1000 title:@"提示" message:request.handleredResult[@"msg"]];
 }
 
 - (void)setDataDic:(NSDictionary *)resultDic toManager:(NSMutableArray *)baseManager
@@ -80,6 +80,8 @@
     NSLog(@"resultDic  %@", resultDic);
     if (resultDic[@"result"] && [resultDic[@"result"] isKindOfClass:[NSArray class]]) {
         [self.model addObjectsFromArray:resultDic[@"result"]];
+    }else if (resultDic[@"result"] && [resultDic[@"result"] isKindOfClass:[NSDictionary class]]){
+        self.model = resultDic[@"result"];
     }
     [self reloadNewData];
 }

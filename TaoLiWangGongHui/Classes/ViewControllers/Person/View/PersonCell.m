@@ -16,16 +16,21 @@
     self = [super initWithStyle:style reuseIdentifier:reuseIdentifier];
     if (self) {
         // Initialization code
+        self.selectionStyle = UITableViewCellSelectionStyleNone;
+        self.backgroundColor = [UIColor clearColor];
         [self createUI];
     }
     return self;
 }
 
 - (void)createUI{
-       customImage = [[UIImageView alloc] initWithFrame:CGRectMake(10, 0, 300, self.height)];
+    if (isIOS7) {
+        customImage = [[UIImageView alloc] initWithFrame:CGRectMake(10, 0, 300, self.height)];
         customImage.tag = 101;
         [self addSubview:customImage];
         [self sendSubviewToBack:customImage];
+        return;
+    }
 }
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated

@@ -11,5 +11,7 @@
 @interface UserInfoUpdateViewController : ViewController
 
 @property (strong, nonatomic) IBOutlet UIImageView *userHeadImage; // 用户头像
+@property (strong, nonatomic) IBOutlet UILabel *phoneNum;
+@property (strong, nonatomic) IBOutlet UILabel *emailLabel;
 
 @end

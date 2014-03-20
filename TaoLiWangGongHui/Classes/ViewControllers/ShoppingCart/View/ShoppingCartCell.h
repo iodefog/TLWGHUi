@@ -7,6 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "GoodsListModel.h"
 
 @protocol ShoppingDelegate <NSObject>
 @optional
@@ -30,6 +31,7 @@
 @property (strong, nonatomic) IBOutlet UILabel *GoodPrice;        // 购物车，商品价格
 @property (strong, nonatomic) IBOutlet UITextField *GoodQuantity; // 购物车，商品个数
 @property (strong, nonatomic) IBOutlet UIButton *deleteButton; // 删除按钮
+@property (strong, nonatomic) GoodsListModel *shoppingModel;
 
 - (void)setObjectWithIndex:(NSIndexPath *)index withData:(NSDictionary *)data;
 

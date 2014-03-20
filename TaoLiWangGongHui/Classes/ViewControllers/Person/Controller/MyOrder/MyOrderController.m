@@ -7,7 +7,6 @@
 //
 
 
-#define MyOrderExampleCount 3
 #define FirstHeadViewHeight 60
 
 #import "MyOrderController.h"
@@ -26,7 +25,7 @@
 
 - (id)initWithStyle:(UITableViewStyle)style
 {
-    style = UITableViewStyleGrouped;
+    style = UITableViewStylePlain;
     self = [super initWithStyle:style];
     if (self) {
         // Custom initialization
@@ -39,7 +38,13 @@
     [super viewDidLoad];
     isShowWelfareHidden = NO;
     self.tableView.backgroundColor = [UIColor whiteColor];
-    [self.tableView setSeparatorStyle:UITableViewCellSeparatorStyleNone];
+    self.tableView.backgroundView = [[UIView alloc] init];
+//    [self.tableView setSeparatorStyle:UITableViewCellSeparatorStyleNone];
+    self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
+    
+    [self commitRequestWithParams:@{@"memberId": @"",
+                                    @"orderType": @"",
+                                    @"pageNo": @"pageSize",} withUrl:[GlobalRequest orderAction_QueryOrderList_Url]];
 }
 
 
@@ -49,12 +54,16 @@
     // Dispose of any resources that can be recreated
 }
 
-#pragma mark - Table view data source
+#pragma mark - response Mothod
+- (void)reloadNewData{
+    [self.tableView reloadData];
+}
 
+#pragma mark - Table view data source
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
     // Return the number of sections.
-    return MyOrderExampleCount;
+    return 3;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
@@ -68,12 +77,16 @@
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section{
-    CGFloat height = 10;
+    CGFloat height = 0;
     if(section == 0){
         height = FirstHeadViewHeight;
     }
     return height;
 }
+
+//- (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section{
+//    return 0.1;
+//}
 
 - (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section{
     UIView *headerView = nil;
@@ -96,9 +109,6 @@
     return headerView;
 }
 
-- (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section{
-    return 0.1;
-}
 
 - (OrderCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
@@ -106,7 +116,6 @@
     OrderCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
     if (!cell) {
         cell = [[[NSBundle mainBundle] loadNibNamed:@"OrderCell" owner:nil options:nil] lastObject];
-        cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
     }
     [cell showWelfareViewWithHidden:isShowWelfareHidden withCashViewHidden:!isShowWelfareHidden];
     return cell;

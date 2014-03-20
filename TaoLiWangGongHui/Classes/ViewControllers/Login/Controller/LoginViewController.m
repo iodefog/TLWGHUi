@@ -60,30 +60,17 @@
      *  保存用户信息
      */
     NSLog(@"resultDic  %@", resultDic);
-    [[UserHelper shareInstance] saveMemberID:resultDic];
-    
-    AppDelegate *appDelegate = [UIApplication sharedApplication].delegate;
-    [appDelegate chageRootVC];
-    
-    [self dismissViewControllerAnimated:YES completion:^{
+    NSNumber *codeNum = resultDic[@"code"];
+    if (codeNum.intValue == 0) {
+        [UIAlertView popupAlertByDelegate:self andTag:1000 title:@"提示" message:@"登陆失败"];
+    }else{
+        [[UserHelper shareInstance] saveMemberID:resultDic];
         
-    }];
-    
-
-    
-//    if ([[resultDic[@"code"]stringValue] isEqualToString:@"1"]) {
-    
-//        NSDictionary *dict = [resultDic objectForKey:@"result"];
+        AppDelegate *appDelegate = [UIApplication sharedApplication].delegate;
+        [appDelegate chageRootVC];
         
-//        self.UserModel.Point = dict[@"jfye"];
-//        self.UserModel.UserName = dict[@"username"];
-//        self.UserModel.UserId = dict[@"yhid"];
-//        [SaveAndGetUserInformation saveUserDefaultsWithTheUserInformation:self.UserModel];
-//        [self dismissViewControllerAnimated:YES completion:^{}];
-//        [SharedApp showViewController:HOME_VIEW_CONTROLLER];
-//        return ;
-//    }
-//    [UIAlertView popupAlertByDelegate:self andTag:0 title:@"提示" message:@"您输入的密码或者账号有误!"];
+         [self dismissViewControllerAnimated:YES completion:nil];
+    }
 }
 
 - (void)didReceiveMemoryWarning

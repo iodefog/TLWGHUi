@@ -8,7 +8,7 @@
 
 #import <UIKit/UIKit.h>
 
-@interface WelfareOrderViewController : UIViewController  // 福利订单|| 订单详情
+@interface WelfareOrderViewController : ViewController  // 福利订单|| 订单详情
 @property (strong, nonatomic) IBOutlet UILabel *orderNum; // 订单号
 @property (strong, nonatomic) IBOutlet UILabel *orderTime; //下单时间
 

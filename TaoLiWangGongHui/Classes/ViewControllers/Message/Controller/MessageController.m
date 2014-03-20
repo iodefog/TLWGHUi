@@ -42,6 +42,7 @@ static bool isSelfRequest = YES;
     self.messageTableView.delegate = self;
     self.messageTableView.dataSource = self;
     self.messageTableView.contentSize = CGSizeMake(self.view.width, 220*4);
+    self.messageTableView.backgroundView = [[UIView alloc] init];
     [self.view addSubview:self.messageTableView];
      self.navigationItem.leftBarButtonItem = nil;
     self.navigationItem.rightBarButtonItem = [UIBarButtonItem barButtonWithTitle:@"订阅管理" image:nil target:self action:@selector(subscribeClicked:) font:[UIFont systemFontOfSize:12] titleColor:[UIColor whiteColor]];

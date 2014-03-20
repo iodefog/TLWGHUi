@@ -6,6 +6,7 @@
 //  Copyright (c) 2014年 Hongli. All rights reserved.
 //
 #import "ForgetPwdViewController.h"
+#import "UpdatePassWordViewController.h"
 
 @interface ForgetPwdViewController (){
     NSTimer *codeTimer;
@@ -112,7 +113,6 @@ static int clickCount = 59;
         [UIAlertView popupAlertByDelegate:self andTag:1001 title:@"提示" message:@"验证码不能为空"];
     }else{
         NSDictionary *params = [NSDictionary dictionaryWithObjectsAndKeys:
-                                [[UserHelper shareInstance] getMemberID],@"member",
                                 self.phoneTetxField.text ,@"phone",
                                 self.codeTextField.text, @"code",  nil];
 //   @{@"member": [[UserHelper shareInstance] getMenberID], @"phone":self.phoneTetxField.text};
@@ -139,22 +139,32 @@ static int clickCount = 59;
     
     if (self.emailTextField.text.length < 1) {
         [UIAlertView popupAlertByDelegate:self andTag:1001 title:@"提示" message:@"邮件不能为空"];
-    }else if (self.emailTextField.text.length != 11){
-        if (![GlobalHelper isValidateEmail:self.emailTextField.text]) {
-             [UIAlertView popupAlertByDelegate:self andTag:1001 title:@"提示" message:@"邮件格式不正确"];
-        }
+    }else if (![GlobalHelper isValidateEmail:self.emailTextField.text]) {
+        [UIAlertView popupAlertByDelegate:self andTag:1001 title:@"提示" message:@"邮件格式不正确"];
     }else{
-       NSDictionary *params = [NSDictionary dictionaryWithObjectsAndKeys:
-                               @"member", [[UserHelper shareInstance] getMemberID],
-                               @"email",self.emailTextField.text,nil];
+        NSDictionary *params = [NSDictionary dictionaryWithObjectsAndKeys:
+                                @"email",self.emailTextField.text,nil];
         [self commitRequestWithParams:params withUrl:[GlobalRequest userAction_QueryPasswordByEmail_Url]];
     }
 }
 
 - (void)responseSuccessWithResponse:(ITTBaseDataRequest *)request{
-        if ([request.requestUrl.lastPathComponent isEqualToString:@"UserAction!queryPasswordByMessage.do"]) {
-            [UIAlertView popupAlertByDelegate:self andTag:1000 title:@"提示" message:request.handleredResult[@"msg"]];
-    }
+    NSNumber *codeNum = request.handleredResult[@"code"];
+    if ([request.requestUrl.lastPathComponent isEqualToString:@"UserAction!queryPasswordByMessage.do"]) {
+            if (codeNum.intValue ==  1) {
+                
+            }else{
+                [UIAlertView popupAlertByDelegate:self andTag:1000 title:@"提示" message:request.handleredResult[@"msg"]];
+            }
+        }else if ([request.requestUrl.lastPathComponent isEqualToString:@"UserAction!queryPasswordByEmail.do"]){
+            if (codeNum.intValue == 1) {
+                UpdatePassWordViewController *updatePassWord = [[UpdatePassWordViewController alloc] initWithNibName:@"UpdatePassWordViewController" bundle:nil];
+                [updatePassWord notShowHeadViewWithShow:YES];
+                [self.navigationController pushViewController:updatePassWord animated:YES];
+            }else{
+                [UIAlertView popupAlertByDelegate:self andTag:1000 title:@"提示" message:request.handleredResult[@"msg"]];
+            }
+        }
 }
 
 - (IBAction)loginEmail:(id)sender {

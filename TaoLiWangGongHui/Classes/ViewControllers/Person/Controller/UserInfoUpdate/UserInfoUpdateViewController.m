@@ -11,6 +11,7 @@
 #import "UpdateEmailViewController.h"
 #import "UpdatePassWordViewController.h"
 #import "ImagePicker.h"
+#import "UserInfoModel.h"
 
 @interface UserInfoUpdateViewController () <ImagePickerDelegate>{
     ImagePicker *imagePicker;
@@ -41,6 +42,12 @@
                             @"UpdatePassWordViewController",nil];
     imagePicker = [[ImagePicker alloc] init];
     imagePicker.parent = self;
+    
+    // 请求用户信息
+    [self commitRequestWithParams:@{@"memberId":[[UserHelper shareInstance] getMemberID]} withUrl:[GlobalRequest userAction_queryUserInfo_Url]];
+    
+   NSData *imageData = [[NSUserDefaults standardUserDefaults] objectForKey:[NSString stringWithFormat:@"%@_head",[[UserHelper shareInstance] getMemberID]]];
+    self.userHeadImage.image = [UIImage imageWithData:imageData];
 }
 
 // 头像点击
@@ -53,7 +60,17 @@
 #pragma mark - ImagePicker Delegate
 - (void)setViewPhoto:(NSString *)path sender:(id)sender{
     [self.userHeadImage setImageWithURL:[NSURL fileURLWithPath:path]];
+    
+    [[NSUserDefaults standardUserDefaults] setObject:[NSData dataWithContentsOfURL:[NSURL fileURLWithPath:path]] forKey:[NSString stringWithFormat:@"%@_head",[[UserHelper shareInstance] getMemberID]]];
+    [[NSUserDefaults standardUserDefaults] synchronize];
+    
+    
+//    [self commitRequestWithParams:@{
+//                                    @"memberId": [[UserHelper shareInstance] getMemberID],
+//                                    @"head": UIImageJPEGRepresentation(self.userHeadImage.image, 0.8f),
+//                                   } withUrl:<#(NSString *)#>]}
 }
+
 
 // 100 手机号码点击
 // 101 邮箱地址
@@ -62,6 +79,15 @@
     Class class = NSClassFromString(self.classNamesArray[sender.tag - 100]);
     UIViewController *viewController = [[class alloc] init];
     [self.navigationController pushViewController:viewController animated:YES];
+}
+
+#pragma mark - Response Delegate
+- (void)reloadNewData{
+    if ([self.model isKindOfClass:[NSDictionary class]]) {
+        UserInfoModel *userModel = [[UserInfoModel alloc] initWithDataDic:self.model];
+        self.phoneNum.text = userModel.phone;
+        self.emailLabel.text = userModel.email;
+    }
 }
 
 - (void)didReceiveMemoryWarning

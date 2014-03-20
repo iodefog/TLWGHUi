@@ -18,7 +18,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="320" height="100"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="shopping_placeholder.png" id="z7o-QB-uVz">
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="subscribe_placeholder.png" id="z7o-QB-uVz">
                                 <rect key="frame" x="10" y="10" width="80" height="80"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                             </imageView>
@@ -67,7 +67,7 @@
                                     <action selector="IncreaseQuantity:" destination="YRb-vO-wyx" eventType="touchUpInside" id="Yoc-dk-KfX"/>
                                 </connections>
                             </button>
-                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="2" borderStyle="roundedRect" textAlignment="center" minimumFontSize="17" background="shopping_input_bg.png" id="kZO-tN-FAL">
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="1" borderStyle="roundedRect" textAlignment="center" minimumFontSize="17" background="shopping_input_bg.png" id="kZO-tN-FAL">
                                 <rect key="frame" x="214" y="63" width="39" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
@@ -76,7 +76,7 @@
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" id="B5B-xk-1Ni">
                                 <rect key="frame" x="0.0" y="99" width="380" height="1"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                                <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
                             </imageView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
@@ -110,7 +110,7 @@
         <image name="shopping_delete.png" width="49" height="27"/>
         <image name="shopping_increase.png" width="39" height="23"/>
         <image name="shopping_input_bg.png" width="39" height="23"/>
-        <image name="shopping_placeholder.png" width="75" height="75"/>
         <image name="shopping_reduce.png" width="39" height="23"/>
+        <image name="subscribe_placeholder.png" width="36" height="36"/>
     </resources>
 </document>

@@ -9,7 +9,7 @@
 #import <UIKit/UIKit.h>
 
 @interface ViewController : UIViewController  // 用来做父类，方便一些全局操作，例如返回按钮修改
-@property (nonatomic, strong) NSMutableArray *model;
+@property (nonatomic, strong) id model;
 
 - (void)reloadNewData; // 数据接收成功后 用新数据刷新view
 - (void)commitRequestWithParams:(NSDictionary *)params withUrl:(NSString *)url; // 根据url和参数 提交到网络

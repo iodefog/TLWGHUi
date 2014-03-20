@@ -11,14 +11,13 @@
 #import "ShoppingCartController.h"
 #import "ShoppingCartCell.h"
 #import "UIKeyboardCoView.h"
-#import "ShoppingModel.h"
+#import "GoodsListModel.h"
 #import "GoodsDetailDataBase.h"
 #import "GoodsListModel.h"
+
 @interface ShoppingCartController () <ShoppingDelegate>{
     BOOL showDeleteButton;
 }
-
-@property (nonatomic, strong) NSMutableArray *shoppingCartArray;
 
 @end
 
@@ -32,6 +31,12 @@
         // Custom initialization
     }
     return self;
+}
+
+- (void)viewWillAppear:(BOOL)animated{
+    [super viewWillAppear:animated];
+    [self.model removeAllObjects];
+    [self getRequestShoppingCartData];
 }
 
 - (void)viewDidLoad
@@ -58,7 +63,9 @@
     
      self.navigationItem.leftBarButtonItem = nil;
     self.navigationItem.rightBarButtonItem = [UIBarButtonItem barButtonWithTitle:@"编辑" image:nil target:self action:@selector(editClicked:) font:[UIFont systemFontOfSize:14.0f] titleColor:[UIColor whiteColor]];
-    
+}
+
+- (void)getRequestShoppingCartData{
     NSArray *dbArray = [[GoodsDetailDataBase shareDataBase] readTableName];
     NSMutableArray *idsArray = [NSMutableArray array];
     for (GoodsListModel *model in dbArray) {
@@ -66,7 +73,7 @@
     }
     NSData *jsonData = [NSJSONSerialization dataWithJSONObject:idsArray options:NSJSONWritingPrettyPrinted error:nil];
     // 请求数据
-    NSDictionary *params = @{@"id":[[NSString alloc] initWithData:jsonData encoding:NSUTF8StringEncoding],
+    NSDictionary *params = @{@"json":[[NSString alloc] initWithData:jsonData encoding:NSUTF8StringEncoding],
                              @"pageNo":@"0",
                              @"pageSize":PAGESIZE
                              };
@@ -90,8 +97,9 @@
     
     UITableViewCell *cell = nil;
     // 多一个cell，当 indexpath.section == tableview的组数时 创建那个cell
-    if (indexPath.row == [self.shoppingCartArray count] ) {
+    if (indexPath.row == [self.model count] ) {
         cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"CustomCell"];
+        cell.selectionStyle = UITableViewCellSelectionStyleNone;
         UIButton *payMentBtn = [UIButton createButton:@selector(toPayment:) title:@"去结算" image:nil selectedBgImage:@"login_Select.png"  backGroundImage:@"login_Nomal.png"  backGroundTapeImage:nil frame:CGRectMake(10, 20, 300, 36) tag:100 target:self];
         [payMentBtn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
         [cell.contentView addSubview:payMentBtn];
@@ -149,9 +157,12 @@
 
 #pragma mark - ShoppingDelegate
 - (void)responseWithIndex:(NSIndexPath *)index withData:(id)data{
-    [self.shoppingCartArray removeLastObject];
+    NSMutableArray *tempArray = [NSMutableArray arrayWithArray:self.model];
+    [tempArray removeObject:data];
+    self.model = tempArray;
+    
     [self.shoppingCartTableView deleteRowsAtIndexPaths:[NSArray arrayWithObjects:index, nil] withRowAnimation:UITableViewRowAnimationRight];
-    [self.shoppingCartTableView reloadData];
+    [self reloadNewData];
 }
 
 static UITextField *currentTextField = nil;
@@ -165,6 +176,27 @@ static UITextField *currentTextField = nil;
 - (void)shoppingTextFieldDidEndEditing:(UITextField *)textField{
     self.shoppingCartTableView.height = [UIScreen mainScreen].bounds.size.height - 49 ;
     
+}
+
+#pragma mark - Response Mothod
+- (void)reloadNewData{
+    UIImageView *emptyView = (id)[self.view viewWithTag:101];
+    
+    if ([self.model count ] < 1) {
+        if (!emptyView.superview) {
+            if (!emptyView) {
+                emptyView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, 100, 76)];
+                emptyView.center = CGPointMake(self.view.centerX, self.view.centerY - 30);
+                emptyView.image = [UIImage imageNamed:@"shopping_empty.png"];
+            }
+            emptyView.tag = 101;
+            emptyView.autoresizingMask = UIViewAutoresizingFlexibleHeight | UIViewAutoresizingFlexibleWidth;
+            [self.view addSubview:emptyView];
+        }
+    }else{
+        [emptyView removeFromSuperview];
+    }
+    [self.shoppingCartTableView reloadData];
 }
 
 - (void)didReceiveMemoryWarning

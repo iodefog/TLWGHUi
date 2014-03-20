@@ -42,11 +42,11 @@
 }
 
 - (void)responseSuccessWithResponse:(ITTBaseDataRequest *)request{
-    [[TKAlertCenter defaultCenter] postAlertWithMessage:@"邮件修改成功"];
+     [UIAlertView popupAlertByDelegate:self andTag:1000 title:@"提示" message:request.handleredResult[@"msg"]];
 }
 
 - (void)responseFailWithResponse:(ITTBaseDataRequest *)request{
-    [[TKAlertCenter defaultCenter] postAlertWithMessage:@"邮件修改失败"];
+     [UIAlertView popupAlertByDelegate:self andTag:1000 title:@"提示" message:request.handleredResult[@"msg"]];
 }
 
 - (void)didReceiveMemoryWarning
