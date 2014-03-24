@@ -9,6 +9,7 @@
 #import "PersonController.h"
 #import "PersonCell.h"
 #import "LBHarpy.h"
+#import "SIAlertView.h"
 @interface PersonController ()
 
 @property (nonatomic, strong) NSMutableArray *cellNameArray;
@@ -64,9 +65,11 @@
 }
 
 - (void)logout{
-    UIAlertView *logoutAlert = [[UIAlertView alloc] initWithTitle:@"\n确定要退出吗\n\n" message:nil delegate:self cancelButtonTitle:@"取消" otherButtonTitles:@"确定", nil];
-    logoutAlert.delegate = self;
-    [logoutAlert show];
+    [self alert2:nil];
+//    return;
+//    UIAlertView *logoutAlert = [[UIAlertView alloc] initWithTitle:@"\n确定要退出吗\n\n" message:nil delegate:self cancelButtonTitle:@"取消" otherButtonTitles:@"确定", nil];
+//    logoutAlert.delegate = self;
+//    [logoutAlert show];
 }
 
 #pragma mark - UITableView Method
@@ -112,14 +115,56 @@
     return 44;
 }
 
-#pragma mark - UIAlertView Delegate Method
-- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex{
-    if (buttonIndex==1) {
-        [[UserHelper shareInstance] removeMemberID];
-        AppDelegate *delegate = [UIApplication sharedApplication].delegate;
-        [delegate chageLoginVC];
-    }
+- (void)okClicked:(UIButton *)sender{
+    NSLog(@"OK Clicked");
+    [[UserHelper shareInstance] removeMemberID];
+    AppDelegate *delegate = [UIApplication sharedApplication].delegate;
+    [delegate chageLoginVC];
 }
+
+- (void)alert2:(id)sender{
+    SEL sel = @selector(okClicked:);
+    [GlobalHelper showWithTitle:@"\n\n\n\n " withMessage:@"确认要退出吗？\n\n" withCancelTitle:@"取消" withOkTitle:@"确定" withSelector:sel withTarget:self];
+
+//{
+//    SIAlertView *alertView = [[SIAlertView alloc] initWithTitle:@"\n\n\n\n " andMessage:@"确认要退出吗？\n\n"];
+//    [alertView addButtonWithTitle:@"取消"
+//                             type:SIAlertViewButtonTypeCancel
+//                          handler:^(SIAlertView *alertView) {
+//                              NSLog(@"Cancel Clicked");
+//                          }];
+//    [alertView addButtonWithTitle:@"确定"
+//                             type:SIAlertViewButtonTypeDefault
+//                          handler:^(SIAlertView *alertView) {
+//                              NSLog(@"OK Clicked");
+//                              [[UserHelper shareInstance] removeMemberID];
+//                              AppDelegate *delegate = [UIApplication sharedApplication].delegate;
+//                              [delegate chageLoginVC];
+//
+//                            }];
+//    alertView.titleColor = [UIColor blueColor];
+//    alertView.messageColor = [UIColor blackColor];
+//    alertView.messageFont = [UIFont systemFontOfSize:14.0];
+//    alertView.cornerRadius = 10;
+////    alertView.buttonFont = [UIFont boldSystemFontOfSize:15];
+//    alertView.transitionStyle = SIAlertViewTransitionStyleBounce;
+//    
+//    alertView.willShowHandler = ^(SIAlertView *alertView) {
+//        NSLog(@"%@, willShowHandler2", alertView);
+//    };
+//    alertView.didShowHandler = ^(SIAlertView *alertView) {
+//        NSLog(@"%@, didShowHandler2", alertView);
+//    };
+//    alertView.willDismissHandler = ^(SIAlertView *alertView) {
+//        NSLog(@"%@, willDismissHandler2", alertView);
+//    };
+//    alertView.didDismissHandler = ^(SIAlertView *alertView) {
+//        NSLog(@"%@, didDismissHandler2", alertView);
+//    };
+//    
+//    [alertView show];
+}
+
 
 
 - (void)didReceiveMemoryWarning

@@ -9,6 +9,7 @@
 #define ExampleCellCount 4
 
 #import "ShoppingCartController.h"
+#import "CashConfirmViewController.h"
 #import "ShoppingCartCell.h"
 #import "UIKeyboardCoView.h"
 #import "GoodsListModel.h"
@@ -17,6 +18,9 @@
 
 @interface ShoppingCartController () <ShoppingDelegate>{
     BOOL showDeleteButton;
+    
+    UILabel *headView;
+    CGFloat allSum;
 }
 
 @end
@@ -35,7 +39,6 @@
 
 - (void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
-    [self.model removeAllObjects];
     [self getRequestShoppingCartData];
 }
 
@@ -44,7 +47,7 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
     // 初始化表
-    self.shoppingCartTableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, 320, [UIScreen mainScreen].bounds.size.height - 49) style:UITableViewStylePlain];
+    self.shoppingCartTableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, 320, [UIScreen mainScreen].bounds.size.height - 49-64) style:UITableViewStylePlain];
     self.shoppingCartTableView.delegate = self;
     self.shoppingCartTableView.dataSource = self;
     self.shoppingCartTableView.separatorStyle = UITableViewCellSeparatorStyleNone;
@@ -61,12 +64,21 @@
     UIView *tempView = [[UIView alloc] init];
     [self.shoppingCartTableView setTableFooterView:tempView];
     
-     self.navigationItem.leftBarButtonItem = nil;
-    self.navigationItem.rightBarButtonItem = [UIBarButtonItem barButtonWithTitle:@"编辑" image:nil target:self action:@selector(editClicked:) font:[UIFont systemFontOfSize:14.0f] titleColor:[UIColor whiteColor]];
+    self.navigationItem.leftBarButtonItem = [UIBarButtonItem barButtonWithTitle:@"编辑" image:nil target:self action:@selector(editClicked:) font:[UIFont systemFontOfSize:14.0f] titleColor:[UIColor whiteColor]];
+    self.navigationItem.rightBarButtonItem = [UIBarButtonItem barButtonWithTitle:@"结算" image:nil target:self action:@selector(toPaymentClicked:) font:[UIFont systemFontOfSize:14.0f] titleColor:[UIColor whiteColor]];
 }
+
+#pragma mark - Class Method
 
 - (void)getRequestShoppingCartData{
     NSArray *dbArray = [[GoodsDetailDataBase shareDataBase] readTableName];
+    
+    if ([dbArray count] == [self.model count]) { // 避免每次刷新
+        return;
+    }else{ // 移除所有数据，避免重复显示
+        [self.model removeAllObjects];
+    }
+    
     NSMutableArray *idsArray = [NSMutableArray array];
     for (GoodsListModel *model in dbArray) {
         [idsArray addObject:model.productId];
@@ -92,6 +104,15 @@
     [currentTextField resignFirstResponder];
 }
 
+
+- (void)toPaymentClicked:(id)sender{
+    CashConfirmViewController *cashConfirmVC = [[CashConfirmViewController alloc] init];
+    [cashConfirmVC setHidesBottomBarWhenPushed:YES];
+    cashConfirmVC.goodsSumPrice = allSum;
+    [cashConfirmVC shoppingPriceWithShow:YES];
+    [self.navigationController pushViewController:cashConfirmVC animated:YES];
+}
+
 #pragma mark - TableView method
 - (ShoppingCartCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
     
@@ -100,7 +121,7 @@
     if (indexPath.row == [self.model count] ) {
         cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"CustomCell"];
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
-        UIButton *payMentBtn = [UIButton createButton:@selector(toPayment:) title:@"去结算" image:nil selectedBgImage:@"login_Select.png"  backGroundImage:@"login_Nomal.png"  backGroundTapeImage:nil frame:CGRectMake(10, 20, 300, 36) tag:100 target:self];
+        UIButton *payMentBtn = [UIButton createButton:@selector(toPaymentClicked:) title:@"去结算" image:nil selectedBgImage:@"login_Select.png"  backGroundImage:@"login_Nomal.png"  backGroundTapeImage:nil frame:CGRectMake(10, 20, 300, 36) tag:100 target:self];
         [payMentBtn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
         [cell.contentView addSubview:payMentBtn];
     }else{
@@ -124,7 +145,7 @@
     // 多一个cell， 给结算按钮留位置
     NSInteger cellCount = 0;
     if ([self.model count]>0) {
-        cellCount = [self.model count] + 1;
+        cellCount = [self.model count];
     }else{
         cellCount = [self.model count];
     }
@@ -135,9 +156,12 @@
     return 100.0f;
 }
 
-
-- (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section{
-    return @"总计：1768元";
+- (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section{
+    headView = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, self.shoppingCartTableView.width, 20)];
+    headView.textColor = [UIColor grayColor];
+    headView.backgroundColor = [UIColor colorWithHex:0xfaf7f3];
+    headView.text = [NSString stringWithFormat:@" 总计：%.2f元",allSum];
+    return headView;
 }
 
 - (NSString *)tableView:(UITableView *)tableView titleForDeleteConfirmationButtonForRowAtIndexPath:(NSIndexPath *)indexPath{
@@ -153,11 +177,6 @@
     if ([currentTextField isFirstResponder]) {
         [currentTextField resignFirstResponder];
     }
-}
-
-#pragma mark - Class Method
-- (void)toPayment:(id)sender{
-
 }
 
 #pragma mark - ShoppingDelegate
@@ -185,24 +204,36 @@ static UITextField *currentTextField = nil;
 }
 
 #pragma mark - Response Mothod
+
+- (UIImage *)emptyImage{
+    return [UIImage imageNamed:@"shopping_empty.png"];
+}
+
+- (NSString *)emptyTitle{
+    return nil;
+}
+
+- (NSString *)emptySubTitle{
+    return @"您的购物车还没有商品，请先去添加一些吧~";
+}
+
 - (void)reloadNewData{
-    UIImageView *emptyView = (id)[self.view viewWithTag:101];
-    
     if ([self.model count ] < 1) {
-        if (!emptyView.superview) {
-            if (!emptyView) {
-                emptyView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, 100, 76)];
-                emptyView.center = CGPointMake(self.view.centerX, self.view.centerY - 30);
-                emptyView.image = [UIImage imageNamed:@"shopping_empty.png"];
-            }
-            emptyView.tag = 101;
-            emptyView.autoresizingMask = UIViewAutoresizingFlexibleHeight | UIViewAutoresizingFlexibleWidth;
-            [self.view addSubview:emptyView];
-        }
+        [self showEmptyView];
     }else{
-        [emptyView removeFromSuperview];
+        [self hideEmptyView];
     }
+    allSum = [self sumAllGoodsPrice];
     [self.shoppingCartTableView reloadData];
+}
+
+- (float)sumAllGoodsPrice{
+    CGFloat sum = 0;
+    for(NSDictionary *dict in self.model){
+        NSNumber *price = dict[@"costPrice"];
+        sum += price.floatValue;
+    }
+    return sum;
 }
 
 - (void)didReceiveMemoryWarning

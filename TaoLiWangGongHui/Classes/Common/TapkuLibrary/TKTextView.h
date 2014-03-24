@@ -1,6 +1,6 @@
 //
-//  TKAlertCenter.h
-//  Created by Devin Ross on 9/29/10.
+//  TKTextView.h
+//  Created by Devin Ross on 5/18/13.
 //
 /*
  
@@ -29,35 +29,14 @@
  
  */
 
-@import Foundation;
 @import UIKit;
 
-@class TKAlertView;
+@interface TKTextView : UITextView
 
-/** A notification center for displaying quick bursts of alert information to the user. */
-@interface TKAlertCenter : NSObject {
-	NSMutableArray *_alerts;
-	BOOL _active;
-	TKAlertView *_alertView;
-    UIView      *_bgView;
-	CGRect _alertFrame;
-}
-
-/** Returns the process’s default notification center. 
- @return The current process’s default notification center, which is used for alert notifications.
- */
-+ (TKAlertCenter*) defaultCenter;
+@property (nonatomic,strong) UILabel *placeHolderLabel;
+@property (nonatomic,strong) NSString *placeholder;
+@property (nonatomic,strong) UIColor *placeholderColor;
 
 
-/** Posts a given alert message to the user.
- @param message The message shown under an image.
- @param image The image displayed to the user. If image is nil, the message will only be shown.
- */
-- (void) postAlertWithMessage:(NSString*)message image:(UIImage*)image;
-
-/** Posts a given alert message to the user.
- @param message The message shown under an image.
- */
-- (void) postAlertWithMessage:(NSString *)message;
 
 @end

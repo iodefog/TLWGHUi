@@ -24,6 +24,14 @@
     self.activityImage.backgroundColor = UIColorFromRGB(0xF0ECEC);
 }
 
+- (void)setObject:(NSDictionary *)dict{
+    self.activityModel = [[MyActivityModel alloc] initWithDataDic:dict];
+    [self.activityImage setImageWithURL:[NSURL URLWithString:self.activityModel.activityPic]];
+    self.activityDescription.text = self.activityModel.activityTitle;
+    self.activityTime.text = self.activityModel.publishDatetime;
+}
+
+
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated
 {
     [super setSelected:selected animated:animated];

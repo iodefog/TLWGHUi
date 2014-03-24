@@ -59,10 +59,7 @@ static NSString *activityCellName = @"activityCellName";
     if (!cell) {
         cell = [[[NSBundle mainBundle] loadNibNamed:@"ActivitiesCell" owner:nil options:nil] lastObject];
     }
-    MyActivityModel *activityModel = [[MyActivityModel alloc] initWithDataDic:self.model[indexPath.row]];
-    [cell.activityImage setImageWithURL:[NSURL URLWithString:activityModel.activityPic]];
-    cell.activityDescription.text = activityModel.activityTitle;
-    cell.activityTime.text = activityModel.publishDatetime;
+    [cell setObject:self.model[indexPath.row]];
     return cell;
 }
 
@@ -76,10 +73,17 @@ static NSString *activityCellName = @"activityCellName";
     NSDictionary *params = @{@"memberId": [[UserHelper shareInstance] getMemberID],
                              @"pageSize": PAGESIZE,
                              @"pageNo": @"0"};
-    [self commitRequestWithParams:params withUrl:[GlobalRequest activityAction_QueryActivityStatus_Url]];
+    [self commitRequestWithParams:params withUrl:[GlobalRequest activityAction_QueryMyActivityList_Url]];
     
 }
 
+- (void)refreshFooterView{
+    NSDictionary *params = @{@"memberId": [[UserHelper shareInstance] getMemberID],
+                             @"pageSize": PAGESIZE,
+                             @"pageNo": [NSString stringWithFormat:@"%d", [self.model count]/PAGESIZEINT]};
+    [self commitRequestWithParams:params withUrl:[GlobalRequest activityAction_QueryMyActivityList_Url]];
+    
+}
 
 
 - (void)didReceiveMemoryWarning

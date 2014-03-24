@@ -12,6 +12,7 @@
 #import "UnionActivitiesController.h"
 #import "WelfareController.h"
 #import "HomeListModel.h"
+#import "ShufflingImageView.h"
 
 @interface HomeViewController (){
     NSTimer *activitiesTimer;
@@ -42,14 +43,8 @@
         self.baseScroll.contentSize = CGSizeMake(self.view.width, 568);
     }
     else{
-        if (isIOS7) {
-            self.baseScroll.contentSize = CGSizeMake(self.view.width, 400);
-            self.baseScroll.height = self.view.height - 49 ;
-        }else{
-//            self.baseScroll.height = self.view.height - 49 ;
-            self.baseScroll.top = 0;
-            self.baseScroll.contentSize = CGSizeMake(self.view.width, 568+64);
-        }
+        self.baseScroll.top = 0;
+        self.baseScroll.contentSize = CGSizeMake(self.view.width, 568+64);
     }
     self.baseScroll.backgroundColor  = RGBCOLOR(241, 241, 241);
 }
@@ -59,6 +54,7 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
     self.baseScroll.userInteractionEnabled = YES;
+    self.headScroll.userInteractionEnabled = YES;
     self.navigationItem.title = @"淘礼网工会平台";
     self.navigationItem.leftBarButtonItem = nil;
     
@@ -77,11 +73,13 @@
     int imageCount = self.activitiesArray.count;
     
     for (int i = 0;i < imageCount ;i ++) {
-        HomeListModel *model = self.activitiesArray[i];
-        UIImageView *imageView = [[UIImageView alloc] initWithFrame:CGRectMake(self.view.width*i, 0, self.view.width, 170)];
-//        imageView.image = [UIImage imageNamed:@"轮播图范例.png"];
-        NSString *imageUrl = [NSString stringWithFormat:@"%@%@", [GlobalRequest getBaseServiceUrl], model.activityPic];
-        [imageView setImageWithURL:[NSURL URLWithString:imageUrl] placeholderImage:[UIImage imageNamed:@"轮播图范例.png"]];
+//        HomeListModel *model = self.activitiesArray[i];
+//        UIImageView *imageView = [[UIImageView alloc] initWithFrame:CGRectMake(self.view.width*i, 0, self.view.width, 170)];
+////        imageView.image = [UIImage imageNamed:@"轮播图范例.png"];
+//        NSString *imageUrl = [NSString stringWithFormat:@"%@%@", [GlobalRequest getBaseServiceUrl], model.activityPic];
+//        [imageView setImageWithURL:[NSURL URLWithString:imageUrl] placeholderImage:[UIImage imageNamed:@"轮播图范例.png"]];
+        ShufflingImageView *imageView = [[ShufflingImageView alloc] initWithFrame:CGRectMake(self.view.width*i, 0, self.view.width, 170)];
+        [imageView createSubViewsWithModel:self.activitiesArray[i]];
         [self.headScroll addSubview:imageView];
     }
     

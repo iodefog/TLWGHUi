@@ -7,6 +7,7 @@
 //
 
 #import "ActivityNormalCell.h"
+#import "SignUpAndVotedModel.h"
 
 @implementation ActivityNormalCell
 
@@ -30,11 +31,16 @@
 }
 
 - (void)setObject:(NSDictionary *)dict{
-    if (showType == showSignUp) {
-        
-    }else{
-        self.eventDetail.text = dict[@"voteName"];
-    }  
+    SignUpAndVotedModel *signUpAndVotedModel = [[SignUpAndVotedModel alloc] initWithDataDic:dict];
+    self.name.text = signUpAndVotedModel.realname;
+    [self.department setTitle:signUpAndVotedModel.Property0 forState:UIControlStateNormal];
+    self.eventDetail.text = signUpAndVotedModel.productName;
+    
+//    if (showType == showSignUp) {
+//        
+//    }else{
+//        self.eventDetail.text = dict[@"voteName"];
+//    }  
 }
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated

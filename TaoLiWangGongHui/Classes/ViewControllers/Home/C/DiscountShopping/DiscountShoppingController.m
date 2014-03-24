@@ -28,10 +28,21 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    
     [self.tableView setTableFooterView:[[UIView alloc] init]];
-    
     self.navigationItem.title = @"优惠购物";
+    
+    [self addHeader];
+    [self addFooter];
+}
+
+- (void)didReceiveMemoryWarning
+{
+    [super didReceiveMemoryWarning];
+    // Dispose of any resources that can be recreated.
+}
+
+#pragma mark - MJRefresh
+- (void)refreshHeaderView{
     NSDictionary *params = @{
                              @"memberId": [[UserHelper shareInstance] getMemberID],
                              @"pageNo": @"1",
@@ -40,10 +51,13 @@
     [self commitRequestWithParams:params withUrl:[GlobalRequest productAction_QueryProductListByType_Url]];
 }
 
-- (void)didReceiveMemoryWarning
-{
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
+- (void)refreshFooterView{
+    NSDictionary *params = @{
+                             @"memberId": [[UserHelper shareInstance] getMemberID],
+                             @"pageNo": [NSString stringWithFormat:@"%d", [self.model count]/PAGESIZEINT],
+                             @"Type":@"3",
+                             @"pageSize": PAGESIZE,};
+    [self commitRequestWithParams:params withUrl:[GlobalRequest productAction_QueryProductListByType_Url]];
 }
 
 #pragma mark - Table view data source

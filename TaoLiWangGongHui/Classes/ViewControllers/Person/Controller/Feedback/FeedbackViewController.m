@@ -47,12 +47,13 @@
 
 #pragma mark - Response Success
 - (void)responseSuccessWithResponse:(ITTBaseDataRequest *)request{
-    [[TKAlertCenter defaultCenter] postAlertWithMessage:@"感谢您的意见"];
+    self.feedbackTextView.text = nil;
+    [GlobalHelper handerResultWithDelegate:self withMessage:request.handleredResult[@"msg"]];
 }
 
 #pragma mark - Response Fail
 - (void)responseFailWithResponse:(ITTBaseDataRequest *)request{
-    [[TKAlertCenter defaultCenter] postAlertWithMessage:@"提交失败"];
+    [GlobalHelper handerResultWithDelegate:self withMessage:request.handleredResult[@"msg"]];
 }
 
 #pragma mark - Response Cancel

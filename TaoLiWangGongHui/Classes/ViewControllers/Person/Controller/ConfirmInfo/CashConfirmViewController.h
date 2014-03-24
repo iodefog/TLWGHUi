@@ -25,4 +25,9 @@
 @property (strong, nonatomic) IBOutlet UILabel *detailAddress;// 详细地址
 @property (strong, nonatomic) GoodsListModel *goodsModel;
 
+// 传入商品价格
+@property (assign, nonatomic) CGFloat goodsSumPrice;
+
+- (void)shoppingPriceWithShow:(BOOL)show;
+
 @end

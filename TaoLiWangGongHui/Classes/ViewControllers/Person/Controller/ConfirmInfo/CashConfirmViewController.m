@@ -35,6 +35,12 @@
     return self;
 }
 
+static bool shoppingShow = NO;
+- (void)shoppingPriceWithShow:(BOOL)show{
+    shoppingShow = show;
+}
+
+
 - (void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
     NSArray *dbArray = [[UserAddressDataBase shareDataBase] readTableName];
@@ -47,8 +53,12 @@
         self.userName.text = addressModel.Name;
         self.phoneNum.text = addressModel.Phone;
         self.detailAddress.text = addressModel.Address;
+        if (shoppingShow) {
+            self.totalPrice.text = [NSString stringWithFormat:@"%.2f元",self.goodsSumPrice];
+        }else{
+            self.totalPrice.text = self.goodsModel.costPrice;
+        }
     }
-    self.totalPrice.text = self.goodsModel.costPrice;
 }
 
 - (void)viewDidLoad
@@ -66,25 +76,32 @@
 
 // 支付宝客户端支付点击
 - (IBAction)aliPayClicked:(UIButton *)sender {
+    if (self.aliPayButton == sender && self.aliPayButton.selected) {
+        return;
+    }
     self.unionpayButton.selected = sender.selected;
     self.aliPayButton.selected = !sender.selected;
 }
 
 // 银联支付点击
 - (IBAction)unionpayClicked:(UIButton *)sender {
+    if (self.unionpayButton == sender && self.unionpayButton.selected) {
+        return;
+    }
     self.aliPayButton.selected = sender.selected;
     self.unionpayButton.selected = !sender.selected;
 }
 
 // 提交
 - (IBAction)commitClicked:(id)sender {
-    NSArray *dbArray = [[UserAddressDataBase shareDataBase] readTableName];
-    if ([dbArray count] < 1) {
+    if (!self.aliPayButton.selected && !self.unionpayButton.selected) {
         [UIAlertView popupAlertByDelegate:self andTag:1001 title:@"提示" message:@"请选择您的付款方式"];
-        return;
     }
+    else if (self.aliPayButton.selected) {
+        [self aliPayMothod];
+    }else if(self.unionpayButton.selected){
     
-    [self aliPayMothod];
+    }
 }
 
 // 头部视图2点击
@@ -100,7 +117,7 @@
      */
     NSString *appScheme = AppName;
 //    NSString* orderInfo = [self getOrderInfo:request.handleredResult[@"result"]];
-     NSString* orderInfo = [self getOrderInfo:nil];
+     NSString* orderInfo = [self getOrderInfo:self.goodsModel.productId];
     NSString* signedStr = [self doRsa:orderInfo];
     NSString *orderString = [NSString stringWithFormat:@"%@&sign=\"%@\"&sign_type=\"%@\"",orderInfo, signedStr, @"RSA"];
     [AlixLibService payOrder:orderString AndScheme:appScheme seletor:nil target:self];
@@ -130,7 +147,7 @@
     order.tradeNO = orderID;//订单ID（由商家自行制定）
 	order.productName = @"goodTitle";//商品标题
 	order.productDescription = @"goodDescription"; //商品描述
-	order.amount = [NSString stringWithFormat:@"%.2f",100.]; //商品价格
+	order.amount = [NSString stringWithFormat:@"%.2f",self.goodsSumPrice]; //商品价格
 	order.notifyURL =  @"http://wwww.xxx.com"; //回调URL
 	return [order description];
 }

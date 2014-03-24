@@ -7,7 +7,7 @@
 //
 
 #import "GlobalHelper.h"
-
+#import "SIAlertView.h"
 @implementation GlobalHelper
 
 UINavigationController *selected_navigation_controller()
@@ -42,6 +42,57 @@ UINavigationController *selected_navigation_controller()
     NSString *zipRegex = @"[1-9]\\d{5}";
     NSPredicate *zipCodeTest = [NSPredicate predicateWithFormat:@"SELF MATCHES%@",zipRegex];
     return [zipCodeTest evaluateWithObject:zipCode];
+}
+
++ (void)handerResultWithDelegate:(id)delegate withMessage:(NSString *)message{
+    if ([message isKindOfClass:[NSString class]]) {
+        [UIAlertView popupAlertByDelegate:delegate andTag:1001 title:@"提示" message:message];
+    }else if([message isKindOfClass:[NSString class]]){
+        [UIAlertView popupAlertByDelegate:delegate andTag:1001 title:@"提示" message:@"获取信息错误"];
+    }
+}
+
+// 自定义AlertView
++ (void)showWithTitle:(NSString *)title withMessage:(NSString *)message withCancelTitle:(NSString *)cancelTitle withOkTitle:(NSString *)okTitle withSelector:(SEL)selector withTarget:(id)target{
+    SIAlertView *alertView = [[SIAlertView alloc] initWithTitle:title andMessage:message];
+    if (cancelTitle) {
+        [alertView addButtonWithTitle:cancelTitle
+                                 type:SIAlertViewButtonTypeCancel
+                              handler:^(SIAlertView *alertView) {
+                                  
+                              }];
+    }
+    if (okTitle) {
+        [alertView addButtonWithTitle:okTitle
+                                 type:SIAlertViewButtonTypeDefault
+                              handler:^(SIAlertView *alertView) {
+                                  if ([target respondsToSelector:selector]) {
+                                       [target performSelector:selector];
+                                  }
+                              }];
+    }
+    
+    alertView.titleColor = [UIColor blueColor];
+    alertView.messageColor = [UIColor blackColor];
+    alertView.messageFont = [UIFont systemFontOfSize:14.0];
+    alertView.cornerRadius = 10;
+    //    alertView.buttonFont = [UIFont boldSystemFontOfSize:15];
+    alertView.transitionStyle = SIAlertViewTransitionStyleBounce;
+    
+    alertView.willShowHandler = ^(SIAlertView *alertView) {
+        NSLog(@"%@, willShowHandler2", alertView);
+    };
+    alertView.didShowHandler = ^(SIAlertView *alertView) {
+        NSLog(@"%@, didShowHandler2", alertView);
+    };
+    alertView.willDismissHandler = ^(SIAlertView *alertView) {
+        NSLog(@"%@, willDismissHandler2", alertView);
+    };
+    alertView.didDismissHandler = ^(SIAlertView *alertView) {
+        NSLog(@"%@, didDismissHandler2", alertView);
+    };
+    
+    [alertView show];
 }
 
 @end

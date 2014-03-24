@@ -127,7 +127,7 @@
 #pragma mark - 四、	通知接口
 // 23.	通知列表接口
 + (NSString *)articleAction_QueryAdList_Url{
-    return [NSString stringWithFormat:@"%@%@",[GlobalRequest getBaseServiceUrl],@"ArticleAction!queryAdList.do"];
+    return [NSString stringWithFormat:@"%@%@",[GlobalRequest getBaseServiceUrl],@"ActivityAction!queryAdList.do"];
 }
 
 // 24.	广告详细接口
@@ -207,4 +207,8 @@ return [NSString stringWithFormat:@"%@%@",[GlobalRequest getBaseServiceUrl],@"Us
  return [NSString stringWithFormat:@"%@%@",[GlobalRequest getBaseServiceUrl],@"ActivityAction!queryVoteList.do"];
 }
 
+// 39.我的活动：（新增）
++ (NSString *)activityAction_QueryMyActivityList_Url{
+    return [NSString stringWithFormat:@"%@%@",[GlobalRequest getBaseServiceUrl],@"ActivityAction!queryMyActivityList.do"];
+}
 @end

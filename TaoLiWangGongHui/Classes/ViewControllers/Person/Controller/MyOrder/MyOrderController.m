@@ -41,17 +41,30 @@
     self.tableView.backgroundView = [[UIView alloc] init];
 //    [self.tableView setSeparatorStyle:UITableViewCellSeparatorStyleNone];
     self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
-    
-    [self commitRequestWithParams:@{@"memberId": @"",
-                                    @"orderType": @"",
-                                    @"pageNo": @"pageSize",} withUrl:[GlobalRequest orderAction_QueryOrderList_Url]];
-}
-
+    [self addHeader];
+    [self addFooter];
+ }
 
 - (void)didReceiveMemoryWarning
 {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated
+}
+
+#pragma mark - MJRefresh
+- (void)refreshHeaderView{
+    [self commitRequestWithParams:@{@"memberId": @"",
+                                    @"orderType": @"",
+                                    @"pageNo":@"",
+                                    @"pageSize":@""} withUrl:[GlobalRequest orderAction_QueryOrderList_Url]];
+}
+
+- (void)refreshFooterView{
+    [self commitRequestWithParams:@{@"memberId": @"",
+                                    @"orderType": @"",
+                                    @"pageNo":@"",
+                                    @"pageSize":@""} withUrl:[GlobalRequest orderAction_QueryOrderList_Url]];
+
 }
 
 #pragma mark - response Mothod

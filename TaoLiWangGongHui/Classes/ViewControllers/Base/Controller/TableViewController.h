@@ -14,6 +14,7 @@
 @interface TableViewController : UITableViewController // 写法与ViewController 一样
 
 @property (nonatomic, strong) id model;
+@property (nonatomic, strong) TKEmptyView *emptyView;
 
 // 下拉刷新，其他复用类需重写
 - (void)refreshHeaderView;
@@ -33,5 +34,16 @@
 - (void)responseFailWithResponse:(ITTBaseDataRequest *)request;
 #pragma mark - Response Cancel
 - (void)responseCancelWithResponse:(ITTBaseDataRequest *)request;
+
+// 无数据时，显示的图片
+- (UIImage *)emptyImage;
+// 无数据时，显示的标题
+- (NSString *)emptyTitle;
+// 无数据时，显示的子标题
+- (NSString *)emptySubTitle;
+// 当无数据时，显示空图
+- (void)showEmptyView;
+// 当有数据是，移除空图
+- (void)hideEmptyView;
 
 @end

@@ -31,6 +31,7 @@
 
 #import "TKAlertCenter.h"
 #import "UIView+TKCategory.h"
+#import "TKGlobal.h"
 
 #pragma mark - TKAlertView
 @interface TKAlertView : UIView {
@@ -138,8 +139,6 @@
 	if(!(self=[super init])) return nil;
 	
 	_alerts = [[NSMutableArray alloc] init];
-    _bgView = [[UIView alloc] init];
-    _bgView.backgroundColor = [UIColor grayColor];
 	_alertView = [[TKAlertView alloc] init];
 	_active = NO;
 	
@@ -168,8 +167,6 @@
 	_active = YES;
 	_alertView.transform = CGAffineTransformIdentity;
 	_alertView.alpha = 0;
-    _bgView.alpha = 1;
-    [[UIApplication sharedApplication].keyWindow addSubview:_bgView];
 	[[UIApplication sharedApplication].keyWindow addSubview:_alertView];
 
 	
@@ -185,8 +182,8 @@
 	
 	
 	
-	_alertView.center = CGPointMake(_alertFrame.origin.x+_alertFrame.size.width/2, _alertFrame.origin.y+_alertFrame.size.height/2);
-	_bgView.center =  CGPointMake(_alertFrame.origin.x+_alertFrame.size.width/2, _alertFrame.origin.y+_alertFrame.size.height/2);
+	_alertView.center = CGPointMake(_alertFrame.origin.x+_alertFrame.size.width/2, _alertFrame.origin.y+_alertFrame.size.height/2+130);
+		
 	
 	CGRect rr = _alertView.frame;
 	rr.origin.x = (int)rr.origin.x;
@@ -203,7 +200,7 @@
 	
 	
 	[UIView beginAnimations:nil context:nil];
-	[UIView setAnimationDuration:0.15];
+	[UIView setAnimationDuration:0.14];
 	[UIView setAnimationDelegate:self];
 	[UIView setAnimationDidStopSelector:@selector(animationStep2)];
 	_alertView.transform = CGAffineTransformMakeRotation(degrees * M_PI / 180);
@@ -220,7 +217,7 @@
 	// change the animation duration accordingly
 	// avg person reads 200 words per minute
 	NSArray * words = [_alerts[0][0] componentsSeparatedByCharactersInSet:[NSCharacterSet whitespaceCharacterSet]];
-	double duration = MAX(((double)[words count]*60.0/200.0),1.4f);
+	double duration = MIN(((double)[words count]*60.0/200.0),1.2f);
 	
 	[UIView setAnimationDelay:duration];
 	[UIView setAnimationDelegate:self];
@@ -238,7 +235,7 @@
 	[UIView commitAnimations];
 }
 - (void) animationStep3{
-	[_bgView removeFromSuperview];
+	
 	[_alertView removeFromSuperview];
 	[_alerts removeObjectAtIndex:0];
 	[self showAlerts];
@@ -303,7 +300,7 @@ CGRect subtractRect(CGRect wf,CGRect kf){
 	[UIView beginAnimations:nil context:nil];
 	_alertFrame = subtractRect(wf,kf);
 	_alertView.center = CGPointMake(_alertFrame.origin.x+_alertFrame.size.width/2, _alertFrame.origin.y+_alertFrame.size.height/2);
-    _bgView.center = CGPointMake(_alertFrame.origin.x+_alertFrame.size.width/2, _alertFrame.origin.y+_alertFrame.size.height/2);
+
 	[UIView commitAnimations];
 
 }
@@ -328,7 +325,6 @@ CGRect subtractRect(CGRect wf,CGRect kf){
 	[UIView beginAnimations:nil context:nil];
 	_alertView.transform = CGAffineTransformMakeRotation(degrees * M_PI / 180);
 	_alertView.frame = CGRectMake((int)_alertView.frame.origin.x, (int)_alertView.frame.origin.y, (int)_alertView.frame.size.width, (int)_alertView.frame.size.height);
-    _bgView.frame = [UIApplication sharedApplication].keyWindow.bounds;
 	[UIView commitAnimations];
 	
 }

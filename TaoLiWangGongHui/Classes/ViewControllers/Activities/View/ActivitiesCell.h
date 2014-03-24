@@ -7,7 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
-
+#import "MyActivityModel.h"
 @interface ActivitiesCell : UITableViewCell
 
 // 我的活动图片，小图
@@ -17,5 +17,8 @@
 // 活动显示时间
 @property (strong, nonatomic) IBOutlet UILabel *activityTime;
 // 传入参数，并根据参数修改活动类型
+@property (strong, nonatomic) MyActivityModel *activityModel;
+
+- (void)setObject:(NSDictionary *)dict;
 
 @end

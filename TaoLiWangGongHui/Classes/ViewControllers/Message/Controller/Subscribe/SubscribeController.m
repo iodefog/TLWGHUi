@@ -35,6 +35,9 @@
                                     @"pageSize":PAGESIZE ,} withUrl:[GlobalRequest articleAction_QuerySubscription_Url]];
     
     [self.tableView setTableFooterView:[[UIView alloc] init]];
+    
+    [self addHeader];
+    [self addFooter];
 }
 
 - (void)back{

@@ -32,6 +32,7 @@
 #import "ITTCommonMacros.h"
 #import "ITTCommonFunctions.h"
 #import "Reachability.h"
+#import "TapkuLibrary.h"
 #import "TKAlertCenter.h"
 #import "RTLabel.h"
 #import "GlobalRequest.h"

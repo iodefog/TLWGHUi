@@ -132,4 +132,8 @@ typedef enum {
 
 // 38.	工会活动 已投票接口
 + (NSString *)activityAction_QueryVoteList_Url;
+
+// 39.我的活动：（新增）
++ (NSString *)activityAction_QueryMyActivityList_Url;
+
 @end

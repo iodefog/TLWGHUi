@@ -15,6 +15,7 @@
              @"activityPic": @"activityPic",
              @"activityTitle": @"activityTitle",
              @"description": @"description",
+             @"typeId": @"typeId",
              @"publishDatetime": @"publishDatetime",
              @"status":@"status"};
 }

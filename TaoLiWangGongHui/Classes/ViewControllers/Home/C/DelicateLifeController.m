@@ -29,10 +29,22 @@
     [super viewDidLoad];
     // 假数据
     self.navigationItem.title = @"精致生活";
+    self.tableView.backgroundView = [[UIView alloc] init];
     self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
-    [self commitRequestWithParams:[NSDictionary dictionaryWithObjectsAndKeys:
-                                   @"0" ,@"pageNo", 
-                                   PAGESIZE,@"pageSize",nil] withUrl:[GlobalRequest activityAction_QueryJokeList_Url]];
+    
+    [self addHeader];
+    [self addFooter];
+}
+
+#pragma mark - MJRefresh
+- (void)refreshHeaderView{
+    [self commitRequestWithParams:@{@"pageNo":@"0",
+                                    @"pageSize":PAGESIZE} withUrl:[GlobalRequest activityAction_QueryJokeList_Url]];
+}
+
+- (void)refreshFooterView{
+    [self commitRequestWithParams:@{@"pageNo":[NSString stringWithFormat:@"%d", [self.model count]/PAGESIZEINT],
+                                    @"pageSize":PAGESIZE} withUrl:[GlobalRequest activityAction_QueryJokeList_Url]];
 }
 
 
@@ -47,7 +59,11 @@
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
     // Return the number of sections.
-    return [self.model count];
+    NSInteger cellCount = 0;
+    if ([self.model isKindOfClass:[NSArray class]]) {
+        cellCount = [self.model count];
+    }
+    return cellCount;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
@@ -59,7 +75,6 @@
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
     NSDictionary *dict = self.model[indexPath.section];
     return [DelicateLifeCell getCellHeight:dict];
-//    return 100;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section{

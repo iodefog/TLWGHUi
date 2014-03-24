@@ -59,9 +59,7 @@
     self.middleScrollView.userInteractionEnabled = YES;
     self.baseScroll.backgroundColor  = RGBCOLOR(241, 241, 241);
     self.baseScroll.contentSize = CGSizeMake(self.view.width, 568);
-    
-    [self showDiffrentMiddleViewWithType:activityType withDescription:nil];
-    
+        
     [self commitRequestWithParams:@{@"activityId":activityID} withUrl:[GlobalRequest activityAction_QueryActivityInfo_Url]];
     
     if (activityType == TypeNone){ // 不显示报名和投票
@@ -83,16 +81,21 @@
     }
 }
 
-- (void)showDiffrentMiddleViewWithType:(ActivityType)myActivityType withDescription:(NSString *)description{
+- (void)showDiffrentMiddleViewWithType:(ActivityType)myActivityType withDescription:(NSString *)description withHaveAction:(BOOL)haveAction{
     if ((myActivityType == TypeSignUp) || (myActivityType == TypeNone)) {
         RTLabel *signDescription = [[RTLabel alloc] initWithFrame:CGRectMake(10, 5, self.middleScrollView.width - 20, 0)];
         signDescription.text = description;
        signDescription.height =  signDescription.optimumSize.height +5 ;
+        if (haveAction) {
+            self.signUpButton.selected = YES;
+        }
         self.middleScrollView.contentSize = CGSizeMake(self.middleScrollView.width, signDescription.optimumSize.height);
         [self.middleScrollView addSubview:signDescription];
     }else if(myActivityType == TypeVote){
+        if (haveAction) {
+            [self haveVotedWithDescription:description];
+        }
         [self unHaveVotedWithDescription:description];
-//        [self haveVotedWithDescription:description];
     }
 }
 
@@ -124,8 +127,6 @@
         [voteOrNotVoteView addSubview:checkBtn];
     }
     [self.middleScrollView addSubview:voteOrNotVoteView];
-//    self.signUpButton.top = self.middleScrollView.bottom;
-//    self.haveSignedButton.top = self.signUpButton.bottom;
     self.middleScrollView.contentSize = CGSizeMake(self.middleScrollView.width, signDescription.bottom + tempHeight);
 }
 
@@ -210,16 +211,18 @@
 }
 
 - (void)reloadNewData{
-    ActivityInfoModel *activityModel = [[ActivityInfoModel alloc] initWithDataDic:[self.model lastObject]];
+    ActivityInfoModel *activityModel = [[ActivityInfoModel alloc] initWithDataDic:self.model];
     self.activitiesTitle.text = activityModel.activityTitle;
     [self.headImage setImageWithURL:[NSURL URLWithString:activityModel.activityPic]];
-    [self showDiffrentMiddleViewWithType:activityType withDescription:activityModel.description];
+    activityType = activityModel.typeId.intValue;
+    [self showDiffrentMiddleViewWithType:activityType withDescription:activityModel.description withHaveAction:NO];
 }
 
 - (void)setDataDic:(NSDictionary *)resultDic toManager:(NSMutableArray *)baseManager{
+
 }
 
-- (void)responseCancelWithResponse:(ITTBaseDataRequest *)request{
+- (void)responseSuccessWithResponse:(ITTBaseDataRequest *)request{
     if ([[request.requestUrl lastPathComponent] isEqualToString:@"ActivityAction!queryActivityOptionList.do"]) { // 投票完成的url
         NSLog(@"resultDic  %@", request.handleredResult);
         if (request.handleredResult[@"result"] && [request.handleredResult[@"result"] isKindOfClass:[NSArray class]]) {
@@ -231,7 +234,12 @@
         if (request.handleredResult[@"result"] && [request.handleredResult[@"result"] isKindOfClass:[NSArray class]]) {
             [self.model addObjectsFromArray:request.handleredResult[@"result"]];
             [self reloadNewData];
+        }else if(request.handleredResult[@"result"] && [request.handleredResult[@"result"] isKindOfClass:[NSDictionary class]]){
+            self.model = request.handleredResult[@"result"];
+            [self reloadNewData];
         }
+    }else if([[request.requestUrl lastPathComponent] isEqualToString:@"ActivityAction!enterActivity.do"]){
+        [GlobalHelper handerResultWithDelegate:self withMessage:request.handleredResult[@"msg"]];
     }
 }
 

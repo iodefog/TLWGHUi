@@ -105,6 +105,7 @@
         [tempArray addObjectsFromArray:resultDic[@"result"]];
         self.model = tempArray;
         if ([resultDic[@"result"] count] < PAGESIZEINT) {
+            [_footer removeFromSuperview];
             [_footer free];
         }
         
@@ -112,6 +113,12 @@
          [_footer removeFromSuperview];
         [_footer free];
         self.model = resultDic[@"result"];
+    }
+    
+    if ([self.model isKindOfClass:[NSArray class]] || [self.model isKindOfClass:[NSDictionary class]]) {
+        if ([self.model count]==0) {
+            [self showEmptyView];
+        }
     }
     [self reloadNewData];
 }
