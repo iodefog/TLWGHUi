@@ -126,4 +126,10 @@ typedef enum {
 
 // 36.	用户信息维护—密码修改接口（没有原密码）
 + (NSString *)userAction_UpdatePasswordNotOld_Url;
+
+// 37.	工会活动 已报名接口：
++ (NSString *)activityAction_QueryActivityRegistionList_Url;
+
+// 38.	工会活动 已投票接口
++ (NSString *)activityAction_QueryVoteList_Url;
 @end

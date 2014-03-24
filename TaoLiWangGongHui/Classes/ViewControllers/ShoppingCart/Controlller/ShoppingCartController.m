@@ -122,7 +122,13 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
     // 多一个cell， 给结算按钮留位置
-    return [self.model count]+1;
+    NSInteger cellCount = 0;
+    if ([self.model count]>0) {
+        cellCount = [self.model count] + 1;
+    }else{
+        cellCount = [self.model count];
+    }
+    return cellCount;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
@@ -138,11 +144,10 @@
     return @"删除";
 }
 
-//- (void)scrollViewDidScroll:(UIScrollView *)scrollView{
-//    if ([currentTextField isFirstResponder]) {
-//        [currentTextField resignFirstResponder];
-//    }
-//}
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
+    ShoppingCartCell *cell = (id)[tableView cellForRowAtIndexPath:indexPath];
+    [cell whenCellDidSelected];
+}
 
 - (void)scrollViewWillBeginDragging:(UIScrollView *)scrollView{
     if ([currentTextField isFirstResponder]) {
@@ -160,8 +165,9 @@
     NSMutableArray *tempArray = [NSMutableArray arrayWithArray:self.model];
     [tempArray removeObject:data];
     self.model = tempArray;
-    
-    [self.shoppingCartTableView deleteRowsAtIndexPaths:[NSArray arrayWithObjects:index, nil] withRowAnimation:UITableViewRowAnimationRight];
+    if ([self.model count] > 1) {
+        [self.shoppingCartTableView deleteRowsAtIndexPaths:[NSArray arrayWithObjects:index, nil] withRowAnimation:UITableViewRowAnimationRight];
+    }
     [self reloadNewData];
 }
 

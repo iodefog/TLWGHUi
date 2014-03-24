@@ -40,8 +40,8 @@
                             @"UpdatePhoneViewController",
                             @"UpdateEmailViewController",
                             @"UpdatePassWordViewController",nil];
-    imagePicker = [[ImagePicker alloc] init];
-    imagePicker.parent = self;
+//    imagePicker = [[ImagePicker alloc] init];
+//    imagePicker.parent = self;
     
     // 请求用户信息
     [self commitRequestWithParams:@{@"memberId":[[UserHelper shareInstance] getMemberID]} withUrl:[GlobalRequest userAction_queryUserInfo_Url]];
@@ -52,8 +52,8 @@
 
 // 头像点击
 - (IBAction)headTapGesture:(id)sender {
-    NSLog(@"头像点击");
-    [imagePicker tap:self inView:self.view inController:self toCut:YES];
+//    NSLog(@"头像点击");
+//    [imagePicker tap:self inView:self.view inController:self toCut:YES];
 }
 
 

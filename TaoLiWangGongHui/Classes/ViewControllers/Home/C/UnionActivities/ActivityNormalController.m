@@ -43,16 +43,12 @@
     
     if(showType == showSignUp){
         [self commitRequestWithParams:@{@"memberId": [[UserHelper shareInstance] getMemberID],
-                                        @"pageSize": PAGESIZE,
-                                        @"pageNo": @"0"} withUrl:[GlobalRequest activityAction_QueryActivityStatus_Url]];
+                                        @"activityId": activityID} withUrl:[GlobalRequest activityAction_QueryActivityRegistionList_Url]];
         
     }else{
-        //	投票记录(activityVoteId) 未填写
         params = @{@"memberId": [[UserHelper shareInstance] getMemberID],
-                   @"activityId":activityID,
-                   @"activityVoteId":@""
-                   };
-        url = [GlobalRequest activityAction_AddVote_Url];
+                   @"activityId":activityID,};
+        url = [GlobalRequest activityAction_QueryVoteList_Url];
         [self commitRequestWithParams:params withUrl:url];
     }
 }

@@ -17,7 +17,7 @@
  	商品介绍（productDescribe）
  	原价(basicPrice)
  	现价(costPrice)
- 	商品类型（参考：1为生日福利，2为节日福利，3为购物商品）
+ 	商品类型 productType（参考：1为生日福利，2为节日福利，3为购物商品）
  */
 
 @property (nonatomic, strong) NSString *productId;

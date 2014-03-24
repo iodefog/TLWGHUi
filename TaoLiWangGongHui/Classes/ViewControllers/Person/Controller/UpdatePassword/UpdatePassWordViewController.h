@@ -8,7 +8,7 @@
 
 #import <UIKit/UIKit.h>
 
-@interface UpdatePassWordViewController : ViewController // 修改密码
+@interface UpdatePassWordViewController : ViewController <UITextFieldDelegate> // 修改密码
 {
     BOOL notNeedShow;
 }

@@ -19,7 +19,6 @@
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
         // Custom initialization
-        self.model = [[NSMutableArray alloc ] init ];
     }
     return self;
 }
@@ -79,7 +78,9 @@
      */
     NSLog(@"resultDic  %@", resultDic);
     if (resultDic[@"result"] && [resultDic[@"result"] isKindOfClass:[NSArray class]]) {
-        [self.model addObjectsFromArray:resultDic[@"result"]];
+        NSMutableArray *tempArray = [NSMutableArray arrayWithArray:self.model];
+        [tempArray addObjectsFromArray:resultDic[@"result"]];
+        self.model = tempArray;
     }else if (resultDic[@"result"] && [resultDic[@"result"] isKindOfClass:[NSDictionary class]]){
         self.model = resultDic[@"result"];
     }

@@ -25,8 +25,6 @@
 
 - (void)viewDidAppear:(BOOL)animated{
     [super viewDidAppear:animated];
-    self.head.hidden = YES;
-    self.bottom.top = 0;
 }
 
 - (void)viewDidLoad
@@ -34,6 +32,11 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
     self.navigationItem.title = @"修改密码";
+    self.againPassWord.delegate = self;
+    if (notNeedShow) {
+        self.head.hidden = YES;
+        self.bottom.top = 0;
+    }
 }
 - (IBAction)commitClicked:(id)sender {
     if (self.passWord.text.length < 6){
@@ -46,10 +49,10 @@
         if (notNeedShow) {
             [self commitRequestWithParams:@{@"newpasswd": self.passWord.text} withUrl:[GlobalRequest userAction_UpdatePasswordNotOld_Url]];
         }else{
-            NSDictionary *params = [NSDictionary dictionaryWithObjectsAndKeys:
-                                  @"memberId", [[UserHelper shareInstance] getMemberID],
-                                  @"oldpasswd", self.prePassWord.text,
-                                  @"newpasswd", self.passWord.text, nil];
+            NSDictionary *params = @{
+                                  @"memberId":[[UserHelper shareInstance] getMemberID],
+                                  @"oldpasswd":self.prePassWord.text,
+                                  @"newpasswd":self.passWord.text};
             [self commitRequestWithParams:params withUrl:[GlobalRequest userAction_UpdatePassword_Url]];
         }
     }
@@ -67,6 +70,29 @@
             [UIAlertView popupAlertByDelegate:self andTag:1000 title:@"提示" message:@"密码修改失败"];
         }
     }
+}
+
+- (void)textFieldDidBeginEditing:(UITextField *)textField{
+    if (textField.tag == 101) {
+        for (UIView *mView in self.view.subviews) {
+            mView.top -= 40;
+        }
+    }
+}
+
+- (void)textFieldDidEndEditing:(UITextField *)textField{
+    if (textField.tag == 101) {
+        for (UIView *mView in self.view.subviews) {
+            mView.top += 40;
+        }
+    }
+}
+
+- (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string{
+    if ([string isEqualToString:@"\n"]) {
+        [self.againPassWord resignFirstResponder];
+    }
+    return YES;
 }
 
 - (void)touchesEnded:(NSSet *)touches withEvent:(UIEvent *)event{

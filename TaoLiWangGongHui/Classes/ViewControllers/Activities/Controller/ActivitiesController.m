@@ -15,7 +15,6 @@
 @end
 
 @implementation ActivitiesController
-@synthesize activitiesTableView;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -26,6 +25,12 @@
     return self;
 }
 
+- (void)viewWillAppear:(BOOL)animated{
+    [super viewWillAppear:animated];
+}
+
+static NSString *activityCellName = @"activityCellName";
+
 - (void)viewDidLoad
 {
     [super viewDidLoad];
@@ -33,17 +38,10 @@
     
     self.navigationItem.leftBarButtonItem = nil;
     
-    NSDictionary *params = @{@"memberId": [[UserHelper shareInstance] getMemberID],
-                             @"pageSize": PAGESIZE,
-                             @"pageNo": @"0"};
-    [self commitRequestWithParams:params withUrl:[GlobalRequest articleAction_QueryMyActivityList_Url]];
-    
-    self.activitiesTableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, self.view.width, self.view.height) style:UITableViewStylePlain];
-    self.activitiesTableView.delegate = self;
-    self.activitiesTableView.dataSource = self;
-    [self.view addSubview:self.activitiesTableView];
-    
-    [self.activitiesTableView setTableFooterView:[[UIView alloc] init]];
+    [self.tableView setTableFooterView:[[UIView alloc] init]];
+ 
+    [self addHeader];
+    [self addFooter];
 }
 
 #pragma mark - TableView Method
@@ -67,6 +65,21 @@
     cell.activityTime.text = activityModel.publishDatetime;
     return cell;
 }
+
+- (void)reloadNewData{
+//    [self.tableView reloadData];
+}
+
+#pragma mark -
+// MJRefresh
+- (void)refreshHeaderView{
+    NSDictionary *params = @{@"memberId": [[UserHelper shareInstance] getMemberID],
+                             @"pageSize": PAGESIZE,
+                             @"pageNo": @"0"};
+    [self commitRequestWithParams:params withUrl:[GlobalRequest activityAction_QueryActivityStatus_Url]];
+    
+}
+
 
 
 - (void)didReceiveMemoryWarning

@@ -7,8 +7,12 @@
 //
 
 #import "TableViewController.h"
+#import "MJRefresh.h"
 
-@interface TableViewController ()
+@interface TableViewController (){
+    MJRefreshHeaderView *_header;
+    MJRefreshFooterView *_footer;
+}
 
 @end
 
@@ -23,10 +27,18 @@
     return self;
 }
 
+- (void)viewWillAppear:(BOOL)animated{
+    [super viewWillAppear:animated];
+    if ([self.model isKindOfClass:[NSArray class]]) {
+        if (![self.model count]) {
+            [self refreshHeaderView];
+        }
+    }
+}
+
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    self.model = [[NSMutableArray alloc ] init ];
     self.navigationItem.leftBarButtonItem = [UIBarButtonItem barButtonWithImage:@"navigation_Back.png" backgroundImage:nil target:self action:@selector(back)];
 }
 
@@ -38,17 +50,26 @@
     [ITTASIBaseDataRequest requestWithParameters:params withRequestUrl:url withIndicatorView:self.view withCancelSubject:nil onRequestStart:^(ITTBaseDataRequest *request) {
         NSLog(@"request start");
     } onRequestFinished:^(ITTBaseDataRequest *request) {
+       
+        [self doneWithView:_header];
+        [self doneWithView:_footer];
         
         [self setDataDic:request.handleredResult toManager:nil];
         NSLog(@"request finish");
         [self responseSuccessWithResponse:request];
         
     } onRequestCanceled:^(ITTBaseDataRequest *request) {
+       
+        [self doneWithView:_header];
+        [self doneWithView:_footer];
         
         NSLog(@"request cancel");
         [self responseFailWithResponse:request];
         
     } onRequestFailed:^(ITTBaseDataRequest *request) {
+        
+        [self doneWithView:_header];
+        [self doneWithView:_footer];
         
         [self responseCancelWithResponse:request];
         NSLog(@"request fail");
@@ -77,10 +98,19 @@
     /**
      *  返回数据
      */
+    
     NSLog(@"resultDic  %@", resultDic);
     if (resultDic[@"result"] && [resultDic[@"result"] isKindOfClass:[NSArray class]]) {
-        [self.model addObjectsFromArray:resultDic[@"result"]];
+        NSMutableArray *tempArray = [NSMutableArray arrayWithArray:self.model];
+        [tempArray addObjectsFromArray:resultDic[@"result"]];
+        self.model = tempArray;
+        if ([resultDic[@"result"] count] < PAGESIZEINT) {
+            [_footer free];
+        }
+        
     }else{
+         [_footer removeFromSuperview];
+        [_footer free];
         self.model = resultDic[@"result"];
     }
     [self reloadNewData];
@@ -114,64 +144,93 @@
     return 0;
 }
 
-/*
-- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:<#@"reuseIdentifier"#> forIndexPath:indexPath];
-    
-    // Configure the cell...
-    
-    return cell;
-}
-*/
 
-/*
-// Override to support conditional editing of the table view.
-- (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath
+#pragma mark - MJRefresh
+- (void)addFooter
 {
-    // Return NO if you do not want the specified item to be editable.
-    return YES;
+    //    __unsafe_unretained MJTableViewController *vc = self;
+    MJRefreshFooterView *footer = [MJRefreshFooterView footer];
+    footer.scrollView = self.tableView;
+    footer.beginRefreshingBlock = ^(MJRefreshBaseView *refreshView) {
+        // 模拟延迟加载数据，因此2秒后才调用）
+        [self refreshHeaderView];
+        // 这里的refreshView其实就是footer
+//        [self performSelector:@selector(doneWithView:) withObject:refreshView afterDelay:2.0];
+        
+        NSLog(@"%@----开始进入刷新状态", refreshView.class);
+    };
+    _footer = footer;
 }
-*/
 
-/*
-// Override to support editing the table view.
-- (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath
+
+// 下拉刷新，其他复用类需重写
+- (void)refreshHeaderView{
+    NSLog(@"上拉尚未重写");
+}
+
+// 上拉刷新，其他复用类需重写
+- (void)refreshFooterView{
+    NSLog(@"下拉尚未重写");
+}
+
+- (void)addHeader
 {
-    if (editingStyle == UITableViewCellEditingStyleDelete) {
-        // Delete the row from the data source
-        [tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
-    } else if (editingStyle == UITableViewCellEditingStyleInsert) {
-        // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
-    }   
+    //    __unsafe_unretained self *vc = self;
+    MJRefreshHeaderView *header = [MJRefreshHeaderView header];
+    header.scrollView = self.tableView;
+    header.beginRefreshingBlock = ^(MJRefreshBaseView *refreshView) {
+        // 进入刷新状态就会回调这个Block
+        [self refreshHeaderView];
+        // 模拟延迟加载数据，因此2秒后才调用）
+        // 这里的refreshView其实就是header
+//        [self performSelector:@selector(doneWithView:) withObject:refreshView afterDelay:2.0];
+        
+        NSLog(@"%@----开始进入刷新状态", refreshView.class);
+    };
+    header.endStateChangeBlock = ^(MJRefreshBaseView *refreshView) {
+        // 刷新完毕就会回调这个Block
+        NSLog(@"%@----刷新完毕", refreshView.class);
+    };
+    header.refreshStateChangeBlock = ^(MJRefreshBaseView *refreshView, MJRefreshState state) {
+        // 控件的刷新状态切换了就会调用这个block
+        switch (state) {
+            case MJRefreshStateNormal:
+                NSLog(@"%@----切换到：普通状态", refreshView.class);
+                break;
+                
+            case MJRefreshStatePulling:
+                NSLog(@"%@----切换到：松开即可刷新的状态", refreshView.class);
+                break;
+                
+            case MJRefreshStateRefreshing:
+                NSLog(@"%@----切换到：正在刷新状态", refreshView.class);
+                break;
+            default:
+                break;
+        }
+    };
+    [header beginRefreshing];
+    _header = header;
 }
-*/
 
-/*
-// Override to support rearranging the table view.
-- (void)tableView:(UITableView *)tableView moveRowAtIndexPath:(NSIndexPath *)fromIndexPath toIndexPath:(NSIndexPath *)toIndexPath
+- (void)doneWithView:(MJRefreshBaseView *)refreshView
 {
+    // 刷新表格
+    [self.tableView reloadData];
+    NSLog(@"完成，刷新数据");
+    // (最好在刷新表格后调用)调用endRefreshing可以结束刷新状态
+    [refreshView endRefreshing];
 }
-*/
 
-/*
-// Override to support conditional rearranging of the table view.
-- (BOOL)tableView:(UITableView *)tableView canMoveRowAtIndexPath:(NSIndexPath *)indexPath
+/**
+ 为了保证内部不泄露，在dealloc中释放占用的内存
+ */
+- (void)dealloc
 {
-    // Return NO if you do not want the item to be re-orderable.
-    return YES;
+    NSLog(@"MJTableViewController--dealloc---");
+    [_header free];
+    [_footer free];
 }
-*/
 
-/*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
-{
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
-}
-*/
 
 @end

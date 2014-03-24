@@ -16,7 +16,6 @@
 @end
 
 @implementation MessageController
-@synthesize messageTableView;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -37,20 +36,12 @@ static bool isSelfRequest = YES;
 {
     [super viewDidLoad];
 	// Do any additional setup after loading the view.
-    
-    self.messageTableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, self.view.width, [UIScreen mainScreen].bounds.size.height - 49 - 44) style:UITableViewStyleGrouped];
-    self.messageTableView.delegate = self;
-    self.messageTableView.dataSource = self;
-    self.messageTableView.contentSize = CGSizeMake(self.view.width, 220*4);
-    self.messageTableView.backgroundView = [[UIView alloc] init];
-    [self.view addSubview:self.messageTableView];
-     self.navigationItem.leftBarButtonItem = nil;
+    self.navigationItem.leftBarButtonItem = nil;
     self.navigationItem.rightBarButtonItem = [UIBarButtonItem barButtonWithTitle:@"订阅管理" image:nil target:self action:@selector(subscribeClicked:) font:[UIFont systemFontOfSize:12] titleColor:[UIColor whiteColor]];
+    [self.tableView setTableFooterView:[[UIView alloc] init]];
     
-    if (isSelfRequest) {
-        [self commitRequestWithParams:@{@"pageNo":@"0",
-                                        @"pageSize":PAGESIZE} withUrl:[GlobalRequest articleAction_QueryAdList_Url]];
-    }
+    [self addHeader];
+    [self addFooter];
 }
 
 // 订阅管理点击
@@ -100,6 +91,22 @@ static bool isSelfRequest = YES;
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
     return 220.0;
+}
+
+#pragma mark - MJRefresh
+- (void)refreshHeaderView{
+    if (isSelfRequest) {
+        [self commitRequestWithParams:@{@"pageNo":@"0",
+                                        @"pageSize":PAGESIZE} withUrl:[GlobalRequest articleAction_QueryAdList_Url]];
+    }
+}
+
+- (void)refreshFooterView{
+    if (isSelfRequest) {
+        NSString *pageNo = [NSString stringWithFormat:@"%d", ([self.model count]/PAGESIZEINT)];
+        [self commitRequestWithParams:@{@"pageNo":pageNo,
+                                        @"pageSize":PAGESIZE} withUrl:[GlobalRequest articleAction_QueryAdList_Url]];
+    }
 }
 
 - (void)didReceiveMemoryWarning

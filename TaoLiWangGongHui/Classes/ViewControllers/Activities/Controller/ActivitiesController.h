@@ -7,9 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
-
-@interface ActivitiesController : ViewController <UITableViewDelegate , UITableViewDataSource>
-
-@property (nonatomic, strong) UITableView *activitiesTableView;  //我的活动
+//我的活动
+@interface ActivitiesController : TableViewController <UITableViewDelegate , UITableViewDataSource>
 
 @end

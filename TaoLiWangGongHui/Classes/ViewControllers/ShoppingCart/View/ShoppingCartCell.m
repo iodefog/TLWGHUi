@@ -8,6 +8,7 @@
 
 #import "ShoppingCartCell.h"
 #import "GoodsDetailDataBase.h"
+#import "GoodsInfoController.h"
 
 @implementation ShoppingCartCell
 
@@ -73,6 +74,18 @@
     if (self.shoppingDelegate && [self.shoppingDelegate respondsToSelector:@selector(shoppingTextFieldDidEndEditing:)]) {
         [self.shoppingDelegate shoppingTextFieldDidEndEditing:textField];
     }
+}
+
+- (void)whenCellDidSelected{
+    GoodsInfoType goodType = 0;
+    if (self.shoppingModel.productType.intValue == 1)
+        goodType =GoodsType_BirthDay;
+    else if (self.shoppingModel.productType.intValue == 2)
+        goodType = GoodsType_Holiday;
+    else goodType = GoodsType_Holiday;
+        
+    GoodsInfoController *goodsInfoVC = [[GoodsInfoController alloc] initWithType:goodType withProductID:self.shoppingModel.productId];
+    [selected_navigation_controller() pushViewController:goodsInfoVC animated:YES];
 }
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated

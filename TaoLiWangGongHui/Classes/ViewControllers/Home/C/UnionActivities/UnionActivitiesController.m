@@ -33,7 +33,7 @@
     self.navigationItem.title = @"工会活动";
     self.navigationItem.leftBarButtonItem = [UIBarButtonItem barButtonWithImage:@"navigation_Back.png" backgroundImage:nil target:self action:@selector(back)];
     self.navigationItem.rightBarButtonItem = nil;
-    self.messageTableView.height = self.view.height - 64;
+    self.tableView.height = self.view.height - 64;
     NSDictionary *params = @{
                              @"memberId":[[UserHelper shareInstance] getMemberID],
                              @"pageSize":PAGESIZE,
@@ -57,7 +57,7 @@
 }
 
 - (void)reloadNewData{
-    [self.messageTableView reloadData];
+    [self.tableView reloadData];
 }
 
 #pragma mark - UITableView Delegate

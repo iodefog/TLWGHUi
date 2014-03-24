@@ -56,15 +56,22 @@
     [self bySMSButtonClick:self.bySMSButton];
 }
 
+- (void)touchesEnded:(NSSet *)touches withEvent:(UIEvent *)event{
+    [self.codeTextField resignFirstResponder];
+    [self.phoneTetxField resignFirstResponder];
+}
+
 #pragma mark -
 #pragma mark ByDifferent type GetPwd Button
 - (IBAction)bySMSButtonClick:(UIButton *)sender {
+    [self.emailTextField resignFirstResponder];
     [self.codeTextField resignFirstResponder];
     [self.phoneTetxField resignFirstResponder];
     self.byEmailGetView.hidden = self.bySMSButton.selected = YES;
     self.bySMSGetView.hidden = self.byEmailButton.selected = NO;
 }
 - (IBAction)byEmailButtonClick:(UIButton *)sender {
+    [self.emailTextField resignFirstResponder];
     [self.codeTextField resignFirstResponder];
     [self.phoneTetxField resignFirstResponder];
     self.byEmailGetView.hidden = self.bySMSButton.selected = NO;

@@ -34,6 +34,10 @@
     return self;
 }
 
+- (void)viewDidLayoutSubviews{
+    [super viewDidLayoutSubviews];
+}
+
 - (id)initWithActivityType:(ActivityType)myActivityType withID:(NSString *)myActivityID{
     activityType = myActivityType;
     activityID = myActivityID;
@@ -52,6 +56,7 @@
     [super viewDidLoad];
     self.headImage.height = 160;
     self.baseScroll.userInteractionEnabled = YES;
+    self.middleScrollView.userInteractionEnabled = YES;
     self.baseScroll.backgroundColor  = RGBCOLOR(241, 241, 241);
     self.baseScroll.contentSize = CGSizeMake(self.view.width, 568);
     
@@ -119,6 +124,8 @@
         [voteOrNotVoteView addSubview:checkBtn];
     }
     [self.middleScrollView addSubview:voteOrNotVoteView];
+//    self.signUpButton.top = self.middleScrollView.bottom;
+//    self.haveSignedButton.top = self.signUpButton.bottom;
     self.middleScrollView.contentSize = CGSizeMake(self.middleScrollView.width, signDescription.bottom + tempHeight);
 }
 

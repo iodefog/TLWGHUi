@@ -8,11 +8,20 @@
 
 #import <UIKit/UIKit.h>
 
-#define PAGESIZE @"10"
+#define PAGESIZE [NSString stringWithFormat:@"%d",PAGESIZEINT]
+#define PAGESIZEINT 10
 
 @interface TableViewController : UITableViewController // 写法与ViewController 一样
 
 @property (nonatomic, strong) id model;
+
+// 下拉刷新，其他复用类需重写
+- (void)refreshHeaderView;
+// 上拉刷新，其他复用类需重写
+- (void)refreshFooterView;
+
+- (void)addHeader;
+- (void)addFooter;
 
 - (void)reloadNewData; // 数据接收成功后 用新数据刷新view
 - (void)commitRequestWithParams:(NSDictionary *)params withUrl:(NSString *)url; // 根据url和参数 提交到网络

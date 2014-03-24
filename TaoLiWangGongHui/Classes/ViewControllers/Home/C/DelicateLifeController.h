@@ -7,7 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
-
+// 精致生活
 @interface DelicateLifeController : TableViewController
 
 @end

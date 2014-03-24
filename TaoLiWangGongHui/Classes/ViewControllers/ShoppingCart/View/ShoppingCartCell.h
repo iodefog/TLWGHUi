@@ -37,4 +37,6 @@
 
 - (void)showDeleteButton:(BOOL)show;
 
+// 当用户点击时触发
+- (void)whenCellDidSelected;
 @end

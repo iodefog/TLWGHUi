@@ -197,4 +197,14 @@ return [NSString stringWithFormat:@"%@%@",[GlobalRequest getBaseServiceUrl],@"Us
     return [NSString stringWithFormat:@"%@%@",[GlobalRequest getBaseServiceUrl],@"UserAction!updatePasswordNotOld.do"];
 }
 
+// 37.	工会活动 已报名接口：
++ (NSString *)activityAction_QueryActivityRegistionList_Url{
+ return [NSString stringWithFormat:@"%@%@",[GlobalRequest getBaseServiceUrl],@"ActivityAction!queryActivityRegistionList.do"];
+}
+
+// 38.	工会活动 已投票接口
++ (NSString *)activityAction_QueryVoteList_Url{
+ return [NSString stringWithFormat:@"%@%@",[GlobalRequest getBaseServiceUrl],@"ActivityAction!queryVoteList.do"];
+}
+
 @end

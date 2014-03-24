@@ -50,7 +50,7 @@
                             [self viewControllerWithTabTitle:@"首页" image:[UIImage imageNamed:@"home"] finishedSelectedImage:[UIImage imageNamed:@"home_tap"] viewClass:@"HomeViewController"],
                             [self viewControllerWithTabTitle:@"购物车" image:[UIImage imageNamed:@"shopping_cart"]  finishedSelectedImage:[UIImage imageNamed:@"shopping_cart_tap"] viewClass:@"ShoppingCartController"],
                             [self viewControllerWithTabTitle:@"推送消息" image:[UIImage imageNamed:@"message"] finishedSelectedImage:[UIImage imageNamed:@"message_tap.png"]  viewClass:@"MessageController"],
-                            [self viewControllerWithTabTitle:@"工会活动" image:[UIImage imageNamed:@"activities"] finishedSelectedImage:[UIImage imageNamed:@"activities_tap"]  viewClass:@"ActivitiesController"],
+                            [self viewControllerWithTabTitle:@"我的活动" image:[UIImage imageNamed:@"activities"] finishedSelectedImage:[UIImage imageNamed:@"activities_tap"]  viewClass:@"ActivitiesController"],
                             [self viewControllerWithTabTitle:@"个人中心" image:[UIImage imageNamed:@"person.png"] finishedSelectedImage:[UIImage imageNamed:@"person_tap.png"]  viewClass:@"PersonController"],
                             nil];
     [self setSelectedViewController:self.viewControllers[0]];
