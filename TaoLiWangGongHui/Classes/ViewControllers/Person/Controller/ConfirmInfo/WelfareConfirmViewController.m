@@ -32,6 +32,10 @@
     NSArray *dbArray = [[UserAddressDataBase shareDataBase] readTableName];
     if ([dbArray count] > 0) {  // 条件避免
         addressModel = dbArray[0];
+    }else{
+        self.head1View.hidden = NO;
+        self.head2View.hidden = YES;
+        return;
     }
     if (addressModel.Type) {  // 检查是否有默认地址，如果有就赋值
         self.head1View.hidden = YES;

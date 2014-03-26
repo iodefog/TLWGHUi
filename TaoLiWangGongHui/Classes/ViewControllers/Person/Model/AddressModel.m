@@ -17,7 +17,7 @@
              @"Email": @"email",
              @"Phone": @"receiverPhone",
              @"ZipCode":@"receiverPostalcode",
-             @"Type":@"sfsxdz",
+             @"Type":@"Type",
              @"City":@"city"};
 }
 @end

@@ -90,10 +90,16 @@
         }
     }
     
+    if(!self.addressModel){
     UIButton *commitBtn = [UIButton createButton:@selector(commitClicked:) title:@"提交" image:nil selectedBgImage:@"login_Select.png" backGroundImage:@"login_Nomal.png" backGroundTapeImage:nil frame:CGRectMake(10, 70*[self.headTitleArray count]+50, 300, 35) tag:110 target:self];
     [commitBtn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
     [self.mScrollView addSubview:commitBtn];
     self.mScrollView.contentSize = CGSizeMake(self.view.width, 600) ;
+    }else{
+        
+        self.navigationItem.rightBarButtonItem = [UIBarButtonItem barButtonWithTitle:@"提交" image:nil target:self action:@selector(commitClicked:) font:[UIFont systemFontOfSize:14] titleColor:[UIColor whiteColor]];
+    self.mScrollView.contentSize = CGSizeMake(self.view.width, 500) ;
+    }
 }
 
 
@@ -187,30 +193,31 @@
     }
     
     NSArray *dbArray = [[UserAddressDataBase shareDataBase] readTableName];;
-    AddressModel *addModel = [[AddressModel alloc] initWithDataDic:
-                              @{@"receiverName":nameTextField.text,
-                                @"city":cityTextField.text,
-                                @"id": self.addressModel? self.addressModel.AddressId: [NSNumber numberWithInt:1000+[dbArray count]],
-                                @"receiverPhone":phoneTextField.text,
-                                @"receiverAddress":detailAddressTextField.text,
-                                @"receiverPostalcode":zipCodeTextField.text,
-                                @"email":self.addressModel?self.addressModel.Email:@"",
-                                @"Type":self.addressModel?self.addressModel.Type:@"0",
-                                }
-                              ];
+    NSDictionary *params =  @{@"receiverName":nameTextField.text,
+                              @"city":cityTextField.text,
+                              @"id": self.addressModel? self.addressModel.AddressId: [NSNumber numberWithInt:1000+[dbArray count]],
+                              @"receiverPhone":phoneTextField.text,
+                              @"receiverAddress":detailAddressTextField.text,
+                              @"receiverPostalcode":zipCodeTextField.text,
+                              @"email":self.addressModel?self.addressModel.Email:@"",
+                              @"Type": ([dbArray count]== 0)?@"1":(self.addressModel?self.addressModel.Type:@"0"),
+                              };
+    AddressModel *addModel = [[AddressModel alloc] initWithDataDic:params];
     if (self.addressModel) {
         if ([[UserAddressDataBase shareDataBase] updateItem:addModel defaultType:addModel.Type.boolValue]) {
+            [self commitRequestWithParams:params withUrl:[GlobalRequest addressAction_UpdateAddress_Url]];
             [[TKAlertCenter defaultCenter] postAlertWithMessage:@"修改成功"];
             [self.navigationController popViewControllerAnimated:YES];
         }else{
-            [[TKAlertCenter defaultCenter] postAlertWithMessage:@"添加失败"];
+//            [[TKAlertCenter defaultCenter] postAlertWithMessage:@"添加失败"];
         }
     }
     else if ([[UserAddressDataBase shareDataBase] insertItem:addModel]) {
+        [self commitRequestWithParams:params withUrl:[GlobalRequest addressAction_AddAddress_Url]];
         [[TKAlertCenter defaultCenter] postAlertWithMessage:@"添加成功"];
         [self.navigationController popViewControllerAnimated:YES];
     }else{
-        [[TKAlertCenter defaultCenter] postAlertWithMessage:@"添加失败"];
+//        [[TKAlertCenter defaultCenter] postAlertWithMessage:@"添加失败"];
     }
 }
 

@@ -14,9 +14,13 @@
 #import "OrderDetailViewController.h"
 #import "MyOrderDetailViewController.h"
 #import "OrderCell.h"
+#import "OrdelModel.h"
 
 @interface MyOrderController (){
     BOOL isShowWelfareHidden;
+    
+    NSMutableArray *welfareArray;
+    NSMutableArray *cashArray;
 }
 
 @end
@@ -29,6 +33,8 @@
     self = [super initWithStyle:style];
     if (self) {
         // Custom initialization
+        welfareArray = [NSMutableArray array];
+        cashArray = [NSMutableArray array];
     }
     return self;
 }
@@ -39,7 +45,6 @@
     isShowWelfareHidden = NO;
     self.tableView.backgroundColor = [UIColor whiteColor];
     self.tableView.backgroundView = [[UIView alloc] init];
-//    [self.tableView setSeparatorStyle:UITableViewCellSeparatorStyleNone];
     self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     [self addHeader];
     [self addFooter];

@@ -73,7 +73,7 @@
     if ( delegate != nil ) {
         SEL sel= NSSelectorFromString (@"checkButtonClicked:");
         if ([ delegate respondsToSelector :sel]){
-            [ delegate performSelector :sel withObject:self];
+            SuppressPerformSelectorLeakWarning ([ delegate performSelector :sel withObject:self]);
         } 
     }
 }

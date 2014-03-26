@@ -29,7 +29,16 @@
 
 - (void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
-    self.model = [[UserAddressDataBase shareDataBase] readTableName];
+    NSMutableArray *dbArray = [NSMutableArray arrayWithArray:[[UserAddressDataBase shareDataBase] readTableName] ];
+    if([dbArray count]){
+        NSMutableArray *tempArray = [NSMutableArray arrayWithObject:[dbArray firstObject]];
+        [dbArray removeObject:[dbArray firstObject]];
+        [tempArray addObjectsFromArray: [[dbArray reverseObjectEnumerator]allObjects]];
+        self.model = tempArray;
+    }else{
+        self.model = dbArray;
+    }
+    [self.tableView reloadData];
 }
 
 - (void)viewDidLoad

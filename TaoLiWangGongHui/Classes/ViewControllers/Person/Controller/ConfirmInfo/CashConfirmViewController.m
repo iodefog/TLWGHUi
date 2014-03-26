@@ -39,6 +39,10 @@ static bool shoppingShow = NO;
     NSArray *dbArray = [[UserAddressDataBase shareDataBase] readTableName];
     if ([dbArray count] > 0) {  // 条件避免
         addressModel = dbArray[0];
+    }else{
+        self.head1.hidden = NO;
+        self.head2.hidden = YES;
+        return;
     }
     if (addressModel.Type) {  // 检查是否有默认地址，如果有就赋值
         self.head1.hidden = YES;
