@@ -26,6 +26,13 @@
     [self setImageWithURL:[NSURL URLWithString:imageUrl] placeholderImage:[UIImage imageNamed:@""]];
     self.userInteractionEnabled = YES;
     
+    UILabel *title = [[UILabel alloc] initWithFrame:CGRectMake(20, self.bottom - 30, self.width-20*2, 20)];
+    title.text = self.homeListModel.activityTitle;
+    title.font = [UIFont systemFontOfSize:14];
+    title.textColor = [UIColor whiteColor];
+    title.backgroundColor = [UIColor clearColor];
+    [self addSubview:title];
+    
     UITapGestureRecognizer *tapGesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tapClicked:)];
     [self addGestureRecognizer:tapGesture];
 }

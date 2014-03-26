@@ -14,6 +14,8 @@
 -(BOOL)insertItem:(id)item;
 //读取数据
 -(NSMutableArray *)readTableName;
+// 根据商品id查询购物车里个数
+- (NSString *)readTableQualityWithProductID:(NSString *)productId;
 //更新数据
 -(void)updateItem:(id)item andProNumber:(NSString *)num;
 //删除数据

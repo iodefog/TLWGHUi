@@ -20,9 +20,14 @@
 // 点击减少商品数量
 - (IBAction)ReduceQuantity:(id)sender {
     NSInteger currentNum = [self.GoodQuantity.text intValue];
-    if (currentNum-1 >= 0) {
+    if (currentNum-1 >= 1) {
         self.GoodQuantity.text = [NSString stringWithFormat:@"%d",--currentNum];
-        self.GoodPrice.text    = [NSString stringWithFormat:@"%d元",currentNum*250];
+        self.GoodPrice.text    = [NSString stringWithFormat:@"%.2f元",currentNum*self.shoppingModel.costPrice.floatValue];
+        
+        if (self.shoppingDelegate && [self.shoppingDelegate respondsToSelector:@selector(reduceGoodsQuantityWithPrice:)]) {
+            [self.shoppingDelegate reduceGoodsQuantityWithPrice:self.shoppingModel.costPrice.floatValue];
+        }
+        [[GoodsDetailDataBase shareDataBase] updateItem:self.shoppingModel andProNumber:[NSString stringWithFormat:@"%d",currentNum]];
     }
 }
 
@@ -30,7 +35,12 @@
 - (IBAction)IncreaseQuantity:(id)sender {
     NSInteger currentNum = [self.GoodQuantity.text intValue];
     self.GoodQuantity.text = [NSString stringWithFormat:@"%d",++currentNum];
-    self.GoodPrice.text    = [NSString stringWithFormat:@"%d元",currentNum*250];
+    self.GoodPrice.text    = [NSString stringWithFormat:@"%.2f元",currentNum*self.shoppingModel.costPrice.floatValue];
+    
+    if (self.shoppingDelegate && [self.shoppingDelegate respondsToSelector:@selector(increaseGoodsQuantityWithPrice:)]) {
+        [self.shoppingDelegate increaseGoodsQuantityWithPrice:self.shoppingModel.costPrice.floatValue];
+    }
+    [[GoodsDetailDataBase shareDataBase] updateItem:self.shoppingModel andProNumber:[NSString stringWithFormat:@"%d",currentNum]];
 }
 
 // 展示是否为编辑时，显示活隐藏删除按钮
@@ -52,6 +62,7 @@
     }
 }
 
+// 赋值
 - (void)setObjectWithIndex:(NSIndexPath*)index withData:(NSDictionary *)data{
     currentIndex = index;
     currentData = data;
@@ -60,7 +71,10 @@
     self.GoodID.text = self.shoppingModel.productId;
     self.GoodDescription.text = self.shoppingModel.productName;
     [self.goodImage setImageWithURL:[NSURL URLWithString:self.shoppingModel.previewPicPath]];
-    self.GoodPrice.text = self.shoppingModel.costPrice;
+    NSString *procuctQuantity = [[GoodsDetailDataBase shareDataBase]readTableQualityWithProductID:self.shoppingModel.productId];
+    CGFloat tempPrice = self.shoppingModel.costPrice.floatValue * ((procuctQuantity.intValue==0)?1:procuctQuantity.intValue);
+    self.GoodPrice.text = [NSString stringWithFormat:@"%.2f元",tempPrice];
+    self.GoodQuantity.text = procuctQuantity?procuctQuantity:@"1";
 }
 
 #pragma mark - textFieldDelegate
@@ -71,9 +85,20 @@
 }
 
 - (void)textFieldDidEndEditing:(UITextField *)textField{
+    if (textField.text.intValue < 1) {
+        textField.text = @"1";
+        return;
+    }
+    [[GoodsDetailDataBase shareDataBase] updateItem:self.shoppingModel andProNumber:self.GoodQuantity.text];
+
     if (self.shoppingDelegate && [self.shoppingDelegate respondsToSelector:@selector(shoppingTextFieldDidEndEditing:)]) {
         [self.shoppingDelegate shoppingTextFieldDidEndEditing:textField];
     }
+}
+
+-(BOOL)textFieldShouldReturn:(UITextField *)textField {
+    [textField resignFirstResponder];
+    return NO;
 }
 
 - (void)whenCellDidSelected{

@@ -58,11 +58,13 @@ static bool isSelfRequest = YES;
         cell = [[[NSBundle mainBundle] loadNibNamed:@"MessageCell" owner:nil options:nil] lastObject];;
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
     }
+    [cell setObject:self.model[indexPath.row]];
     return cell;
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
-    ActivitiesDetailController *activitiesVC = [[ActivitiesDetailController alloc] initWithActivityType:TypeNone withID:nil];
+    MessageCell *cell = (id)[tableView cellForRowAtIndexPath:indexPath];
+    ActivitiesDetailController *activitiesVC = [[ActivitiesDetailController alloc] initWithActivityType:TypeNone withID:cell.messageModel.newsId];
     [activitiesVC setHidesBottomBarWhenPushed:YES];
     activitiesVC.navigationItem.title = @"信息详情";
     [self.navigationController pushViewController:activitiesVC animated:YES];

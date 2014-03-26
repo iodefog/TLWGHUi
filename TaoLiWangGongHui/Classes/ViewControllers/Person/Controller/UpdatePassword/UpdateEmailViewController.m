@@ -32,9 +32,9 @@
 
 - (IBAction)commitClicked:(UIButton *)sender {
     if (self.emailTextField.text.length < 1) {
-        [UIAlertView popupAlertByDelegate:self andTag:1001 title:@"提示" message:@"邮件不能为空"];
+        [GlobalHelper handerResultWithDelegate:self withMessage:@"邮件不能为空" withTag:0];
     }else if (![GlobalHelper isValidateEmail:self.emailTextField.text]){
-            [UIAlertView popupAlertByDelegate:self andTag:1001 title:@"提示" message:@"邮件格式不正确"];
+        [GlobalHelper handerResultWithDelegate:self withMessage:@"邮件格式不正确" withTag:0];
     }else{
         NSDictionary *params = @{@"member": [[UserHelper shareInstance] getMemberID], @"email":self.emailTextField.text};
         [self commitRequestWithParams:params withUrl:[GlobalRequest userAction_QueryPasswordByEmail_Url]];
@@ -42,11 +42,11 @@
 }
 
 - (void)responseSuccessWithResponse:(ITTBaseDataRequest *)request{
-     [UIAlertView popupAlertByDelegate:self andTag:1000 title:@"提示" message:request.handleredResult[@"msg"]];
+    [GlobalHelper handerResultWithDelegate:self withMessage:request.handleredResult[@"msg"] withTag:0];
 }
 
 - (void)responseFailWithResponse:(ITTBaseDataRequest *)request{
-     [UIAlertView popupAlertByDelegate:self andTag:1000 title:@"提示" message:request.handleredResult[@"msg"]];
+    [GlobalHelper handerResultWithDelegate:self withMessage:request.handleredResult[@"msg"] withTag:0];
 }
 
 - (void)didReceiveMemoryWarning

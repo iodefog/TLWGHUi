@@ -9,8 +9,12 @@
 #import <Foundation/Foundation.h>
 
 @interface GlobalHelper : NSObject
+@property (nonatomic, weak) id helperDelegate;
+
 
 UINavigationController *selected_navigation_controller();
+
++ (id)shareInstance;
 
 // 检查邮箱是否格式正确
 + (BOOL)isValidateEmail:(NSString *)email;
@@ -22,7 +26,7 @@ UINavigationController *selected_navigation_controller();
 + (BOOL)isValidateZipCode:(NSString *)zipCode;
 
 // 默认弹出框
-+ (void)handerResultWithDelegate:(id)delegate withMessage:(NSString *)message;
++ (void)handerResultWithDelegate:(id)delegate withMessage:(NSString *)message withTag:(int)tag;
 
 // 自定义AlertView
 + (void)showWithTitle:(NSString *)title withMessage:(NSString *)message withCancelTitle:(NSString *)cancelTitle withOkTitle:(NSString *)okTitle withSelector:(SEL)selector withTarget:(id)target;

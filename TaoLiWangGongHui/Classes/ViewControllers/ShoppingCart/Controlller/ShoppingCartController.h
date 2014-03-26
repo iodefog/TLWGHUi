@@ -8,8 +8,8 @@
 
 #import <UIKit/UIKit.h>
 
-@interface ShoppingCartController : ViewController <UITableViewDataSource, UITableViewDelegate ,UIScrollViewDelegate>
+@interface ShoppingCartController : TableViewController <UIScrollViewDelegate>
 
-@property (nonatomic, strong) UITableView * shoppingCartTableView;  // 购物车
+//@property (nonatomic, strong) UITableView * shoppingCartTableView;  // 购物车
 
 @end

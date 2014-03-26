@@ -11,5 +11,6 @@
 @interface PersonController : UIViewController <UITableViewDataSource, UITableViewDelegate ,UIAlertViewDelegate>
 
 @property (nonatomic, strong) UITableView *personTableView;  // 个人中心
+- (void)okClicked:(UIButton *)sender;
 
 @end

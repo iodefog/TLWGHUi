@@ -1,4 +1,4 @@
-//
+﻿//
 //  PartnerConfig.h
 //  AlipaySdkDemo
 //
@@ -23,7 +23,7 @@
 #define MD5_KEY @"5jzycc01yooashiu8dodhqgxs7rhj4ja"
 
 //应用的名字
-#define AppName @"TaoLiWangGongHui"
+#define AppName @"taoliwanggonghui"
 
 //商户私钥，自助生成
 #define PartnerPrivKey @"MIICdwIBADANBgkqhkiG9w0BAQEFAASCAmEwggJdAgEAAoGBAKoNzMihhc6TRJCblLh8FNsv+XO4BDRDItlCVQD2mamOcbpHu06RmEp4zHn57QBIjyNTOrtOJnuJ+S9lDPYuGqhuOQRQK3YC9NtgOuw0yizxQ1ROWTaKwyl5GMeuij2p2lnwuIJQfDQkpbRXnLEzIxh1E3HX3UgCvn5bB04yvCUxAgMBAAECgYBZ4hFrunRPS+fhx1pEaNFdSW5Ai/Ms7I9u5nCnobB2vqO+IkwOq0YjltX9YuyySafetA9HEXeltLfRJUhElvnfT+tL7Qipyp1IY6HXdwHn/47cOvVpuV1Ff3RrFIolMbKTlyV8KVjsRF6USx3EuS5Se3pBJDpu8zqlhICOFhRwQQJBAN2dQnhwLX+ln/k2Tvs7EPU0dQKo7NzT2HzNH2AZhO50xeSme1+V34JFHvXYl8cNr+KN6MyGdWriu6DYy+vUJ+MCQQDEcIKjbvcEnfX8Z2KCkKdiaEvj24finszP4WVQSyqDpWQ0UyfSWuDkg6Nhoe2AhHjvmrnj/w++N5J9W+VRLMLbAkEAq1B0H/Jn2bNJNTd8Ws3QUB1bDtFTOWoygld3F6zijAuNJzJjUQLkoymXw2jJ+8Bi5PnaqrCOeDAJ509wZD+/DQJBAK9iBEEGgWSN42FGrJ0FqWwi0h7NkbSzMwkmo93cPkjrEVvmIlec680Z+nTgrbtgitjhu7Xjs5qQ4ykpMsQWwqECQBUmQMdmRMDtXVBumSVWKlcK0GigD7v6m4zr+q+/uJEwEyv72k6Z6NWnILhBN4R0WzeEvkNivzvYB278Zn2lYjo="

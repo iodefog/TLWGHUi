@@ -63,12 +63,12 @@
 
 #pragma mark - Response Fail
 - (void)responseFailWithResponse:(ITTBaseDataRequest *)request{
-    [UIAlertView popupAlertByDelegate:self andTag:1000 title:@"提示" message:request.handleredResult[@"msg"]];
+    [GlobalHelper handerResultWithDelegate:self withMessage:request.handleredResult[@"msg"] withTag:0];
 }
 
 #pragma mark - Response Cancel
 - (void)responseCancelWithResponse:(ITTBaseDataRequest *)request{
-     [UIAlertView popupAlertByDelegate:self andTag:1000 title:@"提示" message:request.handleredResult[@"msg"]];
+    [GlobalHelper handerResultWithDelegate:self withMessage:request.handleredResult[@"msg"] withTag:0];
 }
 
 - (void)setDataDic:(NSDictionary *)resultDic toManager:(NSMutableArray *)baseManager
@@ -87,6 +87,8 @@
     if ([self.model isKindOfClass:[NSArray class]] || [self.model isKindOfClass:[NSDictionary class]]) {
         if ([self.model count]==0) {
             [self showEmptyView];
+        }else{
+            [self hideEmptyView];
         }
     }
     [self reloadNewData];

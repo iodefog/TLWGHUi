@@ -49,6 +49,10 @@ static NSString *activityCellName = @"activityCellName";
     return [self.model count];
 }
 
+- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView{
+    return 1;
+}
+
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
     return 78;
 }
@@ -63,9 +67,9 @@ static NSString *activityCellName = @"activityCellName";
     return cell;
 }
 
-- (void)reloadNewData{
-//    [self.tableView reloadData];
-}
+//- (void)reloadNewData{
+////    [self.tableView reloadData];
+//}
 
 #pragma mark -
 // MJRefresh

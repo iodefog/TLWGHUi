@@ -11,10 +11,17 @@
 
 @protocol ShoppingDelegate <NSObject>
 @optional
+// 删除按钮点击回调
 - (void)responseWithIndex:(NSIndexPath *)index withData:(id)data;
+// 文本框开始编辑
 - (void)shoppingTextFieldDidBeginEditing:(UITextField *)textField;
+// 文本框结束编辑
 - (void)shoppingTextFieldDidEndEditing:(UITextField *)textField;
 
+// 减少商品数量
+- (void)reduceGoodsQuantityWithPrice:(float)price;
+// 增加商品数据
+- (void)increaseGoodsQuantityWithPrice:(float)price;
 @end
 
 @interface ShoppingCartCell : UITableViewCell <ShoppingDelegate ,UITextFieldDelegate>{

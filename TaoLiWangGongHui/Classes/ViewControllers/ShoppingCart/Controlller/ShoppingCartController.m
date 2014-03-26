@@ -26,7 +26,7 @@
 @end
 
 @implementation ShoppingCartController
-@synthesize shoppingCartTableView;
+//@synthesize shoppingCartTableView;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -46,23 +46,18 @@
 {
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
-    // 初始化表
-    self.shoppingCartTableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, 320, [UIScreen mainScreen].bounds.size.height - 49-64) style:UITableViewStylePlain];
-    self.shoppingCartTableView.delegate = self;
-    self.shoppingCartTableView.dataSource = self;
-    self.shoppingCartTableView.separatorStyle = UITableViewCellSeparatorStyleNone;
-    [self.view addSubview:self.shoppingCartTableView];
+    self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     
     // UIKeyBoardCoView
-    UIKeyboardCoView *keyBoardCoView = [[UIKeyboardCoView alloc] initWithFrame:CGRectMake(0, [UIScreen mainScreen].bounds.size.height , 320, 35)];
+    UIKeyboardCoView *keyBoardCoView = [[UIKeyboardCoView alloc] initWithFrame:CGRectMake(0, self.tableView.bottom , 320, 35)];
     keyBoardCoView.backgroundColor = [UIColor lightGrayColor];
-    [self.view addSubview:keyBoardCoView];
+    [[[UIApplication sharedApplication].windows firstObject] addSubview:keyBoardCoView];
    
     UIButton *finishButton = [UIButton buttonWithFrame:CGRectMake(270, 0, 40, keyBoardCoView.height) title:@"完成" titleColor:[UIColor blackColor] titleHighlightColor:nil titleFont: [UIFont systemFontOfSize:16] image:nil tappedImage:nil target:self action:@selector(finishButtonClicked:) tag:100];
     [keyBoardCoView addSubview:finishButton];
     
     UIView *tempView = [[UIView alloc] init];
-    [self.shoppingCartTableView setTableFooterView:tempView];
+    [self.tableView setTableFooterView:tempView];
     
     self.navigationItem.leftBarButtonItem = [UIBarButtonItem barButtonWithTitle:@"编辑" image:nil target:self action:@selector(editClicked:) font:[UIFont systemFontOfSize:14.0f] titleColor:[UIColor whiteColor]];
     self.navigationItem.rightBarButtonItem = [UIBarButtonItem barButtonWithTitle:@"结算" image:nil target:self action:@selector(toPaymentClicked:) font:[UIFont systemFontOfSize:14.0f] titleColor:[UIColor whiteColor]];
@@ -72,8 +67,11 @@
 
 - (void)getRequestShoppingCartData{
     NSArray *dbArray = [[GoodsDetailDataBase shareDataBase] readTableName];
-    
-    if ([dbArray count] == [self.model count]) { // 避免每次刷新
+    if ([dbArray count] == 0) {
+        [self reloadNewData];
+        return;
+    }
+    else if ([dbArray count] == [self.model count]) { // 避免每次刷新
         return;
     }else{ // 移除所有数据，避免重复显示
         [self.model removeAllObjects];
@@ -92,22 +90,37 @@
     [self commitRequestWithParams:params withUrl:[GlobalRequest productAction_QueryProductListByIds_Url]];
 }
 
+static UIButton *leftButton = nil;
+
 - (void)editClicked:(UIButton *)sender{
+    leftButton = sender;
     [sender setTitle:@"完成" forState:UIControlStateSelected];
     sender.selected = !sender.selected;
     showDeleteButton = sender.selected;
-    [self.shoppingCartTableView reloadData];
+    [self.tableView reloadData];
 //    self.shoppingCartTableView.editing = !self.shoppingCartTableView.editing;
 }
 
 - (void)finishButtonClicked:(UIButton *)sender{
-    [currentTextField resignFirstResponder];
+    if ([currentTextField isFirstResponder]) {
+        [currentTextField resignFirstResponder];
+    }
 }
 
 
 - (void)toPaymentClicked:(id)sender{
+    if ([leftButton isSelected]) {
+        [self editClicked:leftButton];
+    }
+    if (allSum==0.0f) {
+        [GlobalHelper handerResultWithDelegate:self withMessage:@"请先选择货物" withTag:0];
+       
+        return;
+    }
+    
     CashConfirmViewController *cashConfirmVC = [[CashConfirmViewController alloc] init];
     [cashConfirmVC setHidesBottomBarWhenPushed:YES];
+    allSum = [self sumAllGoodsPrice];
     cashConfirmVC.goodsSumPrice = allSum;
     [cashConfirmVC shoppingPriceWithShow:YES];
     [self.navigationController pushViewController:cashConfirmVC animated:YES];
@@ -135,10 +148,13 @@
         shoppingCell.GoodQuantity.tag = 200+indexPath.row;
         shoppingCell.shoppingDelegate = self;
         [shoppingCell setObjectWithIndex:indexPath withData:self.model[indexPath.row]];
-
     }
     
     return (id)cell;
+}
+
+- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView{
+    return 1;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
@@ -157,7 +173,7 @@
 }
 
 - (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section{
-    headView = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, self.shoppingCartTableView.width, 20)];
+    headView = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, self.tableView.width, 20)];
     headView.textColor = [UIColor grayColor];
     headView.backgroundColor = [UIColor colorWithHex:0xfaf7f3];
     headView.text = [NSString stringWithFormat:@" 总计：%.2f元",allSum];
@@ -185,22 +201,33 @@
     [tempArray removeObject:data];
     self.model = tempArray;
     if ([self.model count] > 1) {
-        [self.shoppingCartTableView deleteRowsAtIndexPaths:[NSArray arrayWithObjects:index, nil] withRowAnimation:UITableViewRowAnimationRight];
+        [self.tableView deleteRowsAtIndexPaths:[NSArray arrayWithObjects:index, nil] withRowAnimation:UITableViewRowAnimationRight];
     }
     [self reloadNewData];
+}
+
+- (void)reduceGoodsQuantityWithPrice:(float)price{
+    allSum -= price;
+    headView.text = [NSString stringWithFormat:@" 总计：%.2f元",allSum];
+}
+
+- (void)increaseGoodsQuantityWithPrice:(float)price{
+    allSum += price;
+    headView.text = [NSString stringWithFormat:@" 总计：%.2f元",allSum];
 }
 
 static UITextField *currentTextField = nil;
 #pragma mark - RFNumberKeyBoard  数字键盘上横条加按钮
 - (void)shoppingTextFieldDidBeginEditing:(UITextField *)textField{
-    self.shoppingCartTableView.height = [UIScreen mainScreen].bounds.size.height - 49 - 218;
+    self.tableView.height = [UIScreen mainScreen].bounds.size.height - 49 - 218;
     
     currentTextField = textField;
 }
 
 - (void)shoppingTextFieldDidEndEditing:(UITextField *)textField{
-    self.shoppingCartTableView.height = [UIScreen mainScreen].bounds.size.height - 49 ;
-    
+    self.tableView.height = [UIScreen mainScreen].bounds.size.height - 64 ;
+    allSum = [self sumAllGoodsPrice];
+    headView.text = [NSString stringWithFormat:@" 总计：%.2f元",allSum];
 }
 
 #pragma mark - Response Mothod
@@ -219,19 +246,22 @@ static UITextField *currentTextField = nil;
 
 - (void)reloadNewData{
     if ([self.model count ] < 1) {
-        [self showEmptyView];
+        [super showEmptyView];
     }else{
-        [self hideEmptyView];
+        [super hideEmptyView];
     }
     allSum = [self sumAllGoodsPrice];
-    [self.shoppingCartTableView reloadData];
+    [self.tableView reloadData];
 }
 
 - (float)sumAllGoodsPrice{
     CGFloat sum = 0;
     for(NSDictionary *dict in self.model){
-        NSNumber *price = dict[@"costPrice"];
-        sum += price.floatValue;
+        NSString *productId = dict[@"productId"];
+        NSString *productQuality = [[GoodsDetailDataBase shareDataBase]readTableQualityWithProductID:productId];
+       NSLog(@"************* %@", productQuality);
+        float tempPrice = ((NSNumber *)dict[@"costPrice"]).floatValue;
+        sum += tempPrice * (productQuality?productQuality.intValue:1);
     }
     return sum;
 }

@@ -123,6 +123,7 @@
 }
 
 - (void)alert2:(id)sender{
+    
     SEL sel = @selector(okClicked:);
     [GlobalHelper showWithTitle:@"\n\n\n\n " withMessage:@"确认要退出吗？\n\n" withCancelTitle:@"取消" withOkTitle:@"确定" withSelector:sel withTarget:self];
 

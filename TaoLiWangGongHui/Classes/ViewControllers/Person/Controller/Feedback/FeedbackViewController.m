@@ -41,19 +41,19 @@
        
         [self commitRequestWithParams:params withUrl:[GlobalRequest userAction_Feedback_Url]];
     }else{
-        [UIAlertView popupAlertByDelegate:self andTag:1001 title:@"提示" message:@"您还没有填写意见，请先填写"];
+        [GlobalHelper handerResultWithDelegate:self withMessage:@"您还没有填写意见，请先填写" withTag:0];
     }
 }
 
 #pragma mark - Response Success
 - (void)responseSuccessWithResponse:(ITTBaseDataRequest *)request{
     self.feedbackTextView.text = nil;
-    [GlobalHelper handerResultWithDelegate:self withMessage:request.handleredResult[@"msg"]];
+    [GlobalHelper handerResultWithDelegate:self withMessage:request.handleredResult[@"msg"] withTag:0];
 }
 
 #pragma mark - Response Fail
 - (void)responseFailWithResponse:(ITTBaseDataRequest *)request{
-    [GlobalHelper handerResultWithDelegate:self withMessage:request.handleredResult[@"msg"]];
+    [GlobalHelper handerResultWithDelegate:self withMessage:request.handleredResult[@"msg"] withTag:0];
 }
 
 #pragma mark - Response Cancel

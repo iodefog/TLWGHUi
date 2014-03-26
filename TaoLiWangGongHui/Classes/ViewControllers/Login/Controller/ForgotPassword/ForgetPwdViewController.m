@@ -92,7 +92,7 @@
             codeTimer = [NSTimer scheduledTimerWithTimeInterval:1 target:self selector:@selector(codeTimerTrigger:) userInfo:nil repeats:YES];
         }
     }else{
-        [UIAlertView popupAlertByDelegate:self andTag:1000 title:@"提示" message:@"手机号码格式不正确"];
+        [GlobalHelper handerResultWithDelegate:self withMessage:@"手机号码格式不正确" withTag:0];
     }
 }
 
@@ -113,16 +113,15 @@ static int clickCount = 59;
 // 通过短信找回密码
 - (IBAction)submitSMSInfomation:(id)sender {
     if (self.phoneTetxField.text.length < 1 ) {
-        [UIAlertView popupAlertByDelegate:self andTag:1001 title:@"提示" message:@"手机号码不能为空"];
+        [GlobalHelper handerResultWithDelegate:self withMessage:@"手机号码不能为空" withTag:0];
     }else if (self.phoneTetxField.text.length != 11){
-         [UIAlertView popupAlertByDelegate:self andTag:1001 title:@"提示" message:@"手机号码格式不正确"];
+        [GlobalHelper handerResultWithDelegate:self withMessage:@"手机号码格式不正确" withTag:0];
     }else if (self.codeTextField.text.length < 1){
-        [UIAlertView popupAlertByDelegate:self andTag:1001 title:@"提示" message:@"验证码不能为空"];
+        [GlobalHelper handerResultWithDelegate:self withMessage:@"验证码不能为空" withTag:0];
     }else{
         NSDictionary *params = [NSDictionary dictionaryWithObjectsAndKeys:
                                 self.phoneTetxField.text ,@"phone",
                                 self.codeTextField.text, @"code",  nil];
-//   @{@"member": [[UserHelper shareInstance] getMenberID], @"phone":self.phoneTetxField.text};
 
         [self commitRequestWithParams:params withUrl:[GlobalRequest userAction_QueryPasswordByMessage_Url]];
     }
@@ -145,9 +144,9 @@ static int clickCount = 59;
 - (IBAction)sendEmailBtnClick:(id)sender {
     
     if (self.emailTextField.text.length < 1) {
-        [UIAlertView popupAlertByDelegate:self andTag:1001 title:@"提示" message:@"邮件不能为空"];
+        [GlobalHelper handerResultWithDelegate:self withMessage:@"邮件不能为空" withTag:0];
     }else if (![GlobalHelper isValidateEmail:self.emailTextField.text]) {
-        [UIAlertView popupAlertByDelegate:self andTag:1001 title:@"提示" message:@"邮件格式不正确"];
+        [GlobalHelper handerResultWithDelegate:self withMessage:@"邮件格式不正确" withTag:0];
     }else{
         NSDictionary *params = [NSDictionary dictionaryWithObjectsAndKeys:
                                 @"email",self.emailTextField.text,nil];
@@ -161,7 +160,7 @@ static int clickCount = 59;
             if (codeNum.intValue ==  1) {
                 
             }else{
-                [UIAlertView popupAlertByDelegate:self andTag:1000 title:@"提示" message:request.handleredResult[@"msg"]];
+                [GlobalHelper handerResultWithDelegate:self withMessage:request.handleredResult[@"msg"] withTag:0];
             }
         }else if ([request.requestUrl.lastPathComponent isEqualToString:@"UserAction!queryPasswordByEmail.do"]){
             if (codeNum.intValue == 1) {
@@ -169,7 +168,7 @@ static int clickCount = 59;
                 [updatePassWord notShowHeadViewWithShow:YES];
                 [self.navigationController pushViewController:updatePassWord animated:YES];
             }else{
-                [UIAlertView popupAlertByDelegate:self andTag:1000 title:@"提示" message:request.handleredResult[@"msg"]];
+                [GlobalHelper handerResultWithDelegate:self withMessage:request.handleredResult[@"msg"] withTag:0];
             }
         }
 }

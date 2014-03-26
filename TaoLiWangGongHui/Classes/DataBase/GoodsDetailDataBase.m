@@ -7,6 +7,8 @@
 //
 
 #import "GoodsDetailDataBase.h"
+#import "FMDatabaseAdditions.h"
+
 static GoodsDetailDataBase *gl_DataBse = nil;
 static NSString *tableName = nil;
 @implementation GoodsDetailDataBase
@@ -32,6 +34,7 @@ static NSString *tableName = nil;
              tableName = [NSString stringWithFormat:@"CarsList_%@",[[UserHelper shareInstance] getMemberID]];
             [super createTable:tableName fieldName:fileName];
         }
+        [self closeDB];
     }
     return self;
 }
@@ -63,12 +66,13 @@ static NSString *tableName = nil;
                                 newItem.basicPrice,
                                 newItem.costPrice,
                                 newItem.productType];
+                [self closeDB];
                 return success;
             }
-            [self closeDB];
         }
         else
         {
+            [self closeDB];
             return NO;
         }
     }
@@ -96,12 +100,33 @@ static NSString *tableName = nil;
                 item.productType = [rs stringForColumn:@"productType"];
                 [resultArray addObject:item];
             }
+            [self closeDB];
             return resultArray;
         }
         return nil;
-        [self closeDB];
     }
 }
+
+
+/***
+ * 根据商品id查询购物车里个数
+ */
+- (NSString *)readTableQualityWithProductID:(NSString *)productId{
+    @synchronized(self){
+        NSString *sql = nil;
+        NSString * productQuantity = nil;
+        sql = [NSString stringWithFormat:@"SELECT productQuantity FROM %@ where productId=%@",tableName, productId];
+        if (sql) {
+            [mdataBase open];
+            NSLog(@"----%@",[mdataBase stringForQuery:sql]);
+            productQuantity = [mdataBase stringForQuery:sql];
+        }
+        [self closeDB];
+        return productQuantity;
+    }
+}
+
+
 /**
  *  更新数据
  *

@@ -40,10 +40,10 @@
 }
 - (IBAction)commitClicked:(id)sender {
     if (self.passWord.text.length < 6){
-        [UIAlertView popupAlertByDelegate:self andTag:1001 title:@"提示" message:@"新密码不能为空，且长度至少为6位"];
+        [GlobalHelper handerResultWithDelegate:self withMessage:@"新密码不能为空，且长度至少为6位" withTag:0];
     }
     else if (![self.passWord.text isEqualToString:self.againPassWord.text]){
-        [UIAlertView popupAlertByDelegate:self andTag:1001 title:@"提示" message:@"新密码二者不一致，请检查"];
+        [GlobalHelper handerResultWithDelegate:self withMessage:@"新密码二者不一致，请检查" withTag:0];
     }
     else{
         if (notNeedShow) {
@@ -61,13 +61,13 @@
 - (void)responseSuccessWithResponse:(ITTBaseDataRequest *)request{
     NSNumber *codeNum = request.handleredResult[@"code"];
     if (codeNum.intValue == 1) {
-        [UIAlertView popupAlertByDelegate:self andTag:1000 title:@"提示" message:@"密码修改成功"];
+        [GlobalHelper handerResultWithDelegate:self withMessage:@"密码修改成功" withTag:0];
         self.passWord.text = self.prePassWord.text = self.againPassWord.text = nil;
     }else{
         if (request.handleredResult[@"msg"] && [request.handleredResult[@"msg"] isKindOfClass:[NSString class]]) {
-            [UIAlertView popupAlertByDelegate:self andTag:1000 title:@"提示" message:request.handleredResult[@"msg"]];
+            [GlobalHelper handerResultWithDelegate:self withMessage:request.handleredResult[@"msg"] withTag:0];
         }else{
-            [UIAlertView popupAlertByDelegate:self andTag:1000 title:@"提示" message:@"密码修改失败"];
+            [GlobalHelper handerResultWithDelegate:self withMessage:@"密码修改失败" withTag:0];
         }
     }
 }

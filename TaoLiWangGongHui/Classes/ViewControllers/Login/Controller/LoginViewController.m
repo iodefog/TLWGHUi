@@ -62,7 +62,7 @@
     NSLog(@"resultDic  %@", resultDic);
     NSNumber *codeNum = resultDic[@"code"];
     if (codeNum.intValue == 0) {
-        [UIAlertView popupAlertByDelegate:self andTag:1000 title:@"提示" message:@"登陆失败"];
+        [GlobalHelper handerResultWithDelegate:self withMessage:@"登陆失败" withTag:0];
     }else{
         [[UserHelper shareInstance] saveMemberID:resultDic];
         

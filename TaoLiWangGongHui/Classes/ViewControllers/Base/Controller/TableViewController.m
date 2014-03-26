@@ -118,6 +118,8 @@
     if ([self.model isKindOfClass:[NSArray class]] || [self.model isKindOfClass:[NSDictionary class]]) {
         if ([self.model count]==0) {
             [self showEmptyView];
+        }else{
+            [self hideEmptyView];
         }
     }
     [self reloadNewData];
@@ -239,5 +241,36 @@
     [_footer free];
 }
 
+#pragma mark - TapkuLibrary
+// 无数据时，显示的图片
+- (UIImage *)emptyImage{
+    return nil;
+}
+
+// 无数据时，显示的标题
+- (NSString *)emptyTitle{
+    return @"无数据";
+}
+
+// 无数据时，显示的子标题
+- (NSString *)emptySubTitle{
+    return nil;
+}
+
+// 当无数据时，显示空图
+- (void)showEmptyView{
+    if (self.emptyView && !self.emptyView.superview) {
+        [self.view addSubview:self.emptyView];
+    }else if(!self.emptyView){
+        self.emptyView = [[TKEmptyView alloc] initWithFrame:self.view.bounds mask:[self emptyImage] title:[self emptyTitle] subtitle:[self emptySubTitle]];
+        self.emptyView.autoresizingMask = UIViewAutoresizingFlexibleHeight | UIViewAutoresizingFlexibleWidth;
+        [self.view addSubview:self.emptyView];
+    }
+}
+
+// 当有数据是，移除空图
+- (void)hideEmptyView{
+    [self.emptyView removeFromSuperview];
+}
 
 @end

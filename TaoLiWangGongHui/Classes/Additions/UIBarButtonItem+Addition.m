@@ -15,22 +15,22 @@
 
     if(title)
     {
-        [button setFrame:CGRectMake(0, 2, 60, 40)];
+        [button setFrame:CGRectMake(0, 2, 50, 40)];
         [button setTitle:title forState:UIControlStateNormal];
         [button.titleLabel setFont:font];
-        [button setTitleEdgeInsets:UIEdgeInsetsMake(0, 8, 0, 0)];
+        [button setTitleEdgeInsets:UIEdgeInsetsMake(0, 0, 0, 0)];
         //[button.titleLabel setShadowColor:[UIColor blackColor]];
         //[button.titleLabel setShadowOffset:CGSizeMake(0, -1)];
         [button.titleLabel setTextColor:titleColor];
 //        [button setBackgroundImage:[UIImage imageNamed:[NSString stringWithFormat:@"%@",imageName]] forState:UIControlStateHighlighted];
-        [button setBackgroundImage:[UIImage imageNamed:imageName] forState:UIControlStateNormal];
+        [button setImage:[UIImage imageNamed:imageName] forState:UIControlStateNormal];
     }
     else
     {
         
         [button setImage:[UIImage imageNamed:imageName] forState:UIControlStateNormal];
 //        [button setImage:[UIImage imageNamed:[NSString stringWithFormat:@"%@_tape",imageName]] forState:UIControlStateHighlighted];
-        [button setFrame:CGRectMake(0, 0, 40, 32)];
+        [button setFrame:CGRectMake(0, 0, 60, 32)];
         
     }
 

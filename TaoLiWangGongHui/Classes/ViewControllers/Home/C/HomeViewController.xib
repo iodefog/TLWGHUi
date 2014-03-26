@@ -9,7 +9,6 @@
             <connections>
                 <outlet property="baseScroll" destination="j9B-iE-qde" id="nCy-Oo-WaM"/>
                 <outlet property="delicateLifeLable" destination="en7-G1-jMJ" id="YKs-tA-yH2"/>
-                <outlet property="headLabelView" destination="9uH-RE-Yux" id="UoD-sd-zW8"/>
                 <outlet property="headScroll" destination="bna-Qb-rSO" id="IQ1-6L-2iE"/>
                 <outlet property="jokeTitle" destination="ajr-g4-lON" id="cZw-4r-3N4"/>
                 <outlet property="view" destination="1" id="3"/>
@@ -32,13 +31,6 @@
                                     <rect key="frame" x="0.0" y="0.0" width="320" height="170"/>
                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                 </scrollView>
-                                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="2014.04.02 今天是您的生日，祝您生日快乐。" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="9uH-RE-Yux">
-                                    <rect key="frame" x="12" y="132" width="297" height="21"/>
-                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                    <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                    <nil key="highlightedColor"/>
-                                </label>
                             </subviews>
                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                         </view>

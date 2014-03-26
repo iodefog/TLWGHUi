@@ -59,8 +59,10 @@
     self.middleScrollView.userInteractionEnabled = YES;
     self.baseScroll.backgroundColor  = RGBCOLOR(241, 241, 241);
     self.baseScroll.contentSize = CGSizeMake(self.view.width, 568);
-        
-    [self commitRequestWithParams:@{@"activityId":activityID} withUrl:[GlobalRequest activityAction_QueryActivityInfo_Url]];
+    if (activityID) {
+        [self commitRequestWithParams:@{@"activityId":activityID} withUrl:[GlobalRequest activityAction_QueryActivityInfo_Url]];
+    }
+    
     
     if (activityType == TypeNone){ // 不显示报名和投票
         self.bottomView.hidden = YES;
@@ -239,7 +241,7 @@
             [self reloadNewData];
         }
     }else if([[request.requestUrl lastPathComponent] isEqualToString:@"ActivityAction!enterActivity.do"]){
-        [GlobalHelper handerResultWithDelegate:self withMessage:request.handleredResult[@"msg"]];
+        [GlobalHelper handerResultWithDelegate:self withMessage:request.handleredResult[@"msg"] withTag:0];
     }
 }
 

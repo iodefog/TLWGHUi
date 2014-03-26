@@ -73,11 +73,6 @@
     int imageCount = self.activitiesArray.count;
     
     for (int i = 0;i < imageCount ;i ++) {
-//        HomeListModel *model = self.activitiesArray[i];
-//        UIImageView *imageView = [[UIImageView alloc] initWithFrame:CGRectMake(self.view.width*i, 0, self.view.width, 170)];
-////        imageView.image = [UIImage imageNamed:@"轮播图范例.png"];
-//        NSString *imageUrl = [NSString stringWithFormat:@"%@%@", [GlobalRequest getBaseServiceUrl], model.activityPic];
-//        [imageView setImageWithURL:[NSURL URLWithString:imageUrl] placeholderImage:[UIImage imageNamed:@"轮播图范例.png"]];
         ShufflingImageView *imageView = [[ShufflingImageView alloc] initWithFrame:CGRectMake(self.view.width*i, 0, self.view.width, 170)];
         [imageView createSubViewsWithModel:self.activitiesArray[i]];
         [self.headScroll addSubview:imageView];

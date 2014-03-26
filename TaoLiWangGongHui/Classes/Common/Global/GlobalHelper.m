@@ -10,6 +10,8 @@
 #import "SIAlertView.h"
 @implementation GlobalHelper
 
+static GlobalHelper *helper = nil;
+
 UINavigationController *selected_navigation_controller()
 {
     NSLog(@"%@", [UIApplication sharedApplication].keyWindow);
@@ -23,6 +25,14 @@ UINavigationController *selected_navigation_controller()
     else
         return  (UINavigationController *)((UITabBarController *)[UIApplication sharedApplication].keyWindow.rootViewController).selectedViewController;
 }
+
++ (id)shareInstance{
+    if (!helper) {
+        helper = [[GlobalHelper alloc] init];
+    }
+    return helper;
+}
+
 // 检查邮箱是否格式正确
 + (BOOL)isValidateEmail:(NSString *)email{
     NSString *emailRegex = @"[A-Z0-9a-z._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,4}";
@@ -44,16 +54,20 @@ UINavigationController *selected_navigation_controller()
     return [zipCodeTest evaluateWithObject:zipCode];
 }
 
-+ (void)handerResultWithDelegate:(id)delegate withMessage:(NSString *)message{
++ (void)handerResultWithDelegate:(id)delegate withMessage:(NSString *)message withTag:(int)tag{
     if ([message isKindOfClass:[NSString class]]) {
-        [UIAlertView popupAlertByDelegate:delegate andTag:1001 title:@"提示" message:message];
+        [GlobalHelper showWithTitle:@"提示" withMessage:message withCancelTitle:@"确定" withOkTitle:nil withSelector:nil withTarget:delegate];
+//        [UIAlertView popupAlertByDelegate:delegate andTag:tag title:@"提示" message:message];
     }else if([message isKindOfClass:[NSString class]]){
-        [UIAlertView popupAlertByDelegate:delegate andTag:1001 title:@"提示" message:@"获取信息错误"];
+        [GlobalHelper showWithTitle:@"提示" withMessage:@"获取信息失败" withCancelTitle:@"确定" withOkTitle:nil withSelector:nil withTarget:delegate];
+//        [UIAlertView popupAlertByDelegate:delegate andTag:tag title:@"提示" message:@"获取信息失败"];
     }
 }
 
 // 自定义AlertView
 + (void)showWithTitle:(NSString *)title withMessage:(NSString *)message withCancelTitle:(NSString *)cancelTitle withOkTitle:(NSString *)okTitle withSelector:(SEL)selector withTarget:(id)target{
+    helper = [GlobalHelper shareInstance];
+    helper.helperDelegate = target;
     SIAlertView *alertView = [[SIAlertView alloc] initWithTitle:title andMessage:message];
     if (cancelTitle) {
         [alertView addButtonWithTitle:cancelTitle
@@ -66,13 +80,13 @@ UINavigationController *selected_navigation_controller()
         [alertView addButtonWithTitle:okTitle
                                  type:SIAlertViewButtonTypeDefault
                               handler:^(SIAlertView *alertView) {
-                                  if ([target respondsToSelector:selector]) {
-                                       [target performSelector:selector];
+                                  if (helper.helperDelegate && [helper.helperDelegate respondsToSelector:selector]) {
+                                      SuppressPerformSelectorLeakWarning([helper.helperDelegate performSelector:selector withObject:nil]);
                                   }
                               }];
     }
     
-    alertView.titleColor = [UIColor blueColor];
+    alertView.titleColor = [UIColor blackColor];
     alertView.messageColor = [UIColor blackColor];
     alertView.messageFont = [UIFont systemFontOfSize:14.0];
     alertView.cornerRadius = 10;

@@ -25,7 +25,7 @@
 }
 
 - (void)setObject:(NSDictionary *)dict{
-    self.activityModel = [[MyActivityModel alloc] initWithDataDic:dict];
+    self.activityModel = [[MyActivityModel alloc] initWithDataDic:dict[@"activity"]];
     [self.activityImage setImageWithURL:[NSURL URLWithString:self.activityModel.activityPic]];
     self.activityDescription.text = self.activityModel.activityTitle;
     self.activityTime.text = self.activityModel.publishDatetime;

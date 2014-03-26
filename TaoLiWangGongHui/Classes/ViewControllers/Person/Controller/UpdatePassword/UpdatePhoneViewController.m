@@ -37,7 +37,7 @@
     [self.getCodeButton setTitle:[NSString stringWithFormat:@"%d秒后再发",60] forState:UIControlStateDisabled];
     self.getCodeButton.enabled = NO;
     if (![GlobalHelper isValidatePhone:self.phoneTextField.text]) {
-        [UIAlertView popupAlertByDelegate:self andTag:1000 title:@"提示" message:@"手机号码格式不正确"];
+        [GlobalHelper handerResultWithDelegate:self withMessage:@"手机号码格式不正确" withTag:0];
         return;
     }
     [self commitRequestWithParams:@{
@@ -53,17 +53,16 @@
 // 提交
 - (IBAction)commitClicked:(id)sender {
     if (self.phoneTextField.text.length < 1 ) {
-        [UIAlertView popupAlertByDelegate:self andTag:1001 title:@"提示" message:@"手机号码不能为空"];
+        [GlobalHelper handerResultWithDelegate:self withMessage:@"手机号码不能为空" withTag:0];
     }else if (self.phoneTextField.text.length != 11){
-        [UIAlertView popupAlertByDelegate:self andTag:1001 title:@"提示" message:@"手机号码格式不正确"];
+        [GlobalHelper handerResultWithDelegate:self withMessage:@"手机号码格式不正确" withTag:0];
     }else if (self.codeTextField.text.length < 1){
-        [UIAlertView popupAlertByDelegate:self andTag:1001 title:@"提示" message:@"验证码不能为空"];
+        [GlobalHelper handerResultWithDelegate:self withMessage:@"验证码不能为空" withTag:0];
     }else{
         NSDictionary *params = [NSDictionary dictionaryWithObjectsAndKeys:
                                 [[UserHelper shareInstance] getMemberID],@"member",
                                 self.phoneTextField.text ,@"phone",
                                 self.codeTextField.text, @"code",  nil];
-        //   @{@"member": [[UserHelper shareInstance] getMenberID], @"phone":self.phoneTetxField.text};
         
         [self commitRequestWithParams:params withUrl:[GlobalRequest userAction_UpdateMobile_Url]];
     }
@@ -71,16 +70,15 @@
 
 - (void)responseSuccessWithResponse:(ITTBaseDataRequest *)request{
     if ([request.handleredResult isKindOfClass:[NSDictionary class]]) {
-        [UIAlertView popupAlertByDelegate:self andTag:1000 title:@"提示" message:request.handleredResult[@"msg"]];
+        [GlobalHelper handerResultWithDelegate:self withMessage:request.handleredResult[@"msg"] withTag:0];
     }
-    
 }
 
 - (void)responseFailWithResponse:(ITTBaseDataRequest *)request{
     if ([request.handleredResult isKindOfClass:[NSDictionary class]]) {
-         [UIAlertView popupAlertByDelegate:self andTag:1000 title:@"提示" message:request.handleredResult[@"msg"]];
+        [GlobalHelper handerResultWithDelegate:self withMessage:request.handleredResult[@"msg"] withTag:0];
     }else{
-         [UIAlertView popupAlertByDelegate:self andTag:1000 title:@"提示" message:request.handleredResult[@"msg"]];
+        [GlobalHelper handerResultWithDelegate:self withMessage:request.handleredResult[@"msg"] withTag:0];
     }
     self.getCodeButton.enabled = YES;
     clickCount = 60;
