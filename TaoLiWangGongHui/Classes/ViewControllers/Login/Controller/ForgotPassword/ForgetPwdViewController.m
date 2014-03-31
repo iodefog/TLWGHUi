@@ -160,6 +160,9 @@ static int clickCount = 59;
             if (codeNum.intValue ==  1) {
                 
             }else{
+                self.bySMSButton.enabled = YES;
+                clickCount = 60;
+                [codeTimer invalidate];
                 [GlobalHelper handerResultWithDelegate:self withMessage:request.handleredResult[@"msg"] withTag:0];
             }
         }else if ([request.requestUrl.lastPathComponent isEqualToString:@"UserAction!queryPasswordByEmail.do"]){

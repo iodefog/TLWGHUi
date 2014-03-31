@@ -29,16 +29,20 @@
 
 - (void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
-    NSMutableArray *dbArray = [NSMutableArray arrayWithArray:[[UserAddressDataBase shareDataBase] readTableName] ];
-    if([dbArray count]){
-        NSMutableArray *tempArray = [NSMutableArray arrayWithObject:[dbArray firstObject]];
-        [dbArray removeObject:[dbArray firstObject]];
-        [tempArray addObjectsFromArray: [[dbArray reverseObjectEnumerator]allObjects]];
-        self.model = tempArray;
-    }else{
-        self.model = dbArray;
-    }
+    [self.model removeAllObjects];
+    [self commitRequestWithParams:@{@"memberId": [[UserHelper shareInstance] getMemberID]} withUrl:[GlobalRequest addressAction_QueryAddressList_Url]];
     [self.tableView reloadData];
+    /** 地址写入数据库后获取
+     NSMutableArray *dbArray = [NSMutableArray arrayWithArray:[[UserAddressDataBase shareDataBase] readTableName] ];
+     if([dbArray count]){
+     NSMutableArray *tempArray = [NSMutableArray arrayWithObject:[dbArray firstObject]];
+     [dbArray removeObject:[dbArray firstObject]];
+     [tempArray addObjectsFromArray: [[dbArray reverseObjectEnumerator]allObjects]];
+     self.model = tempArray;
+     }else{
+     self.model = dbArray;
+     }
+     */
 }
 
 - (void)viewDidLoad
@@ -114,13 +118,10 @@
 }
 
 #pragma mark -  AddressDelegate
-
-- (void)setCurrentCellToDefaultModel:(NSIndexPath *)indexPath{
-    self.model = [[UserAddressDataBase shareDataBase] readTableName];
-    [self.tableView reloadData];
-//    NSIndexPath *firstIndexPath = [NSIndexPath indexPathForRow:0 inSection:0];
-//    [self.tableView moveRowAtIndexPath:indexPath toIndexPath:firstIndexPath];
-    [[TKAlertCenter defaultCenter] postAlertWithMessage:@"已设置为默认地址"];
+- (void)setCurrentCellToDefaultModel:(NewAddressModel *)addressmodel{
+    [self.model removeAllObjects];
+    [self commitRequestWithParams:@{@"memberId": [[UserHelper shareInstance] getMemberID]} withUrl:[GlobalRequest addressAction_QueryAddressList_Url]];
 }
+
 
 @end

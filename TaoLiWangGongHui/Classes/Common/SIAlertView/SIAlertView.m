@@ -654,7 +654,11 @@ static SIAlertView *__si_alert_current_view;
         if (y > CONTENT_PADDING_TOP) {
             y += GAP;
         }
-        if (self.items.count == 2) {
+        if (self.items.count == 1) {
+            UIButton *button = self.buttons[0];
+            button.frame = CGRectMake(CONTENT_PADDING_LEFT-10, y, self.containerView.bounds.size.width - CONTENT_PADDING_LEFT * 2 + 20, BUTTON_HEIGHT+10);
+        }
+        else if (self.items.count == 2) {
             CGFloat width = (self.containerView.bounds.size.width - CONTENT_PADDING_LEFT * 2 - GAP) * 0.5;
             UIButton *button = self.buttons[0];
             button.frame = CGRectMake(CONTENT_PADDING_LEFT-10, y, width+15, BUTTON_HEIGHT+10);

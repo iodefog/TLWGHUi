@@ -8,7 +8,6 @@
 
 #import "AppDelegate.h"
 #import "LoginViewController.h"
-
 ///支付宝
 #import "AliPayHelper.h"
 #import "UIAlertView+ITTAdditions.h"
@@ -23,7 +22,6 @@
     // Override point for customization after application launch.
     
     // 全局预定义导航背景
-
     if (isIOS7) {
         [[UINavigationBar appearance] setBackgroundImage:[UIImage imageNamed:@"nav_background_64.png"] forBarMetrics:UIBarMetricsDefault];
     }else{

@@ -17,7 +17,7 @@
     sender.selected = !sender.selected;
     NSDictionary *params = @{
                                    @"memberId":[[UserHelper shareInstance] getMemberID],
-                                   @"newsId":self.subscribeModel.newsId,
+                                   @"websiteNewsTypeId":self.subscribeModel.newsId,
                                    @"status":sender.selected?@"1":@"0"};
     [self commitRequestWithParams:params withUrl:[GlobalRequest articleAction_DoSubscription_Url]];
 }
@@ -42,7 +42,7 @@
     self.subscribeModel = [[MessageModel alloc] initWithDataDic:dict];
     self.goodCategory.text = self.subscribeModel.newsTitle;
     [self.preViewImage setImageWithURL:[NSURL URLWithString:self.subscribeModel.newsPicPath]];
-    if (self.subscribeModel.status.boolValue) {
+    if (self.subscribeModel.newsType.boolValue) {
         self.subscribeBtn.selected = YES;
     }else{
         self.subscribeBtn.selected = NO;

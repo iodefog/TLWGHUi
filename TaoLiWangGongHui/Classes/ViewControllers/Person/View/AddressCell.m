@@ -7,7 +7,7 @@
 //
 
 #import "AddressCell.h"
-#import "UserAddressDataBase.h"
+//#import "UserAddressDataBase.h"
 #import "AddUserInfoViewController.h"
 
 @implementation AddressCell
@@ -23,25 +23,23 @@
 
 // 设置为默认地址点击
 - (IBAction)selectedClicked:(id)sender {
+    if (self.selectBtn.isSelected) {
+        return;
+    }
     [self.selectBtn setBackgroundImage:[UIImage imageNamed:@"accept_good_selected"] forState:UIControlStateSelected];
     self.selectBtn.selected = !self.selectBtn.selected;
     self.addressBackGroundView.image = [UIImage imageNamed:self.selectBtn.selected ? @"address_cell_selected.png" : @"address_cell_normal.png"];
     [self updateDBWith];
 
-    if (self.selectBtn.selected) {
-        if (self.addressDelegate && [self.addressDelegate respondsToSelector:@selector(setCurrentCellToDefaultModel:)]) {
-            [self.addressDelegate performSelector:@selector(setCurrentCellToDefaultModel:) withObject:self.indexPath];
-        }
-    }
 }
 
 // 赋值
-- (void)setObject:(AddressModel *)addressModel{
-    userAddressModel = addressModel;
-    self.userName.text = addressModel.Name;
-    self.phoneNum.text = addressModel.Phone;
-    self.detailAddress.text = addressModel.Address;
-    if (addressModel.Type.intValue == 1) {
+- (void)setObject:(NSDictionary *)dict{
+    userAddressModel = [[NewAddressModel alloc] initWithDataDic:dict];
+    self.userName.text = userAddressModel.receiverName;
+    self.phoneNum.text = userAddressModel.receiverPhone;
+    self.detailAddress.text = userAddressModel.receiverAddress;
+    if (userAddressModel.isDefault.boolValue == YES) {
         self.selectBtn.selected = YES;
         self.addressBackGroundView.image = [UIImage imageNamed:self.selectBtn.selected ? @"address_cell_selected.png" : @"address_cell_normal.png"];
         self.userName.textColor = self.phoneNum.textColor = self.detailAddress.textColor = [UIColor orangeColor];
@@ -53,18 +51,47 @@
     }
 }
 
-// 更新数据，把第一个值先修改为不默认，再把当前点击的修改为默认
+// 更新数据 再把当前点击的修改为默认
 - (void)updateDBWith{
-    NSMutableArray *dbArray = [[UserAddressDataBase shareDataBase] readTableName];
-    AddressModel *addressModel = nil;
-    if ([dbArray count]> 0) {
-        addressModel = [dbArray objectAtIndex:0];
-    }
-    [[UserAddressDataBase shareDataBase] updateItem:addressModel defaultType:NO];
-    if (self.selectBtn.selected) {
-        [[UserAddressDataBase shareDataBase] updateItem:userAddressModel defaultType:YES];
-        userAddressModel.Type = @"1";
-    }
+    NSDictionary *params = @{@"city": userAddressModel.city?userAddressModel.city:@"",
+                             @"isDefault": @"1",
+                             @"receiverAddress": userAddressModel.receiverAddress?userAddressModel.receiverAddress:@"",
+                             @"receiverAddressId": userAddressModel.receiverAddressId?userAddressModel.receiverAddressId:@"",
+                             @"receiverName": userAddressModel.receiverName?userAddressModel.receiverName:@"",
+                             @"receiverPhone": userAddressModel.receiverPhone?userAddressModel.receiverPhone:@"",
+                             @"receiverPostalcode": userAddressModel.receiverPostalcode?userAddressModel.receiverPostalcode:@""};
+    
+    [ITTASIBaseDataRequest requestWithParameters:params withRequestUrl:[GlobalRequest addressAction_UpdateAddress_Url] withIndicatorView:nil withCancelSubject:nil onRequestStart:^(ITTBaseDataRequest *request) {
+        NSLog(@"request start");
+    } onRequestFinished:^(ITTBaseDataRequest *request) {
+        //        [[TKAlertCenter defaultCenter] postAlertWithMessage:@""];
+        NSLog(@"request finish");
+        if (self.selectBtn.selected) {
+            if (self.addressDelegate && [self.addressDelegate respondsToSelector:@selector(setCurrentCellToDefaultModel:)]) {
+                [self.addressDelegate performSelector:@selector(setCurrentCellToDefaultModel:) withObject:userAddressModel];
+            }
+        }
+        
+    } onRequestCanceled:^(ITTBaseDataRequest *request) {
+        NSLog(@"request cancel");
+        
+    } onRequestFailed:^(ITTBaseDataRequest *request) {
+        NSLog(@"request fail");
+        [[TKAlertCenter defaultCenter] postAlertWithMessage:@"加载失败"];
+        
+    }];
+    
+    
+//    NSMutableArray *dbArray = [[UserAddressDataBase shareDataBase] readTableName];
+//    AddressModel *addressModel = nil;
+//    if ([dbArray count]> 0) {
+//        addressModel = [dbArray objectAtIndex:0];
+//    }
+//    [[UserAddressDataBase shareDataBase] updateItem:addressModel defaultType:NO];
+//    if (self.selectBtn.selected) {
+//        [[UserAddressDataBase shareDataBase] updateItem:userAddressModel defaultType:YES];
+//        userAddressModel.Type = @"1";
+//    }
 }
 
 // 编辑点击，然后传入当前cell上的所有数据

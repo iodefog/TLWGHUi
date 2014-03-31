@@ -123,6 +123,15 @@
 
 // 生日福利和节日福利点击
 - (IBAction)welfareClicked:(UIButton *)sender {
+    
+    NSString *birthday = [[NSUserDefaults standardUserDefaults] objectForKey:[NSString stringWithFormat:@"birthday_%@",[[UserHelper shareInstance] getMemberID]]];
+    NSDate *date = [NSDate dateWithString:birthday];
+    BOOL isToday =  [GlobalHelper isCompareDate:date];
+    if(!isToday){
+        [GlobalHelper showWithTitle:@"" withMessage:@"亲，福利的时间还没有到。"  withCancelTitle:@"确定" withOkTitle:nil withSelector:nil withTarget:self];
+        return;
+    }
+
     WelfareController *welfareController = [[WelfareController alloc] initWithWelfareType:200==sender.tag?WelfareBirthDay:WelfareHoliday];
     [welfareController setHidesBottomBarWhenPushed:YES];
     [self.navigationController pushViewController:welfareController animated:YES];

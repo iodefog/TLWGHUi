@@ -14,7 +14,7 @@ typedef enum {
     TypeVote,    //显示 投票
 } ActivityType;
 
-@interface ActivitiesDetailController : ViewController // 活动详情
+@interface ActivitiesDetailController : ViewController <UIWebViewDelegate> // 活动详情
 {
     ActivityType activityType;
     NSString     *activityID;
@@ -25,6 +25,8 @@ typedef enum {
 @property (strong, nonatomic) IBOutlet UILabel *activitiesTitle;  //活动情简介
 
 @property (strong, nonatomic) IBOutlet UIScrollView *middleScrollView;  //中部滑动scroll
+// 描述
+@property (strong, nonatomic) IBOutlet UIWebView *descriptionWebView;
 
 @property (strong, nonatomic) IBOutlet UIView *bottomView; // 底部视图，用来隐藏底部两个按钮
 

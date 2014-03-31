@@ -189,6 +189,7 @@
     header.scrollView = self.tableView;
     header.beginRefreshingBlock = ^(MJRefreshBaseView *refreshView) {
         // 进入刷新状态就会回调这个Block
+        [self.model removeAllObjects];
         [self refreshHeaderView];
         // 模拟延迟加载数据，因此2秒后才调用）
         // 这里的refreshView其实就是header
@@ -263,6 +264,7 @@
         [self.view addSubview:self.emptyView];
     }else if(!self.emptyView){
         self.emptyView = [[TKEmptyView alloc] initWithFrame:self.view.bounds mask:[self emptyImage] title:[self emptyTitle] subtitle:[self emptySubTitle]];
+        self.emptyView.backgroundColor = [UIColor clearColor];
         self.emptyView.autoresizingMask = UIViewAutoresizingFlexibleHeight | UIViewAutoresizingFlexibleWidth;
         [self.view addSubview:self.emptyView];
     }

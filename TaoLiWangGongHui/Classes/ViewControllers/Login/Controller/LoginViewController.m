@@ -52,7 +52,7 @@
     NSDictionary *params = [NSDictionary dictionaryWithObjectsAndKeys:self.userName.text,@"memberName", self.passWord.text,@"passwd",nil];
     
     [self commitRequestWithParams:params withUrl:[GlobalRequest userAction_Login_Url]];
-   }
+}
 
 - (void)setDataDic:(NSDictionary *)resultDic toManager:(NSMutableArray *)baseManager
 {
@@ -69,7 +69,7 @@
         AppDelegate *appDelegate = [UIApplication sharedApplication].delegate;
         [appDelegate chageRootVC];
         
-         [self dismissViewControllerAnimated:YES completion:nil];
+        [self dismissViewControllerAnimated:YES completion:nil];
     }
 }
 

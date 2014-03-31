@@ -34,12 +34,9 @@
     self.navigationItem.leftBarButtonItem = [UIBarButtonItem barButtonWithImage:@"navigation_Back.png" backgroundImage:nil target:self action:@selector(back)];
     self.navigationItem.rightBarButtonItem = nil;
     self.tableView.height = self.view.height - 64;
-    NSDictionary *params = @{
-                             @"memberId":[[UserHelper shareInstance] getMemberID],
-                             @"pageSize":PAGESIZE,
-                             @"pageNo":@"0"
-                             };
-    [self commitRequestWithParams:params withUrl:[GlobalRequest activityAction_QueryActivityList_Url]];
+    
+//    [self addHeader];
+//    [self addFooter];
 }
 
 - (void)back{
@@ -76,6 +73,25 @@
     [cell.goodImage setImageWithURL:[NSURL URLWithString:homeModel.activityPic]];
     cell.goodDescription.text = homeModel.activityTitle;
     return cell;
+}
+
+#pragma mark - Request Response
+- (void)refreshHeaderView{
+    NSDictionary *params = @{
+                             @"memberId":[[UserHelper shareInstance] getMemberID],
+                             @"pageSize":PAGESIZE,
+                             @"pageNo":@"0"
+                             };
+    [self commitRequestWithParams:params withUrl:[GlobalRequest activityAction_QueryActivityList_Url]];
+}
+
+- (void)refreshFooterView{
+    NSDictionary *params = @{
+                             @"memberId":[[UserHelper shareInstance] getMemberID],
+                             @"pageSize":PAGESIZE,
+                             @"pageNo":[NSString stringWithFormat:@"%d",[self.model count]/PAGESIZEINT]
+                             };
+    [self commitRequestWithParams:params withUrl:[GlobalRequest activityAction_QueryActivityList_Url]];
 }
 
 - (void)didReceiveMemoryWarning

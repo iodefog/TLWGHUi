@@ -7,16 +7,16 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "AddressModel.h"
+#import "NewAddressModel.h"
 
 @protocol AddressDelegate <NSObject>
 
-- (void)setCurrentCellToDefaultModel:(NSIndexPath *)indexPath;
+- (void)setCurrentCellToDefaultModel:(NewAddressModel *)userAddressModel;
 
 @end
 
 @interface AddressCell : UITableViewCell{
-    AddressModel *userAddressModel;
+    NewAddressModel *userAddressModel;
 }
 
 @property (weak, nonatomic) id       addressDelegate;
@@ -27,6 +27,6 @@
 @property (strong, nonatomic) IBOutlet UILabel *phoneNum;
 @property (strong, nonatomic) IBOutlet UILabel *detailAddress;
 @property (strong, nonatomic) NSIndexPath *indexPath;
-- (void)setObject:(AddressModel *)addressModel;
+- (void)setObject:(NSDictionary *)dict;
 
 @end

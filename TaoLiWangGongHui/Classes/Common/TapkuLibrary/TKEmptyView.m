@@ -96,8 +96,8 @@
     if(!(self=[super initWithFrame:frame])) return nil;
     self.backgroundColor = [UIColor whiteColor];
 	
-	UIColor *top = [UIColor colorWithRed:242/255.0 green:244/255.0 blue:246/255.0 alpha:1];
-	UIColor *bot = [UIColor colorWithRed:225/255.0 green:229/255.0 blue:235/255.0 alpha:1];
+	UIColor *top = [UIColor colorWithRed:242/255.0 green:244/255.0 blue:246/255.0 alpha:0];
+	UIColor *bot = [UIColor colorWithRed:225/255.0 green:229/255.0 blue:235/255.0 alpha:0];
 	
 	self.colors = @[top,bot];
 	self.startPoint = CGPointZero;
@@ -125,6 +125,7 @@
     
     _imageView = [[UIImageView alloc] initWithImage:[self maskedImageWithImage:image]];
     _imageView.frame = CGRectMake((int)(frame.size.width/2)-(_imageView.frame.size.width/2), (int)(frame.size.height/2)-(_imageView.frame.size.height/2), _imageView.image.size.width, _imageView.image.size.height);
+    _imageView.backgroundColor = [UIColor clearColor];
 
 	    
     [self addSubview:_imageView];
@@ -176,10 +177,10 @@
 	UIGraphicsBeginImageContext(CGSizeMake((m.size.width)*m.scale , (m.size.height+2)*m.scale));
 	CGContextRef context = UIGraphicsGetCurrentContext();
 
-	NSArray *colors = @[[UIColor colorWithRed:174/255.0 green:182/255.0 blue:195/255.0 alpha:1],[UIColor colorWithRed:197/255.0 green:202/255.0 blue:211/255.0 alpha:1]];
-	
+//	NSArray *colors = @[[UIColor colorWithRed:174/255.0 green:182/255.0 blue:195/255.0 alpha:1],[UIColor colorWithRed:197/255.0 green:202/255.0 blue:211/255.0 alpha:1]];
+	NSArray *colors = @[[UIColor colorWithRed:174/255.0 green:182/255.0 blue:195/255.0 alpha:0],[UIColor colorWithRed:197/255.0 green:202/255.0 blue:211/255.0 alpha:0]];
 
-	CGContextSetShadowWithColor(context, CGSizeMake(1, 4),4, [UIColor colorWithWhite:0 alpha:0.1].CGColor);
+	CGContextSetShadowWithColor(context, CGSizeMake(1, 4),4, [UIColor colorWithWhite:0 alpha:0.0].CGColor);
 	[m drawInRect:CGRectMake(0, 0+(1*m.scale),m.size.width*m.scale, m.size.height*m.scale)];
 	[m drawMaskedGradientInRect:CGRectMake(0, 0, m.size.width*m.scale, m.size.height*m.scale) withColors:colors];
 	

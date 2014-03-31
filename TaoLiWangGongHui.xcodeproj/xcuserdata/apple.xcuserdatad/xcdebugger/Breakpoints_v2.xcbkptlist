@@ -68,11 +68,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "TaoLiWangGongHui/Classes/ViewControllers/Person/Controller/AcceptAddressUpdate/AcceptAddressController.m"
-            timestampString = "417497582.299497"
+            timestampString = "417577861.417483"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "50"
-            endingLineNumber = "50"
+            startingLineNumber = "54"
+            endingLineNumber = "54"
             landmarkName = "-viewDidLoad"
             landmarkType = "5">
          </BreakpointContent>
@@ -84,11 +84,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "TaoLiWangGongHui/Classes/ViewControllers/Person/Controller/AcceptAddressUpdate/AcceptAddressController.m"
-            timestampString = "417497582.299497"
+            timestampString = "417577861.417483"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "106"
-            endingLineNumber = "106"
+            startingLineNumber = "110"
+            endingLineNumber = "110"
             landmarkName = "-tableView:cellForRowAtIndexPath:"
             landmarkType = "5">
          </BreakpointContent>
@@ -122,22 +122,6 @@
             startingLineNumber = "78"
             endingLineNumber = "78"
             landmarkName = "-tableView:cellForRowAtIndexPath:"
-            landmarkType = "5">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "TaoLiWangGongHui/Classes/ViewControllers/Person/Controller/Feedback/FeedbackViewController.m"
-            timestampString = "416826962.016146"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "42"
-            endingLineNumber = "42"
-            landmarkName = "-propertystrongnonatomicIBOutletUIButtonfeedbackCommitfeedbackCommit:"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
@@ -338,27 +322,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "TaoLiWangGongHui/Classes/ViewControllers/Home/C/UnionActivities/ActivitiesDetailController.m"
-            timestampString = "417404463.89442"
+            timestampString = "417521800.97157"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "221"
-            endingLineNumber = "221"
-            landmarkName = "-reloadNewData"
-            landmarkType = "5">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "TaoLiWangGongHui/Classes/ViewControllers/Home/C/UnionActivities/ActivitiesDetailController.m"
-            timestampString = "417404463.89442"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "144"
-            endingLineNumber = "144"
+            startingLineNumber = "145"
+            endingLineNumber = "145"
             landmarkName = "-haveVotedWithDescription:"
             landmarkType = "5">
          </BreakpointContent>
@@ -366,31 +334,15 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            shouldBeEnabled = "No"
+            shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "TaoLiWangGongHui/Classes/ViewControllers/Home/C/UnionActivities/ActivitiesDetailController.m"
-            timestampString = "417404463.89442"
+            timestampString = "417521800.97157"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "113"
-            endingLineNumber = "113"
-            landmarkName = "-unHaveVotedWithDescription:"
-            landmarkType = "5">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "TaoLiWangGongHui/Classes/ViewControllers/Home/C/UnionActivities/ActivitiesDetailController.m"
-            timestampString = "417404463.89442"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "187"
-            endingLineNumber = "187"
+            startingLineNumber = "188"
+            endingLineNumber = "188"
             landmarkName = "-signUpClicked:"
             landmarkType = "5">
          </BreakpointContent>
@@ -513,22 +465,6 @@
             shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "TaoLiWangGongHui/Classes/ViewControllers/Home/C/UnionActivities/ActivitiesDetailController.m"
-            timestampString = "417404463.89442"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "205"
-            endingLineNumber = "205"
-            landmarkName = "-haveSignedClicked:"
-            landmarkType = "5">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
             filePath = "TaoLiWangGongHui/Classes/ViewControllers/Base/Controller/ViewController.m"
             timestampString = "417320139.684007"
             startingColumnNumber = "9223372036854775807"
@@ -546,11 +482,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "TaoLiWangGongHui/Classes/ViewControllers/Home/C/UnionActivities/ActivitiesDetailController.m"
-            timestampString = "417404463.89442"
+            timestampString = "417692921.914934"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "228"
-            endingLineNumber = "228"
+            startingLineNumber = "235"
+            endingLineNumber = "235"
             landmarkName = "-responseSuccessWithResponse:"
             landmarkType = "5">
          </BreakpointContent>
@@ -642,11 +578,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "TaoLiWangGongHui/Classes/ViewControllers/ShoppingCart/Controlller/ShoppingCartController.m"
-            timestampString = "417424232.759734"
+            timestampString = "417667578.975047"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "69"
-            endingLineNumber = "69"
+            startingLineNumber = "70"
+            endingLineNumber = "70"
             landmarkName = "-getRequestShoppingCartData"
             landmarkType = "5">
          </BreakpointContent>
@@ -658,11 +594,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "TaoLiWangGongHui/Classes/ViewControllers/ShoppingCart/Controlller/ShoppingCartController.m"
-            timestampString = "417424232.759734"
+            timestampString = "417667578.975047"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "90"
-            endingLineNumber = "90"
+            startingLineNumber = "91"
+            endingLineNumber = "91"
             landmarkName = "-getRequestShoppingCartData"
             landmarkType = "5">
          </BreakpointContent>
@@ -718,16 +654,64 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "TaoLiWangGongHui/Classes/ViewControllers/Person/Controller/AcceptAddressUpdate/AddUserInfoViewController.m"
+            timestampString = "417685501.847459"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "224"
+            endingLineNumber = "224"
+            landmarkName = "-commitClicked:"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "TaoLiWangGongHui/Classes/ViewControllers/Person/Controller/AcceptAddressUpdate/AddUserInfoViewController.m"
+            timestampString = "417685501.847459"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "236"
+            endingLineNumber = "236"
+            landmarkName = "-commitClicked:"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "TaoLiWangGongHui/Classes/Common/SIAlertView/SIAlertView.m"
+            timestampString = "417516415.367327"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "668"
+            endingLineNumber = "668"
+            landmarkName = "-validateLayout"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
             shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "TaoLiWangGongHui/Classes/ViewControllers/Person/Controller/AcceptAddressUpdate/AcceptAddressController.m"
-            timestampString = "417497873.843812"
+            filePath = "TaoLiWangGongHui/Classes/ViewControllers/Home/V/WelfareCell2.m"
+            timestampString = "417668717.893291"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "33"
-            endingLineNumber = "33"
-            landmarkName = "-viewWillAppear:"
+            startingLineNumber = "37"
+            endingLineNumber = "37"
+            landmarkName = "-setObject:"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
@@ -738,12 +722,92 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "TaoLiWangGongHui/Classes/ViewControllers/Person/Controller/AcceptAddressUpdate/AddUserInfoViewController.m"
-            timestampString = "417498259.771248"
+            timestampString = "417685501.847459"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "196"
-            endingLineNumber = "196"
-            landmarkName = "-commitClicked:"
+            startingLineNumber = "352"
+            endingLineNumber = "352"
+            landmarkName = "-responseSuccessWithResponse:"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "TaoLiWangGongHui/Classes/ViewControllers/Person/Controller/AcceptAddressUpdate/AddUserInfoViewController.m"
+            timestampString = "417685501.847459"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "349"
+            endingLineNumber = "349"
+            landmarkName = "-responseSuccessWithResponse:"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "TaoLiWangGongHui/Classes/CustomViews/TSLocateView/TSLocateView.m"
+            timestampString = "417682721.893866"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "43"
+            endingLineNumber = "43"
+            landmarkName = "-setObjectWithProvince:withCity:"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "TaoLiWangGongHui/Classes/ViewControllers/Person/Controller/AcceptAddressUpdate/AddUserInfoViewController.m"
+            timestampString = "417685501.847459"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "82"
+            endingLineNumber = "82"
+            landmarkName = "-viewDidLoad"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "TaoLiWangGongHui/Classes/ViewControllers/Person/Controller/AcceptAddressUpdate/AddUserInfoViewController.m"
+            timestampString = "417685501.847459"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "270"
+            endingLineNumber = "270"
+            landmarkName = "-textFieldShouldBeginEditing:"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "TaoLiWangGongHui/Classes/ViewControllers/Person/Controller/AcceptAddressUpdate/AddUserInfoViewController.m"
+            timestampString = "417685501.847459"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "263"
+            endingLineNumber = "263"
+            landmarkName = "-textFieldShouldBeginEditing:"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
@@ -753,13 +817,125 @@
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "TaoLiWangGongHui/Classes/ViewControllers/Person/Controller/AcceptAddressUpdate/AddUserInfoViewController.m"
-            timestampString = "417498484.744343"
+            filePath = "TaoLiWangGongHui/Classes/ViewControllers/Person/Controller/UpdatePassword/UpdatePhoneViewController.m"
+            timestampString = "417687424.164196"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "208"
-            endingLineNumber = "208"
-            landmarkName = "-commitClicked:"
+            startingLineNumber = "83"
+            endingLineNumber = "83"
+            landmarkName = "-responseFailWithResponse:"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "TaoLiWangGongHui/Classes/ViewControllers/Home/C/UnionActivities/ActivitiesDetailController.m"
+            timestampString = "417689076.725278"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "107"
+            endingLineNumber = "107"
+            landmarkName = "-unHaveVotedWithDescription:"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "TaoLiWangGongHui/Classes/ViewControllers/Home/C/UnionActivities/ActivitiesDetailController.m"
+            timestampString = "417689127.478323"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "92"
+            endingLineNumber = "92"
+            landmarkName = "-showDiffrentMiddleViewWithType:withDescription:withHaveAction:"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "TaoLiWangGongHui/Classes/ViewControllers/Home/C/UnionActivities/ActivitiesDetailController.m"
+            timestampString = "417689182.19212"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "43"
+            endingLineNumber = "43"
+            landmarkName = "-initWithActivityType:withID:"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "TaoLiWangGongHui/Classes/ViewControllers/Home/C/UnionActivities/ActivitiesDetailController.m"
+            timestampString = "417689391.54318"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "133"
+            endingLineNumber = "133"
+            landmarkName = "-unHaveVotedWithDescription:"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "TaoLiWangGongHui/Classes/ViewControllers/Home/C/UnionActivities/ActivitiesDetailController.m"
+            timestampString = "417690149.883408"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "206"
+            endingLineNumber = "206"
+            landmarkName = "-haveSignedClicked:"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "TaoLiWangGongHui/Classes/ViewControllers/Home/C/UnionActivities/ActivitiesDetailController.m"
+            timestampString = "417692921.914934"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "274"
+            endingLineNumber = "274"
+            landmarkName = "-webViewDidFinishLoad:"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "TaoLiWangGongHui/Classes/ViewControllers/Activities/Controller/ActivitiesController.m"
+            timestampString = "417692396.40657"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "74"
+            endingLineNumber = "74"
+            landmarkName = "-tableView:didSelectRowAtIndexPath:"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>

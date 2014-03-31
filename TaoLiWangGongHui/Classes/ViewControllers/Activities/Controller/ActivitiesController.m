@@ -9,6 +9,7 @@
 #import "ActivitiesController.h"
 #import "ActivitiesCell.h"
 #import "MyActivityModel.h"
+#import "ActivitiesDetailController.h"
 
 @interface ActivitiesController ()
 
@@ -67,9 +68,13 @@ static NSString *activityCellName = @"activityCellName";
     return cell;
 }
 
-//- (void)reloadNewData{
-////    [self.tableView reloadData];
-//}
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
+    ActivitiesCell *cell = (id)[tableView cellForRowAtIndexPath:indexPath];
+    ActivitiesDetailController *activityVC = [[ActivitiesDetailController alloc] initWithActivityType:TypeNone withID:cell.activityModel.activityId];
+    activityVC.navigationItem.title = @"活动详情";
+    [activityVC setHidesBottomBarWhenPushed:YES];
+    [self.navigationController pushViewController:activityVC animated:YES];
+}
 
 #pragma mark -
 // MJRefresh

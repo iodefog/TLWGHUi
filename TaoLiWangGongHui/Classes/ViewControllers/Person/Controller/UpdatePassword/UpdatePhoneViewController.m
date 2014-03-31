@@ -70,6 +70,11 @@
 
 - (void)responseSuccessWithResponse:(ITTBaseDataRequest *)request{
     if ([request.handleredResult isKindOfClass:[NSDictionary class]]) {
+        if (((NSNumber *)request.handleredResult[@"code"]).intValue == 0) {
+            self.getCodeButton.enabled = YES;
+            clickCount = 60;
+            [codeTimer invalidate];
+        }
         [GlobalHelper handerResultWithDelegate:self withMessage:request.handleredResult[@"msg"] withTag:0];
     }
 }

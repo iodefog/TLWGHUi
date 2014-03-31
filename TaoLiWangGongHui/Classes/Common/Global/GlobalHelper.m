@@ -109,4 +109,21 @@ UINavigationController *selected_navigation_controller()
     [alertView show];
 }
 
+// 匹配是否是今天
++ (BOOL)isCompareDate:(NSDate *)nowdate{
+    BOOL isToday = NO;
+    NSCalendar *cal = [NSCalendar currentCalendar];
+    NSDateComponents *components = [cal components:(NSEraCalendarUnit|NSMonthCalendarUnit|NSDayCalendarUnit) fromDate:[NSDate date]];
+    NSDate *today = [cal dateFromComponents:components];
+    
+    components = [cal components:(NSEraCalendarUnit|NSMonthCalendarUnit|NSDayCalendarUnit) fromDate:nowdate];
+    NSDate *otherDate = [cal dateFromComponents:components];
+    if([today isSameDay:otherDate]) {
+        isToday = YES;
+    }
+    return isToday;
+}
+
+
+
 @end

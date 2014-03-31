@@ -14,7 +14,7 @@
     return @{@"newsId": @"newsId",
              @"newsPicPath": @"newsPicPath",
              @"newsTitle": @"newsTitle",
-             @"status":@"status"};
+             @"newsType":@"newsType"};
 }
 
 @end

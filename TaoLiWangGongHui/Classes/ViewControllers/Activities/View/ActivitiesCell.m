@@ -29,6 +29,13 @@
     [self.activityImage setImageWithURL:[NSURL URLWithString:self.activityModel.activityPic]];
     self.activityDescription.text = self.activityModel.activityTitle;
     self.activityTime.text = self.activityModel.publishDatetime;
+    if (self.activityModel.status.boolValue) {
+        self.activityTime.textColor = [UIColor lightGrayColor];
+        self.activityDescription.textColor = [UIColor lightGrayColor];
+    }else{
+        self.activityTime.textColor = [UIColor blackColor];
+        self.activityDescription.textColor = [UIColor blackColor];
+    }
 }
 
 

@@ -8,6 +8,10 @@
 
 #import "ITTBaseModelObject.h"
 
+/****
+ * 这是本地服务器解析的，现在数据从网络获取，不用这个，用的是 #import "NewAddressModel.h"
+ */
+
 @interface AddressModel : ITTBaseModelObject
 @property (nonatomic, strong) NSString            *Name;          //姓名
 @property (nonatomic, strong) NSNumber*           AddressId;     //地址id   //默认用UserID

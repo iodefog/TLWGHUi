@@ -90,7 +90,7 @@ typedef enum {
 + (NSString *)articleAction_QueryAdInfo_Url;
 
 // 25.	订阅栏目列表接口
-+ (NSString *)articleAction_QuerySubscription_Url;
++ (NSString *)articleAction_QueryWebsiteNewsType_Url;
 
 // 26.	订阅/取消订阅接口
 + (NSString *)articleAction_DoSubscription_Url;
@@ -136,4 +136,6 @@ typedef enum {
 // 39.我的活动：（新增）
 + (NSString *)activityAction_QueryMyActivityList_Url;
 
+// 001. 获取省份
++ (NSString *)addressAction_QueryProvinceAndRegionList_Url;
 @end

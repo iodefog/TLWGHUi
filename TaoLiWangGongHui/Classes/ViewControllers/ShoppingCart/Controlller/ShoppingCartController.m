@@ -59,8 +59,9 @@
     UIView *tempView = [[UIView alloc] init];
     [self.tableView setTableFooterView:tempView];
     
-    self.navigationItem.leftBarButtonItem = [UIBarButtonItem barButtonWithTitle:@"编辑" image:nil target:self action:@selector(editClicked:) font:[UIFont systemFontOfSize:14.0f] titleColor:[UIColor whiteColor]];
-    self.navigationItem.rightBarButtonItem = [UIBarButtonItem barButtonWithTitle:@"结算" image:nil target:self action:@selector(toPaymentClicked:) font:[UIFont systemFontOfSize:14.0f] titleColor:[UIColor whiteColor]];
+    self.navigationItem.rightBarButtonItem = [UIBarButtonItem barButtonWithTitle:@"编辑" image:nil target:self action:@selector(editClicked:) font:[UIFont systemFontOfSize:14.0f] titleColor:[UIColor whiteColor]];
+    self.navigationItem.leftBarButtonItem = nil;
+//    self.navigationItem.rightBarButtonItem = [UIBarButtonItem barButtonWithTitle:@"结算" image:nil target:self action:@selector(toPaymentClicked:) font:[UIFont systemFontOfSize:14.0f] titleColor:[UIColor whiteColor]];
 }
 
 #pragma mark - Class Method
@@ -93,6 +94,10 @@
 static UIButton *leftButton = nil;
 
 - (void)editClicked:(UIButton *)sender{
+    if ([self.model count]>0) {
+        [GlobalHelper handerResultWithDelegate:self withMessage:@"请先添加商品，才能编辑哦~" withTag:0];
+        return;
+    }
     leftButton = sender;
     [sender setTitle:@"完成" forState:UIControlStateSelected];
     sender.selected = !sender.selected;
@@ -161,7 +166,7 @@ static UIButton *leftButton = nil;
     // 多一个cell， 给结算按钮留位置
     NSInteger cellCount = 0;
     if ([self.model count]>0) {
-        cellCount = [self.model count];
+        cellCount = [self.model count]+1;
     }else{
         cellCount = [self.model count];
     }

@@ -31,4 +31,7 @@ UINavigationController *selected_navigation_controller();
 // 自定义AlertView
 + (void)showWithTitle:(NSString *)title withMessage:(NSString *)message withCancelTitle:(NSString *)cancelTitle withOkTitle:(NSString *)okTitle withSelector:(SEL)selector withTarget:(id)target;
 
+// 匹配是否是今天
++ (BOOL)isCompareDate:(NSDate *)date;
+
 @end

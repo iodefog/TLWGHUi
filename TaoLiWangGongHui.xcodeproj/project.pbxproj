@@ -280,14 +280,6 @@
 		187BB3C918DFD98F00CA3429 /* UIView+TKCategory.m in Sources */ = {isa = PBXBuildFile; fileRef = 187BB38718DFD98F00CA3429 /* UIView+TKCategory.m */; };
 		187BB3CA18DFD98F00CA3429 /* UIViewController+TKCategory.m in Sources */ = {isa = PBXBuildFile; fileRef = 187BB38918DFD98F00CA3429 /* UIViewController+TKCategory.m */; };
 		187BB3CC18DFDA4200CA3429 /* TapkuLibrary.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 187BB3CB18DFDA4200CA3429 /* TapkuLibrary.bundle */; };
-		187F8AC318E265BD00403EFA /* AlipayRsaLib.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 187F8AB418E265BD00403EFA /* AlipayRsaLib.a */; };
-		187F8AC418E265BD00403EFA /* Alixpay.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 187F8AB618E265BD00403EFA /* Alixpay.bundle */; };
-		187F8AC518E265BD00403EFA /* AlixPaylib.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 187F8AB718E265BD00403EFA /* AlixPaylib.a */; };
-		187F8AC618E265BD00403EFA /* AlixPaylib_Arc.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 187F8AB818E265BD00403EFA /* AlixPaylib_Arc.a */; };
-		187F8AC718E265BD00403EFA /* AlixPayOrder.m in Sources */ = {isa = PBXBuildFile; fileRef = 187F8ABA18E265BD00403EFA /* AlixPayOrder.m */; };
-		187F8AC818E265BD00403EFA /* AlixPayResult.m in Sources */ = {isa = PBXBuildFile; fileRef = 187F8ABC18E265BD00403EFA /* AlixPayResult.m */; };
-		187F8AC918E265BD00403EFA /* libcrypto.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 187F8ABD18E265BD00403EFA /* libcrypto.a */; };
-		187F8ACA18E265BD00403EFA /* libssl.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 187F8ABE18E265BD00403EFA /* libssl.a */; };
 		187F8AF518E2691300403EFA /* activity_ tap.png in Resources */ = {isa = PBXBuildFile; fileRef = 187F8ACB18E2691300403EFA /* activity_ tap.png */; };
 		187F8AF618E2691300403EFA /* activity_ tap@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 187F8ACC18E2691300403EFA /* activity_ tap@2x.png */; };
 		187F8AF718E2691300403EFA /* activity.png in Resources */ = {isa = PBXBuildFile; fileRef = 187F8ACD18E2691300403EFA /* activity.png */; };
@@ -399,6 +391,7 @@
 		187F8BA718E26CD100403EFA /* shopping_cart_tap.png in Resources */ = {isa = PBXBuildFile; fileRef = 187F8B9C18E26CD100403EFA /* shopping_cart_tap.png */; };
 		187F8BA818E26CD100403EFA /* shopping_cart.png in Resources */ = {isa = PBXBuildFile; fileRef = 187F8B9D18E26CD100403EFA /* shopping_cart.png */; };
 		187F8BAB18E27A0A00403EFA /* OrdelModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 187F8BAA18E27A0A00403EFA /* OrdelModel.m */; };
+		188C137618E3BD1400D62BFC /* NewAddressModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 188C137518E3BD1400D62BFC /* NewAddressModel.m */; };
 		18AD5F9118D93A300082FC2B /* MessageModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 18AD5F9018D93A300082FC2B /* MessageModel.m */; };
 		18AD5F9B18D981FA0082FC2B /* activityNumBg@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 18AD5F9A18D981FA0082FC2B /* activityNumBg@2x.png */; };
 		18AD5FB918D994040082FC2B /* NSObject+SBJSON.m in Sources */ = {isa = PBXBuildFile; fileRef = 18AD5FAE18D994040082FC2B /* NSObject+SBJSON.m */; };
@@ -407,6 +400,20 @@
 		18AD5FBC18D994040082FC2B /* SBJsonBase.m in Sources */ = {isa = PBXBuildFile; fileRef = 18AD5FB418D994040082FC2B /* SBJsonBase.m */; };
 		18AD5FBD18D994040082FC2B /* SBJsonParser.m in Sources */ = {isa = PBXBuildFile; fileRef = 18AD5FB618D994040082FC2B /* SBJsonParser.m */; };
 		18AD5FBE18D994040082FC2B /* SBJsonWriter.m in Sources */ = {isa = PBXBuildFile; fileRef = 18AD5FB818D994040082FC2B /* SBJsonWriter.m */; };
+		18EB0BA218E50A6C00E8A8C9 /* UserModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 18EB0BA118E50A6C00E8A8C9 /* UserModel.m */; };
+		18EB0BA718E54D8700E8A8C9 /* AddDocumentPathFile.m in Sources */ = {isa = PBXBuildFile; fileRef = 18EB0BA618E54D8700E8A8C9 /* AddDocumentPathFile.m */; };
+		18EB0BAE18E54F5200E8A8C9 /* TSLocateView.m in Sources */ = {isa = PBXBuildFile; fileRef = 18EB0BAA18E54F5200E8A8C9 /* TSLocateView.m */; };
+		18EB0BAF18E54F5200E8A8C9 /* TSLocateView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 18EB0BAB18E54F5200E8A8C9 /* TSLocateView.xib */; };
+		18EB0BB018E54F5200E8A8C9 /* TSLocation.m in Sources */ = {isa = PBXBuildFile; fileRef = 18EB0BAD18E54F5200E8A8C9 /* TSLocation.m */; };
+		18EB0BB318E55AD700E8A8C9 /* GetCityDataRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 18EB0BB218E55AD700E8A8C9 /* GetCityDataRequest.m */; };
+		18EE2B0718E3B46C00247A53 /* AlipayRsaLib.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 18EE2AF818E3B46C00247A53 /* AlipayRsaLib.a */; };
+		18EE2B0818E3B46C00247A53 /* Alixpay.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 18EE2AFA18E3B46C00247A53 /* Alixpay.bundle */; };
+		18EE2B0918E3B46C00247A53 /* AlixPaylib.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 18EE2AFB18E3B46C00247A53 /* AlixPaylib.a */; };
+		18EE2B0A18E3B46C00247A53 /* AlixPaylib_Arc.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 18EE2AFC18E3B46C00247A53 /* AlixPaylib_Arc.a */; };
+		18EE2B0B18E3B46C00247A53 /* AlixPayOrder.m in Sources */ = {isa = PBXBuildFile; fileRef = 18EE2AFE18E3B46C00247A53 /* AlixPayOrder.m */; };
+		18EE2B0C18E3B46C00247A53 /* AlixPayResult.m in Sources */ = {isa = PBXBuildFile; fileRef = 18EE2B0018E3B46C00247A53 /* AlixPayResult.m */; };
+		18EE2B0D18E3B46C00247A53 /* libcrypto.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 18EE2B0118E3B46C00247A53 /* libcrypto.a */; };
+		18EE2B0E18E3B46C00247A53 /* libssl.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 18EE2B0218E3B46C00247A53 /* libssl.a */; };
 		D824094B18BF00B9001D8004 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D824094A18BF00B9001D8004 /* Foundation.framework */; };
 		D824094D18BF00B9001D8004 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D824094C18BF00B9001D8004 /* CoreGraphics.framework */; };
 		D824094F18BF00B9001D8004 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D824094E18BF00B9001D8004 /* UIKit.framework */; };
@@ -945,20 +952,6 @@
 		187BB38818DFD98F00CA3429 /* UIViewController+TKCategory.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIViewController+TKCategory.h"; sourceTree = "<group>"; };
 		187BB38918DFD98F00CA3429 /* UIViewController+TKCategory.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIViewController+TKCategory.m"; sourceTree = "<group>"; };
 		187BB3CB18DFDA4200CA3429 /* TapkuLibrary.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = TapkuLibrary.bundle; sourceTree = "<group>"; };
-		187F8AB418E265BD00403EFA /* AlipayRsaLib.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = AlipayRsaLib.a; sourceTree = "<group>"; };
-		187F8AB518E265BD00403EFA /* AlixLibService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AlixLibService.h; sourceTree = "<group>"; };
-		187F8AB618E265BD00403EFA /* Alixpay.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = Alixpay.bundle; sourceTree = "<group>"; };
-		187F8AB718E265BD00403EFA /* AlixPaylib.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = AlixPaylib.a; sourceTree = "<group>"; };
-		187F8AB818E265BD00403EFA /* AlixPaylib_Arc.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = AlixPaylib_Arc.a; sourceTree = "<group>"; };
-		187F8AB918E265BD00403EFA /* AlixPayOrder.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AlixPayOrder.h; sourceTree = "<group>"; };
-		187F8ABA18E265BD00403EFA /* AlixPayOrder.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AlixPayOrder.m; sourceTree = "<group>"; };
-		187F8ABB18E265BD00403EFA /* AlixPayResult.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AlixPayResult.h; sourceTree = "<group>"; };
-		187F8ABC18E265BD00403EFA /* AlixPayResult.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AlixPayResult.m; sourceTree = "<group>"; };
-		187F8ABD18E265BD00403EFA /* libcrypto.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libcrypto.a; sourceTree = "<group>"; };
-		187F8ABE18E265BD00403EFA /* libssl.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libssl.a; sourceTree = "<group>"; };
-		187F8ABF18E265BD00403EFA /* PartnerConfig.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PartnerConfig.h; sourceTree = "<group>"; };
-		187F8AC118E265BD00403EFA /* DataSigner.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DataSigner.h; sourceTree = "<group>"; };
-		187F8AC218E265BD00403EFA /* DataVerifier.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DataVerifier.h; sourceTree = "<group>"; };
 		187F8ACB18E2691300403EFA /* activity_ tap.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "activity_ tap.png"; sourceTree = "<group>"; };
 		187F8ACC18E2691300403EFA /* activity_ tap@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "activity_ tap@2x.png"; sourceTree = "<group>"; };
 		187F8ACD18E2691300403EFA /* activity.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = activity.png; sourceTree = "<group>"; };
@@ -1071,6 +1064,8 @@
 		187F8B9D18E26CD100403EFA /* shopping_cart.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = shopping_cart.png; sourceTree = "<group>"; };
 		187F8BA918E27A0A00403EFA /* OrdelModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OrdelModel.h; sourceTree = "<group>"; };
 		187F8BAA18E27A0A00403EFA /* OrdelModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OrdelModel.m; sourceTree = "<group>"; };
+		188C137418E3BD1400D62BFC /* NewAddressModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NewAddressModel.h; sourceTree = "<group>"; };
+		188C137518E3BD1400D62BFC /* NewAddressModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NewAddressModel.m; sourceTree = "<group>"; };
 		18AD5F8F18D93A300082FC2B /* MessageModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MessageModel.h; sourceTree = "<group>"; };
 		18AD5F9018D93A300082FC2B /* MessageModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MessageModel.m; sourceTree = "<group>"; };
 		18AD5F9A18D981FA0082FC2B /* activityNumBg@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "activityNumBg@2x.png"; sourceTree = "<group>"; };
@@ -1087,6 +1082,31 @@
 		18AD5FB618D994040082FC2B /* SBJsonParser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SBJsonParser.m; sourceTree = "<group>"; };
 		18AD5FB718D994040082FC2B /* SBJsonWriter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SBJsonWriter.h; sourceTree = "<group>"; };
 		18AD5FB818D994040082FC2B /* SBJsonWriter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SBJsonWriter.m; sourceTree = "<group>"; };
+		18EB0BA018E50A6C00E8A8C9 /* UserModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UserModel.h; sourceTree = "<group>"; };
+		18EB0BA118E50A6C00E8A8C9 /* UserModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UserModel.m; sourceTree = "<group>"; };
+		18EB0BA518E54D8700E8A8C9 /* AddDocumentPathFile.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AddDocumentPathFile.h; sourceTree = "<group>"; };
+		18EB0BA618E54D8700E8A8C9 /* AddDocumentPathFile.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AddDocumentPathFile.m; sourceTree = "<group>"; };
+		18EB0BA918E54F5200E8A8C9 /* TSLocateView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TSLocateView.h; sourceTree = "<group>"; };
+		18EB0BAA18E54F5200E8A8C9 /* TSLocateView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TSLocateView.m; sourceTree = "<group>"; };
+		18EB0BAB18E54F5200E8A8C9 /* TSLocateView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TSLocateView.xib; sourceTree = "<group>"; };
+		18EB0BAC18E54F5200E8A8C9 /* TSLocation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TSLocation.h; sourceTree = "<group>"; };
+		18EB0BAD18E54F5200E8A8C9 /* TSLocation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TSLocation.m; sourceTree = "<group>"; };
+		18EB0BB118E55AD700E8A8C9 /* GetCityDataRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GetCityDataRequest.h; sourceTree = "<group>"; };
+		18EB0BB218E55AD700E8A8C9 /* GetCityDataRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GetCityDataRequest.m; sourceTree = "<group>"; };
+		18EE2AF818E3B46C00247A53 /* AlipayRsaLib.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = AlipayRsaLib.a; sourceTree = "<group>"; };
+		18EE2AF918E3B46C00247A53 /* AlixLibService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AlixLibService.h; sourceTree = "<group>"; };
+		18EE2AFA18E3B46C00247A53 /* Alixpay.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = Alixpay.bundle; sourceTree = "<group>"; };
+		18EE2AFB18E3B46C00247A53 /* AlixPaylib.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = AlixPaylib.a; sourceTree = "<group>"; };
+		18EE2AFC18E3B46C00247A53 /* AlixPaylib_Arc.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = AlixPaylib_Arc.a; sourceTree = "<group>"; };
+		18EE2AFD18E3B46C00247A53 /* AlixPayOrder.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AlixPayOrder.h; sourceTree = "<group>"; };
+		18EE2AFE18E3B46C00247A53 /* AlixPayOrder.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AlixPayOrder.m; sourceTree = "<group>"; };
+		18EE2AFF18E3B46C00247A53 /* AlixPayResult.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AlixPayResult.h; sourceTree = "<group>"; };
+		18EE2B0018E3B46C00247A53 /* AlixPayResult.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AlixPayResult.m; sourceTree = "<group>"; };
+		18EE2B0118E3B46C00247A53 /* libcrypto.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libcrypto.a; sourceTree = "<group>"; };
+		18EE2B0218E3B46C00247A53 /* libssl.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libssl.a; sourceTree = "<group>"; };
+		18EE2B0318E3B46C00247A53 /* PartnerConfig.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PartnerConfig.h; sourceTree = "<group>"; };
+		18EE2B0518E3B46C00247A53 /* DataSigner.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DataSigner.h; sourceTree = "<group>"; };
+		18EE2B0618E3B46C00247A53 /* DataVerifier.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DataVerifier.h; sourceTree = "<group>"; };
 		D824094718BF00B9001D8004 /* TaoLiWangGongHui.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TaoLiWangGongHui.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		D824094A18BF00B9001D8004 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		D824094C18BF00B9001D8004 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -1121,11 +1141,11 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				187F8ACA18E265BD00403EFA /* libssl.a in Frameworks */,
+				18EE2B0E18E3B46C00247A53 /* libssl.a in Frameworks */,
 				18240D9D18C6CACB00590D9A /* libNoArcTools.a in Frameworks */,
 				D8240B0318BF0963001D8004 /* QuartzCore.framework in Frameworks */,
 				D8240B0118BF095C001D8004 /* libiconv.dylib in Frameworks */,
-				187F8AC618E265BD00403EFA /* AlixPaylib_Arc.a in Frameworks */,
+				18EE2B0A18E3B46C00247A53 /* AlixPaylib_Arc.a in Frameworks */,
 				D8240AFF18BF094E001D8004 /* CoreMedia.framework in Frameworks */,
 				D8240AFD18BF0942001D8004 /* CoreVideo.framework in Frameworks */,
 				D8240AFB18BF0938001D8004 /* AVFoundation.framework in Frameworks */,
@@ -1133,9 +1153,9 @@
 				D8240AF718BF0913001D8004 /* ImageIO.framework in Frameworks */,
 				D8240AF518BF08FE001D8004 /* libz.1.2.5.dylib in Frameworks */,
 				D8240AF318BF08E8001D8004 /* SystemConfiguration.framework in Frameworks */,
-				187F8AC918E265BD00403EFA /* libcrypto.a in Frameworks */,
-				187F8AC518E265BD00403EFA /* AlixPaylib.a in Frameworks */,
-				187F8AC318E265BD00403EFA /* AlipayRsaLib.a in Frameworks */,
+				18EE2B0D18E3B46C00247A53 /* libcrypto.a in Frameworks */,
+				18EE2B0918E3B46C00247A53 /* AlixPaylib.a in Frameworks */,
+				18EE2B0718E3B46C00247A53 /* AlipayRsaLib.a in Frameworks */,
 				D8240AF118BF08DE001D8004 /* MobileCoreServices.framework in Frameworks */,
 				D8240AEF18BF08D2001D8004 /* CFNetwork.framework in Frameworks */,
 				D824094D18BF00B9001D8004 /* CoreGraphics.framework in Frameworks */,
@@ -1248,7 +1268,7 @@
 		18357FAF18D825A200D3177F /* Common */ = {
 			isa = PBXGroup;
 			children = (
-				187F8AB318E265BD00403EFA /* Alipay */,
+				18EE2AF718E3B46C00247A53 /* Alipay */,
 				1806C19318E12B1D0032A573 /* CustomTextField */,
 				1810B4EF18E03057009FB916 /* SIAlertView */,
 				187BB30618DFD98F00CA3429 /* TapkuLibrary */,
@@ -1427,6 +1447,7 @@
 		1835801B18D825A200D3177F /* CustomViews */ = {
 			isa = PBXGroup;
 			children = (
+				18EB0BA818E54F5200E8A8C9 /* TSLocateView */,
 			);
 			path = CustomViews;
 			sourceTree = "<group>";
@@ -1943,6 +1964,8 @@
 			children = (
 				183580EB18D825A300D3177F /* UserHelper.h */,
 				183580EC18D825A300D3177F /* UserHelper.m */,
+				18EB0BA018E50A6C00E8A8C9 /* UserModel.h */,
+				18EB0BA118E50A6C00E8A8C9 /* UserModel.m */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -2158,12 +2181,18 @@
 		1835813718D825A300D3177F /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				18EB0BB118E55AD700E8A8C9 /* GetCityDataRequest.h */,
+				18EB0BB218E55AD700E8A8C9 /* GetCityDataRequest.m */,
+				18EB0BA518E54D8700E8A8C9 /* AddDocumentPathFile.h */,
+				18EB0BA618E54D8700E8A8C9 /* AddDocumentPathFile.m */,
 				1835813818D825A300D3177F /* AddressModel.h */,
 				1835813918D825A300D3177F /* AddressModel.m */,
 				182B814518DA789A0013A15C /* UserInfoModel.h */,
 				187F8BA918E27A0A00403EFA /* OrdelModel.h */,
 				187F8BAA18E27A0A00403EFA /* OrdelModel.m */,
 				182B814618DA789A0013A15C /* UserInfoModel.m */,
+				188C137418E3BD1400D62BFC /* NewAddressModel.h */,
+				188C137518E3BD1400D62BFC /* NewAddressModel.m */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -2378,35 +2407,6 @@
 			path = TapkuLibrary;
 			sourceTree = "<group>";
 		};
-		187F8AB318E265BD00403EFA /* Alipay */ = {
-			isa = PBXGroup;
-			children = (
-				187F8AB418E265BD00403EFA /* AlipayRsaLib.a */,
-				187F8AB518E265BD00403EFA /* AlixLibService.h */,
-				187F8AB618E265BD00403EFA /* Alixpay.bundle */,
-				187F8AB718E265BD00403EFA /* AlixPaylib.a */,
-				187F8AB818E265BD00403EFA /* AlixPaylib_Arc.a */,
-				187F8AB918E265BD00403EFA /* AlixPayOrder.h */,
-				187F8ABA18E265BD00403EFA /* AlixPayOrder.m */,
-				187F8ABB18E265BD00403EFA /* AlixPayResult.h */,
-				187F8ABC18E265BD00403EFA /* AlixPayResult.m */,
-				187F8ABD18E265BD00403EFA /* libcrypto.a */,
-				187F8ABE18E265BD00403EFA /* libssl.a */,
-				187F8ABF18E265BD00403EFA /* PartnerConfig.h */,
-				187F8AC018E265BD00403EFA /* RSA */,
-			);
-			path = Alipay;
-			sourceTree = "<group>";
-		};
-		187F8AC018E265BD00403EFA /* RSA */ = {
-			isa = PBXGroup;
-			children = (
-				187F8AC118E265BD00403EFA /* DataSigner.h */,
-				187F8AC218E265BD00403EFA /* DataVerifier.h */,
-			);
-			path = RSA;
-			sourceTree = "<group>";
-		};
 		187F8ADF18E2691300403EFA /* UnionActivities */ = {
 			isa = PBXGroup;
 			children = (
@@ -2459,6 +2459,47 @@
 				18AD5FB818D994040082FC2B /* SBJsonWriter.m */,
 			);
 			path = Json;
+			sourceTree = "<group>";
+		};
+		18EB0BA818E54F5200E8A8C9 /* TSLocateView */ = {
+			isa = PBXGroup;
+			children = (
+				18EB0BA918E54F5200E8A8C9 /* TSLocateView.h */,
+				18EB0BAA18E54F5200E8A8C9 /* TSLocateView.m */,
+				18EB0BAB18E54F5200E8A8C9 /* TSLocateView.xib */,
+				18EB0BAC18E54F5200E8A8C9 /* TSLocation.h */,
+				18EB0BAD18E54F5200E8A8C9 /* TSLocation.m */,
+			);
+			path = TSLocateView;
+			sourceTree = "<group>";
+		};
+		18EE2AF718E3B46C00247A53 /* Alipay */ = {
+			isa = PBXGroup;
+			children = (
+				18EE2AF818E3B46C00247A53 /* AlipayRsaLib.a */,
+				18EE2AF918E3B46C00247A53 /* AlixLibService.h */,
+				18EE2AFA18E3B46C00247A53 /* Alixpay.bundle */,
+				18EE2AFB18E3B46C00247A53 /* AlixPaylib.a */,
+				18EE2AFC18E3B46C00247A53 /* AlixPaylib_Arc.a */,
+				18EE2AFD18E3B46C00247A53 /* AlixPayOrder.h */,
+				18EE2AFE18E3B46C00247A53 /* AlixPayOrder.m */,
+				18EE2AFF18E3B46C00247A53 /* AlixPayResult.h */,
+				18EE2B0018E3B46C00247A53 /* AlixPayResult.m */,
+				18EE2B0118E3B46C00247A53 /* libcrypto.a */,
+				18EE2B0218E3B46C00247A53 /* libssl.a */,
+				18EE2B0318E3B46C00247A53 /* PartnerConfig.h */,
+				18EE2B0418E3B46C00247A53 /* RSA */,
+			);
+			path = Alipay;
+			sourceTree = "<group>";
+		};
+		18EE2B0418E3B46C00247A53 /* RSA */ = {
+			isa = PBXGroup;
+			children = (
+				18EE2B0518E3B46C00247A53 /* DataSigner.h */,
+				18EE2B0618E3B46C00247A53 /* DataVerifier.h */,
+			);
+			path = RSA;
 			sourceTree = "<group>";
 		};
 		D824093E18BF00B9001D8004 = {
@@ -2680,7 +2721,6 @@
 				187F8B4118E26A0800403EFA /* input_normal.png in Resources */,
 				187F8BA718E26CD100403EFA /* shopping_cart_tap.png in Resources */,
 				187F8B5418E26A0800403EFA /* through_mobile@2x.png in Resources */,
-				187F8AC418E265BD00403EFA /* Alixpay.bundle in Resources */,
 				183581D518D825A300D3177F /* shopping_reduce_selected@2x.png in Resources */,
 				1835823918D825A300D3177F /* OrderCell.xib in Resources */,
 				183581BF18D825A300D3177F /* about_us@2x.png in Resources */,
@@ -2766,11 +2806,13 @@
 				1835822618D825A300D3177F /* OrderDetailViewController.xib in Resources */,
 				187F8B8F18E26BFE00403EFA /* shopping_interval.png in Resources */,
 				183581CC18D825A300D3177F /* shopping_delete@2x.png in Resources */,
+				18EB0BAF18E54F5200E8A8C9 /* TSLocateView.xib in Resources */,
 				1810B4F318E03057009FB916 /* SIAlertView.bundle in Resources */,
 				183581AA18D825A300D3177F /* 福利首页_笑话底.png in Resources */,
 				183581E418D825A300D3177F /* shopping_cart_tap@2x.png in Resources */,
 				183581CE18D825A300D3177F /* shopping_empty@2x.png in Resources */,
 				1835823E18D825A300D3177F /* ShoppingCartCell.xib in Resources */,
+				18EE2B0818E3B46C00247A53 /* Alixpay.bundle in Resources */,
 				187F8B7018E26B3E00403EFA /* about_us.png in Resources */,
 				183581C818D825A300D3177F /* goods_cash_selected@2x.png in Resources */,
 				187F8B3C18E26A0800403EFA /* email_selected@2x.png in Resources */,
@@ -2871,6 +2913,7 @@
 				1835819018D825A300D3177F /* UIKeyboardCoView.m in Sources */,
 				183581FC18D825A300D3177F /* UnionActivitiesController.m in Sources */,
 				183581EE18D825A300D3177F /* TableViewController.m in Sources */,
+				18EE2B0B18E3B46C00247A53 /* AlixPayOrder.m in Sources */,
 				187BB3A318DFD98F00CA3429 /* TKLabelFieldCell.m in Sources */,
 				187BB3B618DFD98F00CA3429 /* TKTextViewCell.m in Sources */,
 				187BB38C18DFD98F00CA3429 /* NSDate+TKCategory.m in Sources */,
@@ -2893,14 +2936,17 @@
 				187BB3B518DFD98F00CA3429 /* TKTextView.m in Sources */,
 				1835817518D825A300D3177F /* ITTImageView.m in Sources */,
 				182B814718DA789A0013A15C /* UserInfoModel.m in Sources */,
+				18EB0BA718E54D8700E8A8C9 /* AddDocumentPathFile.m in Sources */,
 				1835816B18D825A300D3177F /* ITTUserDefaultCacheDao.m in Sources */,
 				1835820618D825A300D3177F /* DelicateLifeCell.m in Sources */,
+				18EB0BAE18E54F5200E8A8C9 /* TSLocateView.m in Sources */,
 				1835818818D825A300D3177F /* SDWebImageManager.m in Sources */,
 				183581FD18D825A300D3177F /* WelfareController.m in Sources */,
 				183581EA18D825A300D3177F /* MyActivityModel.m in Sources */,
 				1835823B18D825A300D3177F /* ShoppingCartController.m in Sources */,
 				187BB3C718DFD98F00CA3429 /* UIScrollview+TKCategory.m in Sources */,
 				1835817A18D825A300D3177F /* ITTDataRequestManager.m in Sources */,
+				18EB0BB018E54F5200E8A8C9 /* TSLocation.m in Sources */,
 				1835819418D825A300D3177F /* DemoModel.m in Sources */,
 				183581F518D825A300D3177F /* DelicateLifeController.m in Sources */,
 				1835817018D825A300D3177F /* FMResultSet.m in Sources */,
@@ -2937,6 +2983,7 @@
 				1835822718D825A300D3177F /* WelfareOrderViewController.m in Sources */,
 				183581F618D825A300D3177F /* DiscountShoppingController.m in Sources */,
 				187BB3AB18DFD98F00CA3429 /* TKProgressCircleView.m in Sources */,
+				188C137618E3BD1400D62BFC /* NewAddressModel.m in Sources */,
 				1835815618D825A300D3177F /* NSData+ITTAdditions.m in Sources */,
 				1835817418D825A300D3177F /* ITTImageDataOperation.m in Sources */,
 				183581FB18D825A300D3177F /* ActivityNormalController.m in Sources */,
@@ -2964,6 +3011,7 @@
 				1835815818D825A300D3177F /* NSLocale+ITTAdditions.m in Sources */,
 				1835817818D825A300D3177F /* ITTASIBaseDataRequest.m in Sources */,
 				187BB3BB18DFD98F00CA3429 /* UIAlertView+TKCategory.m in Sources */,
+				18EB0BA218E50A6C00E8A8C9 /* UserModel.m in Sources */,
 				1835818A18D825A300D3177F /* UIButton+WebCache.m in Sources */,
 				18AD5FB918D994040082FC2B /* NSObject+SBJSON.m in Sources */,
 				1835818418D825A300D3177F /* SDWebImageCompat.m in Sources */,
@@ -2987,7 +3035,6 @@
 				1835818618D825A300D3177F /* SDWebImageDownloader.m in Sources */,
 				1835822318D825A300D3177F /* CashOrderViewController.m in Sources */,
 				1835817318D825A300D3177F /* ITTImageCacheManager.m in Sources */,
-				187F8AC818E265BD00403EFA /* AlixPayResult.m in Sources */,
 				1835820018D825A300D3177F /* GoodsListModel.m in Sources */,
 				1835816D18D825A300D3177F /* FMDatabaseAdditions.m in Sources */,
 				1835818B18D825A300D3177F /* UIImage+GIF.m in Sources */,
@@ -3006,6 +3053,7 @@
 				1835818718D825A300D3177F /* SDWebImageDownloaderOperation.m in Sources */,
 				187BB3C318DFD98F00CA3429 /* UIImagePickerController+TKCategory.m in Sources */,
 				1835820718D825A300D3177F /* DiscountShoppingCell.m in Sources */,
+				18EB0BB318E55AD700E8A8C9 /* GetCityDataRequest.m in Sources */,
 				187BB3A918DFD98F00CA3429 /* TKProgressAlertView.m in Sources */,
 				187BB3B018DFD98F00CA3429 /* TKSlideToUnlockView.m in Sources */,
 				187BB39118DFD98F00CA3429 /* TKAlertViewController.m in Sources */,
@@ -3013,7 +3061,6 @@
 				1835822518D825A300D3177F /* OrderDetailViewController.m in Sources */,
 				1835815F18D825A300D3177F /* UIFont+ITTAdditions.m in Sources */,
 				187BB39218DFD98F00CA3429 /* TKAppDelegate.m in Sources */,
-				187F8AC718E265BD00403EFA /* AlixPayOrder.m in Sources */,
 				187BB3C518DFD98F00CA3429 /* UINavigationBar+TKCategory.m in Sources */,
 				187BB3B218DFD98F00CA3429 /* TKTableViewCell.m in Sources */,
 				1835818C18D825A300D3177F /* UIImage+MultiFormat.m in Sources */,
@@ -3044,6 +3091,7 @@
 				1835816918D825A300D3177F /* ITTDataCacheManager.m in Sources */,
 				1835818218D825A300D3177F /* NSData+GIF.m in Sources */,
 				1835817F18D825A300D3177F /* ITTRequestJsonDataHandler.m in Sources */,
+				18EE2B0C18E3B46C00247A53 /* AlixPayResult.m in Sources */,
 				187BB39B18DFD98F00CA3429 /* TKEmptyView.m in Sources */,
 				1835821D18D825A300D3177F /* WelfareConfirmViewController.m in Sources */,
 				1835823D18D825A300D3177F /* ShoppingCartCell.m in Sources */,
@@ -3175,8 +3223,8 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ARCHS = (
-					armv7,
 					armv7s,
+					armv7,
 				);
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
@@ -3201,8 +3249,8 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ARCHS = (
-					armv7,
 					armv7s,
+					armv7,
 				);
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;

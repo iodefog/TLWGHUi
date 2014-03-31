@@ -8,6 +8,13 @@
 
 #import <Foundation/Foundation.h>
 
+@protocol AlixPaylibDelegate <NSObject>
+
+-(void)paymentResultDelegate:(NSString *)result;
+
+@end
+
+
 @interface AlixLibService : NSObject
 
 /**

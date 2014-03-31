@@ -21,7 +21,7 @@
 @property (nonatomic, strong) NSString *activityPic;
 @property (nonatomic, strong) NSString *activityTitle;
 @property (nonatomic, strong) NSString *publishDatetime;
-@property (nonatomic, strong) NSString *status;
+@property (nonatomic, strong) NSNumber *status;
 
 
 @end

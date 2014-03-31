@@ -136,8 +136,8 @@
 }
 
 // 25.	订阅栏目列表接口
-+ (NSString *)articleAction_QuerySubscription_Url{
- return [NSString stringWithFormat:@"%@%@",[GlobalRequest getBaseServiceUrl],@"ArticleAction!querySubscription.do"];
++ (NSString *)articleAction_QueryWebsiteNewsType_Url{
+ return [NSString stringWithFormat:@"%@%@",[GlobalRequest getBaseServiceUrl],@"ArticleAction!queryWebsiteNewsType.do"];
 }
 
 // 26.	订阅/取消订阅接口
@@ -211,4 +211,10 @@ return [NSString stringWithFormat:@"%@%@",[GlobalRequest getBaseServiceUrl],@"Us
 + (NSString *)activityAction_QueryMyActivityList_Url{
     return [NSString stringWithFormat:@"%@%@",[GlobalRequest getBaseServiceUrl],@"ActivityAction!queryMyActivityList.do"];
 }
+
+// 001. 获取省份
++ (NSString *)addressAction_QueryProvinceAndRegionList_Url{
+    return @"http://www.chaojijifen.com:8088/Interface/AddressAction!queryProvinceAndRegionList.do";
+}
+
 @end

@@ -20,12 +20,12 @@
 	栏目id（newsId）
 	栏目图片(newsPicPath)
 	栏目名称(newsTitle)
-	订阅状态（0为未订阅，1为订阅）(status)
+	订阅状态（0为未订阅，1为订阅）(newsType)
 */
 
 @property (nonatomic, strong) NSString *newsId;
 @property (nonatomic, strong) NSString *newsPicPath;
 @property (nonatomic, strong) NSString *newsTitle;
-@property (nonatomic, strong) NSString *status;
+@property (nonatomic, strong) NSString *newsType;
 
 @end

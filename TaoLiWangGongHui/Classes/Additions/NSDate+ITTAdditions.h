@@ -10,6 +10,7 @@
 @interface NSDate(ITTAdditions)
 
 + (NSDate *)dateWithString:(NSString *)str formate:(NSString *)formate;
++ (NSDate *)dateWithString:(NSString *)str;
 + (NSDate *)relativedDateWithInterval:(NSInteger)interval;
 
 + (NSString *)timeStringWithInterval:(NSTimeInterval) time;

@@ -9,6 +9,8 @@
 #import "AddUserInfoViewController.h"
 #import "UserAddressDataBase.h"
 #import "AddressModel.h"
+#import "AddDocumentPathFile.h"
+#import "GetCityDataRequest.h"
 
 @interface AddUserInfoViewController (){
     UILabel *placeHolderLabel;
@@ -58,17 +60,43 @@
     [self createUI];
     
     nameTextField = (id)[self.view viewWithTag:100];
-    nameTextField.text = self.addressModel.Name;
+    nameTextField.text = self.addressModel.receiverName;
     cityTextField = (id)[self.view viewWithTag:101];
-    cityTextField.text = self.addressModel.City;
+    cityTextField.text = self.addressModel.city;
     phoneTextField = (id)[self.view viewWithTag:102];
-    phoneTextField.text = self.addressModel.Phone;
+    phoneTextField.text = self.addressModel.receiverPhone;
     zipCodeTextField = (id)[self.view viewWithTag:103];
-    zipCodeTextField.text = self.addressModel.ZipCode;
+    zipCodeTextField.text = self.addressModel.receiverPostalcode;
     detailAddressTextField = (id)[self.view viewWithTag:104];
-    detailAddressTextField.text = self.addressModel.Address;
+    detailAddressTextField.text = self.addressModel.receiverAddress;
     if (detailAddressTextField.text.length > 0) {
         placeHolderLabel.hidden = YES;
+    }
+    
+    // 请求省份数据
+    [GetCityDataRequest requestWithParameters:nil withIndicatorView:nil withCancelSubject:nil onRequestStart:^(ITTBaseDataRequest *request) {
+
+    } onRequestFinished:^(ITTBaseDataRequest *request) {
+        self.provinces = request.handleredResult[@"ProviedataArray"];
+        self.cities = request.handleredResult[@"result"];
+        [self.locateView setObjectWithProvince:self.provinces withCity:self.cities];
+        NSLog(@"request finish");
+        [self responseSuccessWithResponse:request];
+        
+    } onRequestCanceled:^(ITTBaseDataRequest *request) {
+        
+        NSLog(@"request cancel");
+        [self responseFailWithResponse:request];
+        
+    } onRequestFailed:^(ITTBaseDataRequest *request) {
+        
+        [self responseCancelWithResponse:request];
+        NSLog(@"request fail");
+    }];
+    
+    NSMutableArray *arr = [self ProviceAndCityWithDm01:self.addressModel.city andDm02:self.self.addressModel.city];
+    if ([arr count] > 1) {
+        cityTextField.text = [NSString stringWithFormat:@"%@ %@",[arr objectAtIndex:0],[arr objectAtIndex:1]];
     }
 }
 
@@ -192,32 +220,24 @@
         }
     }
     
-    NSArray *dbArray = [[UserAddressDataBase shareDataBase] readTableName];;
+//    NSArray *dbArray = [[UserAddressDataBase shareDataBase] readTableName];;
     NSDictionary *params =  @{@"receiverName":nameTextField.text,
                               @"city":cityTextField.text,
-                              @"id": self.addressModel? self.addressModel.AddressId: [NSNumber numberWithInt:1000+[dbArray count]],
+                              @"memberId": [[UserHelper shareInstance] getMemberID],
                               @"receiverPhone":phoneTextField.text,
                               @"receiverAddress":detailAddressTextField.text,
                               @"receiverPostalcode":zipCodeTextField.text,
-                              @"email":self.addressModel?self.addressModel.Email:@"",
-                              @"Type": ([dbArray count]== 0)?@"1":(self.addressModel?self.addressModel.Type:@"0"),
+                              @"email":self.addressModel?self.addressModel.email:@"",
+                              @"isDefault": @"1",
                               };
     AddressModel *addModel = [[AddressModel alloc] initWithDataDic:params];
     if (self.addressModel) {
-        if ([[UserAddressDataBase shareDataBase] updateItem:addModel defaultType:addModel.Type.boolValue]) {
-            [self commitRequestWithParams:params withUrl:[GlobalRequest addressAction_UpdateAddress_Url]];
-            [[TKAlertCenter defaultCenter] postAlertWithMessage:@"修改成功"];
-            [self.navigationController popViewControllerAnimated:YES];
-        }else{
-//            [[TKAlertCenter defaultCenter] postAlertWithMessage:@"添加失败"];
-        }
+            // 更新提交到服务器
+        [self commitRequestWithParams:params withUrl:[GlobalRequest addressAction_UpdateAddress_Url]];
     }
     else if ([[UserAddressDataBase shareDataBase] insertItem:addModel]) {
+        // 添加提交到服务器
         [self commitRequestWithParams:params withUrl:[GlobalRequest addressAction_AddAddress_Url]];
-        [[TKAlertCenter defaultCenter] postAlertWithMessage:@"添加成功"];
-        [self.navigationController popViewControllerAnimated:YES];
-    }else{
-//        [[TKAlertCenter defaultCenter] postAlertWithMessage:@"添加失败"];
     }
 }
 
@@ -233,6 +253,25 @@
             [textField resignFirstResponder];
             [self resetScrollView];
         }
+    }
+    return YES;
+}
+
+- (BOOL)textFieldShouldBeginEditing:(UITextField *)textField{
+    if (textField.tag == 101) {
+        [tempView resignFirstResponder];
+        if (!self.locateView) {
+            self.locateView = [[TSLocateView alloc] initWithTitle:@"城市选择" delegate:self];
+            [self.locateView setObjectWithProvince:self.provinces withCity:self.cities];
+        }
+        self.locateView.alpha = 1;
+        self.locateView.bottom = self.view.bottom;
+        if (!self.locateView.superview) {
+            [self.view addSubview:self.locateView];
+        }
+        return NO;
+    }else{
+        [self.locateView removeFromSuperview];
     }
     return YES;
 }
@@ -304,6 +343,49 @@
 
 - (void)textViewDidEndEditing:(UITextView *)textView{
     [self resetScrollView];
+}
+
+- (void)responseSuccessWithResponse:(ITTBaseDataRequest *)request{
+    if ([request.requestUrl isEqualToString:[GlobalRequest addressAction_QueryProvinceAndRegionList_Url]]) {
+        
+    }else{
+        if (self.addressModel) {
+            [[TKAlertCenter defaultCenter] postAlertWithMessage:@"添加成功"];
+            [self.navigationController popViewControllerAnimated:YES];
+
+        }else{
+            [[TKAlertCenter defaultCenter] postAlertWithMessage:@"修改成功"];
+            [self.navigationController popViewControllerAnimated:YES];
+        }
+    }
+}
+
+- (void)responseFailWithResponse:(ITTBaseDataRequest *)request{
+    [[TKAlertCenter defaultCenter] postAlertWithMessage:@"添加失败"];
+}
+
+#pragma mark Method
+-(NSMutableArray *)ProviceAndCityWithDm01:(NSString *)dm01 andDm02:(NSString *)dm02
+{
+    NSMutableArray *arr = [[NSMutableArray alloc] initWithContentsOfFile:[AddDocumentPathFile AddFileName:@"test01.plist" andType:@"plist"]];
+    NSMutableArray *arr01 = [[NSMutableArray alloc]init];
+    for (NSDictionary *dict in arr) {
+        if ([dm01 isEqualToString:[dict objectForKey:@"dm"]]) {
+            [arr01 addObject:[dict objectForKey:@"mc"]];
+        }
+        if ([dm02 isEqualToString:[dict objectForKey:@"dm"]]) {
+            [arr01 addObject:[dict objectForKey:@"mc"]];
+        }
+    }
+    return arr01;
+}
+
+- (void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex{
+    if (buttonIndex == 1) {
+        if (!self.locateView.locate.mc ) self.locateView.locate.mc = @"";
+        if (!self.locateView.locate.mc01) self.locateView.locate.dm01 = @"";
+        cityTextField.text = [NSString stringWithFormat:@"%@ %@",self.locateView.locate.mc, self.locateView.locate.mc01];
+    }
 }
 
 - (void)didReceiveMemoryWarning
