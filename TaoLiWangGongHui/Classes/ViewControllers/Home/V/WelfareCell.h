@@ -9,7 +9,7 @@
 #import <UIKit/UIKit.h>
 #import "GoodsListModel.h"
 #import "WelfareController.h"
-@interface WelfareCell2 : UITableViewCell
+@interface WelfareCell : UITableViewCell
 
 @property (strong, nonatomic) GoodsListModel *goodsModel;
 @property (strong, nonatomic) IBOutlet UIImageView *welfareGoodImage;

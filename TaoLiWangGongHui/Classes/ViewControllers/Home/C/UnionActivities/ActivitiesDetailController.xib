@@ -77,7 +77,7 @@
                             </subviews>
                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                         </view>
-                        <webView opaque="NO" contentMode="scaleToFill" id="LZl-HJ-Jke">
+                        <webView opaque="NO" userInteractionEnabled="NO" contentMode="scaleToFill" id="LZl-HJ-Jke">
                             <rect key="frame" x="3" y="210" width="314" height="1"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
@@ -100,6 +100,6 @@
         <image name="button_disable.png" width="300" height="35"/>
         <image name="login_Nomal.png" width="300" height="35"/>
         <image name="union_mark_normal.png" width="300" height="35"/>
-        <image name="福利首页.png" width="89" height="26"/>
+        <image name="福利首页.png" width="153" height="40"/>
     </resources>
 </document>

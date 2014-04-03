@@ -93,7 +93,10 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     DiscountShoppingCell *cell = (id)[tableView cellForRowAtIndexPath:indexPath];
-    GoodsInfoController *goodsInfo = [[GoodsInfoController alloc] initWithType:GoodsType_Discount withProductID:cell.discountModel.productId];
+    GoodsInfoController *goodsInfo = [[GoodsInfoController alloc] initWithNibName:@"GoodsInfoController" bundle:nil];
+    goodsInfo.goodsInfoType = GoodsType_Discount;
+    goodsInfo.productID = cell.discountModel.productId;
+                    
     [goodsInfo setHidesBottomBarWhenPushed:YES];
     [self.navigationController pushViewController:goodsInfo animated:YES];
 }

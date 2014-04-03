@@ -141,8 +141,8 @@
 }
 
 // 26.	订阅/取消订阅接口
-+ (NSString *)articleAction_DoSubscription_Url{
-    return [NSString stringWithFormat:@"%@%@",[GlobalRequest getBaseServiceUrl],@"ArticleAction!doSubscription.do"];
++ (NSString *)articleAction_UpdateWebsiteNewsMember_Url{
+    return [NSString stringWithFormat:@"%@%@",[GlobalRequest getBaseServiceUrl],@"ArticleAction!updateWebsiteNewsMember.do"];
 }
 
 #pragma mark - 五、	我的活动
@@ -210,6 +210,11 @@ return [NSString stringWithFormat:@"%@%@",[GlobalRequest getBaseServiceUrl],@"Us
 // 39.我的活动：（新增）
 + (NSString *)activityAction_QueryMyActivityList_Url{
     return [NSString stringWithFormat:@"%@%@",[GlobalRequest getBaseServiceUrl],@"ActivityAction!queryMyActivityList.do"];
+}
+
+// 40.关于我们： （新增）（et_website_info）
++ (NSString *)activityAction_QueryWebSiteInfo_Url{
+    return [NSString stringWithFormat:@"%@%@",[GlobalRequest getBaseServiceUrl],@"ActivityAction!queryWebSiteInfo.do"];
 }
 
 // 001. 获取省份

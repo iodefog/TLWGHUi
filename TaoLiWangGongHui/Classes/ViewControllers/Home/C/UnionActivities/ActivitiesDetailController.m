@@ -10,13 +10,13 @@
 #import "ActivityNormalController.h"
 #import "RadioGroup.h"
 #import "Universal.h"
-#import "ActivityInfoModel.h"
 #import "VoteModel.h"
 
 #define CheckButtonCount 2
 
 @interface ActivitiesDetailController (){
     UIView *voteOrNotVoteView;  //保存当前显示的投票视图
+    RadioGroup * radioGroup;    // 投票选项数组
 }
 
 @property (nonatomic, strong) NSMutableArray *voteListArray;
@@ -86,51 +86,43 @@
 
 - (void)showDiffrentMiddleViewWithType:(ActivityType)myActivityType withDescription:(NSString *)description withHaveAction:(BOOL)haveAction{
     if ((myActivityType == TypeSignUp) || (myActivityType == TypeNone)) {
-//        RTLabel *signDescription = [[RTLabel alloc] initWithFrame:CGRectMake(10, 5, self.middleScrollView.width - 20, 0)];
-//        signDescription.text = description;
-//       signDescription.height =  signDescription.optimumSize.height +5 ;
         if (haveAction) {
-            self.signUpButton.selected = YES;
+            self.signUpButton.enabled = NO;
         }
-//        self.middleScrollView.contentSize = CGSizeMake(self.middleScrollView.width, signDescription.optimumSize.height);
-//        [self.middleScrollView addSubview:signDescription];
     }else if(myActivityType == TypeVote){
-//        if (haveAction) {
-//            [self haveVotedWithDescription:description];
-//        }
-//        [self unHaveVotedWithDescription:description];
+        if (haveAction) {
+            self.signUpButton.enabled = NO;
+            [self haveVotedWithDescription:description];
+        }else{
+            [self unHaveVotedWithDescription:description];
+        }
     }
 }
 
 // 未投票时显示这个
 - (void)unHaveVotedWithDescription:(NSString *)description{
-    voteOrNotVoteView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, self.middleScrollView.width, self.middleScrollView.height)];
-                         
-//    RTLabel *signDescription = [[RTLabel alloc] initWithFrame:CGRectMake(10, 5, self.middleScrollView.width - 20, 0)];
-//    signDescription.text = description;
-//    signDescription.height =  signDescription.optimumSize.height +5 ;
-//    [voteOrNotVoteView addSubview:signDescription];
+    voteOrNotVoteView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, self.middleScrollView.width, 100)];
     
-    NSArray *checkBtnTitleArray = [NSArray arrayWithObjects:@"同意本次活动，活动a很有意思不错，非常想参加同意本次活动。",@"反对活动，不想参加", nil];
-    RadioGroup * radioGroup = [[RadioGroup alloc] init];
+    radioGroup = [[RadioGroup alloc] init];
     float tempHeight = 0;
-    for (int i = 0; i < CheckButtonCount ; i++) {
+    for (int i = 0; i < [self.voteListArray count] ; i++) {
+        NSDictionary *param = self.voteListArray[i];
         RTLabel *temp = [[RTLabel alloc] initWithFrame:CGRectMake(10, 40*i+20, self.descriptionWebView.width, 20)];
         temp.font = [UIFont systemFontOfSize:14];
-        temp.text = checkBtnTitleArray[i];
+        temp.text = param[@"voteName"];
         
         CheckButton *checkBtn = [[CheckButton alloc] initWithFrame:CGRectMake(10, 40*i+20, self.descriptionWebView.width, temp.optimumSize. height + 5)];
         tempHeight += checkBtn.height;
         
         [radioGroup add:checkBtn];
-        checkBtn.label.text = checkBtnTitleArray[i];
+        checkBtn.label.text = param[@"voteName"];
         checkBtn.label.numberOfLines = 0;
-        checkBtn.value = [NSNumber numberWithInt:i];
+        checkBtn.value = param[@"activityVoteId"];
         checkBtn.style = CheckButtonStyleBox;
         [voteOrNotVoteView addSubview:checkBtn];
     }
     [self.middleScrollView addSubview:voteOrNotVoteView];
-    self.middleScrollView.contentSize = CGSizeMake(self.middleScrollView.width, self.descriptionWebView.bottom + tempHeight);
+    self.middleScrollView.height =   tempHeight + 60;
 }
 
 // 已投票后显示这个
@@ -192,11 +184,13 @@
         [self commitRequestWithParams:params withUrl:[GlobalRequest activityAction_EnterActivity_Url]];
         
     }else if(activityType == TypeVote){
+        voteOrNotVoteView.hidden = YES;
         [voteOrNotVoteView removeFromSuperview];
-        [self haveVotedWithDescription:nil];
+//        [self haveVotedWithDescription:nil];
         NSDictionary *params = @{@"memberId": [[UserHelper shareInstance] getMemberID],
+                                 @"activityVoteId":[NSString stringWithFormat:@"%@",radioGroup.value],
                                  @"activityId":activityID};
-        [self commitRequestWithParams:params withUrl:[GlobalRequest activityAction_QueryActivityOptionList_Url]];
+        [self commitRequestWithParams:params withUrl:[GlobalRequest activityAction_AddVote_Url]];
     }
 }
 
@@ -215,15 +209,17 @@
 
 #pragma mark - reponse delegate
 - (void)reloadNewData{
-    ActivityInfoModel *activityModel = [[ActivityInfoModel alloc] initWithDataDic:self.model];
-    self.activitiesTitle.text = activityModel.activityTitle;
-    [self.headImage setImageWithURL:[NSURL URLWithString:activityModel.activityPic]];
-    activityType = activityModel.typeId.intValue;
+    self.activityModel = [[ActivityInfoModel alloc] initWithDataDic:self.model];
+    self.activitiesTitle.text = self.activityModel.activityTitle;
+    [self.headImage setImageWithURL:[NSURL URLWithString:self.activityModel.activityPic]];
+    activityType = self.activityModel.typeId.intValue;
     if (activityType == TypeNone) {
         self.bottomView.hidden = YES;
+    }else if (activityType == TypeSignUp){
+        BOOL action = self.activityModel.status.boolValue;
+        [self showDiffrentMiddleViewWithType:activityType withDescription:self.activityModel.description withHaveAction:action];
     }
-    [self showDiffrentMiddleViewWithType:activityType withDescription:activityModel.description withHaveAction:NO];
-    [self.descriptionWebView loadHTMLString:activityModel.description baseURL:nil];
+    [self.descriptionWebView loadHTMLString:self.activityModel.description baseURL:nil];
     
 }
 
@@ -232,14 +228,18 @@
 }
 
 - (void)responseSuccessWithResponse:(ITTBaseDataRequest *)request{
-    if ([[request.requestUrl lastPathComponent] isEqualToString:@"ActivityAction!queryActivityOptionList.do"]) { // 投票完成的url
-        NSLog(@"resultDic  %@", request.handleredResult);
+     NSLog(@"resultDic  %@", request.handleredResult);
+    if ([request.requestUrl  isEqualToString:[GlobalRequest activityAction_QueryActivityOptionList_Url]]) { // 投票选项
+        
         if (request.handleredResult[@"result"] && [request.handleredResult[@"result"] isKindOfClass:[NSArray class]]) {
-            [self.voteListArray addObjectsFromArray:request.handleredResult[@"result"]];
-
+            self.voteListArray  = request.handleredResult[@"result"];
+            BOOL action = self.activityModel.status.boolValue;
+            [self showDiffrentMiddleViewWithType:activityType withDescription:self.activityModel.description withHaveAction:action];
         }
-    }else if([[request.requestUrl lastPathComponent] isEqualToString:@"ActivityAction!queryActivityInfo.do"]){ // 一进本页就请求本页的所有数据 的url
-        NSLog(@"resultDic  %@", request.handleredResult);
+        
+    }else if([request.requestUrl isEqualToString:[GlobalRequest activityAction_QueryActivityInfo_Url]]){ // 一进本页就请求本页的所有数据 的url
+        
+       
         if (request.handleredResult[@"result"] && [request.handleredResult[@"result"] isKindOfClass:[NSArray class]]) {
             [self.model addObjectsFromArray:request.handleredResult[@"result"]];
             [self reloadNewData];
@@ -247,7 +247,9 @@
             self.model = request.handleredResult[@"result"];
             [self reloadNewData];
         }
-    }else if([[request.requestUrl lastPathComponent] isEqualToString:@"ActivityAction!enterActivity.do"]){
+    }else if([request.requestUrl isEqualToString:[GlobalRequest activityAction_EnterActivity_Url]]){
+        [GlobalHelper handerResultWithDelegate:self withMessage:request.handleredResult[@"msg"] withTag:0];
+    }else if ([request.requestUrl isEqualToString:[GlobalRequest activityAction_AddVote_Url]]){// 投票点击
         [GlobalHelper handerResultWithDelegate:self withMessage:request.handleredResult[@"msg"] withTag:0];
     }
 }

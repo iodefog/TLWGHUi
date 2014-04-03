@@ -109,7 +109,9 @@
         goodType = GoodsType_Holiday;
     else goodType = GoodsType_Holiday;
         
-    GoodsInfoController *goodsInfoVC = [[GoodsInfoController alloc] initWithType:goodType withProductID:self.shoppingModel.productId];
+    GoodsInfoController *goodsInfoVC = [[GoodsInfoController alloc]  initWithNibName:@"GoodsInfoController" bundle:nil];
+    goodsInfoVC.goodsInfoType = goodType ;
+    goodsInfoVC.productID = self.shoppingModel.productId;
     [selected_navigation_controller() pushViewController:goodsInfoVC animated:YES];
 }
 

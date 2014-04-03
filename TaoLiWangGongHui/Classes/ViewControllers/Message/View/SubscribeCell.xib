@@ -14,7 +14,7 @@
                 <rect key="frame" x="0.0" y="0.0" width="320" height="74"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
-                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="subscribe_placeholder.png" translatesAutoresizingMaskIntoConstraints="NO" id="lm1-vg-OoW">
+                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="shopping_placeholder.png" translatesAutoresizingMaskIntoConstraints="NO" id="lm1-vg-OoW">
                         <rect key="frame" x="20" y="20" width="36" height="36"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
@@ -47,8 +47,8 @@
         </tableViewCell>
     </objects>
     <resources>
+        <image name="shopping_placeholder.png" width="75" height="75"/>
         <image name="subscribe_normal.png" width="69" height="26"/>
-        <image name="subscribe_placeholder.png" width="36" height="36"/>
         <image name="subscribe_selected.png" width="69" height="26"/>
     </resources>
 </document>

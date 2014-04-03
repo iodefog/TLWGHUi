@@ -7,7 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
-
+#import "ActivityInfoModel.h"
 typedef enum {
     TypeNone,     //不显示 报名和投票
     TypeSignUp,  //显示 报名
@@ -32,6 +32,7 @@ typedef enum {
 
 @property (strong, nonatomic) IBOutlet UIButton *signUpButton;    // 我要报名
 @property (strong, nonatomic) IBOutlet UIButton *haveSignedButton; // 查看已报名会员
+@property (strong, nonatomic) ActivityInfoModel *activityModel;
 
 - (id)initWithActivityType:(ActivityType)myActivityType withID:(NSString *)myActivityID;;
 

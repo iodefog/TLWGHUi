@@ -18,8 +18,8 @@
     NSDictionary *params = @{
                                    @"memberId":[[UserHelper shareInstance] getMemberID],
                                    @"websiteNewsTypeId":self.subscribeModel.newsId,
-                                   @"status":sender.selected?@"1":@"0"};
-    [self commitRequestWithParams:params withUrl:[GlobalRequest articleAction_DoSubscription_Url]];
+                                   @"newsType":sender.selected?@"1":@"0"};
+    [self commitRequestWithParams:params withUrl:[GlobalRequest articleAction_UpdateWebsiteNewsMember_Url]];
 }
 
 - (void)commitRequestWithParams:(NSDictionary *)params withUrl:(NSString *)url{

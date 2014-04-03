@@ -34,6 +34,17 @@
 {
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
+    [self commitRequestWithParams:@{@"companyId":@"1"} withUrl:[GlobalRequest activityAction_QueryWebSiteInfo_Url]];
+}
+
+- (void)reloadNewData{
+    if ([self.model isKindOfClass:[NSString class]]) {
+        self.aboutDescription.text = self.model;
+    }
+}
+
+- (void)setEmptyView:(TKEmptyView *)emptyView{
+
 }
 
 

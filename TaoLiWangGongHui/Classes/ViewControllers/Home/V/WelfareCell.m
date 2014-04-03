@@ -6,10 +6,10 @@
 //  Copyright (c) 2014年 Hongli. All rights reserved.
 //
 
-#import "WelfareCell2.h"
+#import "WelfareCell.h"
 #import "WelfareConfirmViewController.h"
 #import "CashConfirmViewController.h"
-@implementation WelfareCell2
+@implementation WelfareCell
 
 - (void)awakeFromNib
 {

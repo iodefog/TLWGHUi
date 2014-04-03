@@ -37,7 +37,7 @@
     self.imagePage.backgroundColor = [UIColor grayColor];
     self.imagePage.textColor = [UIColor whiteColor];
     self.imagePage.textAlignment = NSTextAlignmentCenter;
-    self.imagePage.text = @"1/5";
+    self.imagePage.text = [NSString stringWithFormat:@"%d/%d",1,GoodsImageExampleCount];
     [self addSubview:self.imagePage];
 }
 
@@ -65,11 +65,14 @@
 }
 
 - (IBAction)addToCart:(UIButton *)sender {
-    if ([[GoodsDetailDataBase shareDataBase] insertItem:self.goodsListModel]) {
-        [[TKAlertCenter defaultCenter] postAlertWithMessage:@"已加入购物车"];
-    }else{
-        [[TKAlertCenter defaultCenter] postAlertWithMessage:@"购物车里已存在"];
-    }
+    
+    
+    
+//    if ([[GoodsDetailDataBase shareDataBase] insertItem:self.goodsListModel]) {
+//        [[TKAlertCenter defaultCenter] postAlertWithMessage:@"已加入购物车"];
+//    }else{
+//        [[TKAlertCenter defaultCenter] postAlertWithMessage:@"购物车里已存在"];
+//    }
 }
 
 #pragma mark - ScrollDelegate Method

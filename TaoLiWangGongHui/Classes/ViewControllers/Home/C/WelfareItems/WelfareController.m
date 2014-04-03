@@ -8,7 +8,7 @@
 
 #import "WelfareController.h"
 #import "GoodsInfoController.h"
-#include "WelfareCell2.h"
+#include "WelfareCell.h"
 
 @interface WelfareController ()
 
@@ -68,12 +68,12 @@
 
 static GoodsListModel *goodsModel = nil;
 
-- (WelfareCell2 *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
+- (WelfareCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    static NSString *CellIdentifier = @"WelfareCell2";
-    WelfareCell2 *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
+    static NSString *CellIdentifier = @"WelfareCell";
+    WelfareCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
     if (!cell) {
-        cell = [[[NSBundle mainBundle] loadNibNamed:@"WelfareCell2" owner:nil options:nil] lastObject];
+        cell = [[[NSBundle mainBundle] loadNibNamed:@"WelfareCell" owner:nil options:nil] lastObject];
     }
     [cell setObject:self.model[indexPath.row]];
     cell.welfareType = self.welfareType;
@@ -86,7 +86,9 @@ static GoodsListModel *goodsModel = nil;
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     GoodsListModel *goodsModel = [[GoodsListModel alloc] initWithDataDic:self.model[indexPath.row]];
-    GoodsInfoController *goodsInfo = [[GoodsInfoController alloc] initWithType:self.welfareType == WelfareBirthDay ? GoodsType_BirthDay :GoodsType_Holiday withProductID:goodsModel.productId];
+    GoodsInfoController *goodsInfo = [[GoodsInfoController alloc] initWithNibName:@"GoodsInfoController" bundle:nil];
+    goodsInfo.goodsInfoType = self.welfareType == WelfareBirthDay ? GoodsType_BirthDay :GoodsType_Holiday ;
+    goodsInfo.productID = goodsModel.productId;
     [goodsInfo setHidesBottomBarWhenPushed:YES];
     [self.navigationController pushViewController:goodsInfo animated:YES];
 }

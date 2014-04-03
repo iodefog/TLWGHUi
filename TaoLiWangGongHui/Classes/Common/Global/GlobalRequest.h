@@ -93,7 +93,7 @@ typedef enum {
 + (NSString *)articleAction_QueryWebsiteNewsType_Url;
 
 // 26.	订阅/取消订阅接口
-+ (NSString *)articleAction_DoSubscription_Url;
++ (NSString *)articleAction_UpdateWebsiteNewsMember_Url;
 
 #pragma mark - 五、	我的活动
 // 27.	我的活动接口
@@ -135,6 +135,9 @@ typedef enum {
 
 // 39.我的活动：（新增）
 + (NSString *)activityAction_QueryMyActivityList_Url;
+
+// 40.关于我们： （新增）（et_website_info）
++ (NSString *)activityAction_QueryWebSiteInfo_Url;
 
 // 001. 获取省份
 + (NSString *)addressAction_QueryProvinceAndRegionList_Url;
