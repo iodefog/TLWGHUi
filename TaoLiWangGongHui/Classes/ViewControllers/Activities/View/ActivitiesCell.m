@@ -32,6 +32,7 @@
     if (self.activityModel.status.boolValue) {
         self.activityTime.textColor = [UIColor lightGrayColor];
         self.activityDescription.textColor = [UIColor lightGrayColor];
+        self.activityTime.text = @"已过期";
     }else{
         self.activityTime.textColor = [UIColor blackColor];
         self.activityDescription.textColor = [UIColor blackColor];

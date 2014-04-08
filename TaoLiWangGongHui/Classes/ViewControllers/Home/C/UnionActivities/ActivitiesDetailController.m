@@ -184,6 +184,10 @@
         [self commitRequestWithParams:params withUrl:[GlobalRequest activityAction_EnterActivity_Url]];
         
     }else if(activityType == TypeVote){
+        if (!radioGroup.value) {
+            [GlobalHelper handerResultWithDelegate:nil withMessage:@"请先选择投票选项" withTag:0];
+            return;
+        }
         voteOrNotVoteView.hidden = YES;
         [voteOrNotVoteView removeFromSuperview];
 //        [self haveVotedWithDescription:nil];
@@ -216,14 +220,14 @@
     if (activityType == TypeNone) {
         self.bottomView.hidden = YES;
     }else if (activityType == TypeSignUp){
-        BOOL action = self.activityModel.status.boolValue;
-        [self showDiffrentMiddleViewWithType:activityType withDescription:self.activityModel.description withHaveAction:action];
+//        BOOL action = self.activityModel.status.boolValue;
+//        [self showDiffrentMiddleViewWithType:activityType withDescription:self.activityModel.description withHaveAction:action];
     }
     [self.descriptionWebView loadHTMLString:self.activityModel.description baseURL:nil];
     
 }
 
-- (void)setDataDic:(NSDictionary *)resultDic toManager:(NSMutableArray *)baseManager{
+- (void)setDataDic:(NSDictionary *)resultDic withRequest:(id)request{
 
 }
 
@@ -233,8 +237,8 @@
         
         if (request.handleredResult[@"result"] && [request.handleredResult[@"result"] isKindOfClass:[NSArray class]]) {
             self.voteListArray  = request.handleredResult[@"result"];
-            BOOL action = self.activityModel.status.boolValue;
-            [self showDiffrentMiddleViewWithType:activityType withDescription:self.activityModel.description withHaveAction:action];
+//            BOOL action = self.activityModel.status.boolValue;
+//            [self showDiffrentMiddleViewWithType:activityType withDescription:self.activityModel.description withHaveAction:action];
         }
         
     }else if([request.requestUrl isEqualToString:[GlobalRequest activityAction_QueryActivityInfo_Url]]){ // 一进本页就请求本页的所有数据 的url
@@ -266,10 +270,10 @@
     self.descriptionWebView.height = self.descriptionWebView.scrollView.height ;
     
     if(TypeVote == activityType){
+        [self unHaveVotedWithDescription:nil];
         self.middleScrollView.top = self.descriptionWebView.bottom+5;
         self.bottomView.top = self.middleScrollView.bottom;
 
-        [self unHaveVotedWithDescription:nil];
     }else if(TypeSignUp == activityType){
         self.middleScrollView.top = self.descriptionWebView.bottom+5;
         self.middleScrollView.height = 0;

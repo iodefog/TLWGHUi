@@ -11,10 +11,9 @@
 @implementation SignUpAndVotedModel
 
 - (NSDictionary *)attributeMapDictionary{
-   return  @{@"memberId":@"memberId",
-             @"realname":@"realname",
-             @"productName":@"productName",
-             @"Property0":@"Property0",};
+   return  @{@"joinTime":@"joinTime",
+             @"member":@"member",
+             @"activityVote":@"activityVote"};
 }
 
 @end

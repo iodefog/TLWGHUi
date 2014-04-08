@@ -9,8 +9,10 @@
 #import "WelfareController.h"
 #import "GoodsInfoController.h"
 #include "WelfareCell.h"
+#import "PopCarView.h"
 
-@interface WelfareController ()
+@interface WelfareController ()<JoinCarDelegate>
+@property (nonatomic, strong)PopCarView             *Carview;
 
 @end
 
@@ -32,6 +34,16 @@
     return [self initWithStyle:UITableViewStylePlain];
 }
 
+- (void)viewWillAppear:(BOOL)animated{
+    [super viewWillAppear:animated];
+    [GlobalHelper showCarViewInNavC:self.navigationController withVC:self];
+}
+
+- (void)viewWillDisappear:(BOOL)animated{
+    [super viewWillDisappear:animated];
+    [GlobalHelper hiddenCarView];
+}
+
 - (void)viewDidLoad
 {
     [super viewDidLoad];
@@ -45,6 +57,7 @@
     [self commitRequestWithParams:param withUrl:[GlobalRequest productAction_QueryProductListByType_Url]];
     [self.tableView setTableFooterView:[[UIView alloc] init]];
 }
+
 
 - (void)didReceiveMemoryWarning
 {
@@ -88,6 +101,7 @@ static GoodsListModel *goodsModel = nil;
     GoodsListModel *goodsModel = [[GoodsListModel alloc] initWithDataDic:self.model[indexPath.row]];
     GoodsInfoController *goodsInfo = [[GoodsInfoController alloc] initWithNibName:@"GoodsInfoController" bundle:nil];
     goodsInfo.goodsInfoType = self.welfareType == WelfareBirthDay ? GoodsType_BirthDay :GoodsType_Holiday ;
+    goodsInfo.goodsListModel = goodsModel;
     goodsInfo.productID = goodsModel.productId;
     [goodsInfo setHidesBottomBarWhenPushed:YES];
     [self.navigationController pushViewController:goodsInfo animated:YES];

@@ -18,6 +18,6 @@
 
 @property (strong, nonatomic) IBOutlet UILabel *userName; // 用户姓名
 @property (strong, nonatomic) IBOutlet UILabel *userPhone; // 用户手机号码
-@property (strong, nonatomic) IBOutlet UILabel *userDescription; // 用户描述
+@property (strong, nonatomic) IBOutlet UILabel *userDescription; // 用户地址或描述
 @property (strong, nonatomic) IBOutlet UIButton *enterButton;  // 确认按钮
 @end

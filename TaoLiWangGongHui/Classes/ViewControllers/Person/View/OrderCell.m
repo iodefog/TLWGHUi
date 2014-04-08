@@ -24,6 +24,17 @@
     self.cashView.hidden = cashHidden;
 }
 
+- (void)setObject:(NSDictionary *)dict{
+    self.ordelModel = [[OrdelModel alloc] initWithDataDic:dict];
+//    self.welfareHeadImage setImageWithURL:[]
+    self.welfareOrderNum.text = self.ordelModel.orderCode;
+    self.welfareOrderTime.text = self.ordelModel.orderDate;
+    
+    self.cashOrderNum.text = self.ordelModel.orderCode;
+    self.cashOrderTime.text = self.ordelModel.orderDate;
+    self.cashOrderPirce.text =  [NSString stringWithFormat:@"%@元",self.ordelModel.totalMoney];
+}
+
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated
 {
     [super setSelected:selected animated:animated];

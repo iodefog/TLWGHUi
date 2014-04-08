@@ -10,16 +10,18 @@
 
 @interface SignUpAndVotedModel : ITTBaseModelObject
 
-@property (nonatomic, strong) NSString *memberId;
-@property (nonatomic, strong) NSString *realname;
-@property (nonatomic, strong) NSString *productName;
-@property (nonatomic, strong) NSString *Property0;
+@property (nonatomic, strong) NSString *joinTime;
+@property (nonatomic, strong) NSDictionary *member;
+@property (nonatomic, strong) NSDictionary *activityVote;
 
-/****
- 	会员id(memberId)
- 	姓名(realname)
- 	报名时间（productName）
- 	所在部门(Property0)
+/*****
+ 	报名时间（joinTime）
+ 	用户的为数组格式
+ 	member{
+ 	会员id(memberId)
+ 	姓名(realname)
+ 	所在部门(property0)
+ 	}
  */
 
 @end

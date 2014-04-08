@@ -40,7 +40,7 @@
 - (void)viewDidAppear:(BOOL)animated{
     [super viewDidAppear: animated];
     if (iPhone5) {
-        self.baseScroll.contentSize = CGSizeMake(self.view.width, 568);
+        self.baseScroll.contentSize = CGSizeMake(self.view.width, 568-49);
     }
     else{
         self.baseScroll.top = 0;
@@ -62,11 +62,11 @@
     [self commitRequestWithParams:nil withUrl:[GlobalRequest eCMainAction_QueryECMainInfo_Url]];
     
     [self createUI];
-    
     // 精致生活点击
     [self.delicateLifeLable addGestureRecognizer:[[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(delicateLifeClicked:)]];
     self.delicateLifeLable.userInteractionEnabled = YES;
 }
+
 
 - (void)createUI{
     //给轮播添加xx个图片视频

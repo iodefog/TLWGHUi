@@ -40,6 +40,8 @@
 - (void)reloadNewData{
     if ([self.model isKindOfClass:[NSString class]]) {
         self.aboutDescription.text = self.model;
+    }else if ([self.model isKindOfClass:[NSDictionary class]]){
+        self.aboutDescription.text = self.model[@"shopName"];
     }
 }
 

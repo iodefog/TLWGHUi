@@ -32,9 +32,15 @@
 
 - (void)setObject:(NSDictionary *)dict{
     SignUpAndVotedModel *signUpAndVotedModel = [[SignUpAndVotedModel alloc] initWithDataDic:dict];
-    self.name.text = signUpAndVotedModel.realname;
-    [self.department setTitle:signUpAndVotedModel.Property0 forState:UIControlStateNormal];
-    self.eventDetail.text = signUpAndVotedModel.productName;
+    self.eventDetail.text = signUpAndVotedModel.joinTime;
+    self.name.text = signUpAndVotedModel.member[@"realname"];
+    [self.department setTitle:signUpAndVotedModel.member[@"property0"] forState:UIControlStateNormal];
+    if (showType != showSignUp) {
+        self.eventDetail.text = signUpAndVotedModel.activityVote[@"options"];
+    }
+//    self.name.text = signUpAndVotedModel.realname;
+//    [self.department setTitle:signUpAndVotedModel.Property0 forState:UIControlStateNormal];
+//    self.eventDetail.text = signUpAndVotedModel.productName;
     
 //    if (showType == showSignUp) {
 //        

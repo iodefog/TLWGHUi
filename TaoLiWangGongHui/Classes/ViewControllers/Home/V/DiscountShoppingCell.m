@@ -26,6 +26,8 @@
     }else{
         [[TKAlertCenter defaultCenter] postAlertWithMessage:@"购物车里已存在"];
     }
+
+    [GlobalHelper showCarViewInNavC:nil withVC:nil];
 }
 
 - (void)setObject:(NSDictionary *)dict{
@@ -33,7 +35,7 @@
     self.goodsImage = [NSURL URLWithString:self.discountModel.previewPicPath];
     self.goodsTitle.text = self.discountModel.productName;
     self.goodsPrice.text = [NSString stringWithFormat:@"%@元",self.discountModel.costPrice];
-    self.goodsPrePrice.text = [NSString stringWithFormat:@"价格 %@",self.discountModel.basicPrice];
+    self.goodsPrePrice.text = [NSString stringWithFormat:@"价格%@元",self.discountModel.basicPrice];
 }
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated

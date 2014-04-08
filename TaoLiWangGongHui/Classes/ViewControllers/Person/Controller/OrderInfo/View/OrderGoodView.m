@@ -7,6 +7,7 @@
 //
 
 #import "OrderGoodView.h"
+#import "OrderProductModel.h"
 
 @implementation OrderGoodView
 
@@ -50,6 +51,14 @@
     [self addSubview:self.goodQuantity];
     [self addSubview:rightImageView];
     [self addSubview:coverButton];
+}
+
+- (void)setObject:(NSDictionary *)dict{
+    OrderProductModel *orderModel = [[OrderProductModel alloc] initWithDataDic:dict];
+    [self.goodHeadView setImageWithURL:[NSURL URLWithString:orderModel.previewPicPath]];
+    self.goodTitle.text = [NSString stringWithFormat:@"%@",orderModel.productDescribe];
+    self.goodPrice.text = [NSString stringWithFormat:@"%@",orderModel.totalMoney];
+    self.goodQuantity.text = [NSString stringWithFormat:@"%@", orderModel.amount];
 }
 
 - (void)coverButtonClicked:(UIButton *)sender{

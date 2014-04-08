@@ -7,7 +7,6 @@
 //
 
 #import <Foundation/Foundation.h>
-
 @interface GlobalHelper : NSObject
 @property (nonatomic, weak) id helperDelegate;
 
@@ -34,4 +33,9 @@ UINavigationController *selected_navigation_controller();
 // 匹配是否是今天
 + (BOOL)isCompareDate:(NSDate *)date;
 
+// 展示购物车到当前导航视图上
++ (void)showCarViewInNavC:(UINavigationController *)nav withVC:(id)VC;
+
+// 隐藏购物车
++ (void)hiddenCarView;
 @end

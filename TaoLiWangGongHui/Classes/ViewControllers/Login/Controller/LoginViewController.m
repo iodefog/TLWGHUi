@@ -54,7 +54,7 @@
     [self commitRequestWithParams:params withUrl:[GlobalRequest userAction_Login_Url]];
 }
 
-- (void)setDataDic:(NSDictionary *)resultDic toManager:(NSMutableArray *)baseManager
+- (void)setDataDic:(NSDictionary *)resultDic withRequest:(id)request
 {
     /**
      *  保存用户信息

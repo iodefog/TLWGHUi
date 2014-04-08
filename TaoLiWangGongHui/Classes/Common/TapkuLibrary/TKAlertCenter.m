@@ -248,6 +248,10 @@
 		[_alerts addObject:@[message]];
 	else if(image)
 		[_alerts addObject:@[image]];
+    if ([_alerts count]> 1) {
+        [_alerts removeObjectAtIndex:0];
+    }
+    
 	if(!_active) [self showAlerts];
 }
 - (void) postAlertWithMessage:(NSString*)message{

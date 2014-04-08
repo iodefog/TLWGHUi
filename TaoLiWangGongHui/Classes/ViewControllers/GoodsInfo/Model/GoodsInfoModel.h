@@ -15,6 +15,7 @@
 @property (nonatomic, strong) NSString *basicPrice;
 @property (nonatomic, strong) NSString *costPrice;
 @property (nonatomic, strong) NSString *productDescribe;
+@property (nonatomic, strong) NSNumber *productType;
 
 /*****
  	商品图片(数组结构）productPictures
@@ -22,6 +23,9 @@
  	原价(basicPrice)
  	现价(costPrice)
  	介绍图片（带文字的图片）(productDescribe)
+ 	商品类型（参考：1为生日福利，2为节日福利，3为购物商品）
+ productType = 1;
+
  */
 
 @end

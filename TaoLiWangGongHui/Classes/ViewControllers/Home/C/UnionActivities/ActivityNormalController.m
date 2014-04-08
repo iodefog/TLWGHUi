@@ -38,16 +38,27 @@
     [super viewDidLoad];
     self.navigationItem.title = (showType == showSignUp)?@"已报名会员":@"投票详情";
     [self.tableView setTableFooterView:[[UIView alloc] init]];
+    self.tableView.separatorStyle = UITableViewCellSeparatorStyleSingleLine;
     NSDictionary *params = nil;
     NSString *url = nil;
     
     if(showType == showSignUp){
-        [self commitRequestWithParams:@{@"memberId": [[UserHelper shareInstance] getMemberID],
-                                        @"activityId": activityID} withUrl:[GlobalRequest activityAction_QueryActivityRegistionList_Url]];
+        [self commitRequestWithParams:@{
+                                        @"memberId": [[UserHelper shareInstance] getMemberID],
+                                        @"activityId": activityID,
+                                        @"typeId":@"1",
+                                        @"pageNo":@"0",
+                                        @"pageSize":PAGESIZE
+                                        } withUrl:[GlobalRequest activityAction_QueryActivityRegistionList_Url]];
         
     }else{
-        params = @{@"memberId": [[UserHelper shareInstance] getMemberID],
-                   @"activityId":activityID,};
+        params = @{
+                   @"memberId": [[UserHelper shareInstance] getMemberID],
+                   @"activityId": activityID,
+                   @"typeId":@"2",
+                   @"pageNo":@"0",
+                   @"pageSize":PAGESIZE
+                   };
         url = [GlobalRequest activityAction_QueryVoteList_Url];
         [self commitRequestWithParams:params withUrl:url];
     }

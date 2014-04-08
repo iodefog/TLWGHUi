@@ -58,17 +58,17 @@
 
 #pragma mark - MJRefresh
 - (void)refreshHeaderView{
-    [self commitRequestWithParams:@{@"memberId": @"",
-                                    @"orderType": @"",
-                                    @"pageNo":@"",
-                                    @"pageSize":@""} withUrl:[GlobalRequest orderAction_QueryOrderList_Url]];
+    [self commitRequestWithParams:@{@"memberId": [[UserHelper shareInstance] getMemberID],
+                                    @"orderType": @"1",
+                                    @"pageNo":@"0",
+                                    @"pageSize":PAGESIZE} withUrl:[GlobalRequest orderAction_QueryOrderList_Url]];
 }
 
 - (void)refreshFooterView{
-    [self commitRequestWithParams:@{@"memberId": @"",
-                                    @"orderType": @"",
-                                    @"pageNo":@"",
-                                    @"pageSize":@""} withUrl:[GlobalRequest orderAction_QueryOrderList_Url]];
+    [self commitRequestWithParams:@{@"memberId": [[UserHelper shareInstance] getMemberID],
+                                    @"orderType": @"1",
+                                    @"pageNo":[NSString stringWithFormat:@"%d",[self.model count]/PAGESIZEINT],
+                                    @"pageSize":PAGESIZE} withUrl:[GlobalRequest orderAction_QueryOrderList_Url]];
 
 }
 
@@ -81,7 +81,7 @@
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
     // Return the number of sections.
-    return 3;
+    return [self.model count];
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
@@ -136,15 +136,20 @@
         cell = [[[NSBundle mainBundle] loadNibNamed:@"OrderCell" owner:nil options:nil] lastObject];
     }
     [cell showWelfareViewWithHidden:isShowWelfareHidden withCashViewHidden:!isShowWelfareHidden];
+    [cell setObject:self.model[indexPath.section]];
     return cell;
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
+    OrderCell *cell = (id)[tableView cellForRowAtIndexPath:indexPath];
+    NSString *orderCode = cell.ordelModel.orderCode;
     if (isShowWelfareHidden) {
         OrderDetailViewController *cashOrderVC = [[OrderDetailViewController alloc] initWithNibName:@"OrderDetailViewController" bundle:nil];
+        cashOrderVC.orderCode = orderCode;
         [self.navigationController pushViewController:cashOrderVC animated:YES];
     }else{
         MyOrderDetailViewController *welfareOrderVC = [[MyOrderDetailViewController alloc] initWithNibName:@"WelfareOrderViewController" bundle:nil];
+        welfareOrderVC.orderCode = orderCode;
         [self.navigationController pushViewController:welfareOrderVC animated:YES];
     }
 }

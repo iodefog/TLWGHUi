@@ -7,7 +7,11 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "JSBadgeView.h"
 
 @interface BaseViewController : UITabBarController <UITabBarControllerDelegate>
+@property (nonatomic, strong) JSBadgeView *badgeView;
+
+- (void)showBadgeView;
 
 @end

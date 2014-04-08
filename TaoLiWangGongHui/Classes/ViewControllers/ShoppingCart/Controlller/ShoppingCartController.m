@@ -94,7 +94,7 @@
 static UIButton *leftButton = nil;
 
 - (void)editClicked:(UIButton *)sender{
-    if ([self.model count]>0) {
+    if ([self.model count]<1) {
         [GlobalHelper handerResultWithDelegate:self withMessage:@"请先添加商品，才能编辑哦~" withTag:0];
         return;
     }
@@ -207,6 +207,11 @@ static UIButton *leftButton = nil;
     self.model = tempArray;
     if ([self.model count] > 1) {
         [self.tableView deleteRowsAtIndexPaths:[NSArray arrayWithObjects:index, nil] withRowAnimation:UITableViewRowAnimationRight];
+    }else{
+        NSLog(@"%@",self.navigationItem.rightBarButtonItem.customView);
+        UIButton *button = (id)self.navigationItem.rightBarButtonItem.customView;
+        button.selected = !button.selected;
+        showDeleteButton = button.selected;
     }
     [self reloadNewData];
 }
@@ -269,6 +274,16 @@ static UITextField *currentTextField = nil;
         sum += tempPrice * (productQuality?productQuality.intValue:1);
     }
     return sum;
+}
+
+#pragma mark -- response
+- (void)setDataDic:(NSDictionary *)resultDic withRequest:(id)request{
+    [super setDataDic:resultDic withRequest:request];
+    
+    for (NSDictionary *dict in self.model) {
+        GoodsListModel *goodsListModel = [[GoodsListModel alloc] initWithDataDic:dict];
+        [[GoodsDetailDataBase shareDataBase] updateItem:goodsListModel];
+    }
 }
 
 - (void)didReceiveMemoryWarning

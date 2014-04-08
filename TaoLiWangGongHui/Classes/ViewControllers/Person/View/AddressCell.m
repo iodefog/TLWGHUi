@@ -26,9 +26,9 @@
     if (self.selectBtn.isSelected) {
         return;
     }
-    [self.selectBtn setBackgroundImage:[UIImage imageNamed:@"accept_good_selected"] forState:UIControlStateSelected];
+//    [self.selectBtn setBackgroundImage:[UIImage imageNamed:@"accept_good_selected"] forState:UIControlStateSelected];
     self.selectBtn.selected = !self.selectBtn.selected;
-    self.addressBackGroundView.image = [UIImage imageNamed:self.selectBtn.selected ? @"address_cell_selected.png" : @"address_cell_normal.png"];
+//    self.addressBackGroundView.image = [UIImage imageNamed:self.selectBtn.selected ? @"address_cell_selected.png" : @"address_cell_normal.png"];
     [self updateDBWith];
 
 }
@@ -53,7 +53,8 @@
 
 // 更新数据 再把当前点击的修改为默认
 - (void)updateDBWith{
-    NSDictionary *params = @{@"city": userAddressModel.city?userAddressModel.city:@"",
+    NSDictionary *params = @{@"memberId":[[UserHelper shareInstance] getMemberID],
+                             @"city": userAddressModel.city?userAddressModel.city:@"",
                              @"isDefault": @"1",
                              @"receiverAddress": userAddressModel.receiverAddress?userAddressModel.receiverAddress:@"",
                              @"receiverAddressId": userAddressModel.receiverAddressId?userAddressModel.receiverAddressId:@"",

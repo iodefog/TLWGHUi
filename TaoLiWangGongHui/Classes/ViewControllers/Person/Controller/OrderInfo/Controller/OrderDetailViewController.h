@@ -10,6 +10,7 @@
 
 @interface OrderDetailViewController : ViewController
 
+@property (nonatomic, strong) NSString *orderCode;
 
 @property (strong, nonatomic) IBOutlet UIScrollView *baseScrollView;  // 整个滚动视图的载体
 @property (strong, nonatomic) IBOutlet UILabel *orderID; // 订单号

@@ -7,18 +7,19 @@
 //
 
 #import "GoodsInfoController.h"
+#import "WelfareConfirmViewController.h"
+#import "CashConfirmViewController.h"
 #import "GoodsInfoModel.h"
-#import "PopCarView.h"
-#import "GoodsListModel.h"
-
-@interface GoodsInfoController ()<JoinCarDelegate>
-
-@property (nonatomic, strong) GoodsListModel *goodsListModel;
+#import "GoodsDetailDataBase.h"
+//
+@interface GoodsInfoController ()
 /**
  *  UIScrollView上的控件
  */
 @property (weak, nonatomic) IBOutlet UIScrollView    *ShowImageScrollView;
 @property (weak, nonatomic) IBOutlet UILabel         *ShowImageNumberLable;
+// 购买或加入购物车按钮
+@property (strong, nonatomic) IBOutlet UIButton     *PayOrJoinCartBtn;
 @property (nonatomic, assign) int                    ImageCount;
 /**
  *  商品名称
@@ -33,7 +34,6 @@
  */
 @property (weak, nonatomic) IBOutlet UIWebView        *GoodsTitleWebView;
 @property (nonatomic, strong)GoodsInfoModel         *goodsInfoModel;
-@property (nonatomic, strong)PopCarView             *Carview;
 @end
 
 @implementation GoodsInfoController
@@ -67,10 +67,24 @@
 
 - (void)reloadNewData{
     if ([self.model isKindOfClass:[NSDictionary class]]) {
-        self.goodsListModel = [[GoodsListModel alloc] initWithDataDic:self.model];
+        self.goodsInfoModel = [[GoodsInfoModel alloc] initWithDataDic:self.model];
     }
+    if ((self.goodsInfoType==GoodsType_BirthDay) || (self.goodsInfoType==GoodsType_Holiday)) {
+        [self.PayOrJoinCartBtn setTitle:@"立即领取" forState:UIControlStateNormal];
+    }
+    self.ShowImageNumberLable.text = [NSString stringWithFormat:@"1/%d",[self.goodsInfoModel.productPictures count]];
+    self.GoodsNameLable.text = self.goodsInfoModel.productName;
+    self.GoodsNewPriceLable.text = [NSString stringWithFormat:@"%@元",self.goodsInfoModel.costPrice];
+      self.GoodsOldPriceLable.text = [NSString stringWithFormat:@"%@元",self.goodsInfoModel.basicPrice];
+    
 }
 
+
+- (void)addImageArray:(NSArray *)imagesArray{
+    for (NSString *imageUrl in imagesArray) {
+        
+    }
+}
 
 /**
  *  UI加载
@@ -81,25 +95,22 @@
  */
 #pragma mark -
 #pragma mark ViewDidLoad
+
+- (void)viewWillAppear:(BOOL)animated{
+    [super viewWillAppear:animated];
+    [GlobalHelper showCarViewInNavC:self.navigationController withVC:self];
+}
+
+- (void)viewWillDisappear:(BOOL)animated{
+    [super viewWillDisappear:animated];
+    [GlobalHelper hiddenCarView];
+}
+
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    [self InitUI];
+    self.navigationItem.title = @"商品详情";
     [self startGoodsDetailRequest];
-}
-- (void)InitUI
-{
-    _GoodsTitleWebView.scrollView.scrollEnabled = NO;
-    self.Carview = [[PopCarView alloc]init];
-    if (isIOS7) {
-        self.Carview.top = Screen_height - 50;
-    }else{
-        self.Carview.top = Screen_height - 70;
-    }
-    self.Carview.left = Screen_width - 50;
-    self.Carview.delegate = self;
-    [self.Carview SetCarNumber];
-    [self.view addSubview:self.Carview];
 }
 
 -(void)JoinCarButtonClick:(id)sender{
@@ -207,51 +218,26 @@
 #pragma mark -
 #pragma mark CardsBuy
 - (IBAction)InsertCardButtonClick:(id)sender {
-////    GoodsListModel *listModel = [[GoodsListModel alloc]init];
-////    listModel.GoodsId = [NSString stringWithFormat:@"%@", self.GoodsId];
-////    listModel.chmc = _Detailmodel.chmc;
-////    listModel.tlscj = _Detailmodel.tlscj;
-////    listModel.cklsj = _Detailmodel.cklsj;
-////    NSString *str = [[_Detailmodel.tpmc objectAtIndex:0] objectForKey:@"tpmc"];
-////    listModel.tpmc = str;
-////    listModel.GoodsNumber = @"1";
-////    if ([self.GoodsType isEqualToString:isGoodsTypePoint]) {
-////        listModel.Type = isGoodsTypePoint;
-////    }else{
-////        listModel.Type = isGoodsTypeMoney;
-////    }
-//    
-//    //判断是否存在相同类型的商品
-//    UIView *view = [[UIView alloc]initWithFrame:self.view.bounds];
-//    view.backgroundColor = [UIColor clearColor];
-//    [self.view addSubview:view];
-//    
-//    CarHaveSameGoods oneSuc = [TimeObject isHaveTwoClassOfInCar:self.GoodsType];
-//    if (oneSuc == CarHaveSameGoodsNomal) {
-//        
-//        BOOL success = [[GoodsDetailDataBase shareDataBase]insertItem:listModel];
-//        if (success == YES) {
-//            [ITTMessageView showMessage:@"已加入购物车" disappearAfterTime:1.0 andView:view];
-//        }else{
-//            [ITTMessageView showMessage:@"该商品已存在" disappearAfterTime:1.0 andView:view];
-//        }
-//    }
-//    else
-//    {
-//        if (oneSuc == CarHaveSameGoodsPoint) {
-//            [ITTMessageView showMessage:@"购物车中已存在积分商品,不能添加,请清空购物车后添加" disappearAfterTime:1.0 andView:view];
-//        }else{
-//            [ITTMessageView showMessage:@"购物车中已存在现金商品,不能添加,请清空购物车后添加" disappearAfterTime:1.0 andView:view];
-//        }
-//        
-//    }
-//    
-//    
-//    //设置tabbarlable显示
-//    _ITTTabBarController = (ITTTabBarController *)self.tabBarController;
-//    [_ITTTabBarController setNumberlable];
-//    [self.Carview SetCarNumber];
-    
+    if ((self.goodsInfoType == GoodsType_BirthDay) || (self.goodsInfoType == GoodsType_Holiday)) {
+        WelfareConfirmViewController *welfareConfirmVC = [[WelfareConfirmViewController alloc] initWithNibName:@"WelfareConfirmViewController" bundle:nil];
+        UIImageView *imageView = [[UIImageView alloc] init];
+        [imageView setImageWithURL:[NSURL URLWithString:self.goodsListModel.previewPicPath]];
+        welfareConfirmVC.goodPic = imageView.image;
+        welfareConfirmVC.goodText = self.goodsListModel.productName;
+        welfareConfirmVC.goodIDText = self.goodsListModel.productId;
+        [selected_navigation_controller() pushViewController:welfareConfirmVC animated:YES];
+    }else if (self.goodsInfoType == GoodsType_Discount){
+//        CashConfirmViewController *cashConfirmVC = [[CashConfirmViewController alloc] initWithNibName:@"CashConfirmViewController" bundle:nil];
+//        cashConfirmVC.goodsModel = self.goodsListModel;
+//        [selected_navigation_controller() pushViewController:cashConfirmVC animated:YES];
+        if ([[GoodsDetailDataBase shareDataBase] insertItem:self.goodsListModel]) {
+            [[TKAlertCenter defaultCenter] postAlertWithMessage:@"已加入购物车"];
+        }else{
+            [[TKAlertCenter defaultCenter] postAlertWithMessage:@"购物车里已存在"];
+        }
+        
+        [GlobalHelper showCarViewInNavC:nil withVC:nil];
+    }
 }
 
 

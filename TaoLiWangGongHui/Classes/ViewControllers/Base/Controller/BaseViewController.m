@@ -7,12 +7,13 @@
 //
 
 #import "BaseViewController.h"
-//#import "HomeController.h"
+#import "GoodsDetailDataBase.h"
 @interface BaseViewController ()
 
 @end
 
 @implementation BaseViewController
+@synthesize badgeView;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -45,7 +46,6 @@
 {
     [super viewDidLoad];
 	// Do any additional setup after loading the view.
-    self.tabBarController.delegate = self;
     self.viewControllers = [NSArray arrayWithObjects:
                             [self viewControllerWithTabTitle:@"首页" image:[UIImage imageNamed:@"home"] finishedSelectedImage:[UIImage imageNamed:@"home_tap"] viewClass:@"HomeViewController"],
                             [self viewControllerWithTabTitle:@"购物车" image:[UIImage imageNamed:@"shopping_cart"]  finishedSelectedImage:[UIImage imageNamed:@"shopping_cart_tap"] viewClass:@"ShoppingCartController"],
@@ -54,12 +54,27 @@
                             [self viewControllerWithTabTitle:@"个人中心" image:[UIImage imageNamed:@"person.png"] finishedSelectedImage:[UIImage imageNamed:@"person_tap.png"]  viewClass:@"PersonController"],
                             nil];
     [self setSelectedViewController:self.viewControllers[0]];
+    self.delegate = self;
+    [self showBadgeView];
+}
 
+- (void)showBadgeView{
+    if (!self.badgeView) {
+        self.badgeView = [[JSBadgeView alloc] initWithParentView:self.tabBar alignment:(JSBadgeViewAlignmentTopLeft)];
+        self.badgeView.badgePositionAdjustment = CGPointMake(115, 10);
+        self.badgeView.badgeBackgroundColor = RGBCOLOR(249, 89, 66);
+    }
+    if (!self.badgeView.superview) {
+        [self.tabBar addSubview:self.badgeView];
+    }
+    self.badgeView.badgeText = [NSString stringWithFormat:@"%d",[[[GoodsDetailDataBase shareDataBase] readTableName] count]];
+    if ([[[GoodsDetailDataBase shareDataBase] readTableName] count]<1) {
+        [self.badgeView removeFromSuperview];
+    }
 }
 
 - (void)tabBarController:(UITabBarController *)tabBarController didSelectViewController:(UIViewController *)viewController
 {
-    
 //    if (!viewController) {
 //        NSArray *controllerArray = [NSArray arrayWithObjects:@"HomeViewController",@"ShoppingCartController", @"MessageController", @"TeamController", @"PersonController", nil];
 //    self.tabBarController.

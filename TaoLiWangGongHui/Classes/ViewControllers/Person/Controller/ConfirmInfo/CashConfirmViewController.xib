@@ -152,7 +152,8 @@
                         <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                     </state>
-                    <state key="selected" backgroundImage="login_Select.png"/>
+                    <state key="selected" title="提交" backgroundImage="login_Select.png"/>
+                    <state key="highlighted" backgroundImage="login_Select.png"/>
                     <connections>
                         <action selector="commitClicked:" destination="-1" eventType="touchUpInside" id="wIS-Lg-Sh3"/>
                     </connections>

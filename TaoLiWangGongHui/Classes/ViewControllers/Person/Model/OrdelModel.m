@@ -17,6 +17,8 @@
              @"totalMoney":@"totalMoney",
              @"totalScore":@"totalScore",
              @"orderDate":@"orderDate",
+             @"orderProducts":@"orderProducts",
+             @"orderReceiver":@"orderReceiver"
              };
 }
 

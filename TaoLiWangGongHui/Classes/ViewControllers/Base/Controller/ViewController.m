@@ -39,7 +39,7 @@
         NSLog(@"request start");
     } onRequestFinished:^(ITTBaseDataRequest *request) {
         
-        [self setDataDic:request.handleredResult toManager:nil];
+        [self setDataDic:request.handleredResult withRequest:request];
         NSLog(@"request finish");
         [self responseSuccessWithResponse:request];
     
@@ -71,7 +71,7 @@
     [GlobalHelper handerResultWithDelegate:self withMessage:request.handleredResult[@"msg"] withTag:0];
 }
 
-- (void)setDataDic:(NSDictionary *)resultDic toManager:(NSMutableArray *)baseManager
+- (void)setDataDic:(NSDictionary *)resultDic withRequest:(id)request
 {
     /**
      *  返回数据

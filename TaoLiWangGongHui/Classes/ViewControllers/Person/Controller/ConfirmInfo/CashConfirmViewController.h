@@ -23,7 +23,8 @@
 @property (strong, nonatomic) IBOutlet UILabel *userName; // 用户名
 @property (strong, nonatomic) IBOutlet UILabel *phoneNum; // 用户手机号
 @property (strong, nonatomic) IBOutlet UILabel *detailAddress;// 详细地址
-@property (strong, nonatomic) GoodsListModel *goodsModel;
+//@property (strong, nonatomic) NSArray  *goodsModelArray;
+@property (strong, nonatomic) GoodsListModel *welfareGoodsModel;
 
 // 传入商品价格
 @property (assign, nonatomic) CGFloat goodsSumPrice;

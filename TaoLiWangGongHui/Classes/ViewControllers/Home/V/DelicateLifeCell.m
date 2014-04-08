@@ -17,7 +17,7 @@
     self = [super initWithStyle:style reuseIdentifier:reuseIdentifier];
     if (self) {
         // Initialization code
-        self.selectionStyle = UITableViewCellSelectionStyleBlue;
+        self.selectionStyle = UITableViewCellSelectionStyleNone;
         [self createUI];
     }
     return self;
@@ -25,7 +25,7 @@
 
 - (void)createUI{
     self.dailyLable = [[RTLabel alloc] initWithFrame:CGRectMake(10, 0, 300, 20)];
-    self.dailyLable.text = @"2014-03-12";
+//    self.dailyLable.text = @"2014-03-12";
     self.dailyLable.font = [UIFont systemFontOfSize:14.0];
     self.dailyLable.textColor = [UIColor lightGrayColor];
     [self.dailyLable setTextAlignment:RTTextAlignmentCenter];
@@ -33,7 +33,7 @@
     
     self.timeLable = [[RTLabel alloc] initWithFrame:CGRectMake(200, self.dailyLable.top, 110, self.dailyLable.height)];
     self.timeLable.font = [UIFont systemFontOfSize:14.0f];
-    self.timeLable.text = @"8:00";
+//    self.timeLable.text = @"8:00";
     self.timeLable.textColor = [UIColor lightGrayColor];
     [self.timeLable setTextAlignment:RTTextAlignmentRight];
     self.timeLable.backgroundColor = [UIColor clearColor];

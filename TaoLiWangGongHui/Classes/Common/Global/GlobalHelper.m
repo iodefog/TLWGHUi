@@ -8,6 +8,8 @@
 
 #import "GlobalHelper.h"
 #import "SIAlertView.h"
+#import "PopCarView.h"
+#import "GoodsDetailDataBase.h"
 @implementation GlobalHelper
 
 static GlobalHelper *helper = nil;
@@ -124,6 +126,28 @@ UINavigationController *selected_navigation_controller()
     return isToday;
 }
 
+// 展示购物车到当前导航视图上
+static PopCarView *carview = nil;
++ (void)showCarViewInNavC:(UINavigationController *)nav withVC:(id)VC{
+    //    _GoodsTitleWebView.scrollView.scrollEnabled = NO;
+    if (!carview) {
+        carview = [[PopCarView alloc]init];
+    }
+    if(nav) carview.bottom = nav.view.bottom;
+    carview.left = Screen_width - 50;
+    carview.delegate = self;
+    [carview SetCarNumber];
+    if (!carview.superview && nav) {
+        [nav.view addSubview:carview];
+    }
+    AppDelegate *delegate = (id)[UIApplication sharedApplication].delegate;
+    [delegate.baseViewController showBadgeView];
+}
 
+
+// 隐藏购物车
++ (void)hiddenCarView;{
+    [carview removeFromSuperview];
+}
 
 @end

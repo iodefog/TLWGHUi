@@ -148,6 +148,24 @@ static NSString *tableName = nil;
         [self closeDB];
     }
 }
+
+- (void)updateItem:(id)item{
+    @synchronized(self){
+        [mdataBase open];
+        if ([item isKindOfClass:[GoodsListModel class]]) {
+            GoodsListModel *model =(GoodsListModel *)item;
+            NSString *sql = [NSString stringWithFormat:@"update %@ set productName='%@',productDescribe='%@',previewPicPath='%@',basicPrice='%@',costPrice='%@',productType=%@ where productId='%@'", tableName ,model.productName,model.productDescribe,model.previewPicPath,model.basicPrice,model.costPrice,model.productType ,model.productId];
+            BOOL success = [mdataBase executeUpdate:sql];
+            if (!success) {
+                NSLog(@"更新失败");
+            }
+        }
+        [self closeDB];
+    }
+    //    productName, productDescribe, previewPicPath, productQuantity, basicPrice, costPrice, productType
+
+}
+
 /**
  *  删除数据
  */

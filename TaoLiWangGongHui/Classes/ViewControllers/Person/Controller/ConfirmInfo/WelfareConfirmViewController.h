@@ -7,7 +7,7 @@
 //
 
 #import "ViewController.h"
-
+#import "GoodsListModel.h"
 @interface WelfareConfirmViewController : ViewController // 信息确认
 // 头部视图1
 @property (strong, nonatomic) IBOutlet UIView *head1View;
@@ -26,5 +26,7 @@
 @property (strong, nonatomic) IBOutlet UILabel *userName; //用户名
 @property (strong, nonatomic) IBOutlet UILabel *phoneNum; // 手机号码
 @property (strong, nonatomic) IBOutlet UILabel *detailAddress;// 详细地址
+
+@property (strong, nonatomic) GoodsListModel *goodsListModel;
 
 @end

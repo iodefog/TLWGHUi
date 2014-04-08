@@ -70,7 +70,7 @@
                         </subviews>
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                     </view>
-                    <view contentMode="scaleToFill" id="qqy-l1-ca8" userLabel="welfareView">
+                    <view hidden="YES" contentMode="scaleToFill" id="qqy-l1-ca8" userLabel="welfareView">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="73"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
@@ -122,13 +122,13 @@
             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
             <connections>
                 <outlet property="cashHeadImage" destination="BUa-Ke-BTm" id="Hz0-cW-ubr"/>
-                <outlet property="cashOrderNum" destination="p8P-2y-IFi" id="H2q-AG-zku"/>
+                <outlet property="cashOrderNum" destination="61I-QA-mFQ" id="FrL-hA-2mU"/>
                 <outlet property="cashOrderPirce" destination="eNQ-3i-PLt" id="zQC-vv-UGu"/>
-                <outlet property="cashOrderTime" destination="61I-QA-mFQ" id="T9a-ia-kGh"/>
+                <outlet property="cashOrderTime" destination="p8P-2y-IFi" id="58W-h1-WnA"/>
                 <outlet property="cashView" destination="e83-fN-XLj" id="QKg-39-guo"/>
                 <outlet property="welfareHeadImage" destination="S5D-bw-muj" id="Bus-eZ-gQ6"/>
-                <outlet property="welfareOrderNum" destination="xPo-jw-Kck" id="21W-Q3-p7v"/>
-                <outlet property="welfareOrderTime" destination="wdg-aV-dLD" id="EMp-iL-chx"/>
+                <outlet property="welfareOrderNum" destination="wdg-aV-dLD" id="LrL-qv-yXO"/>
+                <outlet property="welfareOrderTime" destination="xPo-jw-Kck" id="NUL-gm-eXu"/>
                 <outlet property="welfareView" destination="qqy-l1-ca8" id="RXw-eU-EKw"/>
             </connections>
         </tableViewCell>

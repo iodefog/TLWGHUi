@@ -127,7 +127,7 @@ static int clickCount = 59;
     }
 }
 
-- (void)setDataDic:(NSDictionary *)resultDic toManager:(NSMutableArray *)baseManager
+- (void)setDataDic:(NSDictionary *)resultDic withRequest:(id)request
 {
     /**
      *  保存用户信息

@@ -44,7 +44,7 @@
                                     <nil key="highlightedColor"/>
                                 </label>
                             </subviews>
-                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                            <color key="backgroundColor" red="0.98039215686274506" green="0.96862745098039216" blue="0.95294117647058818" alpha="0.0" colorSpace="calibratedRGB"/>
                         </view>
                         <view contentMode="scaleToFill" id="Ds2-fL-1Yh" userLabel="bottom">
                             <rect key="frame" x="0.0" y="250" width="320" height="120"/>
@@ -85,13 +85,13 @@
                         <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" scrollEnabled="NO" id="hki-uV-VLN">
                             <rect key="frame" x="0.0" y="210" width="326" height="10"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                            <color key="backgroundColor" red="0.96470588235294119" green="0.94509803921568625" blue="0.91764705882352937" alpha="0.0" colorSpace="calibratedRGB"/>
                         </scrollView>
                     </subviews>
-                    <color key="backgroundColor" red="0.98039215686274506" green="0.96862745098039216" blue="0.95294117647058818" alpha="1" colorSpace="calibratedRGB"/>
+                    <color key="backgroundColor" red="0.96470588235294119" green="0.94509803921568625" blue="0.91764705882352937" alpha="1" colorSpace="calibratedRGB"/>
                 </scrollView>
             </subviews>
-            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+            <color key="backgroundColor" red="0.98039215686274506" green="0.96862745098039216" blue="0.95294117647058818" alpha="1" colorSpace="calibratedRGB"/>
             <simulatedStatusBarMetrics key="simulatedStatusBarMetrics"/>
             <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina4"/>
         </view>
@@ -100,6 +100,6 @@
         <image name="button_disable.png" width="300" height="35"/>
         <image name="login_Nomal.png" width="300" height="35"/>
         <image name="union_mark_normal.png" width="300" height="35"/>
-        <image name="福利首页.png" width="153" height="40"/>
+        <image name="福利首页.png" width="92" height="92"/>
     </resources>
 </document>

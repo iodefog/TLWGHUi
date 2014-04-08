@@ -8,6 +8,7 @@
 
 #import "AppDelegate.h"
 #import "LoginViewController.h"
+#import "TimeObject.h"
 ///支付宝
 #import "AliPayHelper.h"
 #import "UIAlertView+ITTAdditions.h"
@@ -20,6 +21,9 @@
 {
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
     // Override point for customization after application launch.
+    
+    if(![self SenderlimitTime])
+        return NO;
     
     // 全局预定义导航背景
     if (isIOS7) {
@@ -52,6 +56,22 @@
 - (void)chageLoginVC{
     self.window.rootViewController = [[UINavigationController alloc] initWithRootViewController:[[LoginViewController alloc] init]];
 }
+
+//打包使用期限限制
+- (BOOL)SenderlimitTime{
+    int timeDay5 = 7 * 24 * 60 * 60;
+    NSString * strNewTime = [TimeObject currentTime];
+    NSString * strTime = @"1396636363";
+    NSLog(@"预计开始时间===%@",[TimeObject fromTimeChuoTotime:strTime]);
+    NSLog(@"当前时间====%@",[TimeObject currentTime]);
+    if ([strTime intValue] + timeDay5 <= [strNewTime intValue]) {
+        [UIAlertView popupAlertByDelegate:self andTag:7000 title:@"温馨提示" message:@"超出有效期  不再正常使用"];
+        NSLog(@"strNew超出有效期  不再正常使用");
+        return NO;
+    }
+    return YES;
+}
+
 
 - (void)applicationWillResignActive:(UIApplication *)application
 {

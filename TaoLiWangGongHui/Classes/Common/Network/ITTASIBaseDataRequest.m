@@ -77,6 +77,7 @@
         postBodySize += [urlString lengthOfBytesUsingEncoding:NSUTF8StringEncoding];        
         NSURL *nsUrl = [NSURL URLWithString:urlString];
         _request = [[ASIFormDataRequest alloc] initWithURL:nsUrl];
+        _request.shouldAttemptPersistentConnection   = NO;
         [_request setRequestMethod:@"GET"];
     }
     else {
@@ -84,6 +85,7 @@
         postBodySize += [url lengthOfBytesUsingEncoding:NSUTF8StringEncoding];
         NSURL *nsUrl = [NSURL URLWithString:url];
         _request = [[ASIFormDataRequest alloc] initWithURL:nsUrl];
+        _request.shouldAttemptPersistentConnection   = NO;
         [_request setRequestMethod:@"POST"];        
         switch (self.parmaterEncoding) {
             case ITTURLParameterEncoding: {

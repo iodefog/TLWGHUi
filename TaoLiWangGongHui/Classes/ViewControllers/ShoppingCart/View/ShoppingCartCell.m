@@ -9,6 +9,7 @@
 #import "ShoppingCartCell.h"
 #import "GoodsDetailDataBase.h"
 #import "GoodsInfoController.h"
+#import "Appdelegate.h"
 
 @implementation ShoppingCartCell
 
@@ -56,6 +57,9 @@
 // 删除按钮点击
 - (IBAction)deleteClicked:(id)sender {
     [[GoodsDetailDataBase shareDataBase] deleteTableProductId:self.shoppingModel];
+    AppDelegate *delegate = (id)[UIApplication sharedApplication].delegate;
+   
+    [delegate.baseViewController showBadgeView];
     
     if (self.shoppingDelegate && [self.shoppingDelegate respondsToSelector:@selector(responseWithIndex:withData:)]) {
         [self.shoppingDelegate performSelector:@selector(responseWithIndex:withData:) withObject:currentIndex withObject:currentData];
@@ -90,7 +94,7 @@
         return;
     }
     [[GoodsDetailDataBase shareDataBase] updateItem:self.shoppingModel andProNumber:self.GoodQuantity.text];
-
+    
     if (self.shoppingDelegate && [self.shoppingDelegate respondsToSelector:@selector(shoppingTextFieldDidEndEditing:)]) {
         [self.shoppingDelegate shoppingTextFieldDidEndEditing:textField];
     }

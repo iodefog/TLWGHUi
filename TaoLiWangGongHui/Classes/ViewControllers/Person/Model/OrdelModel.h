@@ -15,7 +15,8 @@
 @property (nonatomic, strong) NSString *totalMoney;
 @property (nonatomic, strong) NSString *totalScore;
 @property (nonatomic, strong) NSString *orderDate;
-
+@property (nonatomic, strong) NSDictionary *orderReceiver;
+@property (nonatomic, strong) NSArray *orderProducts;
 
 /*****
  	订单id（orderId）

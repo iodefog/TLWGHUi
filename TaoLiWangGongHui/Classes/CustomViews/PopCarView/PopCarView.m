@@ -8,6 +8,7 @@
 
 #import "PopCarView.h"
 #import "GoodsDetailDataBase.h"
+#import "AppDelegate.h"
 
 @implementation PopCarView
 
@@ -31,9 +32,14 @@
 
 }
 - (IBAction)JoinCarButtonClick:(id)sender {
-    if ([self.delegate respondsToSelector:@selector(JoinCarButtonClick:)]) {
-        [self.delegate performSelector:@selector(JoinCarButtonClick:) withObject:sender];
-    }
+//    if ([self.delegate respondsToSelector:@selector(JoinCarButtonClick:)]) {
+//        [self.delegate performSelector:@selector(JoinCarButtonClick:) withObject:sender];
+//    }
+    UINavigationController *currentNavC = selected_navigation_controller();
+    [currentNavC  popToRootViewControllerAnimated:NO];
+    AppDelegate *delegate = [UIApplication sharedApplication].delegate;
+    [delegate.baseViewController setSelectedIndex:1];
+    [self removeFromSuperview];
 }
 
 -(void)awakeFromNib{

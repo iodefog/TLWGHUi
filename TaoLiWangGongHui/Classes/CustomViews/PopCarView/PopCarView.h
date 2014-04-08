@@ -9,7 +9,7 @@
 #import "ITTXibView.h"
 
 @protocol JoinCarDelegate <NSObject>
-
+@optional
 -(void)JoinCarButtonClick:(id)sender;
 
 @end

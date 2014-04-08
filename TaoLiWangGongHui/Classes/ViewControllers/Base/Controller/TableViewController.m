@@ -54,7 +54,7 @@
         [self doneWithView:_header];
         [self doneWithView:_footer];
         
-        [self setDataDic:request.handleredResult toManager:nil];
+        [self setDataDic:request.handleredResult withRequest:nil];
         NSLog(@"request finish");
         [self responseSuccessWithResponse:request];
         
@@ -93,7 +93,7 @@
     
 }
 
-- (void)setDataDic:(NSDictionary *)resultDic toManager:(NSMutableArray *)baseManager
+- (void)setDataDic:(NSDictionary *)resultDic withRequest:(id)request
 {
     /**
      *  返回数据
@@ -162,7 +162,7 @@
     footer.scrollView = self.tableView;
     footer.beginRefreshingBlock = ^(MJRefreshBaseView *refreshView) {
         // 模拟延迟加载数据，因此2秒后才调用）
-        [self refreshHeaderView];
+        [self refreshFooterView];
         // 这里的refreshView其实就是footer
 //        [self performSelector:@selector(doneWithView:) withObject:refreshView afterDelay:2.0];
         

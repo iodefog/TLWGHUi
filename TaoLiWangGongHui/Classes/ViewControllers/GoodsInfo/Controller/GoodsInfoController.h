@@ -7,7 +7,7 @@
 //
 
 #import "ViewController.h"
-
+#import "GoodsListModel.h"
 /*** 共用一个福利详情页
  */
 typedef enum{
@@ -20,5 +20,6 @@ typedef enum{
 
 @property (nonatomic, assign) GoodsInfoType goodsInfoType;
 @property (nonatomic, strong) NSString      *productID;
+@property (nonatomic, strong) GoodsListModel *goodsListModel;
 
 @end

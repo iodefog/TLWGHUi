@@ -16,4 +16,6 @@
 @property (strong, nonatomic) IBOutlet UILabel *goodPrice;
 @property (strong, nonatomic) IBOutlet UILabel *goodQuantity;
 
+- (void)setObject:(NSDictionary *)dict;
+
 @end
