@@ -10,7 +10,7 @@
 #import "JokeListModel.h"
 
 @implementation DelicateLifeCell
-@synthesize delicateLifeTitle, delicateLifeDescription;
+@synthesize delicateLifeTitle;
 
 - (id)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier
 {
@@ -39,7 +39,7 @@
     self.timeLable.backgroundColor = [UIColor clearColor];
     [self addSubview:self.timeLable];
 
-    self.bgImageView = [[UIImageView alloc] initWithFrame:CGRectMake(10, self.dailyLable.bottom , self.dailyLable.width, 134)];
+    self.bgImageView = [[UIImageView alloc] initWithFrame:CGRectMake(10, self.dailyLable.bottom -3 , self.dailyLable.width, 0)];
     self.bgImageView.image = [UIImage imageNamed:@"joke_background.png"];
     self.bgImageView.backgroundColor = [UIColor clearColor];
     [self addSubview:self.bgImageView];
@@ -53,33 +53,47 @@
     dividingView.backgroundColor = RGBCOLOR(221, 215, 207);
     [self addSubview:dividingView];
     
-    self.delicateLifeDescription = [[RTLabel alloc] initWithFrame:CGRectMake(20, 50, self.delicateLifeTitle.width, 40)];
-    self.delicateLifeDescription.backgroundColor = [UIColor clearColor];
-    self.delicateLifeDescription.font = [UIFont systemFontOfSize:14];
-    [self addSubview:self.delicateLifeDescription];
+    self.delicateWebView = [[UIWebView alloc] initWithFrame:CGRectMake(20, 40, self.delicateLifeTitle.width, 40)];
+    self.delicateWebView.backgroundColor = [UIColor clearColor];
+    self.delicateWebView.opaque = NO;
+    self.delicateWebView.userInteractionEnabled = NO;
+    self.delicateWebView.delegate = self;
+    [self addSubview:self.delicateWebView];
 }
-
+/*
+ &nbsp;44sdfsfsdfdsf&nbsp:&nbsp:
+ */
 - (void)setObject:(NSDictionary *)dict{
     JokeListModel *model = [[JokeListModel alloc] initWithDataDic:dict];
     self.dailyLable.text = model.publishDatetime;
     self.delicateLifeTitle.text = model.activityTitle;
-    self.delicateLifeDescription.text = model.description;
-    self.delicateLifeTitle.height = self.delicateLifeTitle.optimumSize.height + 4;
-    self.delicateLifeDescription.top = self.delicateLifeTitle.bottom;
-    self.delicateLifeDescription.height = self.delicateLifeDescription.optimumSize.height + 5;
-    self.bgImageView.height = self.delicateLifeDescription.height + self.delicateLifeTitle.height + 10;
+    [self.delicateWebView loadHTMLString:model.description baseURL:nil];
+}
+
+static float cellHeight = 0.0f;
+
+- (void)webViewDidFinishLoad:(UIWebView *)webView{
+    NSString *jsString = @"document.body.style.fontSize=14";
+    [webView stringByEvaluatingJavaScriptFromString:jsString];
+    
+    //webView的高度
+    NSString *string = [webView stringByEvaluatingJavaScriptFromString:@"document.body.offsetHeight;"];
+    CGRect frame = [webView frame];
+    frame.size.height = [string floatValue]+10;
+    [webView setFrame:frame];
+    
+    self.frame = CGRectMake(self.left, self.top, self.width, 40+frame.size.height);
+    cellHeight =  40+frame.size.height;
+    
+    self.bgImageView.height = cellHeight;
+
+    if (self.delegate && [self.delegate respondsToSelector:@selector(reloadTableView)]) {
+        [self.delegate performSelector:@selector(reloadTableView) withObject:nil];
+    }
 }
 
 + (CGFloat)getCellHeight:(NSDictionary *)dict{
-    CGFloat height = 0;
-    RTLabel *tempLabel = [[RTLabel alloc] initWithFrame:CGRectMake(0, 0, 280, 0)];
-    tempLabel.font = [UIFont systemFontOfSize:14];
-    JokeListModel *model = [[JokeListModel alloc] initWithDataDic:dict];
-    tempLabel.text = model.activityTitle;
-    height = 10 + tempLabel.optimumSize.height;
-    tempLabel.text = model.description;
-    height += 10 + tempLabel.optimumSize.height ;
-    return height + 20;
+    return cellHeight;
 }
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated

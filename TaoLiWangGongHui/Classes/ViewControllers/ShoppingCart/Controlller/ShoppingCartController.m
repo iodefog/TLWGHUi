@@ -39,13 +39,20 @@
 
 - (void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
-    [self getRequestShoppingCartData];
+    NSArray *dbArray = [[GoodsDetailDataBase shareDataBase] readTableName];
+    if (([dbArray count] != [self.model count]) && self.model) {
+        [self.model removeAllObjects];
+        [self getRequestShoppingCartData];
+    }
 }
 
 - (void)viewDidLoad
 {
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
+    if (!self.model) {
+        [self getRequestShoppingCartData];
+    }
     self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     
     // UIKeyBoardCoView

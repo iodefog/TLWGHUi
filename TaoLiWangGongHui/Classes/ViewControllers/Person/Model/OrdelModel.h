@@ -18,6 +18,10 @@
 @property (nonatomic, strong) NSDictionary *orderReceiver;
 @property (nonatomic, strong) NSArray *orderProducts;
 
+
+// orderPorducts 里的数据解析，两层共用一个class
+
+
 /*****
  	订单id（orderId）
  	订单号(orderCode)

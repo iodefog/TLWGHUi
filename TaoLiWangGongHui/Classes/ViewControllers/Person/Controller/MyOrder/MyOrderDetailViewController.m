@@ -27,13 +27,32 @@
 {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
-    self.navigationItem.title = @"订单详情";
-    self.enterButton.hidden = YES;
+    self.navigationItem.title = self.orderSuccess?@"订单交易成功":@"订单详情";
+    self.enterButton.hidden = !self.orderSuccess;
     
     [self commitRequestWithParams:@{@"memberId": [[UserHelper shareInstance] getMemberID],
                                     @"orderCode": self.orderCode
                                     } withUrl:[GlobalRequest orderAction_QueryOrderInfo_Url]];
-     
+    if (!self.orderSuccess) {
+        self.enterButton.hidden = YES;
+    }
+}
+
+- (void)back{
+    if ( self.orderSuccess) {
+        UIViewController *viewController = nil;
+        if ([self.navigationController.childViewControllers count] >1) {
+            NSLog(@"%@", self.navigationController.childViewControllers);
+           viewController = self.navigationController.childViewControllers[self.navigationController.childViewControllers.count - 3];
+            [self.navigationController popToViewController:viewController animated:YES];
+        }
+    }else{
+        [super back];
+    }
+}
+
+- (void)enterOrder:(id)sender{
+    [self back];
 }
 
 - (void)reloadNewData{

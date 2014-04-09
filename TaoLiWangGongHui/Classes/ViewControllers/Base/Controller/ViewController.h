@@ -35,4 +35,6 @@
 - (void)showEmptyView;
 // 当有数据是，移除空图
 - (void)hideEmptyView;
+
+- (void)back;
 @end

@@ -11,5 +11,6 @@
 @interface MyOrderDetailViewController : WelfareOrderViewController
 
 @property (nonatomic, strong) NSString *orderCode;
+@property (nonatomic, assign) BOOL     orderSuccess;
 
 @end

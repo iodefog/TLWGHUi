@@ -48,13 +48,16 @@
 {
     [super viewDidLoad];
     self.navigationItem.title = self.welfareType?@"节日福利领取":@"生日福利领取";
-    NSDictionary *param = @{
-                            @"id":[[UserHelper shareInstance] getMemberID],
-                            (self.welfareType?@"type":@"productType"):self.welfareType?@"2":@"1",
-                            @"pageNo":@"0",
-                            @"pageSize":PAGESIZE
-                            };
-    [self commitRequestWithParams:param withUrl:[GlobalRequest productAction_QueryProductListByType_Url]];
+    if (!self.model) {
+        NSDictionary *param = @{
+                                @"id":[[UserHelper shareInstance] getMemberID],
+                                (self.welfareType?@"type":@"productType"):self.welfareType?@"2":@"1",
+                                @"pageNo":@"0",
+                                @"pageSize":PAGESIZE
+                                };
+        [self commitRequestWithParams:param withUrl:[GlobalRequest productAction_QueryProductListByType_Url]];
+    }
+   
     [self.tableView setTableFooterView:[[UIView alloc] init]];
 }
 

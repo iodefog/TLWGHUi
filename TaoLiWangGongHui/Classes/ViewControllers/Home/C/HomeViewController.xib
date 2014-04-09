@@ -8,8 +8,9 @@
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="HomeViewController">
             <connections>
                 <outlet property="baseScroll" destination="j9B-iE-qde" id="nCy-Oo-WaM"/>
-                <outlet property="delicateLifeLable" destination="en7-G1-jMJ" id="YKs-tA-yH2"/>
                 <outlet property="headScroll" destination="bna-Qb-rSO" id="IQ1-6L-2iE"/>
+                <outlet property="jokeDescription" destination="rOm-ro-zhQ" id="I8U-sb-ylC"/>
+                <outlet property="jokeImageView" destination="IOS-NO-as7" id="hUz-af-Bnw"/>
                 <outlet property="jokeTitle" destination="ajr-g4-lON" id="cZw-4r-3N4"/>
                 <outlet property="view" destination="1" id="3"/>
             </connections>
@@ -102,18 +103,6 @@
                                     </subviews>
                                     <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                                 </view>
-                                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" lineBreakMode="tailTruncation" numberOfLines="10" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="en7-G1-jMJ">
-                                    <rect key="frame" x="20" y="51" width="280" height="101"/>
-                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                                    <gestureRecognizers/>
-                                    <fontDescription key="fontDescription" type="system" pointSize="13"/>
-                                    <color key="textColor" red="0.48327105978260865" green="0.48327105978260865" blue="0.48327105978260865" alpha="1" colorSpace="calibratedRGB"/>
-                                    <nil key="highlightedColor"/>
-                                    <connections>
-                                        <outletCollection property="gestureRecognizers" destination="Y1b-mK-GBq" appends="YES" id="68e-tB-goY"/>
-                                    </connections>
-                                </label>
                                 <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="ajr-g4-lON">
                                     <rect key="frame" x="20" y="32" width="280" height="21"/>
                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -121,8 +110,30 @@
                                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                     <nil key="highlightedColor"/>
                                 </label>
+                                <label hidden="YES" opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" lineBreakMode="tailTruncation" numberOfLines="10" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="en7-G1-jMJ">
+                                    <rect key="frame" x="20" y="51" width="280" height="101"/>
+                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                    <gestureRecognizers/>
+                                    <fontDescription key="fontDescription" type="system" pointSize="13"/>
+                                    <color key="textColor" red="0.48327105978260865" green="0.48327105978260865" blue="0.48327105978260865" alpha="1" colorSpace="calibratedRGB"/>
+                                    <nil key="highlightedColor"/>
+                                </label>
+                                <webView opaque="NO" userInteractionEnabled="NO" contentMode="scaleToFill" id="rOm-ro-zhQ">
+                                    <rect key="frame" x="20" y="51" width="280" height="96"/>
+                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                    <gestureRecognizers/>
+                                    <connections>
+                                        <outlet property="delegate" destination="-1" id="1Js-mD-WAf"/>
+                                    </connections>
+                                </webView>
                             </subviews>
                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                            <gestureRecognizers/>
+                            <connections>
+                                <outletCollection property="gestureRecognizers" destination="AsT-8d-6KS" appends="YES" id="zKJ-i6-KHl"/>
+                            </connections>
                         </view>
                     </subviews>
                     <inset key="insetFor6xAndEarlier" minX="0.0" minY="-20" maxX="0.0" maxY="20"/>
@@ -139,9 +150,9 @@
             <simulatedOrientationMetrics key="simulatedOrientationMetrics"/>
             <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina4"/>
         </viewController>
-        <tapGestureRecognizer id="Y1b-mK-GBq">
+        <tapGestureRecognizer id="AsT-8d-6KS">
             <connections>
-                <action selector="delicateLifeClicked:" destination="-1" id="H4X-0v-LJl"/>
+                <action selector="delicateLifeClicked:" destination="-1" id="K3n-Tx-hm3"/>
             </connections>
         </tapGestureRecognizer>
     </objects>

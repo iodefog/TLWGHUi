@@ -42,10 +42,16 @@
     return navigationController;
 }
 
+- (void)dealloc{
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
+}
+
 - (void)viewDidLoad
 {
     [super viewDidLoad];
 	// Do any additional setup after loading the view.
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(showBadgeView) name:@"cartDBChange" object:nil];
+    
     self.viewControllers = [NSArray arrayWithObjects:
                             [self viewControllerWithTabTitle:@"首页" image:[UIImage imageNamed:@"home"] finishedSelectedImage:[UIImage imageNamed:@"home_tap"] viewClass:@"HomeViewController"],
                             [self viewControllerWithTabTitle:@"购物车" image:[UIImage imageNamed:@"shopping_cart"]  finishedSelectedImage:[UIImage imageNamed:@"shopping_cart_tap"] viewClass:@"ShoppingCartController"],

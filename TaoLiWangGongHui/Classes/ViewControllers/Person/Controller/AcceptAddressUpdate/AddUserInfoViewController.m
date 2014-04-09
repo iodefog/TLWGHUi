@@ -227,7 +227,7 @@
                               @"receiverPhone":phoneTextField.text,
                               @"receiverAddress":detailAddressTextField.text,
                               @"receiverPostalcode":zipCodeTextField.text,
-                              @"email":self.addressModel?self.addressModel.email:@"",
+                              @"email":self.addressModel?(self.addressModel.email?self.addressModel.email:@""):@"",
                               @"isDefault": @"1",
                               };
     AddressModel *addModel = [[AddressModel alloc] initWithDataDic:params];

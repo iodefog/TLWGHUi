@@ -185,4 +185,23 @@ static NSString *tableName = nil;
         [self closeDB];
     }
 }
+
+// 清空表数据
+- (BOOL)cleanTabel{
+    BOOL mm = YES;
+    @synchronized(self){
+        [mdataBase open];
+        NSString *sqlstr = [NSString stringWithFormat:@"DELETE FROM %@", tableName];
+        if (![mdataBase executeUpdate:sqlstr])
+        {
+            NSLog(@"Erase table error!");
+            mm = NO;
+        }else{
+            mm = YES;
+        }
+    [self closeDB];
+    }
+    return  mm;
+}
+
 @end

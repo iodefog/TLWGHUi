@@ -9,7 +9,7 @@
 #import "WelfareConfirmViewController.h"
 #import "AcceptAddressController.h"
 #import "UserAddressDataBase.h"
-//#import "AddressModel.h"
+#import "MyOrderDetailViewController.h"
 #import "NewAddressModel.h"
 @interface WelfareConfirmViewController (){
     AddressModel *addressModel;
@@ -112,10 +112,18 @@
         NSLog(@"%@",request.handleredResult[@"msg"]);
 //        NSNumber *codeNum = request.handleredResult[@"code"];
 //        if (!codeNum.boolValue) {
-            [GlobalHelper handerResultWithDelegate:nil withMessage:request.handleredResult[@"msg"] withTag:0];
-//        }else{
-//            
-//        }
+//            [GlobalHelper handerResultWithDelegate:nil withMessage:request.handleredResult[@"msg"] withTag:0];
+        if ([request.handleredResult[@"msg"] isKindOfClass:[NSString class]]) {
+            [[TKAlertCenter defaultCenter] postAlertWithMessage:request.handleredResult[@"msg"]];
+        }
+        if ([resultDic[@"result"] isKindOfClass:[NSDictionary class]]) {
+            MyOrderDetailViewController *welfareOrderVC = [[MyOrderDetailViewController alloc] initWithNibName:@"WelfareOrderViewController" bundle:nil];
+            welfareOrderVC.orderSuccess = YES;
+            welfareOrderVC.orderCode = request.handleredResult[@"result"][@"orderCode"];
+            welfareOrderVC.navigationItem.title = @"订单交易成功";
+            [self.navigationController pushViewController:welfareOrderVC animated:YES];
+        }
+       
     }else if ( [request.requestUrl isEqualToString:[GlobalRequest orderAction_Pay_Url]]){
         if([request.handleredResult[@"result"] isKindOfClass:[NSDictionary class]])
         orderCode = request.handleredResult[@"result"][@"orderCode"];

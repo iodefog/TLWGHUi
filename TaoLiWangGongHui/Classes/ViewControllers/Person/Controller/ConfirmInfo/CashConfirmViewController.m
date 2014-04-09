@@ -8,12 +8,13 @@
 
 #import "CashConfirmViewController.h"
 #import "AcceptAddressController.h"
+#import "CashOrderViewController.h"
 #import "UserAddressDataBase.h"
 #import "GoodsDetailDataBase.h"
 #import "AliPayHelper.h"
 #import "NewAddressModel.h"
 
-@interface CashConfirmViewController (){
+@interface CashConfirmViewController ()<AlixLibPayDelegate>{
     AddressModel *addressModel;
     NewAddressModel *newAddressModel;
     NSString        *orderCode;      // 服务器返回订单号
@@ -152,20 +153,8 @@ static bool shoppingShow = NO;
         [GlobalHelper handerResultWithDelegate:self withMessage:@"请选择您的付款方式" withTag:0];
     }
     else if (self.aliPayButton.selected) {
-        
-        NSLog(@"%ld",    time(NULL));
-        NSString *payFlowNo = [NSString stringWithFormat:@"%ld%@",time(NULL),[[UserHelper shareInstance] getMemberID]];
-        if (!orderCode) {
-            return;
-        }
-        NSDictionary *params = @{@"memberId":[[UserHelper shareInstance] getMemberID],
-                                 @"receiverAddressId":newAddressModel.receiverAddressId,
-                                 @"payMode":@"支付宝",
-                                 @"orderCode":orderCode,
-                                 @"payFlowNo":payFlowNo,
-                                 @"totalMoney":@"0",
-                                 @"totalScore":[NSString stringWithFormat:@"%.2f",self.goodsSumPrice]};
-        [self commitRequestWithParams:params withUrl:[GlobalRequest orderAction_Submit_Url]];
+//        [self aliPayMothod];
+        [self alixLibPaySuccess:nil];
     }else if(self.unionpayButton.selected){
     
     }
@@ -181,22 +170,25 @@ static bool shoppingShow = NO;
     Product *product = [[Product alloc] init];
     
     if (shoppingShow) {
-        product.subject = @"淘礼网付款";
-        product.body = @"购买超值商品，就取淘礼网";
+        product.subject = @"淘礼网购买商品付款";
+        product.body = @"购买超值商品，就去淘礼网";
         product.price = self.goodsSumPrice;
+        product.orderId = orderCode;
     }else{
         product.subject = self.welfareGoodsModel.productName;
         product.body = self.welfareGoodsModel.productDescribe;
         product.price = self.welfareGoodsModel.costPrice.floatValue;
+        product.orderId = orderCode;
     }
+    ((AliPayHelper *)[AliPayHelper shareInstance]).aliPayDelegate = self;
     [[AliPayHelper shareInstance] setAliPayProduct:product];
 }
 
 #pragma mark - request Response
 - (void)setDataDic:(NSDictionary *)resultDic withRequest:(ITTBaseDataRequest *)request{
     NSLog(@"%@", request.handleredResult);
-    [super setDataDic:resultDic withRequest:request];
     if ([request.requestUrl isEqualToString:[GlobalRequest addressAction_QueryAddressList_Url]]) {
+        [super setDataDic:resultDic withRequest:request];
         for (NSDictionary *dict in self.model) {
             NewAddressModel *tempModel = [[NewAddressModel alloc] initWithDataDic:dict];
             if (((NSNumber *)tempModel.isDefault).boolValue) {
@@ -211,10 +203,18 @@ static bool shoppingShow = NO;
         if (!codeNum.boolValue) {
             [GlobalHelper handerResultWithDelegate:nil withMessage:request.handleredResult[@"msg"] withTag:0];
         }else{
-            [self aliPayMothod];
+            [[GoodsDetailDataBase shareDataBase] cleanTabel];
+            [[NSNotificationCenter defaultCenter] postNotificationName:@"cartDBChange" object:nil];
+            
+            CashOrderViewController *orderDetailVC = [[CashOrderViewController alloc] initWithNibName:@"CashOrderViewController" bundle:nil];
+            orderDetailVC.orderCode = orderCode;
+            orderDetailVC.model = resultDic;
+            [self.navigationController pushViewController:orderDetailVC animated:YES];
         }
     }else if ( [request.requestUrl isEqualToString:[GlobalRequest orderAction_Pay_Url]]){
-        orderCode = request.handleredResult[@"orderCode"];
+        if ([request.handleredResult[@"result"] isKindOfClass:[NSDictionary class]]) {
+            orderCode = request.handleredResult[@"result"][@"orderCode"];
+        }
     }
 }
 
@@ -233,6 +233,27 @@ static bool shoppingShow = NO;
     }
 }
 
+#pragma mark - AliPayDelgate
+- (void)alixLibPayFail:(id)response{
+    [GlobalHelper handerResultWithDelegate:nil withMessage:@"支付失败" withTag:1000];
+}
+
+- (void)alixLibPaySuccess:(id)response{
+    NSLog(@"%ld",    time(NULL));
+    NSString *payFlowNo = [NSString stringWithFormat:@"%ld%@",time(NULL),[[UserHelper shareInstance] getMemberID]];
+    if (!orderCode) {
+        return;
+    }
+    NSDictionary *params = @{@"memberId":[[UserHelper shareInstance] getMemberID],
+                             @"receiverAddressId":newAddressModel.receiverAddressId,
+                             @"payMode":@"支付宝",
+                             @"orderCode":orderCode,
+                             @"payFlowNo":payFlowNo,
+                             @"totalMoney":[NSString stringWithFormat:@"%.2f",self.goodsSumPrice],
+                             @"totalScore":@"0"};
+    [self commitRequestWithParams:params withUrl:[GlobalRequest orderAction_Submit_Url]];
+
+}
 
 - (void)didReceiveMemoryWarning
 {

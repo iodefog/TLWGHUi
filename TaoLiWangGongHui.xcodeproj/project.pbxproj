@@ -420,11 +420,11 @@
 		18AD5FBC18D994040082FC2B /* SBJsonBase.m in Sources */ = {isa = PBXBuildFile; fileRef = 18AD5FB418D994040082FC2B /* SBJsonBase.m */; };
 		18AD5FBD18D994040082FC2B /* SBJsonParser.m in Sources */ = {isa = PBXBuildFile; fileRef = 18AD5FB618D994040082FC2B /* SBJsonParser.m */; };
 		18AD5FBE18D994040082FC2B /* SBJsonWriter.m in Sources */ = {isa = PBXBuildFile; fileRef = 18AD5FB818D994040082FC2B /* SBJsonWriter.m */; };
+		18D84B3B18F3E88C00D2F207 /* TSLocateView.m in Sources */ = {isa = PBXBuildFile; fileRef = 18D84B3718F3E88C00D2F207 /* TSLocateView.m */; };
+		18D84B3C18F3E88C00D2F207 /* TSLocateView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 18D84B3818F3E88C00D2F207 /* TSLocateView.xib */; };
+		18D84B3D18F3E88C00D2F207 /* TSLocation.m in Sources */ = {isa = PBXBuildFile; fileRef = 18D84B3A18F3E88C00D2F207 /* TSLocation.m */; };
 		18EB0BA218E50A6C00E8A8C9 /* UserModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 18EB0BA118E50A6C00E8A8C9 /* UserModel.m */; };
 		18EB0BA718E54D8700E8A8C9 /* AddDocumentPathFile.m in Sources */ = {isa = PBXBuildFile; fileRef = 18EB0BA618E54D8700E8A8C9 /* AddDocumentPathFile.m */; };
-		18EB0BAE18E54F5200E8A8C9 /* TSLocateView.m in Sources */ = {isa = PBXBuildFile; fileRef = 18EB0BAA18E54F5200E8A8C9 /* TSLocateView.m */; };
-		18EB0BAF18E54F5200E8A8C9 /* TSLocateView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 18EB0BAB18E54F5200E8A8C9 /* TSLocateView.xib */; };
-		18EB0BB018E54F5200E8A8C9 /* TSLocation.m in Sources */ = {isa = PBXBuildFile; fileRef = 18EB0BAD18E54F5200E8A8C9 /* TSLocation.m */; };
 		18EB0BB318E55AD700E8A8C9 /* GetCityDataRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 18EB0BB218E55AD700E8A8C9 /* GetCityDataRequest.m */; };
 		18EE2B0718E3B46C00247A53 /* AlipayRsaLib.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 18EE2AF818E3B46C00247A53 /* AlipayRsaLib.a */; };
 		18EE2B0818E3B46C00247A53 /* Alixpay.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 18EE2AFA18E3B46C00247A53 /* Alixpay.bundle */; };
@@ -1127,15 +1127,15 @@
 		18AD5FB618D994040082FC2B /* SBJsonParser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SBJsonParser.m; sourceTree = "<group>"; };
 		18AD5FB718D994040082FC2B /* SBJsonWriter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SBJsonWriter.h; sourceTree = "<group>"; };
 		18AD5FB818D994040082FC2B /* SBJsonWriter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SBJsonWriter.m; sourceTree = "<group>"; };
+		18D84B3618F3E88C00D2F207 /* TSLocateView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TSLocateView.h; sourceTree = "<group>"; };
+		18D84B3718F3E88C00D2F207 /* TSLocateView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TSLocateView.m; sourceTree = "<group>"; };
+		18D84B3818F3E88C00D2F207 /* TSLocateView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TSLocateView.xib; sourceTree = "<group>"; };
+		18D84B3918F3E88C00D2F207 /* TSLocation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TSLocation.h; sourceTree = "<group>"; };
+		18D84B3A18F3E88C00D2F207 /* TSLocation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TSLocation.m; sourceTree = "<group>"; };
 		18EB0BA018E50A6C00E8A8C9 /* UserModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UserModel.h; sourceTree = "<group>"; };
 		18EB0BA118E50A6C00E8A8C9 /* UserModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UserModel.m; sourceTree = "<group>"; };
 		18EB0BA518E54D8700E8A8C9 /* AddDocumentPathFile.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AddDocumentPathFile.h; sourceTree = "<group>"; };
 		18EB0BA618E54D8700E8A8C9 /* AddDocumentPathFile.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AddDocumentPathFile.m; sourceTree = "<group>"; };
-		18EB0BA918E54F5200E8A8C9 /* TSLocateView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TSLocateView.h; sourceTree = "<group>"; };
-		18EB0BAA18E54F5200E8A8C9 /* TSLocateView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TSLocateView.m; sourceTree = "<group>"; };
-		18EB0BAB18E54F5200E8A8C9 /* TSLocateView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TSLocateView.xib; sourceTree = "<group>"; };
-		18EB0BAC18E54F5200E8A8C9 /* TSLocation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TSLocation.h; sourceTree = "<group>"; };
-		18EB0BAD18E54F5200E8A8C9 /* TSLocation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TSLocation.m; sourceTree = "<group>"; };
 		18EB0BB118E55AD700E8A8C9 /* GetCityDataRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GetCityDataRequest.h; sourceTree = "<group>"; };
 		18EB0BB218E55AD700E8A8C9 /* GetCityDataRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GetCityDataRequest.m; sourceTree = "<group>"; };
 		18EE2AF818E3B46C00247A53 /* AlipayRsaLib.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = AlipayRsaLib.a; sourceTree = "<group>"; };
@@ -1504,9 +1504,9 @@
 		1835801B18D825A200D3177F /* CustomViews */ = {
 			isa = PBXGroup;
 			children = (
+				18D84B3518F3E88C00D2F207 /* TSLocateView */,
 				1826C91018EE8B4A00D37AF1 /* JSBadgeView */,
 				1839DE9C18E9175F004F6FCD /* PopCarView */,
-				18EB0BA818E54F5200E8A8C9 /* TSLocateView */,
 			);
 			path = CustomViews;
 			sourceTree = "<group>";
@@ -2549,14 +2549,14 @@
 			path = Json;
 			sourceTree = "<group>";
 		};
-		18EB0BA818E54F5200E8A8C9 /* TSLocateView */ = {
+		18D84B3518F3E88C00D2F207 /* TSLocateView */ = {
 			isa = PBXGroup;
 			children = (
-				18EB0BA918E54F5200E8A8C9 /* TSLocateView.h */,
-				18EB0BAA18E54F5200E8A8C9 /* TSLocateView.m */,
-				18EB0BAB18E54F5200E8A8C9 /* TSLocateView.xib */,
-				18EB0BAC18E54F5200E8A8C9 /* TSLocation.h */,
-				18EB0BAD18E54F5200E8A8C9 /* TSLocation.m */,
+				18D84B3618F3E88C00D2F207 /* TSLocateView.h */,
+				18D84B3718F3E88C00D2F207 /* TSLocateView.m */,
+				18D84B3818F3E88C00D2F207 /* TSLocateView.xib */,
+				18D84B3918F3E88C00D2F207 /* TSLocation.h */,
+				18D84B3A18F3E88C00D2F207 /* TSLocation.m */,
 			);
 			path = TSLocateView;
 			sourceTree = "<group>";
@@ -2872,6 +2872,7 @@
 				187F8B5F18E26A4B00403EFA /* subscribe_selected.png in Resources */,
 				183581CA18D825A300D3177F /* goods_gift_selected@2x.png in Resources */,
 				187F8B5C18E26A4B00403EFA /* subscribe_normal@2x.png in Resources */,
+				18D84B3C18F3E88C00D2F207 /* TSLocateView.xib in Resources */,
 				1835817C18D825A300D3177F /* ITTMaskActivityView.xib in Resources */,
 				187F8B7318E26B3E00403EFA /* activityNumBg.png in Resources */,
 				187F8B4818E26A0800403EFA /* input_Under@2x.png in Resources */,
@@ -2917,7 +2918,6 @@
 				1835822618D825A300D3177F /* OrderDetailViewController.xib in Resources */,
 				187F8B8F18E26BFE00403EFA /* shopping_interval.png in Resources */,
 				183581CC18D825A300D3177F /* shopping_delete@2x.png in Resources */,
-				18EB0BAF18E54F5200E8A8C9 /* TSLocateView.xib in Resources */,
 				1810B4F318E03057009FB916 /* SIAlertView.bundle in Resources */,
 				1826C90618EE596F00D37AF1 /* goshopping_normal.png in Resources */,
 				183581AA18D825A300D3177F /* 福利首页_笑话底.png in Resources */,
@@ -3023,6 +3023,7 @@
 				187BB39F18DFD98F00CA3429 /* TKHTTPRequest.m in Sources */,
 				1835820918D825A300D3177F /* WelfareCell.m in Sources */,
 				187BB3AA18DFD98F00CA3429 /* TKProgressBarView.m in Sources */,
+				18D84B3D18F3E88C00D2F207 /* TSLocation.m in Sources */,
 				187BB3A818DFD98F00CA3429 /* TKNetworkQueue.m in Sources */,
 				1835816318D825A300D3177F /* UIView+ITTAdditions.m in Sources */,
 				1835816818D825A300D3177F /* ITTCacheDao.m in Sources */,
@@ -3055,15 +3056,14 @@
 				182B814718DA789A0013A15C /* UserInfoModel.m in Sources */,
 				18EB0BA718E54D8700E8A8C9 /* AddDocumentPathFile.m in Sources */,
 				1835816B18D825A300D3177F /* ITTUserDefaultCacheDao.m in Sources */,
+				18D84B3B18F3E88C00D2F207 /* TSLocateView.m in Sources */,
 				1835820618D825A300D3177F /* DelicateLifeCell.m in Sources */,
-				18EB0BAE18E54F5200E8A8C9 /* TSLocateView.m in Sources */,
 				1835818818D825A300D3177F /* SDWebImageManager.m in Sources */,
 				183581FD18D825A300D3177F /* WelfareController.m in Sources */,
 				183581EA18D825A300D3177F /* MyActivityModel.m in Sources */,
 				1835823B18D825A300D3177F /* ShoppingCartController.m in Sources */,
 				187BB3C718DFD98F00CA3429 /* UIScrollview+TKCategory.m in Sources */,
 				1835817A18D825A300D3177F /* ITTDataRequestManager.m in Sources */,
-				18EB0BB018E54F5200E8A8C9 /* TSLocation.m in Sources */,
 				1835819418D825A300D3177F /* DemoModel.m in Sources */,
 				183581F518D825A300D3177F /* DelicateLifeController.m in Sources */,
 				1835817018D825A300D3177F /* FMResultSet.m in Sources */,
@@ -3376,7 +3376,8 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CLANG_CXX_LIBRARY = "libc++";
-				CODE_SIGN_IDENTITY = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "iPhone Distribution: Beijing Ugift Co.,Ltd (6NUT9F8SEH)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Beijing Ugift Co.,Ltd (6NUT9F8SEH)";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "TaoLiWangGongHui/TaoLiWangGongHui-Prefix.pch";
 				INFOPLIST_FILE = "TaoLiWangGongHui/TaoLiWangGongHui-Info.plist";
@@ -3385,7 +3386,7 @@
 				LIBRARY_SEARCH_PATHS = "$(PROJECT_DIR)/TaoLiWangGongHui/Classes/Common/Alipay";
 				OTHER_LDFLAGS = "-lstdc++";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "5458FE0A-845A-4449-B3D7-E915DE36ECD0";
+				PROVISIONING_PROFILE = "765CF4AB-ECCF-4B27-BE1A-C54B82B94270";
 				USER_HEADER_SEARCH_PATHS = "./NoArcTools/**";
 				WRAPPER_EXTENSION = app;
 			};

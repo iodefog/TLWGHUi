@@ -29,6 +29,8 @@
     // Do any additional setup after loading the view from its nib.
     self.navigationItem.title = @"订单交易成功";
 }
+- (IBAction)enterOrder:(id)sender {
+}
 
 - (void)didReceiveMemoryWarning
 {

@@ -37,7 +37,7 @@
 //    }
     UINavigationController *currentNavC = selected_navigation_controller();
     [currentNavC  popToRootViewControllerAnimated:NO];
-    AppDelegate *delegate = [UIApplication sharedApplication].delegate;
+    AppDelegate *delegate = (id)[UIApplication sharedApplication].delegate;
     [delegate.baseViewController setSelectedIndex:1];
     [self removeFromSuperview];
 }

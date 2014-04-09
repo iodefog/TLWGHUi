@@ -19,4 +19,5 @@ typedef enum {
 
 - (id)initWithWelfareType:(WelfareType)myWelfareType;
 
+
 @end

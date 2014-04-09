@@ -22,4 +22,6 @@
 -(void)updateItem:(id)item andProNumber:(NSString *)num;
 //删除数据
 -(void)deleteTableProductId:(id)item;
+// 清空表数据
+- (BOOL)cleanTabel;
 @end

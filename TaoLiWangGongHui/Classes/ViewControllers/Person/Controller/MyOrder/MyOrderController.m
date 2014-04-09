@@ -136,7 +136,9 @@
         cell = [[[NSBundle mainBundle] loadNibNamed:@"OrderCell" owner:nil options:nil] lastObject];
     }
     [cell showWelfareViewWithHidden:isShowWelfareHidden withCashViewHidden:!isShowWelfareHidden];
-    [cell setObject:self.model[indexPath.section]];
+    if ( [self.model count] > indexPath.section ) {
+        [cell setObject:self.model[indexPath.section]];
+    }
     return cell;
 }
 

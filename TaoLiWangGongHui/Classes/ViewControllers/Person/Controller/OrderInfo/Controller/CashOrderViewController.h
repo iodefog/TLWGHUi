@@ -9,6 +9,8 @@
 #import <UIKit/UIKit.h>
 
 @interface CashOrderViewController : ViewController // 现金福利
+@property (strong, nonatomic) NSString *orderCode;
+
 @property (strong, nonatomic) IBOutlet UILabel *cashOrderNum;
 @property (strong, nonatomic) IBOutlet UILabel *cashOrderPrice;
 @property (strong, nonatomic) IBOutlet UILabel *cashPaymentStyle;

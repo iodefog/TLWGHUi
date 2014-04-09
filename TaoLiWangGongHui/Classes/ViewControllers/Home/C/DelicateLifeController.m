@@ -9,7 +9,7 @@
 #import "DelicateLifeController.h"
 #import "DelicateLifeCell.h"
 
-@interface DelicateLifeController ()
+@interface DelicateLifeController () <DelicateLifeDelegate>
 
 @end
 
@@ -74,6 +74,7 @@
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
     NSDictionary *dict = self.model[indexPath.section];
+    //<p>&nbsp;44</p>
     return [DelicateLifeCell getCellHeight:dict];
 }
 
@@ -91,11 +92,18 @@
     DelicateLifeCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
     if (!cell) {
         cell = [[DelicateLifeCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
-//        cell.selectionStyle = UITableViewCellSelectionStyleNone;
+        cell.selectionStyle = UITableViewCellSelectionStyleNone;
     }
+    cell.delegate = self;
     NSDictionary *dict = self.model[indexPath.section];
     [cell setObject:dict];
     return cell;
 }
+
+
+- (void)reloadTableView{
+    [self.tableView reloadData];
+}
+
 
 @end
