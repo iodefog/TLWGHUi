@@ -48,7 +48,8 @@
 #pragma mark - Response Success
 - (void)responseSuccessWithResponse:(ITTBaseDataRequest *)request{
     self.feedbackTextView.text = nil;
-    [GlobalHelper handerResultWithDelegate:self withMessage:request.handleredResult[@"msg"] withTag:0];
+    [GlobalHelper handerResultWithDelegate:nil withMessage:request.handleredResult[@"msg"] withTag:0];
+    [self.navigationController popViewControllerAnimated:YES];
 }
 
 #pragma mark - Response Fail

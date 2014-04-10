@@ -47,7 +47,7 @@
     [self.navigationController pushViewController:forgotPwd animated:YES];
 }
 
-// 登陆
+// 登录
 - (IBAction)login:(id)sender {
     NSDictionary *params = [NSDictionary dictionaryWithObjectsAndKeys:self.userName.text,@"memberName", self.passWord.text,@"passwd",nil];
     
@@ -62,14 +62,20 @@
     NSLog(@"resultDic  %@", resultDic);
     NSNumber *codeNum = resultDic[@"code"];
     if (codeNum.intValue == 0) {
-        [GlobalHelper handerResultWithDelegate:self withMessage:@"登陆失败" withTag:0];
+        [GlobalHelper handerResultWithDelegate:self withMessage:@"登录失败" withTag:0];
     }else{
-        [[UserHelper shareInstance] saveMemberID:resultDic];
         
-        AppDelegate *appDelegate = [UIApplication sharedApplication].delegate;
-        [appDelegate chageRootVC];
-        
-        [self dismissViewControllerAnimated:YES completion:nil];
+        if ([resultDic[@"result"] count] > 0) {
+            
+            [[UserHelper shareInstance] saveMemberID:resultDic];
+            
+            AppDelegate *appDelegate = (id)[UIApplication sharedApplication].delegate;
+            [appDelegate chageRootVC];
+            
+            [self dismissViewControllerAnimated:YES completion:nil];
+        }else{
+            [GlobalHelper handerResultWithDelegate:nil withMessage:@"登陆失败" withTag:1000];
+        }
     }
 }
 

@@ -34,16 +34,6 @@
     return [self initWithStyle:UITableViewStylePlain];
 }
 
-- (void)viewWillAppear:(BOOL)animated{
-    [super viewWillAppear:animated];
-    [GlobalHelper showCarViewInNavC:self.navigationController withVC:self];
-}
-
-- (void)viewWillDisappear:(BOOL)animated{
-    [super viewWillDisappear:animated];
-    [GlobalHelper hiddenCarView];
-}
-
 - (void)viewDidLoad
 {
     [super viewDidLoad];

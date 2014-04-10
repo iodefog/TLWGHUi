@@ -99,6 +99,10 @@
     return self;
 }
 
+- (void) keyboardCoViewRemoveObserver{
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
+}
+
 - (void) keyboardCoViewCommonInit{
     //It's not rotating
     self.isRotating = NO;

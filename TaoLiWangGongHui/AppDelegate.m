@@ -46,13 +46,13 @@
     return YES;
 }
 
-// 登陆成功后修改rootVC
+// 登录成功后修改rootVC
 - (void)chageRootVC{
     self.baseViewController = [[BaseViewController alloc] init];
     self.window.rootViewController = self.baseViewController;
 }
 
-// 登陆成功后修改rootVC
+// 登录成功后修改rootVC
 - (void)chageLoginVC{
     self.window.rootViewController = [[UINavigationController alloc] initWithRootViewController:[[LoginViewController alloc] init]];
 }
@@ -61,7 +61,7 @@
 - (BOOL)SenderlimitTime{
     int timeDay5 = 7 * 24 * 60 * 60;
     NSString * strNewTime = [TimeObject currentTime];
-    NSString * strTime = @"1396636363";
+    NSString * strTime = @"1397064551";
     NSLog(@"预计开始时间===%@",[TimeObject fromTimeChuoTotime:strTime]);
     NSLog(@"当前时间====%@",[TimeObject currentTime]);
     if ([strTime intValue] + timeDay5 <= [strNewTime intValue]) {

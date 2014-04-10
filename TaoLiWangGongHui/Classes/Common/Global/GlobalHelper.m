@@ -58,11 +58,18 @@ UINavigationController *selected_navigation_controller()
 
 + (void)handerResultWithDelegate:(id)delegate withMessage:(NSString *)message withTag:(int)tag{
     if ([message isKindOfClass:[NSString class]]) {
-        [GlobalHelper showWithTitle:@"提示" withMessage:message withCancelTitle:@"确定" withOkTitle:nil withSelector:nil withTarget:delegate];
-//        [UIAlertView popupAlertByDelegate:delegate andTag:tag title:@"提示" message:message];
-    }else if([message isKindOfClass:[NSString class]]){
-        [GlobalHelper showWithTitle:@"提示" withMessage:@"获取信息失败" withCancelTitle:@"确定" withOkTitle:nil withSelector:nil withTarget:delegate];
-//        [UIAlertView popupAlertByDelegate:delegate andTag:tag title:@"提示" message:@"获取信息失败"];
+        if (isIOS7) {
+            [UIAlertView popupAlertByDelegate:delegate andTag:tag title:@"温馨提示" message:message];
+        }else{
+            [GlobalHelper showWithTitle:@"温馨提示" withMessage:message withCancelTitle:@"确定" withOkTitle:nil withSelector:nil withTarget:delegate];
+        }
+        
+    }else{
+        if (isIOS7) {
+            [UIAlertView popupAlertByDelegate:delegate andTag:tag title:@"温馨提示" message:@"获取信息失败"];
+        }else{
+            [GlobalHelper showWithTitle:@"温馨提示" withMessage:@"获取信息失败" withCancelTitle:@"确定" withOkTitle:nil withSelector:nil withTarget:delegate];
+        }
     }
 }
 
@@ -133,9 +140,9 @@ static PopCarView *carview = nil;
     if (!carview) {
         carview = [[PopCarView alloc]init];
     }
-    if(nav) carview.bottom = nav.view.bottom;
+    if(nav) carview.bottom = nav.view.bottom - 5;
     carview.left = Screen_width - 50;
-    carview.delegate = self;
+//    carview.delegate = self;
     [carview SetCarNumber];
     if (!carview.superview && nav) {
         [nav.view addSubview:carview];

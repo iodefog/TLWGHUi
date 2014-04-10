@@ -23,17 +23,27 @@
 }
 
 - (void)commitRequestWithParams:(NSDictionary *)params withUrl:(NSString *)url{
-    [ITTASIBaseDataRequest requestWithParameters:params withRequestUrl:url withIndicatorView:self withCancelSubject:nil onRequestStart:^(ITTBaseDataRequest *request) {
+    UINavigationController *navC = selected_navigation_controller();
+    
+    [ITTASIBaseDataRequest requestWithParameters:params withRequestUrl:url withIndicatorView:navC.view withCancelSubject:nil onRequestStart:^(ITTBaseDataRequest *request) {
         NSLog(@"request start");
     } onRequestFinished:^(ITTBaseDataRequest *request) {
         NSLog(@"request finish");
-        [[TKAlertCenter defaultCenter] postAlertWithMessage:@"操作成功"];
+        if (self.subscribeBtn.isSelected) {
+            [[TKAlertCenter defaultCenter] postAlertWithMessage:@"订阅成功"];
+        }else{
+            [[TKAlertCenter defaultCenter] postAlertWithMessage:@"取消订阅成功"];
+        }
     } onRequestCanceled:^(ITTBaseDataRequest *request) {
         NSLog(@"request cancel");
     } onRequestFailed:^(ITTBaseDataRequest *request) {
         NSLog(@"request fail");
-        [[TKAlertCenter defaultCenter] postAlertWithMessage:@"操作失败"];
-        
+        if (self.subscribeBtn.isSelected) {
+            [[TKAlertCenter defaultCenter] postAlertWithMessage:@"订阅失败"];
+        }else{
+            [[TKAlertCenter defaultCenter] postAlertWithMessage:@"取消订阅失败"];
+        }
+        self.subscribeBtn.selected = !self.subscribeBtn.selected;
     }];
 }
 

@@ -57,6 +57,10 @@
  */
 @property (nonatomic,assign) IBOutlet id<UIKeyboardCoViewDelegate> delegate;
 
+- (void) keyboardCoViewCommonInit;
+
+- (void) keyboardCoViewRemoveObserver;
+
 @end
 
 
@@ -76,6 +80,7 @@
 @protocol UIKeyboardCoViewDelegate <NSObject>
 
 @optional
+
 /**
     Called when the Keyboard Co View will appear
     @param keyboardCoView The keyboard co view that will appear

@@ -13,5 +13,5 @@
 @property (strong, nonatomic) UIWindow *window;
 @property (strong, nonatomic) BaseViewController *baseViewController;
 - (void)chageRootVC; // 切换到内容跟视图
-- (void)chageLoginVC; // 切换到登陆视图
+- (void)chageLoginVC; // 切换到登录视图
 @end

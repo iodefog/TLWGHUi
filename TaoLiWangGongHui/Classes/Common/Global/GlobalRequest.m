@@ -15,7 +15,7 @@
     return serviceUrl;
 }
 
-#pragma mark -   一、注册登陆相关功能接口
+#pragma mark -   一、注册登录相关功能接口
 
 
 

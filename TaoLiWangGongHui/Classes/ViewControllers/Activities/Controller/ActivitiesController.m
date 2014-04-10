@@ -47,7 +47,11 @@ static NSString *activityCellName = @"activityCellName";
 
 #pragma mark - TableView Method
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
-    return [self.model count];
+    NSInteger count = 0;
+    if ([self.model isKindOfClass:[NSArray class]]) {
+        count = [self.model count];
+    }
+    return count;
 }
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView{

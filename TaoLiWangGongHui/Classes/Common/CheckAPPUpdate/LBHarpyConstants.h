@@ -15,7 +15,7 @@
 static BOOL harpyForceUpdate = NO;
 
 // 2. Your AppID (found in iTunes Connect)
-#define kHarpyAppID                 @"634787524"
+#define kHarpyAppID                 @"858940011"
 
 // 3. Customize the alert title and action buttons
 #define kHarpyAlertViewTitle        @"检测到有新版本可以更新"

@@ -21,6 +21,8 @@
     
     UILabel *headView;
     CGFloat allSum;
+    
+    UIKeyboardCoView *keyBoardCoView;
 }
 
 @end
@@ -40,10 +42,18 @@
 - (void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
     NSArray *dbArray = [[GoodsDetailDataBase shareDataBase] readTableName];
-    if (([dbArray count] != [self.model count]) && self.model) {
+    if (([dbArray count] != [self.model count])) {
         [self.model removeAllObjects];
         [self getRequestShoppingCartData];
     }
+    if (keyBoardCoView) {
+        [keyBoardCoView keyboardCoViewCommonInit];
+    }
+}
+
+- (void)viewWillDisappear:(BOOL)animated{
+    [super viewWillDisappear:animated];
+    [keyBoardCoView keyboardCoViewRemoveObserver];
 }
 
 - (void)viewDidLoad
@@ -56,7 +66,7 @@
     self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     
     // UIKeyBoardCoView
-    UIKeyboardCoView *keyBoardCoView = [[UIKeyboardCoView alloc] initWithFrame:CGRectMake(0, self.tableView.bottom , 320, 35)];
+    keyBoardCoView = [[UIKeyboardCoView alloc] initWithFrame:CGRectMake(0, self.tableView.bottom , 320, 35)];
     keyBoardCoView.backgroundColor = [UIColor lightGrayColor];
     [[[UIApplication sharedApplication].windows firstObject] addSubview:keyBoardCoView];
    
@@ -285,6 +295,7 @@ static UITextField *currentTextField = nil;
 
 #pragma mark -- response
 - (void)setDataDic:(NSDictionary *)resultDic withRequest:(id)request{
+    [self.model removeAllObjects];
     [super setDataDic:resultDic withRequest:request];
     
     for (NSDictionary *dict in self.model) {

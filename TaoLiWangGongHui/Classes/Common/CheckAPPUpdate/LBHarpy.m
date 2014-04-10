@@ -102,7 +102,10 @@ static UIAlertView *loadingAlertView  = nil;
                 NSArray *versionsInAppStore = [[appData valueForKey:@"results"] valueForKey:@"version"];
                 NSArray *updateContentArray = [[appData valueForKey:@"results"] valueForKey:@"releaseNotes"];
                 if ( ![versionsInAppStore count] ) { // No versions of app in AppStore
-                    
+                    [loadingAlertView dismissWithClickedButtonIndex:0 animated:NO];
+
+                    UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"\n您现在正在使用最新版本\n\n" message:nil delegate:self cancelButtonTitle:@"确定" otherButtonTitles:nil, nil];
+                    [alertView show];
                     return;
                     
                 } else {
@@ -119,6 +122,8 @@ static UIAlertView *loadingAlertView  = nil;
                     } else {
 		            
                         // Current installed version is the newest public version or newer
+                        [loadingAlertView dismissWithClickedButtonIndex:0 animated:NO];
+
                         UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"\n您现在正在使用最新版本\n\n" message:nil delegate:self cancelButtonTitle:@"确定" otherButtonTitles:nil, nil];
                         [alertView show];
                     }

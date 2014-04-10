@@ -189,7 +189,9 @@
     header.scrollView = self.tableView;
     header.beginRefreshingBlock = ^(MJRefreshBaseView *refreshView) {
         // 进入刷新状态就会回调这个Block
-        [self.model removeAllObjects];
+        if ([self.model isKindOfClass:[NSArray class]]) {
+            [self.model removeAllObjects];
+        }
         [self refreshHeaderView];
         // 模拟延迟加载数据，因此2秒后才调用）
         // 这里的refreshView其实就是header

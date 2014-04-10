@@ -118,7 +118,7 @@
 - (void)okClicked:(UIButton *)sender{
     NSLog(@"OK Clicked");
     [[UserHelper shareInstance] removeMemberID];
-    AppDelegate *delegate = [UIApplication sharedApplication].delegate;
+    AppDelegate *delegate = (id)[UIApplication sharedApplication].delegate;
     [delegate chageLoginVC];
 }
 
@@ -126,44 +126,6 @@
     
     SEL sel = @selector(okClicked:);
     [GlobalHelper showWithTitle:@"\n\n\n\n " withMessage:@"确认要退出吗？\n\n" withCancelTitle:@"取消" withOkTitle:@"确定" withSelector:sel withTarget:self];
-
-//{
-//    SIAlertView *alertView = [[SIAlertView alloc] initWithTitle:@"\n\n\n\n " andMessage:@"确认要退出吗？\n\n"];
-//    [alertView addButtonWithTitle:@"取消"
-//                             type:SIAlertViewButtonTypeCancel
-//                          handler:^(SIAlertView *alertView) {
-//                              NSLog(@"Cancel Clicked");
-//                          }];
-//    [alertView addButtonWithTitle:@"确定"
-//                             type:SIAlertViewButtonTypeDefault
-//                          handler:^(SIAlertView *alertView) {
-//                              NSLog(@"OK Clicked");
-//                              [[UserHelper shareInstance] removeMemberID];
-//                              AppDelegate *delegate = [UIApplication sharedApplication].delegate;
-//                              [delegate chageLoginVC];
-//
-//                            }];
-//    alertView.titleColor = [UIColor blueColor];
-//    alertView.messageColor = [UIColor blackColor];
-//    alertView.messageFont = [UIFont systemFontOfSize:14.0];
-//    alertView.cornerRadius = 10;
-////    alertView.buttonFont = [UIFont boldSystemFontOfSize:15];
-//    alertView.transitionStyle = SIAlertViewTransitionStyleBounce;
-//    
-//    alertView.willShowHandler = ^(SIAlertView *alertView) {
-//        NSLog(@"%@, willShowHandler2", alertView);
-//    };
-//    alertView.didShowHandler = ^(SIAlertView *alertView) {
-//        NSLog(@"%@, didShowHandler2", alertView);
-//    };
-//    alertView.willDismissHandler = ^(SIAlertView *alertView) {
-//        NSLog(@"%@, willDismissHandler2", alertView);
-//    };
-//    alertView.didDismissHandler = ^(SIAlertView *alertView) {
-//        NSLog(@"%@, didDismissHandler2", alertView);
-//    };
-//    
-//    [alertView show];
 }
 
 

@@ -16,7 +16,7 @@ typedef enum {
 
 + (NSString *)getBaseServiceUrl;  // 网路请求前拼
 
-#pragma mark -   一、注册登陆相关功能接口
+#pragma mark -   一、注册登录相关功能接口
 
 //	1.用户信息接口
 + (NSString *)userAction_queryUserInfo_Url;

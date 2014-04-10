@@ -46,7 +46,7 @@ typedef enum{
 #define iPhone5                              ([UIScreen instancesRespondToSelector:@selector(currentMode)] ? CGSizeEqualToSize(CGSizeMake(640, 1136), [[UIScreen mainScreen] currentMode].size) : NO)
 
 /**========================================================
- *  登陆接口
+ *  登录接口
  ===============================================================**/
 #define USER_LOGIN_REQUEST [NSString stringWithFormat:@"%@%@",BASE_REQUEST_URL,@"UserAction!login.do"]
 

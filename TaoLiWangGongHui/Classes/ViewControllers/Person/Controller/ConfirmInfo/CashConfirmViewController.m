@@ -153,8 +153,8 @@ static bool shoppingShow = NO;
         [GlobalHelper handerResultWithDelegate:self withMessage:@"请选择您的付款方式" withTag:0];
     }
     else if (self.aliPayButton.selected) {
-//        [self aliPayMothod];
-        [self alixLibPaySuccess:nil];
+        [self aliPayMothod];
+//        [self alixLibPaySuccess:nil];
     }else if(self.unionpayButton.selected){
     
     }
