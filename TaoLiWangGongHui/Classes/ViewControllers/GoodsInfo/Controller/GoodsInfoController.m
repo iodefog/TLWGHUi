@@ -75,14 +75,17 @@
     self.ShowImageNumberLable.text = [NSString stringWithFormat:@"1/%d",[self.goodsInfoModel.productPictures count]];
     self.GoodsNameLable.text = self.goodsInfoModel.productName;
     self.GoodsNewPriceLable.text = [NSString stringWithFormat:@"%@元",self.goodsInfoModel.costPrice];
-      self.GoodsOldPriceLable.text = [NSString stringWithFormat:@"%@元",self.goodsInfoModel.basicPrice];
-    
+    self.GoodsOldPriceLable.text = [NSString stringWithFormat:@"%@元",self.goodsInfoModel.basicPrice];
+    [self addImageArray:self.goodsInfoModel.productPictures];
 }
 
-
+// 根据返回的商品数，显示商品图片
 - (void)addImageArray:(NSArray *)imagesArray{
-    for (NSString *imageUrl in imagesArray) {
-        
+    self.ShowImageScrollView.contentSize = CGSizeMake(self.view.width * [imagesArray count], self.ShowImageScrollView.height);
+    for (int i = 0; i < [imagesArray count]; i ++) {
+        UIImageView *imageView = [[UIImageView alloc] initWithFrame:CGRectMake(self.view.width * i, 0, self.view.width, self.ShowImageScrollView.height)];
+        [imageView setImageWithURL:[NSURL URLWithString:imagesArray[i]]];
+        [self.ShowImageScrollView addSubview:imageView];
     }
 }
 
@@ -110,6 +113,12 @@
 {
     [super viewDidLoad];
     self.navigationItem.title = @"商品详情";
+    if ((self.goodsInfoType==GoodsType_BirthDay) || (self.goodsInfoType==GoodsType_Holiday)) {
+        [self.PayOrJoinCartBtn setTitle:@"立即领取" forState:UIControlStateNormal];
+    }else if(self.goodsInfoType == GoodsType_None){
+        self.PayOrJoinCartBtn.hidden = YES;
+    }
+
     [self startGoodsDetailRequest];
 }
 

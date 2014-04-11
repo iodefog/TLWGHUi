@@ -14,8 +14,11 @@
 #import "HomeListModel.h"
 #import "ShufflingImageView.h"
 
+#import "AddUserInfoViewController.h"
+
 @interface HomeViewController ()<UIWebViewDelegate>{
     NSTimer *activitiesTimer;
+    BOOL    welfareDataHaveData;
 }
 
 @property (nonatomic, strong) NSMutableArray *activitiesArray;
@@ -121,17 +124,30 @@
             [welfareController setHidesBottomBarWhenPushed:YES];
             [self.navigationController pushViewController:welfareController animated:YES];
         }
+        
+        welfareDataHaveData = NO;
     }
+}
+
+- (void)responseCancelWithResponse:(ITTBaseDataRequest *)request{
+    welfareDataHaveData = NO;
+}
+
+- (void)responseFailWithResponse:(ITTBaseDataRequest *)request{
+    welfareDataHaveData = NO;
 }
 
 /*** 定时器实现方法
  *   当偏移量小于size的wide 减去 自己的frame的宽度，就直接设置偏移为0
  */
 - (void)scrollTheHeadImage{
-    [UIView beginAnimations:nil context:nil];
-    self.headScroll.contentOffset = CGPointMake(self.headScroll.contentOffset.x + self.view.width, 0);
-    [UIView setAnimationDuration:1];
-    [UIView commitAnimations];
+    
+    [UIView animateWithDuration:0.7 animations:^{
+        self.headScroll.contentOffset = CGPointMake(self.headScroll.contentOffset.x + self.view.width, 0);
+    } completion:^(BOOL finished) {
+        
+    }];
+
     if (self.headScroll.contentOffset.x > (self.headScroll.contentSize.width - self.headScroll.width)) {
         self.headScroll.contentOffset = CGPointZero;
     }
@@ -139,6 +155,11 @@
 
 //精致生活点击进入详情页
 - (IBAction)delicateLifeClicked:(id)sender {
+    
+    AddUserInfoViewController *vc = [[AddUserInfoViewController alloc] init];
+    [self.navigationController pushViewController:vc animated:YES];
+    
+    return;
     DelicateLifeController *delicateLife = [[DelicateLifeController alloc] initWithStyle:UITableViewStyleGrouped];
     [delicateLife setHidesBottomBarWhenPushed:YES];
     [self.navigationController pushViewController:delicateLife animated:YES];
@@ -146,14 +167,18 @@
 
 // 生日福利和节日福利点击
 - (IBAction)welfareClicked:(UIButton *)sender {
-    isBirthDay = (200==sender.tag)?YES:NO;
-    NSDictionary *param = @{
-                            @"id":[[UserHelper shareInstance] getMemberID],
-                            (200==sender.tag?@"productType":@"type"):200==sender.tag?@"1":@"2",
-                            @"pageNo":@"0",
-                            @"pageSize":PAGESIZE
-                            };
-    [self commitRequestWithParams:param withUrl:[GlobalRequest productAction_QueryProductListByType_Url]];
+    
+    if (welfareDataHaveData == NO) {
+        welfareDataHaveData = YES;
+        isBirthDay = (200==sender.tag)?YES:NO;
+        NSDictionary *param = @{
+                                @"id":[[UserHelper shareInstance] getMemberID],
+                                (200==sender.tag?@"productType":@"type"):200==sender.tag?@"1":@"2",
+                                @"pageNo":@"0",
+                                @"pageSize":PAGESIZE
+                                };
+        [self commitRequestWithParams:param withUrl:[GlobalRequest productAction_QueryProductListByType_Url]];
+    }
 }
 
 // 优惠购物点击
@@ -180,7 +205,11 @@
     frame.size.height = [string floatValue]+10;
     [webView setFrame:frame];
     
-    self.baseScroll.contentSize = CGSizeMake(self.baseScroll.width, (480+frame.size.height > 598)?(480+frame.size.height):598);
+    if (iPhone5) {
+        self.baseScroll.contentSize = CGSizeMake(self.baseScroll.width, ((480+frame.size.height - 88) > 524)?(480+frame.size.height - 88):524);
+    }else{
+        self.baseScroll.contentSize = CGSizeMake(self.baseScroll.width, ((480+frame.size.height) > 598)?(480+frame.size.height):598);
+    }
     self.jokeImageView.height = frame.size.height+25;
 }
 

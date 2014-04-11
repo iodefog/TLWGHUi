@@ -307,10 +307,11 @@
         CGContextSaveGState(ctx);
         {
             CGContextAddPath(ctx, borderPath.CGPath);
-            
+//
             CGContextSetFillColorWithColor(ctx, self.badgeBackgroundColor.CGColor);
-            CGContextSetShadowWithColor(ctx, kShadowOffset, kShadowRadius, kShadowColor.CGColor);
-            
+            // 外框阴影
+//            CGContextSetShadowWithColor(ctx, kShadowOffset, kShadowRadius, kShadowColor.CGColor);
+//            
             CGContextDrawPath(ctx, kCGPathFill);
         }
         CGContextRestoreGState(ctx);
@@ -344,12 +345,15 @@
         /* Stroke */
         CGContextSaveGState(ctx);
         {
+            /* **
+             * 外框
             CGContextAddPath(ctx, borderPath.CGPath);
             
             CGContextSetLineWidth(ctx, kBadgeStrokeWidth);
             CGContextSetStrokeColorWithColor(ctx, kBadgeStrokeColor.CGColor);
             
             CGContextDrawPath(ctx, kCGPathStroke);
+             */
         }
         CGContextRestoreGState(ctx);
         

@@ -7,6 +7,7 @@
 //
 
 #import "WelfareOrderViewController.h"
+#import "GoodsInfoController.h"
 @interface WelfareOrderViewController ()
 
 
@@ -30,6 +31,16 @@
     self.navigationItem.title = @"订单交易成功";
 }
 - (IBAction)enterOrder:(id)sender {
+}
+
+// 商品点击
+- (IBAction)goodTapGesture:(id)sender {
+    if (!self.goodID.text || [self.goodID.text isEqualToString:@""]) {
+        return;
+    }
+    GoodsInfoController *goodsInfoVC = [[GoodsInfoController alloc] initWithNibName:@"GoodsInfoController" bundle:nil];
+    goodsInfoVC.productID = self.goodID.text;
+    [self.navigationController pushViewController:goodsInfoVC animated:YES];
 }
 
 - (void)didReceiveMemoryWarning

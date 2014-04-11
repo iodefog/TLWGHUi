@@ -33,7 +33,8 @@
     }
     
     [[UINavigationBar appearance] setTitleTextAttributes:[NSDictionary dictionaryWithObjectsAndKeys:
-        [UIColor whiteColor], UITextAttributeTextColor,nil]];
+        [UIColor whiteColor], UITextAttributeTextColor,
+        [UIFont systemFontOfSize:20], UITextAttributeFont,nil]];
     
     if (([[UserHelper shareInstance] getMemberID].intValue != 0) && [[UserHelper shareInstance] getMemberID]) {
         [self chageRootVC];

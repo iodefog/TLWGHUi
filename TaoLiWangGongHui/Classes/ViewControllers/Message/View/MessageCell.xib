@@ -27,12 +27,13 @@
                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                         <nil key="highlightedColor"/>
                     </label>
-                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="z7t-WD-vay">
+                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="activity_placeHolder.png" translatesAutoresizingMaskIntoConstraints="NO" id="z7t-WD-vay">
                         <rect key="frame" x="0.0" y="210" width="320" height="10"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                     </imageView>
                 </subviews>
+                <color key="backgroundColor" red="0.98039215686274506" green="0.96862745098039216" blue="0.95294117647058818" alpha="1" colorSpace="calibratedRGB"/>
             </tableViewCellContentView>
             <connections>
                 <outlet property="goodDescription" destination="O3U-Y0-WBD" id="Ctw-8L-MLf"/>
@@ -40,4 +41,7 @@
             </connections>
         </tableViewCell>
     </objects>
+    <resources>
+        <image name="activity_placeHolder.png" width="79" height="58"/>
+    </resources>
 </document>

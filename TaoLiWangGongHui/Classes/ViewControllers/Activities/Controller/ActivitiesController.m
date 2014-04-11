@@ -68,7 +68,9 @@ static NSString *activityCellName = @"activityCellName";
     if (!cell) {
         cell = [[[NSBundle mainBundle] loadNibNamed:@"ActivitiesCell" owner:nil options:nil] lastObject];
     }
-    [cell setObject:self.model[indexPath.row]];
+    if (([self.model isKindOfClass:[NSArray class]]) && ([self.model count] > indexPath.row )) {
+        [cell setObject:self.model[indexPath.row]];
+    }
     return cell;
 }
 

@@ -35,7 +35,7 @@
     [super viewDidLoad];
 	// Do any additional setup after loading the view.
     
-    self.personTableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, self.view.width, self.view.height) style:UITableViewStyleGrouped];
+    self.personTableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, self.view.width, self.view.height+2) style:UITableViewStyleGrouped];
     self.personTableView.backgroundView = [[UIView alloc] init];
     self.personTableView.delegate = self;
     self.personTableView.dataSource = self;
@@ -61,11 +61,15 @@
                       @"",
                       @"AboutViewController",nil];
      self.navigationItem.leftBarButtonItem = nil;
-    self.navigationItem.rightBarButtonItem = [UIBarButtonItem barButtonWithTitle:@"退出" image:nil target:self action:@selector(logout) font:[UIFont systemFontOfSize:14] titleColor:[UIColor whiteColor]];
+    self.navigationItem.rightBarButtonItem = [UIBarButtonItem barButtonWithTitle:@"     退出" image:nil target:self action:@selector(logout) font:[UIFont systemFontOfSize:15] titleColor:[UIColor whiteColor]];
 }
 
 - (void)logout{
-    [self alert2:nil];
+    
+    [UIAlertView popupAlertByDelegate:self andTag:1000 title:@"\n" message:@"确认要退出吗？\n\n" cancel:@"取消" others:@"确定"];
+    
+//    [UIAlertView popupAlertByDelegate:self andTag:1000 title:@"" message:@"确认要退出吗？\n\n"];
+//    [self alert2:nil];
 //    return;
 //    UIAlertView *logoutAlert = [[UIAlertView alloc] initWithTitle:@"\n确定要退出吗\n\n" message:nil delegate:self cancelButtonTitle:@"取消" otherButtonTitles:@"确定", nil];
 //    logoutAlert.delegate = self;
@@ -122,11 +126,17 @@
     [delegate chageLoginVC];
 }
 
-- (void)alert2:(id)sender{
-    
-    SEL sel = @selector(okClicked:);
-    [GlobalHelper showWithTitle:@"\n\n\n\n " withMessage:@"确认要退出吗？\n\n" withCancelTitle:@"取消" withOkTitle:@"确定" withSelector:sel withTarget:self];
+- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex{
+    if ((alertView.tag == 1000) && buttonIndex == 1) {
+        [self okClicked:nil];
+    }
 }
+
+//- (void)alert2:(id)sender{
+//
+//    SEL sel = @selector(okClicked:);
+//    [GlobalHelper showWithTitle:@"\n\n\n\n " withMessage:@"确认要退出吗？\n\n" withCancelTitle:@"取消" withOkTitle:@"确定" withSelector:sel withTarget:self];
+//}
 
 
 

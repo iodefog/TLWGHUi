@@ -15,6 +15,7 @@
 #import "GoodsListModel.h"
 #import "GoodsDetailDataBase.h"
 #import "GoodsListModel.h"
+#import "EmptyView.h"
 
 @interface ShoppingCartController () <ShoppingDelegate>{
     BOOL showDeleteButton;
@@ -23,6 +24,8 @@
     CGFloat allSum;
     
     UIKeyboardCoView *keyBoardCoView;
+    
+    EmptyView *emptyView;
 }
 
 @end
@@ -53,6 +56,7 @@
 
 - (void)viewWillDisappear:(BOOL)animated{
     [super viewWillDisappear:animated];
+    [currentTextField resignFirstResponder];
     [keyBoardCoView keyboardCoViewRemoveObserver];
 }
 
@@ -60,10 +64,18 @@
 {
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
+    
+    self.tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 35, self.view.width, self.view.height - 20) style:UITableViewStylePlain];
+    self.tableView.dataSource = self;
+    self.tableView.delegate = self;
+    self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
+    [self.view addSubview:self.tableView];
+
+    [self.view addSubview:[self createHeadView]];
+    
     if (!self.model) {
         [self getRequestShoppingCartData];
     }
-    self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     
     // UIKeyBoardCoView
     keyBoardCoView = [[UIKeyboardCoView alloc] initWithFrame:CGRectMake(0, self.tableView.bottom , 320, 35)];
@@ -81,12 +93,22 @@
 //    self.navigationItem.rightBarButtonItem = [UIBarButtonItem barButtonWithTitle:@"结算" image:nil target:self action:@selector(toPaymentClicked:) font:[UIFont systemFontOfSize:14.0f] titleColor:[UIColor whiteColor]];
 }
 
+- (UIView *)createHeadView{
+    headView = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, self.tableView.width, 35)];
+    headView.textColor = [UIColor grayColor];
+    headView.backgroundColor = [UIColor colorWithHex:0xfaf7f3];
+    headView.text = [NSString stringWithFormat:@" 总计：%.2f元",allSum];
+    return headView;
+}
+
+
 #pragma mark - Class Method
 
 - (void)getRequestShoppingCartData{
     NSArray *dbArray = [[GoodsDetailDataBase shareDataBase] readTableName];
     if ([dbArray count] == 0) {
         [self reloadNewData];
+        [self checkShoppingData];
         return;
     }
     else if ([dbArray count] == [self.model count]) { // 避免每次刷新
@@ -134,7 +156,7 @@ static UIButton *leftButton = nil;
     if ([leftButton isSelected]) {
         [self editClicked:leftButton];
     }
-    if (allSum==0.0f) {
+    if ([self.model count] == 0) {
         [GlobalHelper handerResultWithDelegate:self withMessage:@"请先选择货物" withTag:0];
        
         return;
@@ -194,13 +216,13 @@ static UIButton *leftButton = nil;
     return 100.0f;
 }
 
-- (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section{
-    headView = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, self.tableView.width, 20)];
-    headView.textColor = [UIColor grayColor];
-    headView.backgroundColor = [UIColor colorWithHex:0xfaf7f3];
-    headView.text = [NSString stringWithFormat:@" 总计：%.2f元",allSum];
-    return headView;
-}
+//- (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section{
+//    headView = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, self.tableView.width, 35)];
+//    headView.textColor = [UIColor grayColor];
+//    headView.backgroundColor = [UIColor colorWithHex:0xfaf7f3];
+//    headView.text = [NSString stringWithFormat:@" 总计：%.2f元",allSum];
+//    return headView;
+//}
 
 - (NSString *)tableView:(UITableView *)tableView titleForDeleteConfirmationButtonForRowAtIndexPath:(NSIndexPath *)indexPath{
     return @"删除";
@@ -222,7 +244,7 @@ static UIButton *leftButton = nil;
     NSMutableArray *tempArray = [NSMutableArray arrayWithArray:self.model];
     [tempArray removeObject:data];
     self.model = tempArray;
-    if ([self.model count] > 1) {
+    if ([self.model count] >= 1) {
         [self.tableView deleteRowsAtIndexPaths:[NSArray arrayWithObjects:index, nil] withRowAnimation:UITableViewRowAnimationRight];
     }else{
         NSLog(@"%@",self.navigationItem.rightBarButtonItem.customView);
@@ -260,7 +282,7 @@ static UITextField *currentTextField = nil;
 #pragma mark - Response Mothod
 
 - (UIImage *)emptyImage{
-    return [UIImage imageNamed:@"shopping_empty.png"];
+    return nil;
 }
 
 - (NSString *)emptyTitle{
@@ -268,7 +290,7 @@ static UITextField *currentTextField = nil;
 }
 
 - (NSString *)emptySubTitle{
-    return @"您的购物车还没有商品，请先去添加一些吧~";
+    return nil;
 }
 
 - (void)reloadNewData{
@@ -278,6 +300,8 @@ static UITextField *currentTextField = nil;
         [super hideEmptyView];
     }
     allSum = [self sumAllGoodsPrice];
+    [self checkShoppingData];
+    headView.text = [NSString stringWithFormat:@" 总计：%.2f元",allSum];
     [self.tableView reloadData];
 }
 
@@ -301,6 +325,23 @@ static UITextField *currentTextField = nil;
     for (NSDictionary *dict in self.model) {
         GoodsListModel *goodsListModel = [[GoodsListModel alloc] initWithDataDic:dict];
         [[GoodsDetailDataBase shareDataBase] updateItem:goodsListModel];
+    }
+    [self checkShoppingData];
+}
+
+- (void)checkShoppingData{
+    
+    if ([self.model count] == 0 || !self.model) {
+        if (!emptyView) {
+            emptyView = [[EmptyView alloc] initWithFrame:self.view.bounds];
+            emptyView.imageView.image = [UIImage imageNamed:@"shopping_empty.png"];
+            emptyView.titleLabel.text = @"购物车空空如也，快去逛逛吧~";
+        }
+        if (!emptyView.superview) {
+            [self.view addSubview:emptyView];
+        }
+    }else{
+        [emptyView removeFromSuperview];
     }
 }
 

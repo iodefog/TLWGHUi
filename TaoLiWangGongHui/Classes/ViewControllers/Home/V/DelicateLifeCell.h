@@ -11,11 +11,14 @@
 
 @protocol DelicateLifeDelegate <NSObject>
 
-- (void)reloadTableView;
+- (void)reloadTableViewWithCell:(id)cell;
 
 @end
 
 @interface DelicateLifeCell : UITableViewCell<UIWebViewDelegate> //(精致生活)
+{
+    NSString *webStr;
+}
 
 @property (assign, nonatomic) id delegate;
 @property (strong, nonatomic) RTLabel *dailyLable;   // 年月日
@@ -25,6 +28,8 @@
 @property (strong, nonatomic) UIView *sperateLine;// 分割线
 //@property (strong, nonatomic)  RTLabel *delicateLifeDescription; // 精致也文字详情
 @property (strong, nonatomic)  UIWebView *delicateWebView; // 精致也文字详情
+@property (assign, nonatomic)  float cellHeight;    //cell 的高度
+@property (strong, nonatomic)  NSIndexPath *indexPath;    //cell indexPath
 
 - (void)setObject:(NSDictionary *)dict;                          // 从网络获取数据，并给视图赋值
 

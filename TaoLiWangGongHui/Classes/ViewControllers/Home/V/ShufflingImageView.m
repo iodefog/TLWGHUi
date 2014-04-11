@@ -22,7 +22,7 @@
 
 - (void)createSubViewsWithModel:(HomeListModel *)myHomeListModel{
     self.homeListModel = myHomeListModel;
-    NSString *imageUrl = [NSString stringWithFormat:@"%@%@", [GlobalRequest getBaseServiceUrl], self.homeListModel.activityPic];
+    NSString *imageUrl = self.homeListModel.activityPic;
     [self setImageWithURL:[NSURL URLWithString:imageUrl] placeholderImage:[UIImage imageNamed:@""]];
     self.userInteractionEnabled = YES;
     

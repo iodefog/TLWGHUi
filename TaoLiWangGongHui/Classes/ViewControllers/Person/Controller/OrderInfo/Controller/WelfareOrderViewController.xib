@@ -100,6 +100,17 @@
                                     <rect key="frame" x="281" y="27" width="9" height="16"/>
                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 </imageView>
+                                <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="iTc-g3-0qn">
+                                    <rect key="frame" x="0.0" y="1" width="300" height="80"/>
+                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                    <state key="normal">
+                                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                    </state>
+                                    <connections>
+                                        <action selector="goodTapGesture:" destination="-1" eventType="touchUpInside" id="5wN-2v-qB4"/>
+                                    </connections>
+                                </button>
                             </subviews>
                             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                         </view>
@@ -163,8 +174,8 @@
     </objects>
     <resources>
         <image name="arrow_right.png" width="9" height="16"/>
-        <image name="input_Top.png" width="300" height="40"/>
-        <image name="input_Under.png" width="300" height="40"/>
+        <image name="input_Top.png" width="300" height="70"/>
+        <image name="input_Under.png" width="300" height="70"/>
         <image name="input_normal.png" width="300" height="40"/>
         <image name="login_Nomal.png" width="300" height="35"/>
         <image name="login_Select.png" width="300" height="35"/>

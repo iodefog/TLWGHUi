@@ -135,7 +135,7 @@
     
     _request.delegate = self;
     _request.defaultResponseEncoding = [self getResponseEncoding];
-    _request.timeOutSeconds = 120;
+    _request.timeOutSeconds = 30;
     _request.allowCompressedResponse = YES;
     _request.shouldCompressRequestBody = NO;
     

@@ -186,10 +186,11 @@
     }else if(activityType == TypeVote){
         if (!radioGroup.value) {
             [GlobalHelper handerResultWithDelegate:nil withMessage:@"请先选择投票选项" withTag:0];
+            self.signUpButton.enabled = YES;
             return;
         }
-        voteOrNotVoteView.hidden = YES;
-        [voteOrNotVoteView removeFromSuperview];
+//        voteOrNotVoteView.hidden = YES;
+//        [voteOrNotVoteView removeFromSuperview];
 //        [self haveVotedWithDescription:nil];
         NSDictionary *params = @{@"memberId": [[UserHelper shareInstance] getMemberID],
                                  @"activityVoteId":[NSString stringWithFormat:@"%@",radioGroup.value],

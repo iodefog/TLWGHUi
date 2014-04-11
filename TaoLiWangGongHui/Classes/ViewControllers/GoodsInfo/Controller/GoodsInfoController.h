@@ -13,7 +13,8 @@
 typedef enum{
     GoodsType_BirthDay, // 生日福利
     GoodsType_Holiday,  // 节日福利
-    GoodsType_Discount  // 优惠购物
+    GoodsType_Discount,  // 优惠购物
+    GoodsType_None  // 其他情况进入
 }  GoodsInfoType;
 
 @interface GoodsInfoController : ViewController

@@ -67,10 +67,13 @@
     JokeListModel *model = [[JokeListModel alloc] initWithDataDic:dict];
     self.dailyLable.text = model.publishDatetime;
     self.delicateLifeTitle.text = model.activityTitle;
-    [self.delicateWebView loadHTMLString:model.description baseURL:nil];
+    if (![model.description isEqualToString:webStr]) {
+        [self.delicateWebView loadHTMLString:model.description baseURL:nil];
+        webStr = model.description;
+    }
 }
 
-static float cellHeight = 0.0f;
+static float Height = 0.0f;
 
 - (void)webViewDidFinishLoad:(UIWebView *)webView{
     NSString *jsString = @"document.body.style.fontSize=14";
@@ -83,17 +86,18 @@ static float cellHeight = 0.0f;
     [webView setFrame:frame];
     
     self.frame = CGRectMake(self.left, self.top, self.width, 40+frame.size.height);
-    cellHeight =  40+frame.size.height;
-    
-    self.bgImageView.height = cellHeight;
+    Height =  40+frame.size.height;
+    self.cellHeight = Height;
+    self.bgImageView.height = Height;
 
-    if (self.delegate && [self.delegate respondsToSelector:@selector(reloadTableView)]) {
-        [self.delegate performSelector:@selector(reloadTableView) withObject:nil];
+    if (self.delegate && [self.delegate respondsToSelector:@selector(reloadTableViewWithCell:)]) {
+        [self.delegate performSelector:@selector(reloadTableViewWithCell:) withObject:self];
     }
 }
 
 + (CGFloat)getCellHeight:(NSDictionary *)dict{
-    return cellHeight;
+//    NSLog(@"%.2f", ([DelicateLifeCell class]).height);
+    return Height;
 }
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated

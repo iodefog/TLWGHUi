@@ -44,7 +44,11 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
     self.view.backgroundColor = [UIColor whiteColor];
-    self.navigationItem.title = @"新增信息";
+    if (self.addressModel) {
+        self.navigationItem.title = @"编辑信息";
+    }else{
+        self.navigationItem.title = @"新增信息";
+    }
     self.headTitleArray = [NSArray arrayWithObjects:
                            @"收货人姓名",
                            @"所在地区",
@@ -118,14 +122,14 @@
         }
     }
     
-    if(!self.addressModel){
+    if(self.addressModel){
     UIButton *commitBtn = [UIButton createButton:@selector(commitClicked:) title:@"提交" image:nil selectedBgImage:@"login_Select.png" backGroundImage:@"login_Nomal.png" backGroundTapeImage:nil frame:CGRectMake(10, 70*[self.headTitleArray count]+50, 300, 35) tag:110 target:self];
     [commitBtn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
     [self.mScrollView addSubview:commitBtn];
     self.mScrollView.contentSize = CGSizeMake(self.view.width, 600) ;
     }else{
         
-        self.navigationItem.rightBarButtonItem = [UIBarButtonItem barButtonWithTitle:@"提交" image:nil target:self action:@selector(commitClicked:) font:[UIFont systemFontOfSize:14] titleColor:[UIColor whiteColor]];
+        self.navigationItem.rightBarButtonItem = [UIBarButtonItem barButtonWithTitle:@"提交" image:nil target:self action:@selector(commitClicked:) font:[UIFont systemFontOfSize:15] titleColor:[UIColor whiteColor]];
     self.mScrollView.contentSize = CGSizeMake(self.view.width, 500) ;
     }
 }
@@ -137,6 +141,7 @@
 
 - (void)tapClicked:(UITapGestureRecognizer *)gesture{
     [tempView resignFirstResponder];
+    [self resetScrollView];
 }
 
 #pragma mark - Custom View
@@ -146,13 +151,13 @@
     mView.backgroundColor = [UIColor clearColor];
     
     UILabel *titleLabel = [[UILabel alloc] initWithFrame:CGRectMake(10, 0, 300, 30)];
-    titleLabel.font = [UIFont systemFontOfSize:14];
+    titleLabel.font = [UIFont systemFontOfSize:15];
     titleLabel.backgroundColor = [UIColor clearColor];
     titleLabel.textColor = [UIColor darkTextColor];
     titleLabel.text = title;
     [mView addSubview:titleLabel];
     
-    placeHolderLabel = [[UILabel alloc] initWithFrame:CGRectMake(titleLabel.left, 30, titleLabel.width, 30)];
+    placeHolderLabel = [[UILabel alloc] initWithFrame:CGRectMake(titleLabel.left+5, 30, titleLabel.width, 30)];
     placeHolderLabel.textColor = [UIColor grayColor];
     placeHolderLabel.font = titleLabel.font;
     placeHolderLabel.text = placeHolder;
@@ -180,7 +185,7 @@
     mView.backgroundColor = [UIColor clearColor];
     
     UILabel *titleLabel = [[UILabel alloc] initWithFrame:CGRectMake(10, 0, 300, 30)];
-    titleLabel.font = [UIFont systemFontOfSize:14];
+    titleLabel.font = [UIFont systemFontOfSize:15];
     titleLabel.backgroundColor = [UIColor clearColor];
     titleLabel.textColor = [UIColor darkTextColor];
     titleLabel.text = title;
@@ -188,10 +193,16 @@
     
     UITextField *textField = [[UITextField alloc] initWithFrame:CGRectMake(10, 30, 300, 30)];
     textField.placeholder = placeHolder;
+    textField.borderStyle = UITextBorderStyleRoundedRect;
     textField.background = [UIImage imageNamed:@"input.png"];
     textField.font = titleLabel.font;
+    textField.returnKeyType = UIReturnKeyNext;
+
     if(tag == 102 || tag == 103){
         textField.keyboardType = UIKeyboardTypeNumberPad;
+    }
+    if (tag == 104) {
+        textField.returnKeyType = UIReturnKeyDone;
     }
     textField.delegate = self;
     textField.tag = tag;
@@ -221,13 +232,18 @@
     }
     
 //    NSArray *dbArray = [[UserAddressDataBase shareDataBase] readTableName];;
+    NSString *receiverAddressId = self.addressModel.receiverAddressId;
+    if (!receiverAddressId) {
+        receiverAddressId = @"";
+    }
     NSDictionary *params =  @{@"receiverName":nameTextField.text,
                               @"city":cityTextField.text,
                               @"memberId": [[UserHelper shareInstance] getMemberID],
                               @"receiverPhone":phoneTextField.text,
                               @"receiverAddress":detailAddressTextField.text,
+                               @"receiverAddressId":receiverAddressId,
                               @"receiverPostalcode":zipCodeTextField.text,
-                              @"email":self.addressModel?(self.addressModel.email?self.addressModel.email:@""):@"",
+                             
                               @"isDefault": @"1",
                               };
     AddressModel *addModel = [[AddressModel alloc] initWithDataDic:params];
@@ -272,6 +288,11 @@
         return NO;
     }else{
         [self.locateView removeFromSuperview];
+        if (textField.tag == 103) {
+            [UIView animateWithDuration:0.3 animations:^{
+                self.mScrollView.contentOffset = CGPointMake(self.mScrollView.contentOffset.x, 300);
+            }];
+        }
     }
     return YES;
 }
@@ -300,9 +321,9 @@
 }
 
 - (void)resetScrollView{
-    self.mScrollView.contentSize = CGSizeMake(self.view.width, 600) ;
     self.mScrollView.frame = self.view.bounds;
-    [self.mScrollView scrollRectToVisible:CGRectMake(0,100, self.mScrollView.width, self.mScrollView.height) animated:YES];
+    self.mScrollView.contentSize = CGSizeMake(self.view.width, self.view.height) ;
+//    [self.mScrollView scrollRectToVisible:CGRectMake(0,100, self.mScrollView.width, self.mScrollView.height) animated:YES];
 }
 
 - (void)changeScrollView{
@@ -328,7 +349,7 @@
             [[TKAlertCenter defaultCenter] postAlertWithMessage:@"请输入正确地的邮编"];
         }
     }
-    [self resetScrollView];
+//    [self resetScrollView];
 }
 
 
@@ -338,11 +359,11 @@
     if (textView.superview.bottom > self.view.height - 244) {
         [self changeScrollView];
     }
-    [self.mScrollView scrollRectToVisible:CGRectMake(0, 200, self.mScrollView.width, self.mScrollView.height) animated:YES];
+    [self.mScrollView scrollRectToVisible:CGRectMake(0, 150, self.mScrollView.width,200) animated:YES];
 }
 
 - (void)textViewDidEndEditing:(UITextView *)textView{
-    [self resetScrollView];
+//    [self resetScrollView];
 }
 
 - (void)responseSuccessWithResponse:(ITTBaseDataRequest *)request{

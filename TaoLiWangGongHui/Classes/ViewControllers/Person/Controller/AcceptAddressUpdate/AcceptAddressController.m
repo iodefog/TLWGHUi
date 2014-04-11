@@ -11,7 +11,9 @@
 #import "AddressCell.h"
 #import "UserAddressDataBase.h"
 
-@interface AcceptAddressController () <AddressDelegate>
+@interface AcceptAddressController () <AddressDelegate>{
+    BOOL haveRequestData;
+}
 
 @end
 
@@ -31,7 +33,7 @@
     [super viewWillAppear:animated];
     [self.model removeAllObjects];
     [self commitRequestWithParams:@{@"memberId": [[UserHelper shareInstance] getMemberID]} withUrl:[GlobalRequest addressAction_QueryAddressList_Url]];
-    [self.tableView reloadData];
+//    [self.tableView reloadData];
     /** 地址写入数据库后获取
      NSMutableArray *dbArray = [NSMutableArray arrayWithArray:[[UserAddressDataBase shareDataBase] readTableName] ];
      if([dbArray count]){
@@ -51,6 +53,7 @@
     self.navigationItem.title = @"选择收货地址";
     self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     self.tableView.backgroundView = [[UIView alloc] init];
+    haveRequestData = NO;
 }
 
 
@@ -60,11 +63,17 @@
     // Dispose of any resources that can be recreated.
 }
 
+- (void)reloadNewData{
+    haveRequestData = YES;
+    [super reloadNewData];
+}
+
 #pragma mark - Table view data source
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView{
     // Return the number of sections.
-    return ([self.model count] >=3)  ? 3 :  ([self.model count]+1);
+    NSInteger cellCount = ([self.model count] >=3)  ? 3 :  ([self.model count]+1);
+    return haveRequestData ? cellCount : 0;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{

@@ -33,7 +33,7 @@
     viewController.title = title;
     [viewController.tabBarItem setFinishedSelectedImage:finishedSelectedImage withFinishedUnselectedImage:image];
     [viewController.tabBarItem setTitle:nil];
-    [viewController.tabBarItem setImageInsets:UIEdgeInsetsMake(6, 0, -6, 0)];
+    [viewController.tabBarItem setImageInsets:UIEdgeInsetsMake(5, 0, -5, 0)];
     
     UINavigationController *navigationController = [[UINavigationController alloc] initWithRootViewController:viewController];
     
@@ -69,6 +69,7 @@
         self.badgeView = [[JSBadgeView alloc] initWithParentView:self.tabBar alignment:(JSBadgeViewAlignmentTopLeft)];
         self.badgeView.badgePositionAdjustment = CGPointMake(115, 10);
         self.badgeView.badgeBackgroundColor = RGBCOLOR(249, 89, 66);
+        self.badgeView.badgeOverlayColor = [UIColor clearColor];
     }
     if (!self.badgeView.superview) {
         [self.tabBar addSubview:self.badgeView];

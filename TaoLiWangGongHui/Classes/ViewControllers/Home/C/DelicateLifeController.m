@@ -11,6 +11,8 @@
 
 @interface DelicateLifeController () <DelicateLifeDelegate>
 
+@property (nonatomic, strong) NSMutableDictionary *cellHightDict;
+
 @end
 
 @implementation DelicateLifeController
@@ -20,6 +22,7 @@
     self = [super initWithStyle:style];
     if (self) {
         // Custom initialization
+        self.cellHightDict = [NSMutableDictionary dictionary];
     }
     return self;
 }
@@ -73,9 +76,14 @@
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
-    NSDictionary *dict = self.model[indexPath.section];
-    //<p>&nbsp;44</p>
-    return [DelicateLifeCell getCellHeight:dict];
+    
+//    NSDictionary *dict = self.model[indexPath.section];
+//    NSLog(@"**** %f",[DelicateLifeCell getCellHeight:dict]);
+//    NSLog(@"**** %d",indexPath.section);
+//    return [DelicateLifeCell getCellHeight:dict];
+    NSString *cellName = [NSString stringWithFormat:@"section_%d",indexPath.section ];
+    NSNumber *num = self.cellHightDict[cellName];
+    return num.floatValue;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section{
@@ -95,13 +103,15 @@
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
     }
     cell.delegate = self;
+    cell.indexPath = indexPath;
     NSDictionary *dict = self.model[indexPath.section];
     [cell setObject:dict];
     return cell;
 }
 
 
-- (void)reloadTableView{
+- (void)reloadTableViewWithCell:(DelicateLifeCell *)cell{
+    [self.cellHightDict setObject:[NSNumber numberWithFloat:cell.cellHeight] forKey:[NSString stringWithFormat:@"section_%d",cell.indexPath.section]];
     [self.tableView reloadData];
 }
 

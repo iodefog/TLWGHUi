@@ -34,8 +34,6 @@
 
 // 获取验证码
 - (IBAction)getCodeClicked:(id)sender {
-    [self.getCodeButton setTitle:[NSString stringWithFormat:@"%d秒后再发",60] forState:UIControlStateDisabled];
-    self.getCodeButton.enabled = NO;
     if (![GlobalHelper isValidatePhone:self.phoneTextField.text]) {
         [GlobalHelper handerResultWithDelegate:self withMessage:@"手机号码格式不正确" withTag:0];
         return;
@@ -45,9 +43,6 @@
                                     @"phone":self.phoneTextField.text
                                     } withUrl:[GlobalRequest userAction_QueryPasswordByMessage_Url]];
     
-    if (![codeTimer isValid]) {
-        codeTimer = [NSTimer scheduledTimerWithTimeInterval:1 target:self selector:@selector(codeTimerTrigger:) userInfo:nil repeats:YES];
-    }
 }
 
 // 提交
@@ -74,6 +69,10 @@
             self.getCodeButton.enabled = YES;
             clickCount = 60;
             [codeTimer invalidate];
+        }else{
+            if (![codeTimer isValid]) {
+                codeTimer = [NSTimer scheduledTimerWithTimeInterval:1 target:self selector:@selector(codeTimerTrigger:) userInfo:nil repeats:YES];
+            }
         }
         [GlobalHelper handerResultWithDelegate:self withMessage:request.handleredResult[@"msg"] withTag:0];
     }
@@ -93,6 +92,9 @@
 // 点击一次验证码后，计时器触发60秒
 static int clickCount = 59;
 - (void)codeTimerTrigger:(NSTimer *)timer{
+    [self.getCodeButton setTitle:[NSString stringWithFormat:@"%d秒后再发",60] forState:UIControlStateDisabled];
+    self.getCodeButton.enabled = NO;
+
     if (-- clickCount > 0) {
         [self.getCodeButton setTitle:[NSString stringWithFormat:@"%d秒后再发",clickCount] forState:UIControlStateDisabled];
         self.getCodeButton.enabled = NO;
