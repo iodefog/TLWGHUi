@@ -58,7 +58,7 @@
                              @"pageNo": @"1",
                              @"Type":@"3",
                              @"pageSize": PAGESIZE,};
-    [self commitRequestWithParams:params withUrl:[GlobalRequest productAction_QueryProductListByType_Url]];
+    [self commitRequestWithParams:params withUrl:[GlobalRequest productAction_QueryProductListByType_Url] withView:nil];
 }
 
 - (void)refreshFooterView{
@@ -67,7 +67,7 @@
                              @"pageNo": [NSString stringWithFormat:@"%d", [self.model count]/PAGESIZEINT],
                              @"Type":@"3",
                              @"pageSize": PAGESIZE,};
-    [self commitRequestWithParams:params withUrl:[GlobalRequest productAction_QueryProductListByType_Url]];
+    [self commitRequestWithParams:params withUrl:[GlobalRequest productAction_QueryProductListByType_Url] withView:nil];
 }
 
 #pragma mark - Table view data source
@@ -104,7 +104,6 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     DiscountShoppingCell *cell = (id)[tableView cellForRowAtIndexPath:indexPath];
     GoodsInfoController *goodsInfo = [[GoodsInfoController alloc] initWithNibName:@"GoodsInfoController" bundle:nil];
-    goodsInfo.goodsInfoType = GoodsType_Discount;
     goodsInfo.productID = cell.discountModel.productId;
                     
     [goodsInfo setHidesBottomBarWhenPushed:YES];

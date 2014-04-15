@@ -21,7 +21,7 @@
 
 - (id)initWithStyle:(UITableViewStyle)style
 {
-    style = UITableViewStyleGrouped;
+    style = UITableViewStylePlain;
     self = [super initWithStyle:style];
     if (self) {
         // Custom initialization
@@ -31,8 +31,6 @@
 
 - (void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
-    [self.model removeAllObjects];
-    [self commitRequestWithParams:@{@"memberId": [[UserHelper shareInstance] getMemberID]} withUrl:[GlobalRequest addressAction_QueryAddressList_Url]];
 //    [self.tableView reloadData];
     /** 地址写入数据库后获取
      NSMutableArray *dbArray = [NSMutableArray arrayWithArray:[[UserAddressDataBase shareDataBase] readTableName] ];
@@ -47,6 +45,11 @@
      */
 }
 
+- (void)refreshHeaderView{
+    [self.model removeAllObjects];
+    [self commitRequestWithParams:@{@"memberId": [[UserHelper shareInstance] getMemberID]} withUrl:[GlobalRequest addressAction_QueryAddressList_Url] withView:nil];
+}
+
 - (void)viewDidLoad
 {
     [super viewDidLoad];
@@ -54,6 +57,7 @@
     self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     self.tableView.backgroundView = [[UIView alloc] init];
     haveRequestData = NO;
+    [self refreshHeaderView];
 }
 
 
@@ -85,8 +89,12 @@
     return 10;
 }
 
+- (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section{
+    return [[UIView alloc] init];
+}
+
 - (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section{
-    return 0.1f;
+    return 0.0f;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
@@ -123,13 +131,14 @@
 
 - (void)addAddressClicked:(UIButton *)sender{
     AddUserInfoViewController *addUserInfoVC = [[AddUserInfoViewController alloc] init];
+    addUserInfoVC.parent = self;
     [self.navigationController pushViewController:addUserInfoVC animated:YES];
 }
 
 #pragma mark -  AddressDelegate
 - (void)setCurrentCellToDefaultModel:(NewAddressModel *)addressmodel{
     [self.model removeAllObjects];
-    [self commitRequestWithParams:@{@"memberId": [[UserHelper shareInstance] getMemberID]} withUrl:[GlobalRequest addressAction_QueryAddressList_Url]];
+    [self commitRequestWithParams:@{@"memberId": [[UserHelper shareInstance] getMemberID]} withUrl:[GlobalRequest addressAction_QueryAddressList_Url] withView:self.view];
 }
 
 

@@ -61,7 +61,7 @@
                       @"",
                       @"AboutViewController",nil];
      self.navigationItem.leftBarButtonItem = nil;
-    self.navigationItem.rightBarButtonItem = [UIBarButtonItem barButtonWithTitle:@"     退出" image:nil target:self action:@selector(logout) font:[UIFont systemFontOfSize:15] titleColor:[UIColor whiteColor]];
+    self.navigationItem.rightBarButtonItem = [UIBarButtonItem barButtonWithTitle:@"    退出" image:nil target:self action:@selector(logout) font:[UIFont systemFontOfSize:15] titleColor:[UIColor whiteColor]];
 }
 
 - (void)logout{
@@ -93,7 +93,7 @@
     }
     cell.textLabel.text = [self.cellNameArray objectAtIndex:indexPath.row];
     cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
-    cell.textLabel.font = [UIFont systemFontOfSize:14];
+    cell.textLabel.font = [UIFont systemFontOfSize:15.0f];
     if (indexPath.row == 0) {
         cell.customImage.image = [UIImage imageNamed:@"input_Top.png"];
     }else if (indexPath.row == [cellNameArray count] - 1){

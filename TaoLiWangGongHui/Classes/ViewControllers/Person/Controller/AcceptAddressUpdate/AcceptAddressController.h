@@ -10,4 +10,6 @@
 
 @interface AcceptAddressController : TableViewController
 
+- (void)refreshHeaderView;
+
 @end

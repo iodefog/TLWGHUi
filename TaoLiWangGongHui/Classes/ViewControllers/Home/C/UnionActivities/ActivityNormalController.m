@@ -49,7 +49,7 @@
                                         @"typeId":@"1",
                                         @"pageNo":@"0",
                                         @"pageSize":PAGESIZE
-                                        } withUrl:[GlobalRequest activityAction_QueryActivityRegistionList_Url]];
+                                        } withUrl:[GlobalRequest activityAction_QueryActivityRegistionList_Url] withView:self.view];
         
     }else{
         params = @{
@@ -60,7 +60,7 @@
                    @"pageSize":PAGESIZE
                    };
         url = [GlobalRequest activityAction_QueryVoteList_Url];
-        [self commitRequestWithParams:params withUrl:url];
+        [self commitRequestWithParams:params withUrl:url withView:self.view];
     }
 }
 
@@ -99,7 +99,9 @@
     if (!cell) {
         cell = [[[NSBundle mainBundle] loadNibNamed:@"ActivityNormalCell" owner:nil options:nil] lastObject];
         [cell changeShowType:showType];
-        [cell setObject:self.model[indexPath.row]];
+        if ([self.model count] > indexPath.row) {
+            [cell setObject:self.model[indexPath.row]];
+        }
     }
     
     return cell;

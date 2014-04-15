@@ -29,7 +29,7 @@
     self.titleLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, self.imageView.bottom, self.width, 40)];
     self.titleLabel.textColor = [UIColor grayColor];
     self.titleLabel.textAlignment = NSTextAlignmentCenter;
-    self.titleLabel.font = [UIFont systemFontOfSize:17.0];
+    self.titleLabel.font = [UIFont systemFontOfSize:15.0];
     [self addSubview:self.titleLabel];
 }
 

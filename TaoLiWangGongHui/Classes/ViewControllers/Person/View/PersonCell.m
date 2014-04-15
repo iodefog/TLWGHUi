@@ -25,7 +25,8 @@
 
 - (void)createUI{
     if (isIOS7) {
-        customImage = [[UIImageView alloc] initWithFrame:CGRectMake(10, 0, 300, self.height+1)];
+//        self.separatorInset
+        customImage = [[UIImageView alloc] initWithFrame:CGRectMake(10, 0, 300, self.height)];
         customImage.tag = 101;
         [self addSubview:customImage];
         [self sendSubviewToBack:customImage];

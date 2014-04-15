@@ -56,5 +56,20 @@
 }
 
 
+//打包使用期限限制
++ (BOOL)SenderlimitTime{
+    int timeDay5 = 7 * 24 * 60 * 60;
+    NSString * strNewTime = [TimeObject currentTime];
+    NSString * strTime = @"1397482793";
+    NSLog(@"预计开始时间===%@",[TimeObject fromTimeChuoTotime:strTime]);
+    NSLog(@"当前时间====%@",[TimeObject currentTime]);
+    if ([strTime intValue] + timeDay5 <= [strNewTime intValue]) {
+        [UIAlertView popupAlertByDelegate:self andTag:7000 title:@"温馨提示" message:@"超出有效期  不再正常使用"];
+        NSLog(@"strNew超出有效期  不再正常使用");
+        return NO;
+    }
+    return YES;
+}
+
 
 @end

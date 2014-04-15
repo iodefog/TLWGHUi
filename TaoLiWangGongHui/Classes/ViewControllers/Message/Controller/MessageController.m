@@ -58,7 +58,9 @@ static bool isSelfRequest = YES;
         cell = [[[NSBundle mainBundle] loadNibNamed:@"MessageCell" owner:nil options:nil] lastObject];;
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
     }
-    [cell setObject:self.model[indexPath.row]];
+    if ([self.model count] > indexPath.row) {
+        [cell setObject:self.model[indexPath.row]];
+    }
     return cell;
 }
 
@@ -99,7 +101,7 @@ static bool isSelfRequest = YES;
 - (void)refreshHeaderView{
     if (isSelfRequest) {
         [self commitRequestWithParams:@{@"pageNo":@"0",
-                                        @"pageSize":PAGESIZE} withUrl:[GlobalRequest articleAction_QueryAdList_Url]];
+                                        @"pageSize":PAGESIZE} withUrl:[GlobalRequest articleAction_QueryAdList_Url] withView:nil];
     }
 }
 
@@ -107,7 +109,7 @@ static bool isSelfRequest = YES;
     if (isSelfRequest) {
         NSString *pageNo = [NSString stringWithFormat:@"%d", ([self.model count]/PAGESIZEINT)];
         [self commitRequestWithParams:@{@"pageNo":pageNo,
-                                        @"pageSize":PAGESIZE} withUrl:[GlobalRequest articleAction_QueryAdList_Url]];
+                                        @"pageSize":PAGESIZE} withUrl:[GlobalRequest articleAction_QueryAdList_Url] withView:nil];
     }
 }
 

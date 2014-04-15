@@ -88,7 +88,7 @@ static NSString *activityCellName = @"activityCellName";
     NSDictionary *params = @{@"memberId": [[UserHelper shareInstance] getMemberID],
                              @"pageSize": PAGESIZE,
                              @"pageNo": @"0"};
-    [self commitRequestWithParams:params withUrl:[GlobalRequest activityAction_QueryMyActivityList_Url]];
+    [self commitRequestWithParams:params withUrl:[GlobalRequest activityAction_QueryMyActivityList_Url] withView:nil];
     
 }
 
@@ -96,7 +96,7 @@ static NSString *activityCellName = @"activityCellName";
     NSDictionary *params = @{@"memberId": [[UserHelper shareInstance] getMemberID],
                              @"pageSize": PAGESIZE,
                              @"pageNo": [NSString stringWithFormat:@"%d", [self.model count]/PAGESIZEINT]};
-    [self commitRequestWithParams:params withUrl:[GlobalRequest activityAction_QueryMyActivityList_Url]];
+    [self commitRequestWithParams:params withUrl:[GlobalRequest activityAction_QueryMyActivityList_Url] withView:nil];
     
 }
 

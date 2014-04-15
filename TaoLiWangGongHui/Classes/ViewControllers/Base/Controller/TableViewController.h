@@ -25,7 +25,7 @@
 - (void)addFooter;
 
 - (void)reloadNewData; // 数据接收成功后 用新数据刷新view
-- (void)commitRequestWithParams:(NSDictionary *)params withUrl:(NSString *)url; // 根据url和参数 提交到网络
+- (void)commitRequestWithParams:(NSDictionary *)params withUrl:(NSString *)url withView:(UIView *)view; // 根据url和参数 提交到网络
 - (void)setDataDic:(NSDictionary *)resultDic withRequest:(id)request; // 数据完成后回调的函数
 
 #pragma mark - Response Success

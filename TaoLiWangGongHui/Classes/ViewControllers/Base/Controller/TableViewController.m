@@ -46,8 +46,8 @@
     [self.navigationController popViewControllerAnimated:YES];
 }
 
-- (void)commitRequestWithParams:(NSDictionary *)params withUrl:(NSString *)url{
-    [ITTASIBaseDataRequest requestWithParameters:params withRequestUrl:url withIndicatorView:self.view withCancelSubject:nil onRequestStart:^(ITTBaseDataRequest *request) {
+- (void)commitRequestWithParams:(NSDictionary *)params withUrl:(NSString *)url withView:(UIView *)view{
+    [ITTASIBaseDataRequest requestWithParameters:params withRequestUrl:url withIndicatorView:view withCancelSubject:nil onRequestStart:^(ITTBaseDataRequest *request) {
         NSLog(@"request start");
     } onRequestFinished:^(ITTBaseDataRequest *request) {
        

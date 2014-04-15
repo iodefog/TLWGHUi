@@ -66,7 +66,7 @@
     
     
     if (activityType == TypeNone){ // 不显示报名和投票
-        self.bottomView.hidden = YES;
+
     }
     else if (activityType == TypeSignUp) {  // 报名
         [self.signUpButton setTitle:@"已报名" forState:UIControlStateDisabled];
@@ -218,11 +218,10 @@
     self.activitiesTitle.text = self.activityModel.activityTitle;
     [self.headImage setImageWithURL:[NSURL URLWithString:self.activityModel.activityPic]];
     activityType = self.activityModel.typeId.intValue;
-    if (activityType == TypeNone) {
+    if (activityType == TypeNone || (self.activityModel.typeId.intValue == 3)) {
         self.bottomView.hidden = YES;
-    }else if (activityType == TypeSignUp){
-//        BOOL action = self.activityModel.status.boolValue;
-//        [self showDiffrentMiddleViewWithType:activityType withDescription:self.activityModel.description withHaveAction:action];
+    }else if ((activityType == TypeSignUp) || (activityType == TypeVote)){
+        self.bottomView.hidden = NO;
     }
     [self.descriptionWebView loadHTMLString:self.activityModel.description baseURL:nil];
     
@@ -279,6 +278,13 @@
         self.middleScrollView.top = self.descriptionWebView.bottom+5;
         self.middleScrollView.height = 0;
         self.bottomView.top = self.middleScrollView.bottom;
+    }
+    self.baseScroll.contentSize = CGSizeMake(self.baseScroll.width, self.bottomView.bottom);
+    if (self.baseScroll.contentSize.height <= self.baseScroll.height) {
+        if (self.baseScroll.contentSize.height <= self.baseScroll.height) {
+            self.baseScroll.contentSize = CGSizeMake(self.baseScroll.width, self.baseScroll.height + 5) ;
+        }
+
     }
 }
 

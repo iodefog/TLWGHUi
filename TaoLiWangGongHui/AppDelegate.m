@@ -32,9 +32,17 @@
         [[UINavigationBar appearance] setBackgroundImage:[UIImage imageNamed:@"nav_background.png"] forBarMetrics:UIBarMetricsDefault];
     }
     
-    [[UINavigationBar appearance] setTitleTextAttributes:[NSDictionary dictionaryWithObjectsAndKeys:
-        [UIColor whiteColor], UITextAttributeTextColor,
-        [UIFont systemFontOfSize:20], UITextAttributeFont,nil]];
+    if (isIOS7) {
+        [[UINavigationBar appearance] setTitleTextAttributes:[NSDictionary dictionaryWithObjectsAndKeys:
+                                                              [UIColor whiteColor], UITextAttributeTextColor,
+                                                              [UIFont systemFontOfSize:17.0f], UITextAttributeFont,nil]];
+    }else{
+        [[UINavigationBar appearance] setTitleTextAttributes:[NSDictionary dictionaryWithObjectsAndKeys:
+                                                              [UIColor whiteColor],UITextAttributeTextColor,
+                                                              [UIColor clearColor],
+                                                              UITextAttributeTextShadowColor,nil]];
+
+    }
     
     if (([[UserHelper shareInstance] getMemberID].intValue != 0) && [[UserHelper shareInstance] getMemberID]) {
         [self chageRootVC];
@@ -62,7 +70,7 @@
 - (BOOL)SenderlimitTime{
     int timeDay5 = 7 * 24 * 60 * 60;
     NSString * strNewTime = [TimeObject currentTime];
-    NSString * strTime = @"1397064551";
+    NSString * strTime = @"1397482793";
     NSLog(@"预计开始时间===%@",[TimeObject fromTimeChuoTotime:strTime]);
     NSLog(@"当前时间====%@",[TimeObject currentTime]);
     if ([strTime intValue] + timeDay5 <= [strNewTime intValue]) {

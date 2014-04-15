@@ -25,4 +25,13 @@ typedef NS_ENUM(NSInteger, CarHaveSameGoods) {
  *  从时间戳转换为时间
  */
 +(NSString *)fromTimeChuoTotime:(NSString *)timeChuo;
+
+
+
+/****
+ *打包使用期限限制
+ */
++ (BOOL)SenderlimitTime;
+
+
 @end

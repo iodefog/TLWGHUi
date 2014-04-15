@@ -47,7 +47,12 @@
 {
     [super viewDidLoad];
     isShowWelfareHidden = NO;
-    self.tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 44, self.view.width, self.view.height - 44) style:UITableViewStylePlain];
+    if (isIOS7) {
+        self.tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 44, self.view.width, self.view.height - 44 - 60) style:UITableViewStylePlain];
+    }else{
+        self.tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 44, self.view.width, self.view.height - 44 - 44) style:UITableViewStylePlain];
+    }
+    
     self.tableView.dataSource = self;
     self.tableView.delegate = self;
     self.tableView.backgroundColor = [UIColor whiteColor];
@@ -193,9 +198,13 @@
     UIButton *button2 = (id)[self.view viewWithTag:101];
     
     if (sender == button1) {
+        button1.selected = YES;
+        button2.selected = NO;
         isShowWelfareHidden = NO;
         [self.tableView reloadData];
     }else if(sender == button2){
+        button1.selected = NO;
+        button2.selected = YES;
         isShowWelfareHidden = YES;
         [self.tableView reloadData];
     }
@@ -203,7 +212,7 @@
 
 #pragma mark - *****************
 - (void)commitRequestWithParams:(NSDictionary *)params withUrl:(NSString *)url{
-    [ITTASIBaseDataRequest requestWithParameters:params withRequestUrl:url withIndicatorView:self.view withCancelSubject:nil onRequestStart:^(ITTBaseDataRequest *request) {
+    [ITTASIBaseDataRequest requestWithParameters:params withRequestUrl:url withIndicatorView:nil withCancelSubject:nil onRequestStart:^(ITTBaseDataRequest *request) {
         NSLog(@"request start");
     } onRequestFinished:^(ITTBaseDataRequest *request) {
         

@@ -101,12 +101,16 @@
 
 - (void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
-    [GlobalHelper showCarViewInNavC:self.navigationController withVC:self];
+    if (self.goodsInfoType == GoodsType_Discount) {
+        [GlobalHelper showCarViewInNavC:self.navigationController withVC:self];
+    }
 }
 
 - (void)viewWillDisappear:(BOOL)animated{
     [super viewWillDisappear:animated];
-    [GlobalHelper hiddenCarView];
+    if (self.goodsInfoType == GoodsType_Discount) {
+        [GlobalHelper hiddenCarView];
+    }
 }
 
 - (void)viewDidLoad
@@ -115,11 +119,16 @@
     self.navigationItem.title = @"商品详情";
     if ((self.goodsInfoType==GoodsType_BirthDay) || (self.goodsInfoType==GoodsType_Holiday)) {
         [self.PayOrJoinCartBtn setTitle:@"立即领取" forState:UIControlStateNormal];
-    }else if(self.goodsInfoType == GoodsType_None){
-        self.PayOrJoinCartBtn.hidden = YES;
     }
+//    else if(self.goodsInfoType == GoodsType_None){
+//        self.PayOrJoinCartBtn.hidden = YES;
+//    }
 
     [self startGoodsDetailRequest];
+    if (_ContentScrollView.contentSize.height <= _ContentScrollView.height) {
+        _ContentScrollView.contentSize = CGSizeMake(320, _ContentScrollView.height + 15) ;
+    }
+
 }
 
 -(void)JoinCarButtonClick:(id)sender{
@@ -234,6 +243,7 @@
         welfareConfirmVC.goodPic = imageView.image;
         welfareConfirmVC.goodText = self.goodsListModel.productName;
         welfareConfirmVC.goodIDText = self.goodsListModel.productId;
+        welfareConfirmVC.goodsListModel = self.goodsListModel;
         [selected_navigation_controller() pushViewController:welfareConfirmVC animated:YES];
     }else if (self.goodsInfoType == GoodsType_Discount){
 //        CashConfirmViewController *cashConfirmVC = [[CashConfirmViewController alloc] initWithNibName:@"CashConfirmViewController" bundle:nil];
@@ -288,6 +298,11 @@
     }else{
         _ContentScrollView.contentSize = CGSizeMake(320, frame.size.height+415);
     }
+    
+    if (_ContentScrollView.contentSize.height <= _ContentScrollView.height) {
+        _ContentScrollView.contentSize = CGSizeMake(320, _ContentScrollView.height + 15) ;
+    }
+    
     [webView setFrame:frame];
 }
 

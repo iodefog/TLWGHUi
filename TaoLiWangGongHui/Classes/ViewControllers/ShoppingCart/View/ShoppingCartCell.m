@@ -106,7 +106,7 @@
 }
 
 - (void)whenCellDidSelected{
-    GoodsInfoType goodType = GoodsType_None;
+//    GoodsInfoType goodType = GoodsType_None;
 //    if (self.shoppingModel.productType.intValue == 1)
 //        goodType =GoodsType_BirthDay;
 //    else if (self.shoppingModel.productType.intValue == 2)
@@ -114,7 +114,7 @@
 //    else goodType = GoodsType_Holiday;
     
     GoodsInfoController *goodsInfoVC = [[GoodsInfoController alloc]  initWithNibName:@"GoodsInfoController" bundle:nil];
-    goodsInfoVC.goodsInfoType = goodType ;
+    goodsInfoVC.goodsInfoType = GoodsType_Discount ;
     goodsInfoVC.productID = self.shoppingModel.productId;
     [selected_navigation_controller() pushViewController:goodsInfoVC animated:YES];
 }

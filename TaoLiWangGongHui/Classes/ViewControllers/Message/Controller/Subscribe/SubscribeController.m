@@ -32,7 +32,7 @@
     [self commitRequestWithParams:@{
                                     @"memberId": [[UserHelper shareInstance] getMemberID],
                                     @"pageNo": @"0",
-                                    @"pageSize":PAGESIZE ,} withUrl:[GlobalRequest articleAction_QueryWebsiteNewsType_Url]];
+                                    @"pageSize":PAGESIZE ,} withUrl:[GlobalRequest articleAction_QueryWebsiteNewsType_Url] withView:self.view];
     
     [self.tableView setTableFooterView:[[UIView alloc] init]];
     

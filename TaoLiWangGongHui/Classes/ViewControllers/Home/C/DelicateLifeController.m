@@ -42,12 +42,12 @@
 #pragma mark - MJRefresh
 - (void)refreshHeaderView{
     [self commitRequestWithParams:@{@"pageNo":@"0",
-                                    @"pageSize":PAGESIZE} withUrl:[GlobalRequest activityAction_QueryJokeList_Url]];
+                                    @"pageSize":PAGESIZE} withUrl:[GlobalRequest activityAction_QueryJokeList_Url] withView:nil];
 }
 
 - (void)refreshFooterView{
     [self commitRequestWithParams:@{@"pageNo":[NSString stringWithFormat:@"%d", [self.model count]/PAGESIZEINT],
-                                    @"pageSize":PAGESIZE} withUrl:[GlobalRequest activityAction_QueryJokeList_Url]];
+                                    @"pageSize":PAGESIZE} withUrl:[GlobalRequest activityAction_QueryJokeList_Url] withView:nil];
 }
 
 
@@ -87,12 +87,21 @@
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section{
-    return 20.0;
+    float cellHeight = 30.0f;
+    if (section == 0) {
+        cellHeight = 20.0f;
+    }
+    return cellHeight;
 }
 
-- (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section{
-    return 0.1f;
+- (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section{
+    return [[UIView alloc] initWithFrame:CGRectMake(0, 0, self.view.width, 20.0f)];
 }
+
+//
+//- (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section{
+//    return 0.1f;
+//}
 
 - (DelicateLifeCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {

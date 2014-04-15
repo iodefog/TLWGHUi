@@ -39,6 +39,7 @@
         return;
     }
     GoodsInfoController *goodsInfoVC = [[GoodsInfoController alloc] initWithNibName:@"GoodsInfoController" bundle:nil];
+    goodsInfoVC.goodsInfoType = GoodsType_None;
     goodsInfoVC.productID = self.goodID.text;
     [self.navigationController pushViewController:goodsInfoVC animated:YES];
 }

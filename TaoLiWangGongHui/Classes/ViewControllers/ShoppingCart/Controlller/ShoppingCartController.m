@@ -65,7 +65,11 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
     
-    self.tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 35, self.view.width, self.view.height - 20) style:UITableViewStylePlain];
+    if (isIOS7) {
+        self.tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 35, self.view.width, self.view.height - 20) style:UITableViewStylePlain];
+    }else{
+        self.tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 35, self.view.width, self.view.height - 64 - 35) style:UITableViewStylePlain];
+    }
     self.tableView.dataSource = self;
     self.tableView.delegate = self;
     self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
@@ -78,7 +82,7 @@
     }
     
     // UIKeyBoardCoView
-    keyBoardCoView = [[UIKeyboardCoView alloc] initWithFrame:CGRectMake(0, self.tableView.bottom , 320, 35)];
+    keyBoardCoView = [[UIKeyboardCoView alloc] initWithFrame:CGRectMake(0, [UIScreen mainScreen].bounds.size.height , 320, 35)];
     keyBoardCoView.backgroundColor = [UIColor lightGrayColor];
     [[[UIApplication sharedApplication].windows firstObject] addSubview:keyBoardCoView];
    

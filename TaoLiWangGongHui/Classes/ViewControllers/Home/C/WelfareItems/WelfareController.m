@@ -45,7 +45,7 @@
                                 @"pageNo":@"0",
                                 @"pageSize":PAGESIZE
                                 };
-        [self commitRequestWithParams:param withUrl:[GlobalRequest productAction_QueryProductListByType_Url]];
+        [self commitRequestWithParams:param withUrl:[GlobalRequest productAction_QueryProductListByType_Url] withView:self.view];
     }
    
     [self.tableView setTableFooterView:[[UIView alloc] init]];

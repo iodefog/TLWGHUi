@@ -99,6 +99,7 @@
 - (void)setDataDic:(NSDictionary *)resultDic withRequest:(ITTBaseDataRequest *)request{
     NSLog(@"%@", request.handleredResult);
     if ([request.requestUrl isEqualToString:[GlobalRequest addressAction_QueryAddressList_Url]]) {
+        [self.model removeAllObjects];
         [super setDataDic:resultDic withRequest:request];
         for (NSDictionary *dict in self.model) {
             NewAddressModel *tempModel = [[NewAddressModel alloc] initWithDataDic:dict];

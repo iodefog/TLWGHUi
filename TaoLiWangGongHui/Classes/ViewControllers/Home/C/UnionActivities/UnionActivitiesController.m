@@ -82,7 +82,7 @@
                              @"pageSize":PAGESIZE,
                              @"pageNo":@"0"
                              };
-    [self commitRequestWithParams:params withUrl:[GlobalRequest activityAction_QueryActivityList_Url]];
+    [self commitRequestWithParams:params withUrl:[GlobalRequest activityAction_QueryActivityList_Url] withView:nil];
 }
 
 - (void)refreshFooterView{
@@ -91,7 +91,7 @@
                              @"pageSize":PAGESIZE,
                              @"pageNo":[NSString stringWithFormat:@"%d",[self.model count]/PAGESIZEINT]
                              };
-    [self commitRequestWithParams:params withUrl:[GlobalRequest activityAction_QueryActivityList_Url]];
+    [self commitRequestWithParams:params withUrl:[GlobalRequest activityAction_QueryActivityList_Url] withView:nil];
 }
 
 - (void)didReceiveMemoryWarning

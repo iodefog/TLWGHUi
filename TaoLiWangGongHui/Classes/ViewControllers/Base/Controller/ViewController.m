@@ -35,7 +35,7 @@
 }
 
 - (void)commitRequestWithParams:(NSDictionary *)params withUrl:(NSString *)url{
-    [ITTASIBaseDataRequest requestWithParameters:params withRequestUrl:url withIndicatorView:self.view withCancelSubject:nil onRequestStart:^(ITTBaseDataRequest *request) {
+    [ITTASIBaseDataRequest requestWithParameters:params withRequestUrl:url withIndicatorView:self.navigationController.view withCancelSubject:nil onRequestStart:^(ITTBaseDataRequest *request) {
         NSLog(@"request start");
     } onRequestFinished:^(ITTBaseDataRequest *request) {
         

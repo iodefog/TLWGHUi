@@ -19,4 +19,6 @@
 @property (nonatomic, strong) UIScrollView *mScrollView;
 @property (nonatomic, strong) NewAddressModel *addressModel;
 
+@property (nonatomic, weak)  id parent;
+
 @end

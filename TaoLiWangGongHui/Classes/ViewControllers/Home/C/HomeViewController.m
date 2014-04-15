@@ -19,6 +19,7 @@
 @interface HomeViewController ()<UIWebViewDelegate>{
     NSTimer *activitiesTimer;
     BOOL    welfareDataHaveData;
+    BOOL    DelicateHaveData;
 }
 
 @property (nonatomic, strong) NSMutableArray *activitiesArray;
@@ -49,6 +50,9 @@
         self.baseScroll.top = 0;
 //        self.baseScroll.contentSize = CGSizeMake(self.view.width, 568+30);
 //    }
+    
+    
+    
     self.baseScroll.backgroundColor  = RGBCOLOR(241, 241, 241);
 }
 
@@ -68,6 +72,13 @@
     // 精致生活点击
     [self.delicateLifeLable addGestureRecognizer:[[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(delicateLifeClicked:)]];
     self.delicateLifeLable.userInteractionEnabled = YES;
+    
+    NSLog(@"isIOS7    %d",isIOS7);
+    if (isIOS7) {
+        
+    }else{
+        self.baseScroll.height = self.baseScroll.height - 64;
+    }
 }
 
 
@@ -108,10 +119,10 @@
     }else if ([request.requestUrl isEqualToString:[GlobalRequest productAction_QueryProductListByType_Url]]){
         
         if (!resultDic[@"result"] || [resultDic[@"result"] isKindOfClass:[NSString class]]) {
-             [GlobalHelper showWithTitle:@"" withMessage:@"亲，福利的时间还没有到。"  withCancelTitle:@"确定" withOkTitle:nil withSelector:nil withTarget:self];
+            [UIAlertView popupAlertByDelegate:nil andTag:0 title:nil message:@"\n\n亲，福利的时间还没有到。\n\n"];
         }else if ([resultDic[@"result"] isKindOfClass:[NSArray class]] || [resultDic[@"result"] isKindOfClass:[NSDictionary class]]){
             if ([resultDic[@"result"] count]==0) {
-                [GlobalHelper showWithTitle:@"" withMessage:@"亲，福利的时间还没有到。"  withCancelTitle:@"确定" withOkTitle:nil withSelector:nil withTarget:self];
+                [UIAlertView popupAlertByDelegate:nil andTag:0 title:nil message:@"\n\n亲，福利的时间还没有到。\n\n"];
             }else{
                 WelfareController *welfareController = [[WelfareController alloc] initWithWelfareType:isBirthDay?WelfareBirthDay:WelfareHoliday];
                 welfareController.model = resultDic[@"result"];
@@ -142,7 +153,7 @@
  */
 - (void)scrollTheHeadImage{
     
-    [UIView animateWithDuration:0.7 animations:^{
+    [UIView animateWithDuration:0.3 animations:^{
         self.headScroll.contentOffset = CGPointMake(self.headScroll.contentOffset.x + self.view.width, 0);
     } completion:^(BOOL finished) {
         
@@ -155,19 +166,14 @@
 
 //精致生活点击进入详情页
 - (IBAction)delicateLifeClicked:(id)sender {
-    
-    AddUserInfoViewController *vc = [[AddUserInfoViewController alloc] init];
-    [self.navigationController pushViewController:vc animated:YES];
-    
-    return;
-    DelicateLifeController *delicateLife = [[DelicateLifeController alloc] initWithStyle:UITableViewStyleGrouped];
+    DelicateLifeController *delicateLife = [[DelicateLifeController alloc] initWithStyle:UITableViewStylePlain];
     [delicateLife setHidesBottomBarWhenPushed:YES];
     [self.navigationController pushViewController:delicateLife animated:YES];
 }
 
 // 生日福利和节日福利点击
 - (IBAction)welfareClicked:(UIButton *)sender {
-    
+
     if (welfareDataHaveData == NO) {
         welfareDataHaveData = YES;
         isBirthDay = (200==sender.tag)?YES:NO;
@@ -205,12 +211,20 @@
     frame.size.height = [string floatValue]+10;
     [webView setFrame:frame];
     
-    if (iPhone5) {
-        self.baseScroll.contentSize = CGSizeMake(self.baseScroll.width, ((480+frame.size.height - 88) > 524)?(480+frame.size.height - 88):524);
-    }else{
-        self.baseScroll.contentSize = CGSizeMake(self.baseScroll.width, ((480+frame.size.height) > 598)?(480+frame.size.height):598);
-    }
-    self.jokeImageView.height = frame.size.height+25;
+//    if (isIOS7) {
+        if (iPhone5) {
+            self.baseScroll.contentSize = CGSizeMake(self.baseScroll.width, ((480+frame.size.height - 88) > 524)?(480+frame.size.height - 88):524);
+        }else{
+            self.baseScroll.contentSize = CGSizeMake(self.baseScroll.width, ((480+frame.size.height) > 598)?(480+frame.size.height):598);
+        }
+//    }else{
+//        if (iPhone5) {
+//            self.baseScroll.contentSize = CGSizeMake(self.baseScroll.width, ((460+frame.size.height - 88) > 504)?(460+frame.size.height - 88):504);
+//        }else{
+//            self.baseScroll.contentSize = CGSizeMake(self.baseScroll.width, ((460+frame.size.height) > 578)?(460+frame.size.height):578);
+//        }
+//    }
+       self.jokeImageView.height = frame.size.height+25;
 }
 
 

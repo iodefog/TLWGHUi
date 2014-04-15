@@ -9,6 +9,7 @@
 #import "AddressCell.h"
 //#import "UserAddressDataBase.h"
 #import "AddUserInfoViewController.h"
+#import "AcceptAddressController.h"
 
 @implementation AddressCell
 
@@ -21,16 +22,25 @@
     return self;
 }
 
+- (void)awakeFromNib{
+    [super awakeFromNib];
+    if (isIOS7) {
+        
+    }else{
+//        self.addressBackGroundView.hidden = YES;
+//        for (UIView *subView in self.contentView.subviews) {
+//            subView.left = subView.left - 10;
+//        }
+    }
+}
+
 // 设置为默认地址点击
 - (IBAction)selectedClicked:(id)sender {
     if (self.selectBtn.isSelected) {
         return;
     }
-//    [self.selectBtn setBackgroundImage:[UIImage imageNamed:@"accept_good_selected"] forState:UIControlStateSelected];
     self.selectBtn.selected = !self.selectBtn.selected;
-//    self.addressBackGroundView.image = [UIImage imageNamed:self.selectBtn.selected ? @"address_cell_selected.png" : @"address_cell_normal.png"];
     [self updateDBWith];
-
 }
 
 // 赋值
@@ -81,23 +91,14 @@
         [[TKAlertCenter defaultCenter] postAlertWithMessage:@"加载失败"];
         
     }];
-    
-    
-//    NSMutableArray *dbArray = [[UserAddressDataBase shareDataBase] readTableName];
-//    AddressModel *addressModel = nil;
-//    if ([dbArray count]> 0) {
-//        addressModel = [dbArray objectAtIndex:0];
-//    }
-//    [[UserAddressDataBase shareDataBase] updateItem:addressModel defaultType:NO];
-//    if (self.selectBtn.selected) {
-//        [[UserAddressDataBase shareDataBase] updateItem:userAddressModel defaultType:YES];
-//        userAddressModel.Type = @"1";
-//    }
 }
 
 // 编辑点击，然后传入当前cell上的所有数据
 - (IBAction)editClicked:(UIButton *)sender {
     AddUserInfoViewController *addUserInfoVC = [[AddUserInfoViewController alloc] init];
+    if ([selected_navigation_controller().visibleViewController isKindOfClass:[AcceptAddressController class]]) {
+        addUserInfoVC.parent = selected_navigation_controller().visibleViewController;
+    }
     addUserInfoVC.addressModel = userAddressModel;
     [selected_navigation_controller() pushViewController:addUserInfoVC animated:YES];
 }

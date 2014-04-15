@@ -7,6 +7,7 @@
 //
 
 #import "AddUserInfoViewController.h"
+#import "AcceptAddressController.h"
 #import "UserAddressDataBase.h"
 #import "AddressModel.h"
 #import "AddDocumentPathFile.h"
@@ -77,24 +78,34 @@
         placeHolderLabel.hidden = YES;
     }
     
+    self.provinces = [[NSUserDefaults standardUserDefaults] objectForKey:@"ProviedataArray"];
+    self.cities = [[NSUserDefaults standardUserDefaults] objectForKey:@"ProviedataResult"];
+    [self.locateView setObjectWithProvince:self.provinces withCity:self.cities];
+
     // 请求省份数据
     [GetCityDataRequest requestWithParameters:nil withIndicatorView:nil withCancelSubject:nil onRequestStart:^(ITTBaseDataRequest *request) {
 
     } onRequestFinished:^(ITTBaseDataRequest *request) {
-        self.provinces = request.handleredResult[@"ProviedataArray"];
-        self.cities = request.handleredResult[@"result"];
-        [self.locateView setObjectWithProvince:self.provinces withCity:self.cities];
+        if (!self.provinces || !self.cities ) {
+            self.provinces = request.handleredResult[@"ProviedataArray"];
+            self.cities = request.handleredResult[@"result"];
+            [self.locateView setObjectWithProvince:self.provinces withCity:self.cities];
+        }
+        
+        [[NSUserDefaults standardUserDefaults] setObject:self.provinces forKey:@"ProviedataArray"];
+         [[NSUserDefaults standardUserDefaults] setObject:self.cities forKey:@"ProviedataResult"];
+       
         NSLog(@"request finish");
         [self responseSuccessWithResponse:request];
         
     } onRequestCanceled:^(ITTBaseDataRequest *request) {
         
         NSLog(@"request cancel");
-        [self responseFailWithResponse:request];
+//        [self responseFailWithResponse:request];
         
     } onRequestFailed:^(ITTBaseDataRequest *request) {
         
-        [self responseCancelWithResponse:request];
+//        [self responseCancelWithResponse:request];
         NSLog(@"request fail");
     }];
     
@@ -126,7 +137,7 @@
     UIButton *commitBtn = [UIButton createButton:@selector(commitClicked:) title:@"提交" image:nil selectedBgImage:@"login_Select.png" backGroundImage:@"login_Nomal.png" backGroundTapeImage:nil frame:CGRectMake(10, 70*[self.headTitleArray count]+50, 300, 35) tag:110 target:self];
     [commitBtn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
     [self.mScrollView addSubview:commitBtn];
-    self.mScrollView.contentSize = CGSizeMake(self.view.width, 600) ;
+    self.mScrollView.contentSize = CGSizeMake(self.view.width, 510) ;
     }else{
         
         self.navigationItem.rightBarButtonItem = [UIBarButtonItem barButtonWithTitle:@"提交" image:nil target:self action:@selector(commitClicked:) font:[UIFont systemFontOfSize:15] titleColor:[UIColor whiteColor]];
@@ -157,7 +168,7 @@
     titleLabel.text = title;
     [mView addSubview:titleLabel];
     
-    placeHolderLabel = [[UILabel alloc] initWithFrame:CGRectMake(titleLabel.left+5, 30, titleLabel.width, 30)];
+    placeHolderLabel = [[UILabel alloc] initWithFrame:CGRectMake(titleLabel.left+8, 30, titleLabel.width, 30)];
     placeHolderLabel.textColor = [UIColor grayColor];
     placeHolderLabel.font = titleLabel.font;
     placeHolderLabel.text = placeHolder;
@@ -173,6 +184,7 @@
     UITextView *textView = [[UITextView alloc] initWithFrame:CGRectMake(10, 30, textBgView.width, textBgView.height)];
     textView.backgroundColor = [UIColor clearColor];
     textView.font = titleLabel.font;
+    textView.returnKeyType = UIReturnKeyDone;
     textView.delegate = self;
     textView.tag = tag;
     [mView addSubview:textView];
@@ -244,7 +256,7 @@
                                @"receiverAddressId":receiverAddressId,
                               @"receiverPostalcode":zipCodeTextField.text,
                              
-                              @"isDefault": @"1",
+                              @"isDefault":  @"1",
                               };
     AddressModel *addModel = [[AddressModel alloc] initWithDataDic:params];
     if (self.addressModel) {
@@ -288,11 +300,11 @@
         return NO;
     }else{
         [self.locateView removeFromSuperview];
-        if (textField.tag == 103) {
-            [UIView animateWithDuration:0.3 animations:^{
-                self.mScrollView.contentOffset = CGPointMake(self.mScrollView.contentOffset.x, 300);
-            }];
-        }
+//        if (textField.tag == 103) {
+//            [UIView animateWithDuration:0.3 animations:^{
+//                self.mScrollView.contentOffset = CGPointMake(self.mScrollView.contentOffset.x, 300);
+//            }];
+//        }
     }
     return YES;
 }
@@ -322,7 +334,7 @@
 
 - (void)resetScrollView{
     self.mScrollView.frame = self.view.bounds;
-    self.mScrollView.contentSize = CGSizeMake(self.view.width, self.view.height) ;
+    self.mScrollView.contentSize = CGSizeMake(self.view.width, self.view.height + 50) ;
 //    [self.mScrollView scrollRectToVisible:CGRectMake(0,100, self.mScrollView.width, self.mScrollView.height) animated:YES];
 }
 
@@ -335,7 +347,15 @@
     tempView = textField;
     [self changeScrollView];
     if (textField.tag == 103 && !iPhone5) {
-        [self.mScrollView scrollRectToVisible:CGRectMake(0, 250, self.mScrollView.width, self.mScrollView.height) animated:YES];
+        if (isIOS7) {
+            [UIView animateWithDuration:0.3 animations:^{
+                self.mScrollView.contentOffset = CGPointMake(self.mScrollView.contentOffset.x, 300);
+            }];
+        }else{
+            [UIView animateWithDuration:0.3 animations:^{
+                self.mScrollView.contentOffset = CGPointMake(self.mScrollView.contentOffset.x, 200);
+            }];
+        }
     }
 }
 
@@ -359,7 +379,9 @@
     if (textView.superview.bottom > self.view.height - 244) {
         [self changeScrollView];
     }
-    [self.mScrollView scrollRectToVisible:CGRectMake(0, 150, self.mScrollView.width,200) animated:YES];
+    [UIView animateWithDuration:0.3 animations:^{
+        self.mScrollView.contentOffset = CGPointMake(self.mScrollView.contentOffset.x, 250);
+    }];
 }
 
 - (void)textViewDidEndEditing:(UITextView *)textView{
@@ -377,6 +399,10 @@
         }else{
             [[TKAlertCenter defaultCenter] postAlertWithMessage:@"修改成功"];
             [self.navigationController popViewControllerAnimated:YES];
+        }
+        
+        if (self.parent && [self.parent respondsToSelector:@selector(refreshHeaderView)]) {
+            [self.parent  performSelector:@selector(refreshHeaderView) withObject:nil];
         }
     }
 }
@@ -407,6 +433,7 @@
         if (!self.locateView.locate.mc01) self.locateView.locate.dm01 = @"";
         cityTextField.text = [NSString stringWithFormat:@"%@ %@",self.locateView.locate.mc, self.locateView.locate.mc01];
     }
+    [self resetScrollView];
 }
 
 - (void)didReceiveMemoryWarning
