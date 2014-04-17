@@ -19,6 +19,14 @@
     return self;
 }
 
+- (void)awakeFromNib{
+    [super awakeFromNib];
+    UIImage *image = [UIImage imageNamed:@"input_normal.png"];
+    image = [image stretchableImageWithLeftCapWidth:image.size.width/2 topCapHeight:image.size.height/2];
+    self.cashBackImageView.image = image;
+    self.welfareBackImageView.image = image;
+}
+
 - (void)showWelfareViewWithHidden:(BOOL)welfareHidden withCashViewHidden:(BOOL)cashHidden{
     self.welfareView.hidden = welfareHidden;
     self.cashView.hidden = cashHidden;

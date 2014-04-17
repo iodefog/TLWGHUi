@@ -12,6 +12,8 @@
 @property (strong, nonatomic) IBOutlet UILabel *orderNum; // 订单号
 @property (strong, nonatomic) IBOutlet UILabel *orderTime; //下单时间
 
+@property (strong, nonatomic) IBOutlet UIImageView *goodsBgView; // 商品边框
+
 @property (strong, nonatomic) IBOutlet UIImageView *goodHeadImage; // 商品图片
 @property (strong, nonatomic) IBOutlet UILabel *goodTitle; // 商品概要
 @property (strong, nonatomic) IBOutlet UILabel *goodID; // 商品编码

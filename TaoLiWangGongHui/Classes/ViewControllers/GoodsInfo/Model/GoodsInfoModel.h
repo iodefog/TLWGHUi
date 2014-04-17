@@ -15,6 +15,7 @@
 @property (nonatomic, strong) NSString *basicPrice;
 @property (nonatomic, strong) NSString *costPrice;
 @property (nonatomic, strong) NSString *productDescribe;
+@property (nonatomic, strong) NSString *productId;
 @property (nonatomic, strong) NSNumber *productType;
 
 /*****

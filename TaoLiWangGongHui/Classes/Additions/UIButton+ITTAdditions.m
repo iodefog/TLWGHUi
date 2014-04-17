@@ -53,9 +53,9 @@
     [button setBackgroundImage:[UIImage imageNamed:selectedbgImage] forState:UIControlStateSelected];
     [button setBackgroundImage:[UIImage imageNamed:selectedbgImage] forState:UIControlStateHighlighted];
     [button setTitleColor:[UIColor colorWithRed:143./255. green:143./255. blue:143./255. alpha:1.] forState:UIControlStateNormal];
-    [button setTitleColor:[UIColor whiteColor] forState:UIControlStateHighlighted];
-    [button setTitleColor:[UIColor whiteColor] forState:UIControlStateSelected];
-    button.titleLabel.font = [UIFont systemFontOfSize:14];
+//    [button setTitleColor:[UIColor whiteColor] forState:UIControlStateHighlighted];
+    [button setTitleColor:[UIColor colorWithHex:0xea804c] forState:UIControlStateSelected];
+    button.titleLabel.font = [UIFont systemFontOfSize:13];
     [button addTarget:target action:selector forControlEvents:UIControlEventTouchUpInside];
     
     return button;

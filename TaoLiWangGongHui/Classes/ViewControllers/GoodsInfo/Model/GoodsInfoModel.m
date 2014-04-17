@@ -16,7 +16,8 @@
              @"basicPrice":@"basicPrice",
              @"costPrice":@"costPrice",
              @"productDescribe":@"productDescribe",
-             @"productType":@"productType"
+             @"productType":@"productType",
+             @"productId":@"productId"
              };
     
 }

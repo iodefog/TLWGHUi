@@ -38,4 +38,10 @@ UINavigationController *selected_navigation_controller();
 
 // 隐藏购物车
 + (void)hiddenCarView;
+
+//去掉空格和回车
++ (NSString *)quKongGeAndEnder:(NSString *)sender;
+
+// 图片制灰
++ (UIImage*)grayscale:(UIImage*)anImage type:(char)type;
 @end

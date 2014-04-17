@@ -23,7 +23,7 @@
     NSInteger currentNum = [self.GoodQuantity.text intValue];
     if (currentNum-1 >= 1) {
         self.GoodQuantity.text = [NSString stringWithFormat:@"%d",--currentNum];
-        self.GoodPrice.text    = [NSString stringWithFormat:@"%.2f元",currentNum*self.shoppingModel.costPrice.floatValue];
+//        self.GoodPrice.text    = [NSString stringWithFormat:@"%.2f元",currentNum*self.shoppingModel.costPrice.floatValue];
         
         if (self.shoppingDelegate && [self.shoppingDelegate respondsToSelector:@selector(reduceGoodsQuantityWithPrice:)]) {
             [self.shoppingDelegate reduceGoodsQuantityWithPrice:self.shoppingModel.costPrice.floatValue];
@@ -36,7 +36,7 @@
 - (IBAction)IncreaseQuantity:(id)sender {
     NSInteger currentNum = [self.GoodQuantity.text intValue];
     self.GoodQuantity.text = [NSString stringWithFormat:@"%d",++currentNum];
-    self.GoodPrice.text    = [NSString stringWithFormat:@"%.2f元",currentNum*self.shoppingModel.costPrice.floatValue];
+//    self.GoodPrice.text    = [NSString stringWithFormat:@"%.2f元",currentNum*self.shoppingModel.costPrice.floatValue];
     
     if (self.shoppingDelegate && [self.shoppingDelegate respondsToSelector:@selector(increaseGoodsQuantityWithPrice:)]) {
         [self.shoppingDelegate increaseGoodsQuantityWithPrice:self.shoppingModel.costPrice.floatValue];
@@ -114,6 +114,7 @@
 //    else goodType = GoodsType_Holiday;
     
     GoodsInfoController *goodsInfoVC = [[GoodsInfoController alloc]  initWithNibName:@"GoodsInfoController" bundle:nil];
+    goodsInfoVC.hidesBottomBarWhenPushed = YES;
     goodsInfoVC.goodsInfoType = GoodsType_Discount ;
     goodsInfoVC.productID = self.shoppingModel.productId;
     [selected_navigation_controller() pushViewController:goodsInfoVC animated:YES];

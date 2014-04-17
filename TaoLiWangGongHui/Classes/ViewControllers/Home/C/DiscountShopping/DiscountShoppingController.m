@@ -56,7 +56,7 @@
     NSDictionary *params = @{
                              @"memberId": [[UserHelper shareInstance] getMemberID],
                              @"pageNo": @"1",
-                             @"Type":@"3",
+                             @"productType":@"3",
                              @"pageSize": PAGESIZE,};
     [self commitRequestWithParams:params withUrl:[GlobalRequest productAction_QueryProductListByType_Url] withView:nil];
 }
@@ -98,14 +98,15 @@
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
-    return 100.0f;
+    return 95.0f;
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     DiscountShoppingCell *cell = (id)[tableView cellForRowAtIndexPath:indexPath];
     GoodsInfoController *goodsInfo = [[GoodsInfoController alloc] initWithNibName:@"GoodsInfoController" bundle:nil];
     goodsInfo.productID = cell.discountModel.productId;
-                    
+    goodsInfo.goodsListModel = cell.discountModel;
+    goodsInfo.goodsInfoType = GoodsType_Discount;
     [goodsInfo setHidesBottomBarWhenPushed:YES];
     [self.navigationController pushViewController:goodsInfo animated:YES];
 }

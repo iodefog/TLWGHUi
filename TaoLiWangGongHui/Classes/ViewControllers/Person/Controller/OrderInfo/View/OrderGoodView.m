@@ -7,7 +7,7 @@
 //
 
 #import "OrderGoodView.h"
-#import "OrderProductModel.h"
+#import "GoodsInfoController.h"
 
 @implementation OrderGoodView
 
@@ -54,15 +54,21 @@
 }
 
 - (void)setObject:(NSDictionary *)dict{
-    OrderProductModel *orderModel = [[OrderProductModel alloc] initWithDataDic:dict];
-    [self.goodHeadView setImageWithURL:[NSURL URLWithString:orderModel.previewPicPath]];
-    self.goodTitle.text = [NSString stringWithFormat:@"%@",orderModel.productDescribe];
-    self.goodPrice.text = [NSString stringWithFormat:@"%@",orderModel.totalMoney];
-    self.goodQuantity.text = [NSString stringWithFormat:@"%@", orderModel.amount];
+    self.orderModel = [[OrderProductModel alloc] initWithDataDic:dict];
+    [self.goodHeadView setImageWithURL:[NSURL URLWithString:self.orderModel.previewPicPath]];
+    self.goodTitle.text = [NSString stringWithFormat:@"%@",self.orderModel.productName];
+    self.goodPrice.text = [NSString stringWithFormat:@"%@",self.orderModel.totalMoney];
+    self.goodQuantity.text = [NSString stringWithFormat:@"%@", self.orderModel.amount];
 }
 
 - (void)coverButtonClicked:(UIButton *)sender{
-
+    if (self.orderModel.productId) {
+        GoodsInfoController *goodsVC = [[GoodsInfoController alloc] initWithNibName:@"GoodsInfoController" bundle:nil];
+        goodsVC.productID = self.orderModel.productId;
+        goodsVC.goodsInfoType = GoodsType_Discount;
+        goodsVC.goodsListModel = (id)self.orderModel;
+        [selected_navigation_controller() pushViewController:goodsVC animated:YES];
+    }
 }
 
 @end

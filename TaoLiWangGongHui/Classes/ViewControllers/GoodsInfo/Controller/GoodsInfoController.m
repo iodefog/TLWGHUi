@@ -27,7 +27,10 @@
 @property (weak, nonatomic) IBOutlet UILabel         *GoodsNewPriceLable;
 @property (weak, nonatomic) IBOutlet UILabel         *GoodsNameLable;
 @property (weak, nonatomic) IBOutlet UILabel         *GoodsOldPriceLable;
+@property (strong, nonatomic) IBOutlet UILabel *GoodsPriceSperate;// 1像素 分割线
 @property (weak, nonatomic) IBOutlet UIScrollView    *ContentScrollView;
+
+@property (strong, nonatomic) IBOutlet UILabel *GoodsOrderId;// 订单编号
 
 /**
  *  商品图解
@@ -71,10 +74,27 @@
     }
     if ((self.goodsInfoType==GoodsType_BirthDay) || (self.goodsInfoType==GoodsType_Holiday)) {
         [self.PayOrJoinCartBtn setTitle:@"立即领取" forState:UIControlStateNormal];
+        [self.PayOrJoinCartBtn setTitle:@"已领取" forState:UIControlStateDisabled];
+        [self.PayOrJoinCartBtn setBackgroundImage:[UIImage imageNamed:@"department_bg.png"] forState:UIControlStateDisabled];
+        if (self.goodsListModel.theHolidayReceiveType.boolValue && (self.goodsInfoType==GoodsType_Holiday)) {
+            self.PayOrJoinCartBtn.enabled = YES;
+        }else if(self.goodsListModel.birthdayReceiveType.boolValue && (self.goodsInfoType==GoodsType_BirthDay)){
+            self.PayOrJoinCartBtn.enabled = YES;
+        }
+        else{
+            self.PayOrJoinCartBtn.enabled = NO;
+        }
+        self.GoodsOrderId.hidden = NO;
+        self.GoodsPriceSperate.hidden = self.GoodsNewPriceLable.hidden = self.GoodsOldPriceLable.hidden = YES;
+
+    }else{
+        self.GoodsOrderId.hidden = YES;
+        self.GoodsPriceSperate.hidden = self.GoodsNewPriceLable.hidden = self.GoodsOldPriceLable.hidden = NO;
     }
     self.ShowImageNumberLable.text = [NSString stringWithFormat:@"1/%d",[self.goodsInfoModel.productPictures count]];
     self.GoodsNameLable.text = self.goodsInfoModel.productName;
     self.GoodsNewPriceLable.text = [NSString stringWithFormat:@"%@元",self.goodsInfoModel.costPrice];
+    self.GoodsOrderId.text = [NSString stringWithFormat:@"订单编号:%@元",self.goodsInfoModel.productId];
     self.GoodsOldPriceLable.text = [NSString stringWithFormat:@"%@元",self.goodsInfoModel.basicPrice];
     [self addImageArray:self.goodsInfoModel.productPictures];
 }

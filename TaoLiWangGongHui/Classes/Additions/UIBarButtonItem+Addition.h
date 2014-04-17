@@ -11,8 +11,8 @@
 
 @interface UIBarButtonItem (Addition)
 
-+ (UIBarButtonItem*)barButtonWithTitle:(NSString *)title image:(NSString*)imageName target:(id)target action:(SEL)action font:(UIFont *)font titleColor:(UIColor *)titleColor;
++ (UIBarButtonItem*)barButtonWithTitle:(NSString *)title image:(NSString*)imageName target:(id)target action:(SEL)action font:(UIFont *)font titleColor:(UIColor *)titleColor withRightBarItem:(BOOL)right;
 
-+ (UIBarButtonItem*)barButtonWithImage:(NSString *)imageName backgroundImage:(NSString*)backgroundImage target:(id)target action:(SEL)action;
++ (UIBarButtonItem*)barButtonWithImage:(NSString *)imageName backgroundImage:(NSString*)backgroundImage target:(id)target action:(SEL)action withRightBarItem:(BOOL)right;
 @end
 

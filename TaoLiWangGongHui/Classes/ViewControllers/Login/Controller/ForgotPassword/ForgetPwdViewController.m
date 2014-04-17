@@ -86,11 +86,7 @@
         NSDictionary *params = @{@"phone":self.phoneTetxField.text};
         [self commitRequestWithParams:params withUrl:[GlobalRequest userAction_QueryPasswordByMessage_Url]];
         [self.byCodeButton setTitle:[NSString stringWithFormat:@"%d秒后再发",60] forState:UIControlStateDisabled];
-        self.byCodeButton.enabled = NO;
         
-        if (![codeTimer isValid]) {
-            codeTimer = [NSTimer scheduledTimerWithTimeInterval:1 target:self selector:@selector(codeTimerTrigger:) userInfo:nil repeats:YES];
-        }
     }else{
         [GlobalHelper handerResultWithDelegate:self withMessage:@"手机号码格式不正确" withTag:0];
     }
@@ -157,14 +153,18 @@ static int clickCount = 59;
 - (void)responseSuccessWithResponse:(ITTBaseDataRequest *)request{
     NSNumber *codeNum = request.handleredResult[@"code"];
     if ([request.requestUrl.lastPathComponent isEqualToString:@"UserAction!queryPasswordByMessage.do"]) {
-            if (codeNum.intValue ==  1) {
-                
-            }else{
-                self.bySMSButton.enabled = YES;
-                clickCount = 60;
-                [codeTimer invalidate];
-                [GlobalHelper handerResultWithDelegate:self withMessage:request.handleredResult[@"msg"] withTag:0];
+        
+        if (((NSNumber *)request.handleredResult[@"code"]).intValue == 0) {
+            self.byCodeButton.enabled = YES;
+            clickCount = 60;
+            [codeTimer invalidate];
+        }else{
+            if (![codeTimer isValid]) {
+                codeTimer = [NSTimer scheduledTimerWithTimeInterval:1 target:self selector:@selector(codeTimerTrigger:) userInfo:nil repeats:YES];
             }
+        }
+        [GlobalHelper handerResultWithDelegate:self withMessage:request.handleredResult[@"msg"] withTag:0];
+        
         }else if ([request.requestUrl.lastPathComponent isEqualToString:@"UserAction!queryPasswordByEmail.do"]){
             if (codeNum.intValue == 1) {
                 UpdatePassWordViewController *updatePassWord = [[UpdatePassWordViewController alloc] initWithNibName:@"UpdatePassWordViewController" bundle:nil];
@@ -174,6 +174,14 @@ static int clickCount = 59;
                 [GlobalHelper handerResultWithDelegate:self withMessage:request.handleredResult[@"msg"] withTag:0];
             }
         }
+}
+
+- (void)responseFailWithResponse:(ITTBaseDataRequest *)request{
+     [GlobalHelper handerResultWithDelegate:self withMessage:request.handleredResult[@"msg"] withTag:0];
+    
+    self.byCodeButton.enabled = YES;
+    clickCount = 60;
+    [codeTimer invalidate];
 }
 
 - (IBAction)loginEmail:(id)sender {

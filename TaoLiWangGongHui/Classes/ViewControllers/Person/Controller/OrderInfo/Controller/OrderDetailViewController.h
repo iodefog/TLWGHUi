@@ -22,6 +22,9 @@
 @property (strong, nonatomic) IBOutlet UILabel *orderPhone;  // 下单用户的手机号
 @property (strong, nonatomic) IBOutlet UILabel *orderDescription; // 下单人的描述
 @property (strong, nonatomic) IBOutlet UILabel *orderTotalPrice; // 总计
+@property (strong, nonatomic) IBOutlet UIButton *enterButton; // 确定或返回购物车按钮
+
+@property (nonatomic, assign) BOOL     orderSuccess;
 
 
 

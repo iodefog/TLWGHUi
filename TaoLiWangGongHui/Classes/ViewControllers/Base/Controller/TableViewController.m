@@ -33,13 +33,18 @@
         if (![self.model count]) {
             [self refreshHeaderView];
         }
+    }else if (!self.model){
+        [self refreshHeaderView];
     }
 }
 
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    self.navigationItem.leftBarButtonItem = [UIBarButtonItem barButtonWithImage:@"navigation_Back.png" backgroundImage:nil target:self action:@selector(back)];
+    if ([self.tableView respondsToSelector:@selector(setSeparatorInset:)]) {
+        [self.tableView setSeparatorInset:UIEdgeInsetsZero];
+    }
+    self.navigationItem.leftBarButtonItem = [UIBarButtonItem barButtonWithImage:@"navigation_Back.png" backgroundImage:nil target:self action:@selector(back) withRightBarItem:NO];
 }
 
 - (void)back{
@@ -101,6 +106,9 @@
     
     NSLog(@"resultDic  %@", resultDic);
     if (resultDic[@"result"] && [resultDic[@"result"] isKindOfClass:[NSArray class]]) {
+        if (![self.model isKindOfClass:[NSArray class]]) {
+            self.model = nil;
+        }
         NSMutableArray *tempArray = [NSMutableArray arrayWithArray:self.model];
         [tempArray addObjectsFromArray:resultDic[@"result"]];
         self.model = tempArray;
@@ -228,7 +236,12 @@
 - (void)doneWithView:(MJRefreshBaseView *)refreshView
 {
     // 刷新表格
-    [self.tableView reloadData];
+//    [self.tableView reloadData];
+    if (refreshView == _header) {
+        if ([self.model isKindOfClass:[NSMutableArray class]]) {
+            [self.model removeAllObjects];
+        }
+    }
     NSLog(@"完成，刷新数据");
     // (最好在刷新表格后调用)调用endRefreshing可以结束刷新状态
     [refreshView endRefreshing];

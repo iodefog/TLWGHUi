@@ -40,17 +40,16 @@
     [self commitRequestWithParams:@{@"memberId": [[UserHelper shareInstance] getMemberID],
                                     @"orderCode": self.orderCode
                                     } withUrl:[GlobalRequest orderAction_QueryOrderInfo_Url]];
+    if (self.orderSuccess) {
+        self.enterButton.hidden = YES;
+    }
 }
 
 - (void)createUIWithProductArray:(NSArray *)productArray{
     for (int i = 0; i < [productArray count]; i++) {
         OrderGoodView *orderView = [[OrderGoodView alloc] initWithFrame:CGRectMake(10, 140+70*i, 300, 70)];
         orderView.image = [UIImage imageNamed:(i==0)?@"input_Top.png":((i==self.goodsArray.count-1)?@"input_Under.png":@"input_Middle.png")];
-        OrderProductModel *orderModel = [[OrderProductModel alloc] initWithDataDic:productArray[i]];
-        orderView.goodTitle.text = orderModel.productName;
-        orderView.goodQuantity.text = [NSString stringWithFormat:@"x%@", orderModel.amount];
-        orderView.goodPrice.text = [NSString stringWithFormat:@"%@元", orderModel.totalMoney];
-        [orderView.goodHeadView setImageWithURL:[NSURL URLWithString:orderModel.previewPicPath]];
+        [orderView setObject:productArray[i]];
         [self.baseScrollView addSubview:orderView];
     }
     self.baseScrollView.contentSize = CGSizeMake(320, 140+productArray.count*70+260);

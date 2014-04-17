@@ -10,16 +10,19 @@
 #import "MessageCell.h"
 #import "ActivitiesDetailController.h"
 #import "SubscribeController.h"
+#import "EmptyView.h"
 
-@interface MessageController ()
+@interface MessageController (){
+    EmptyView *emptyView;
+}
 
 @end
 
 @implementation MessageController
 
-- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
+- (id)initWithStyle:(UITableViewStyle)style
 {
-    self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
+    self = [super initWithStyle:style];
     if (self) {
         // Custom initialization
     }
@@ -37,8 +40,12 @@ static bool isSelfRequest = YES;
     [super viewDidLoad];
 	// Do any additional setup after loading the view.
     self.navigationItem.leftBarButtonItem = nil;
-    self.navigationItem.rightBarButtonItem = [UIBarButtonItem barButtonWithTitle:@"订阅管理" image:nil target:self action:@selector(subscribeClicked:) font:[UIFont systemFontOfSize:12] titleColor:[UIColor whiteColor]];
+    self.navigationItem.rightBarButtonItem = [UIBarButtonItem barButtonWithTitle:@"订阅管理" image:nil target:self action:@selector(subscribeClicked:) font:[UIFont systemFontOfSize:14] titleColor:[UIColor whiteColor] withRightBarItem:YES];
+    
     [self.tableView setTableFooterView:[[UIView alloc] init]];
+    self.tableView.backgroundColor = [UIColor colorWithHex:0xf6f1ea];
+    self.tableView.separatorStyle = UITableViewCellEditingStyleNone;
+
     
     [self addHeader];
     [self addFooter];
@@ -47,6 +54,7 @@ static bool isSelfRequest = YES;
 // 订阅管理点击
 - (void)subscribeClicked:(UIButton *)sender{
     SubscribeController *subscribeVC = [[SubscribeController alloc] initWithStyle:UITableViewStylePlain];
+    subscribeVC.parent = self;
     [subscribeVC setHidesBottomBarWhenPushed:YES];
     [self.navigationController pushViewController:subscribeVC animated:YES];
 }
@@ -73,35 +81,33 @@ static bool isSelfRequest = YES;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
-    return 1;
+    NSInteger cellNum = 0;
+    if ([self.model isKindOfClass:[NSArray class]]) {
+        cellNum = [self.model count];
+    }
+    return cellNum;
 }
 
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView{
-    return [self.model count];
-}
-
-- (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section{
-    CGFloat height = 0.1f;
-    if (section != 0) {
-        height = 10;
-    }
-    return height;
-}
-
-- (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section{
-    return 0.1;
+   return 1;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
-    return 220.0;
+    float cellHeight =  220.0;
+//    NSLog(@"count %d   indexPath.section %d",[self.model count], indexPath.row );
+    if (([self.model count]- 1) == indexPath.row) {
+        cellHeight = 216.f;
+    }
+    return cellHeight;
 }
 
 #pragma mark - MJRefresh
 - (void)refreshHeaderView{
     if (isSelfRequest) {
         [self commitRequestWithParams:@{@"pageNo":@"0",
-                                        @"pageSize":PAGESIZE} withUrl:[GlobalRequest articleAction_QueryAdList_Url] withView:nil];
+                                        @"pageSize":PAGESIZE,
+                                        @"memberId":[[UserHelper shareInstance] getMemberID]} withUrl:[GlobalRequest articleAction_QueryAdList_Url] withView:nil];
     }
 }
 
@@ -109,7 +115,38 @@ static bool isSelfRequest = YES;
     if (isSelfRequest) {
         NSString *pageNo = [NSString stringWithFormat:@"%d", ([self.model count]/PAGESIZEINT)];
         [self commitRequestWithParams:@{@"pageNo":pageNo,
-                                        @"pageSize":PAGESIZE} withUrl:[GlobalRequest articleAction_QueryAdList_Url] withView:nil];
+                                        @"pageSize":PAGESIZE,
+                                         @"memberId":[[UserHelper shareInstance] getMemberID]} withUrl:[GlobalRequest articleAction_QueryAdList_Url] withView:nil];
+    }
+}
+
+- (void)reloadNewData{
+    [super reloadNewData];
+    [self checkShoppingData];
+}
+
+- (void)checkShoppingData{
+    if (![self.model isKindOfClass:[NSMutableArray class]]) {
+        if (!emptyView) {
+            emptyView = [[EmptyView alloc] initWithFrame:[UIScreen mainScreen].bounds];
+            emptyView.imageView.image = [UIImage imageNamed:@"mydiscount_empty.png"];
+            emptyView.titleLabel.text = @"您还没有订阅，先去订阅吧~";
+        }
+        if (!emptyView.superview) {
+            [self.view addSubview:emptyView];
+        }
+    }
+    else if ([self.model count] == 0 || !self.model ) {
+        if (!emptyView) {
+            emptyView = [[EmptyView alloc] initWithFrame:[UIScreen mainScreen].bounds];
+            emptyView.imageView.image = [UIImage imageNamed:@"mydiscount_empty.png"];
+            emptyView.titleLabel.text = @"您还没有订阅，先去订阅吧~";
+        }
+        if (!emptyView.superview) {
+            [self.view addSubview:emptyView];
+        }
+    }else{
+        [emptyView removeFromSuperview];
     }
 }
 

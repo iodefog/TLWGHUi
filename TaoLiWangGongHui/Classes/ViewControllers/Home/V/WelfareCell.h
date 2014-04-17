@@ -12,9 +12,11 @@
 @interface WelfareCell : UITableViewCell
 
 @property (strong, nonatomic) GoodsListModel *goodsModel;
-@property (strong, nonatomic) IBOutlet UIImageView *welfareGoodImage;
-@property (strong, nonatomic) IBOutlet UILabel *welfareGoodTitle;
-@property (strong, nonatomic) IBOutlet UILabel *welfareGoodID;
+@property (strong, nonatomic) IBOutlet UIImageView *welfareGoodImage; // 商品图片
+@property (strong, nonatomic) IBOutlet UILabel *welfareGoodTitle; //商品名字
+@property (strong, nonatomic) IBOutlet UILabel *welfareGoodID;// 商品编号
+@property (strong, nonatomic) IBOutlet UIButton *receiveButton;// 立即领取
+
 @property (assign, nonatomic) WelfareType welfareType;
 
 - (void)setObject:(NSDictionary *)params;

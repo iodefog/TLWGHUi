@@ -33,7 +33,9 @@
 
 // 提交意见反馈
 - (IBAction)propertystrongnonatomicIBOutletUIButtonfeedbackCommitfeedbackCommit:(id)sender {
-    if (self.feedbackTextView.text.length > 0) {
+    NSString *feedstr = [GlobalHelper quKongGeAndEnder:self.feedbackTextView.text];
+
+    if (feedstr.length > 0) {
         NSDictionary *params = @{
                                  @"memberId":[[UserHelper shareInstance] getMemberID],
                                  @"message":self.feedbackTextView.text

@@ -94,7 +94,7 @@ static int clickCount = 59;
 - (void)codeTimerTrigger:(NSTimer *)timer{
     [self.getCodeButton setTitle:[NSString stringWithFormat:@"%d秒后再发",60] forState:UIControlStateDisabled];
     self.getCodeButton.enabled = NO;
-
+    
     if (-- clickCount > 0) {
         [self.getCodeButton setTitle:[NSString stringWithFormat:@"%d秒后再发",clickCount] forState:UIControlStateDisabled];
         self.getCodeButton.enabled = NO;

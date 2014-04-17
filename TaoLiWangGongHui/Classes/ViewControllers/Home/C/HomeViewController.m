@@ -19,6 +19,7 @@
 @interface HomeViewController ()<UIWebViewDelegate>{
     NSTimer *activitiesTimer;
     BOOL    welfareDataHaveData;
+    BOOL    homeDataHaveData;
     BOOL    DelicateHaveData;
 }
 
@@ -39,6 +40,10 @@
 
 - (void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
+    if (!self.model && !homeDataHaveData) {
+        homeDataHaveData = YES;
+        [self commitRequestWithParams:nil withUrl:[GlobalRequest eCMainAction_QueryECMainInfo_Url]];
+    }
 }
 
 - (void)viewDidAppear:(BOOL)animated{
@@ -62,11 +67,10 @@
     // Do any additional setup after loading the view from its nib.
     self.baseScroll.userInteractionEnabled = YES;
     self.headScroll.userInteractionEnabled = YES;
-    self.navigationItem.title = @"淘礼网工会平台";
+    self.navigationItem.title = @"员工关怀";
     self.navigationItem.leftBarButtonItem = nil;
     
     self.activitiesArray = [NSMutableArray array];
-    [self commitRequestWithParams:nil withUrl:[GlobalRequest eCMainAction_QueryECMainInfo_Url]];
     
     [self createUI];
     // 精致生活点击
@@ -116,6 +120,7 @@
 - (void)setDataDic:(NSDictionary *)resultDic withRequest:(ITTBaseDataRequest *)request{
     if ([request.requestUrl isEqualToString:[GlobalRequest eCMainAction_QueryECMainInfo_Url]]) {
         [super setDataDic:resultDic withRequest:request];
+        homeDataHaveData = NO;
     }else if ([request.requestUrl isEqualToString:[GlobalRequest productAction_QueryProductListByType_Url]]){
         
         if (!resultDic[@"result"] || [resultDic[@"result"] isKindOfClass:[NSString class]]) {
@@ -142,10 +147,12 @@
 
 - (void)responseCancelWithResponse:(ITTBaseDataRequest *)request{
     welfareDataHaveData = NO;
+    homeDataHaveData= NO;
 }
 
 - (void)responseFailWithResponse:(ITTBaseDataRequest *)request{
     welfareDataHaveData = NO;
+    homeDataHaveData = NO;
 }
 
 /*** 定时器实现方法
@@ -179,7 +186,7 @@
         isBirthDay = (200==sender.tag)?YES:NO;
         NSDictionary *param = @{
                                 @"id":[[UserHelper shareInstance] getMemberID],
-                                (200==sender.tag?@"productType":@"type"):200==sender.tag?@"1":@"2",
+                                @"productType":(200==sender.tag)?@"1":@"2",
                                 @"pageNo":@"0",
                                 @"pageSize":PAGESIZE
                                 };
@@ -215,7 +222,7 @@
         if (iPhone5) {
             self.baseScroll.contentSize = CGSizeMake(self.baseScroll.width, ((480+frame.size.height - 88) > 524)?(480+frame.size.height - 88):524);
         }else{
-            self.baseScroll.contentSize = CGSizeMake(self.baseScroll.width, ((480+frame.size.height) > 598)?(480+frame.size.height):598);
+            self.baseScroll.contentSize = CGSizeMake(self.baseScroll.width, ((480+frame.size.height) > 598)?(480+frame.size.height):578);
         }
 //    }else{
 //        if (iPhone5) {

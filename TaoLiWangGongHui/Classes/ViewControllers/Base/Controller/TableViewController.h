@@ -16,6 +16,8 @@
 @property (nonatomic, strong) id model;
 @property (nonatomic, strong) TKEmptyView *emptyView;
 
+- (void)back;
+
 // 下拉刷新，其他复用类需重写
 - (void)refreshHeaderView;
 // 上拉刷新，其他复用类需重写

@@ -12,7 +12,7 @@
 ///支付宝
 #import "AliPayHelper.h"
 #import "UIAlertView+ITTAdditions.h"
-
+#import "BootPageViewController.h"
 
 @implementation AppDelegate
 @synthesize baseViewController;
@@ -35,7 +35,7 @@
     if (isIOS7) {
         [[UINavigationBar appearance] setTitleTextAttributes:[NSDictionary dictionaryWithObjectsAndKeys:
                                                               [UIColor whiteColor], UITextAttributeTextColor,
-                                                              [UIFont systemFontOfSize:17.0f], UITextAttributeFont,nil]];
+                                                              [UIFont systemFontOfSize:18.0f], UITextAttributeFont,nil]];
     }else{
         [[UINavigationBar appearance] setTitleTextAttributes:[NSDictionary dictionaryWithObjectsAndKeys:
                                                               [UIColor whiteColor],UITextAttributeTextColor,
@@ -44,12 +44,25 @@
 
     }
     
-    if (([[UserHelper shareInstance] getMemberID].intValue != 0) && [[UserHelper shareInstance] getMemberID]) {
-        [self chageRootVC];
-    }else{
-        [self chageLoginVC];
-    }
     
+    
+    if (![[NSUserDefaults standardUserDefaults] objectForKey:@"BootPage_key"]){
+        //加载引导页
+        if (iPhone5) {
+            BootPageViewController *bvc = [[BootPageViewController alloc]initWithNibName:@"BootPageViewController-iPhone5" bundle:nil];
+            self.window.rootViewController = bvc;
+        }else{
+            BootPageViewController *bvc = [[BootPageViewController alloc]initWithNibName:@"BootPageViewController-iPhone4" bundle:nil];
+            self.window.rootViewController = bvc;
+        }
+    }else{
+        if (([[UserHelper shareInstance] getMemberID].intValue != 0) && [[UserHelper shareInstance] getMemberID]) {
+            [self chageRootVC];
+        }else{
+            [self chageLoginVC];
+        }
+    }
+
     self.window.backgroundColor = [UIColor whiteColor];
     [self.window makeKeyAndVisible];
     return YES;
@@ -57,8 +70,13 @@
 
 // 登录成功后修改rootVC
 - (void)chageRootVC{
-    self.baseViewController = [[BaseViewController alloc] init];
-    self.window.rootViewController = self.baseViewController;
+    [UIApplication sharedApplication].statusBarHidden = NO;
+    if (([[UserHelper shareInstance] getMemberID].intValue != 0) && [[UserHelper shareInstance] getMemberID]) {
+        self.baseViewController = [[BaseViewController alloc] init];
+        self.window.rootViewController = self.baseViewController;            }else{
+            [self chageLoginVC];
+        }
+    
 }
 
 // 登录成功后修改rootVC
@@ -70,7 +88,7 @@
 - (BOOL)SenderlimitTime{
     int timeDay5 = 7 * 24 * 60 * 60;
     NSString * strNewTime = [TimeObject currentTime];
-    NSString * strTime = @"1397482793";
+    NSString * strTime = @"1397662005";
     NSLog(@"预计开始时间===%@",[TimeObject fromTimeChuoTotime:strTime]);
     NSLog(@"当前时间====%@",[TimeObject currentTime]);
     if ([strTime intValue] + timeDay5 <= [strNewTime intValue]) {

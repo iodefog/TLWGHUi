@@ -10,4 +10,6 @@
 
 @interface SubscribeController : TableViewController
 
+@property (nonatomic, assign) id parent;
+
 @end

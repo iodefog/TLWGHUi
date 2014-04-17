@@ -19,6 +19,8 @@
  	现价(costPrice)
  	商品类型 productType（参考：1为生日福利，2为节日福利，3为购物商品）
  	商品数量 productQuality
+ theHolidayReceiveType  1 =已领取，0=未领取   节日
+ birthdayReceiveType 1 =已领取，0=未领取      生日
  */
 
 @property (nonatomic, strong) NSString *productId;
@@ -29,5 +31,7 @@
 @property (nonatomic, strong) NSString *basicPrice;
 @property (nonatomic, strong) NSString *costPrice;
 @property (nonatomic, strong) NSString *productQuantity;
+@property (nonatomic, strong) NSNumber *theHolidayReceiveType;
+@property (nonatomic, strong) NSNumber *birthdayReceiveType;
 
 @end

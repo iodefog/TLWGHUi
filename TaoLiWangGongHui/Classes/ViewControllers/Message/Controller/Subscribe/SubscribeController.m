@@ -7,6 +7,7 @@
 //
 
 #import "SubscribeController.h"
+#import "MessageController.h"
 #import "SubscribeCell.h"
 
 @interface SubscribeController ()
@@ -28,7 +29,6 @@
     // Do any additional setup after loading the view.
     
     self.navigationItem.title = @"订阅管理";
-    self.navigationItem.leftBarButtonItem = [UIBarButtonItem barButtonWithImage:@"navigation_Back.png" backgroundImage:nil target:self action:@selector(back)];
     [self commitRequestWithParams:@{
                                     @"memberId": [[UserHelper shareInstance] getMemberID],
                                     @"pageNo": @"0",
@@ -41,7 +41,11 @@
 }
 
 - (void)back{
-    [self.navigationController popViewControllerAnimated:YES];
+    if (self.parent && [self.parent respondsToSelector:@selector(refreshHeaderView)]) {
+        [self.parent changeIsSelfResquestWithBool:YES];
+        [self.parent performSelector:@selector(refreshHeaderView) withObject:nil];
+    }
+    [super back];
 }
 
 - (void)reloadNewData{

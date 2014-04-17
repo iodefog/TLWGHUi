@@ -32,10 +32,10 @@
 
 - (void)setObject:(NSDictionary *)dict{
     self.discountModel = [[GoodsListModel alloc] initWithDataDic:dict];
-    self.goodsImage = [NSURL URLWithString:self.discountModel.previewPicPath];
+    [self.goodsImage setImageWithURL:[NSURL URLWithString:self.discountModel.previewPicPath]];
     self.goodsTitle.text = self.discountModel.productName;
-    self.goodsPrice.text = [NSString stringWithFormat:@"%@元",self.discountModel.costPrice];
-    self.goodsPrePrice.text = [NSString stringWithFormat:@"价格%@元",self.discountModel.basicPrice];
+    self.goodsPrice.text = [NSString stringWithFormat:@"原价:%@元",self.discountModel.costPrice];
+    self.goodsPrePrice.text = [NSString stringWithFormat:@"现价:%@元",self.discountModel.basicPrice];
 }
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated

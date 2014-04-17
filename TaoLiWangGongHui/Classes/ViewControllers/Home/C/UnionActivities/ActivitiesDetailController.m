@@ -63,25 +63,6 @@
     if (activityID) {
         [self commitRequestWithParams:@{@"activityId":activityID} withUrl:[GlobalRequest activityAction_QueryActivityInfo_Url]];
     }
-    
-    
-    if (activityType == TypeNone){ // 不显示报名和投票
-
-    }
-    else if (activityType == TypeSignUp) {  // 报名
-        [self.signUpButton setTitle:@"已报名" forState:UIControlStateDisabled];
-        [self.haveSignedButton setTitle:@"查看已报名会员" forState:UIControlStateNormal];
-    }
-    else{ // 投票
-        
-        NSDictionary *params = @{@"memberId": [[UserHelper shareInstance] getMemberID],
-                                 @"activityId":activityID};
-        [self commitRequestWithParams:params withUrl:[GlobalRequest activityAction_QueryActivityOptionList_Url]];
-        
-        [self.signUpButton setTitle:@"投票" forState:UIControlStateNormal];
-        [self.signUpButton setTitle:@"已投票" forState:UIControlStateDisabled];
-        [self.haveSignedButton setTitle:@"查看投票记录" forState:UIControlStateNormal];
-    }
 }
 
 - (void)showDiffrentMiddleViewWithType:(ActivityType)myActivityType withDescription:(NSString *)description withHaveAction:(BOOL)haveAction{
@@ -102,6 +83,7 @@
 // 未投票时显示这个
 - (void)unHaveVotedWithDescription:(NSString *)description{
     voteOrNotVoteView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, self.middleScrollView.width, 100)];
+    voteOrNotVoteView.backgroundColor = [UIColor clearColor];
     
     radioGroup = [[RadioGroup alloc] init];
     float tempHeight = 0;
@@ -123,6 +105,7 @@
     }
     [self.middleScrollView addSubview:voteOrNotVoteView];
     self.middleScrollView.height =   tempHeight + 60;
+    [self changeMiddleScrollView];
 }
 
 // 已投票后显示这个
@@ -212,6 +195,27 @@
     }
 }
 
+- (void)changeSignUpButton{
+    
+    if (activityType == TypeNone){ // 不显示报名和投票
+        
+    }
+    else if (activityType == TypeSignUp) {  // 报名
+        [self.signUpButton setTitle:@"已报名" forState:UIControlStateDisabled];
+        [self.haveSignedButton setTitle:@"查看已报名会员" forState:UIControlStateNormal];
+    }
+    else{ // 投票
+        
+        NSDictionary *params = @{@"memberId": [[UserHelper shareInstance] getMemberID],
+                                 @"activityId":activityID};
+        [self commitRequestWithParams:params withUrl:[GlobalRequest activityAction_QueryActivityOptionList_Url]];
+        
+        [self.signUpButton setTitle:@"投票" forState:UIControlStateNormal];
+        [self.signUpButton setTitle:@"已投票" forState:UIControlStateDisabled];
+        [self.haveSignedButton setTitle:@"查看投票记录" forState:UIControlStateNormal];
+    }
+}
+
 #pragma mark - reponse delegate
 - (void)reloadNewData{
     self.activityModel = [[ActivityInfoModel alloc] initWithDataDic:self.model];
@@ -222,7 +226,9 @@
         self.bottomView.hidden = YES;
     }else if ((activityType == TypeSignUp) || (activityType == TypeVote)){
         self.bottomView.hidden = NO;
+        [self changeSignUpButton];
     }
+    
     [self.descriptionWebView loadHTMLString:self.activityModel.description baseURL:nil];
     
 }
@@ -237,8 +243,9 @@
         
         if (request.handleredResult[@"result"] && [request.handleredResult[@"result"] isKindOfClass:[NSArray class]]) {
             self.voteListArray  = request.handleredResult[@"result"];
+            [self unHaveVotedWithDescription:nil];
 //            BOOL action = self.activityModel.status.boolValue;
-//            [self showDiffrentMiddleViewWithType:activityType withDescription:self.activityModel.description withHaveAction:action];
+//            [self showDiffrentMiddleViewWithType:activityType withDescription:self.activityModel.description withHaveAction:YES];
         }
         
     }else if([request.requestUrl isEqualToString:[GlobalRequest activityAction_QueryActivityInfo_Url]]){ // 一进本页就请求本页的所有数据 的url
@@ -261,6 +268,9 @@
 #pragma mark - WebView delegate
 -(void)webViewDidFinishLoad:(UIWebView *)webView{
     
+//    NSString *jsString = @"document.body.style.fontSize=14";
+//    [webView stringByEvaluatingJavaScriptFromString:jsString];
+    
     //webView的高度
     NSString *string = [webView stringByEvaluatingJavaScriptFromString:@"document.body.offsetHeight;"];
     CGRect frame = [webView frame];
@@ -269,11 +279,14 @@
     
     self.descriptionWebView.height = self.descriptionWebView.scrollView.height ;
     
+    [self changeMiddleScrollView];
+}
+
+- (void)changeMiddleScrollView{
     if(TypeVote == activityType){
-        [self unHaveVotedWithDescription:nil];
         self.middleScrollView.top = self.descriptionWebView.bottom+5;
         self.bottomView.top = self.middleScrollView.bottom;
-
+        
     }else if(TypeSignUp == activityType){
         self.middleScrollView.top = self.descriptionWebView.bottom+5;
         self.middleScrollView.height = 0;
@@ -284,7 +297,7 @@
         if (self.baseScroll.contentSize.height <= self.baseScroll.height) {
             self.baseScroll.contentSize = CGSizeMake(self.baseScroll.width, self.baseScroll.height + 5) ;
         }
-
+        
     }
 }
 

@@ -49,6 +49,16 @@
 
 // 登录
 - (IBAction)login:(id)sender {
+    
+    if (!self.userName || (self.userName.text.length < 1)) {
+        [GlobalHelper handerResultWithDelegate:nil withMessage:@"用户名不能为空" withTag:0];
+        return;
+    }else if (!self.passWord || (self.passWord.text.length < 1)){
+        [GlobalHelper handerResultWithDelegate:nil withMessage:@"密码不能为空" withTag:0];
+        return;
+    }
+    
+    
     NSDictionary *params = [NSDictionary dictionaryWithObjectsAndKeys:self.userName.text,@"memberName", self.passWord.text,@"passwd",nil];
     
     [self commitRequestWithParams:params withUrl:[GlobalRequest userAction_Login_Url]];

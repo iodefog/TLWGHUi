@@ -52,12 +52,12 @@
     if (userAddressModel.isDefault.boolValue == YES) {
         self.selectBtn.selected = YES;
         self.addressBackGroundView.image = [UIImage imageNamed:self.selectBtn.selected ? @"address_cell_selected.png" : @"address_cell_normal.png"];
-        self.userName.textColor = self.phoneNum.textColor = self.detailAddress.textColor = [UIColor orangeColor];
+        self.userName.textColor = self.phoneNum.textColor = self.detailAddress.textColor = [UIColor colorWithHex:0xee611f];
     }else{
         self.selectBtn.selected = NO;
         self.addressBackGroundView.image = [UIImage imageNamed:self.selectBtn.selected ? @"address_cell_selected.png" : @"address_cell_normal.png"];
-        self.userName.textColor = self.phoneNum.textColor = [UIColor blackColor];
-        self.detailAddress.textColor = [UIColor lightGrayColor];
+        self.userName.textColor = self.phoneNum.textColor = [UIColor colorWithHex:0x49443e];
+        self.detailAddress.textColor = [UIColor colorWithHex:0x938b83];
     }
 }
 

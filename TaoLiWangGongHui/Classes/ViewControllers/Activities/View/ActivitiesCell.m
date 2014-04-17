@@ -7,7 +7,6 @@
 //
 
 #import "ActivitiesCell.h"
-
 @implementation ActivitiesCell
 
 - (id)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier
@@ -26,7 +25,19 @@
 
 - (void)setObject:(NSDictionary *)dict{
     self.activityModel = [[MyActivityModel alloc] initWithDataDic:dict[@"activity"]];
-    [self.activityImage setImageWithURL:[NSURL URLWithString:self.activityModel.activityPic]];
+    [[SDWebImageManager sharedManager] downloadWithURL:[NSURL URLWithString:self.activityModel.activityPic] options:0 progress:^(NSUInteger receivedSize, long long expectedSize) {
+        /**
+         * progress
+         */
+    } completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, BOOL finished) {
+        if (finished && !error && image && self.activityModel.status.boolValue) {
+            UIImage *temp = [[UIImage alloc] initWithData:UIImageJPEGRepresentation(image, 1.0f)];
+            self.activityImage.image = [GlobalHelper grayscale:temp type:1];;
+        }else{
+            self.activityImage.image = image;
+        }
+    }];
+
     self.activityDescription.text = self.activityModel.activityTitle;
     self.activityTime.text = self.activityModel.publishDatetime;
     if (self.activityModel.status.boolValue) {
@@ -38,7 +49,6 @@
         self.activityDescription.textColor = [UIColor blackColor];
     }
 }
-
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated
 {

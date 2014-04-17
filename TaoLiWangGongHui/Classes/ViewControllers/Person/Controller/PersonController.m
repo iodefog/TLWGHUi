@@ -61,7 +61,7 @@
                       @"",
                       @"AboutViewController",nil];
      self.navigationItem.leftBarButtonItem = nil;
-    self.navigationItem.rightBarButtonItem = [UIBarButtonItem barButtonWithTitle:@"    退出" image:nil target:self action:@selector(logout) font:[UIFont systemFontOfSize:15] titleColor:[UIColor whiteColor]];
+    self.navigationItem.rightBarButtonItem = [UIBarButtonItem barButtonWithTitle:@"退出" image:nil target:self action:@selector(logout) font:[UIFont systemFontOfSize:14] titleColor:[UIColor whiteColor] withRightBarItem:YES];
 }
 
 - (void)logout{
@@ -92,7 +92,13 @@
         cell = [[PersonCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellName];
     }
     cell.textLabel.text = [self.cellNameArray objectAtIndex:indexPath.row];
-    cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
+    cell.accessoryType = UITableViewCellAccessoryNone;
+    UIImageView *accessory = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"arrow_right.png"]];
+    accessory.frame = CGRectMake(285, 0, 9, 16);
+    accessory.centerY = cell.centerY;
+    [cell.contentView addSubview:accessory];
+//
+    cell.textLabel.textColor = [UIColor colorWithHex:0x49443e];
     cell.textLabel.font = [UIFont systemFontOfSize:15.0f];
     if (indexPath.row == 0) {
         cell.customImage.image = [UIImage imageNamed:@"input_Top.png"];

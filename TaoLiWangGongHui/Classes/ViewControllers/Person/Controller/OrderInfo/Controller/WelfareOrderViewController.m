@@ -29,6 +29,9 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
     self.navigationItem.title = @"订单交易成功";
+    UIImage *goodsImage = [UIImage imageNamed:@"input_normal.png"];
+    goodsImage = [goodsImage stretchableImageWithLeftCapWidth:goodsImage.size.width/2 topCapHeight:goodsImage.size.height/2];
+    self.goodsBgView.image = goodsImage;
 }
 - (IBAction)enterOrder:(id)sender {
 }
@@ -39,7 +42,7 @@
         return;
     }
     GoodsInfoController *goodsInfoVC = [[GoodsInfoController alloc] initWithNibName:@"GoodsInfoController" bundle:nil];
-    goodsInfoVC.goodsInfoType = GoodsType_None;
+    goodsInfoVC.goodsInfoType = GoodsType_Holiday;
     goodsInfoVC.productID = self.goodID.text;
     [self.navigationController pushViewController:goodsInfoVC animated:YES];
 }

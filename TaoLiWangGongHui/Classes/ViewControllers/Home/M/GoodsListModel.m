@@ -19,7 +19,9 @@
              @"productType":@"productType",
              @"basicPrice":@"basicPrice",
              @"costPrice":@"costPrice",
-             @"productQuantity":@"productQuantity"
+             @"productQuantity":@"productQuantity",
+             @"theHolidayReceiveType":@"theHolidayReceiveType",
+             @"birthdayReceiveType":@"birthdayReceiveType"
              };
 }
 

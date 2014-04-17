@@ -116,7 +116,11 @@
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
     // Return the number of sections.
-    return [self.model count];
+    NSInteger cellCount = 0;
+    if ([self.model isKindOfClass:[NSArray class]]) {
+        cellCount = [self.model count];
+    }
+    return cellCount;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
@@ -184,6 +188,7 @@
     if (isShowWelfareHidden) {
         OrderDetailViewController *cashOrderVC = [[OrderDetailViewController alloc] initWithNibName:@"OrderDetailViewController" bundle:nil];
         cashOrderVC.orderCode = orderCode;
+        cashOrderVC.orderSuccess = YES;
         [self.navigationController pushViewController:cashOrderVC animated:YES];
     }else{
         MyOrderDetailViewController *welfareOrderVC = [[MyOrderDetailViewController alloc] initWithNibName:@"WelfareOrderViewController" bundle:nil];

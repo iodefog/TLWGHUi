@@ -7,6 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "OrderProductModel.h"
 
 @interface OrderGoodView : UIImageView
 
@@ -15,7 +16,7 @@
 @property (strong, nonatomic) IBOutlet UILabel *goodTitle;
 @property (strong, nonatomic) IBOutlet UILabel *goodPrice;
 @property (strong, nonatomic) IBOutlet UILabel *goodQuantity;
-
+@property (strong, nonatomic) OrderProductModel *orderModel;
 - (void)setObject:(NSDictionary *)dict;
 
 @end

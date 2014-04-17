@@ -140,7 +140,8 @@
     self.mScrollView.contentSize = CGSizeMake(self.view.width, 510) ;
     }else{
         
-        self.navigationItem.rightBarButtonItem = [UIBarButtonItem barButtonWithTitle:@"提交" image:nil target:self action:@selector(commitClicked:) font:[UIFont systemFontOfSize:15] titleColor:[UIColor whiteColor]];
+       UIBarButtonItem *barItem = [UIBarButtonItem barButtonWithTitle:@"提交" image:nil target:self action:@selector(commitClicked:) font:[UIFont systemFontOfSize:14] titleColor:[UIColor whiteColor] withRightBarItem:YES];
+        self.navigationItem.rightBarButtonItem = barItem;
     self.mScrollView.contentSize = CGSizeMake(self.view.width, 500) ;
     }
 }
@@ -281,7 +282,12 @@
             [textField resignFirstResponder];
             [self resetScrollView];
         }
+    }else{
+        if ( (textField.tag == 103) && (textField.text.length >= 6) && (![string isEqualToString:@""])) {
+            return NO;
+        }
     }
+    
     return YES;
 }
 
@@ -371,8 +377,6 @@
     }
 //    [self resetScrollView];
 }
-
-
 
 - (void)textViewDidBeginEditing:(UITextView *)textView{
     tempView = textView;

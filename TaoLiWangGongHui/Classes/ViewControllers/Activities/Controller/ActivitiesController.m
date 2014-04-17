@@ -76,6 +76,11 @@ static NSString *activityCellName = @"activityCellName";
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     ActivitiesCell *cell = (id)[tableView cellForRowAtIndexPath:indexPath];
+    if (cell.activityModel.status.boolValue) {
+//        [[TKAlertCenter defaultCenter] postAlertWithMessage:@"活动已过期"];
+        return;
+    }
+    
     ActivitiesDetailController *activityVC = [[ActivitiesDetailController alloc] initWithActivityType:TypeNone withID:cell.activityModel.activityId];
     activityVC.navigationItem.title = @"活动详情";
     [activityVC setHidesBottomBarWhenPushed:YES];
