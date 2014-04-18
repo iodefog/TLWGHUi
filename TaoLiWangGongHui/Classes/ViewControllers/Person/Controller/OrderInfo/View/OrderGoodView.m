@@ -66,7 +66,9 @@
         GoodsInfoController *goodsVC = [[GoodsInfoController alloc] initWithNibName:@"GoodsInfoController" bundle:nil];
         goodsVC.productID = self.orderModel.productId;
         goodsVC.goodsInfoType = GoodsType_Discount;
-        goodsVC.goodsListModel = (id)self.orderModel;
+        NSDictionary *param = @{@"productId":self.orderModel.productId};
+        GoodsListModel *goodsListModel = [[GoodsListModel alloc] initWithDataDic:param];
+        goodsVC.goodsListModel = goodsListModel;
         [selected_navigation_controller() pushViewController:goodsVC animated:YES];
     }
 }

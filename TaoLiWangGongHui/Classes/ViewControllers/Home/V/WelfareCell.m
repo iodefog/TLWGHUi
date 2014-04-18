@@ -34,12 +34,12 @@
 
 - (void)setObject:(NSDictionary *)params{
     self.goodsModel = [[GoodsListModel alloc] initWithDataDic:params];
-    if (self.goodsModel.theHolidayReceiveType.boolValue && self.welfareType == WelfareHoliday) {
-        self.receiveButton.enabled = YES;
-    }else if (self.goodsModel.birthdayReceiveType.boolValue && self.welfareType == WelfareBirthDay){
-        self.receiveButton.enabled = YES;
-    }else{
+    if ((self.goodsModel.productType.intValue == 2) && self.goodsModel.theHolidayReceiveType.boolValue) {
         self.receiveButton.enabled = NO;
+    }else if ((self.goodsModel.productType.intValue == 1) && self.goodsModel.birthdayReceiveType.boolValue){
+        self.receiveButton.enabled = NO;
+    }else{
+        self.receiveButton.enabled = YES;
     }
     
     [self.welfareGoodImage setImageWithURL:[NSURL URLWithString:self.goodsModel.previewPicPath]];

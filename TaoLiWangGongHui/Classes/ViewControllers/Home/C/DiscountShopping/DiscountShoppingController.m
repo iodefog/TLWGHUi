@@ -65,7 +65,7 @@
     NSDictionary *params = @{
                              @"memberId": [[UserHelper shareInstance] getMemberID],
                              @"pageNo": [NSString stringWithFormat:@"%d", [self.model count]/PAGESIZEINT],
-                             @"Type":@"3",
+                             @"productType":@"3",
                              @"pageSize": PAGESIZE,};
     [self commitRequestWithParams:params withUrl:[GlobalRequest productAction_QueryProductListByType_Url] withView:nil];
 }
@@ -81,7 +81,7 @@
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
     // Return the number of rows in the section.
-    return [self.model count];
+    return [self.model count] + 1;
 }
 
 - (DiscountShoppingCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -93,6 +93,9 @@
     }
     if (indexPath.row < [self.model count]) {
         [cell setObject:self.model[indexPath.row]];
+        cell.coverView.hidden = YES;
+    }else{
+        cell.coverView.hidden = NO;
     }
     return cell;
 }
@@ -102,6 +105,9 @@
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
+    if (indexPath.row == [self.model count]) {
+        return;
+    }
     DiscountShoppingCell *cell = (id)[tableView cellForRowAtIndexPath:indexPath];
     GoodsInfoController *goodsInfo = [[GoodsInfoController alloc] initWithNibName:@"GoodsInfoController" bundle:nil];
     goodsInfo.productID = cell.discountModel.productId;

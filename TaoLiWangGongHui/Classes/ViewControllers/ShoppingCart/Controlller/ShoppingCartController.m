@@ -186,7 +186,7 @@ static UIButton *leftButton = nil;
     if (indexPath.row == [self.model count] ) {
         cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"CustomCell"];
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
-        UIButton *payMentBtn = [UIButton createButton:@selector(toPaymentClicked:) title:@"支付宝支付" image:nil selectedBgImage:@"login_Select.png"  backGroundImage:@"login_Nomal.png"  backGroundTapeImage:nil frame:CGRectMake(10, 20, 300, 36) tag:100 target:self];
+        UIButton *payMentBtn = [UIButton createButton:@selector(toPaymentClicked:) title:@"去结算" image:nil selectedBgImage:@"login_Select.png"  backGroundImage:@"login_Nomal.png"  backGroundTapeImage:nil frame:CGRectMake(10, 20, 300, 36) tag:100 target:self];
         [payMentBtn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
         [cell.contentView addSubview:payMentBtn];
     }else{

@@ -46,7 +46,7 @@
                             <rect key="frame" x="0.0" y="232" width="320" height="92"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <subviews>
-                                <imageView contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="message_buttom.png" highlightedImage="79670E88-32B4-4E15-9CA5-1FB79B47320A" id="zhI-a3-ify">
+                                <imageView contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="message_buttom.png" highlightedImage="6298FC9A-1D87-4853-BCCE-20E087D0576C" id="zhI-a3-ify">
                                     <rect key="frame" x="0.0" y="0.0" width="320" height="92"/>
                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 </imageView>
@@ -87,7 +87,7 @@
                                     <color key="textColor" red="0.28627450980392155" green="0.26666666666666666" blue="0.24313725490196078" alpha="1" colorSpace="calibratedRGB"/>
                                     <nil key="highlightedColor"/>
                                 </label>
-                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="Ms6-Zi-EzS">
+                                <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="Ms6-Zi-EzS">
                                     <rect key="frame" x="204" y="55" width="107" height="26"/>
                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                     <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
@@ -121,7 +121,7 @@
         </view>
     </objects>
     <resources>
-        <image name="79670E88-32B4-4E15-9CA5-1FB79B47320A" width="640" height="184">
+        <image name="6298FC9A-1D87-4853-BCCE-20E087D0576C" width="640" height="184">
             <mutableData key="keyedArchiveRepresentation">
 YnBsaXN0MDDUAQIDBAUGOzxYJHZlcnNpb25YJG9iamVjdHNZJGFyY2hpdmVyVCR0b3ASAAGGoK0HCBEW
 GxwgISksLzU4VSRudWxs1AkKCwwNDg8QViRjbGFzc1xOU0ltYWdlRmxhZ3NWTlNSZXBzV05TQ29sb3KA

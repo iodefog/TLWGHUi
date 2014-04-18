@@ -27,7 +27,7 @@
                         <nil key="highlightedColor"/>
                     </label>
                     <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="现价:0元" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="I7T-8n-09k">
-                        <rect key="frame" x="99" y="59" width="61" height="21"/>
+                        <rect key="frame" x="99" y="59" width="84" height="21"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <fontDescription key="fontDescription" type="boldSystem" pointSize="12"/>
                         <color key="textColor" red="1" green="0.33333333333333331" blue="0.074509803921568626" alpha="1" colorSpace="calibratedRGB"/>
@@ -39,7 +39,7 @@
                         <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
                     <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="原价:0元" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="so3-48-Ud2">
-                        <rect key="frame" x="176" y="59" width="79" height="21"/>
+                        <rect key="frame" x="179" y="59" width="79" height="21"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <fontDescription key="fontDescription" type="system" pointSize="12"/>
                         <color key="textColor" red="0.58823529411764708" green="0.58823529411764708" blue="0.58823529411764708" alpha="1" colorSpace="calibratedRGB"/>
@@ -56,9 +56,15 @@
                             <action selector="addShoppingCart:" destination="6rz-nq-h2r" eventType="touchUpInside" id="dQ7-4x-zIL"/>
                         </connections>
                     </button>
+                    <view hidden="YES" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Xz2-Y5-0lw">
+                        <rect key="frame" x="0.0" y="0.0" width="325" height="95"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                    </view>
                 </subviews>
             </tableViewCellContentView>
             <connections>
+                <outlet property="coverView" destination="Xz2-Y5-0lw" id="aj5-CJ-3pN"/>
                 <outlet property="goodsImage" destination="Yft-Et-QWG" id="EA2-z6-wZm"/>
                 <outlet property="goodsPrePrice" destination="so3-48-Ud2" id="csF-hZ-mDn"/>
                 <outlet property="goodsPrice" destination="I7T-8n-09k" id="8Si-BT-fib"/>

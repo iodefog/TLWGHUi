@@ -46,8 +46,8 @@
     // 请求用户信息
     [self commitRequestWithParams:@{@"memberId":[[UserHelper shareInstance] getMemberID]} withUrl:[GlobalRequest userAction_queryUserInfo_Url]];
     
-   NSData *imageData = [[NSUserDefaults standardUserDefaults] objectForKey:[NSString stringWithFormat:@"%@_head",[[UserHelper shareInstance] getMemberID]]];
-    self.userHeadImage.image = [UIImage imageWithData:imageData];
+//   NSData *imageData = [[NSUserDefaults standardUserDefaults] objectForKey:[NSString stringWithFormat:@"%@_head",[[UserHelper shareInstance] getMemberID]]];
+//    self.userHeadImage.image = [UIImage imageWithData:imageData];
 }
 
 // 头像点击
@@ -59,10 +59,10 @@
 
 #pragma mark - ImagePicker Delegate
 - (void)setViewPhoto:(NSString *)path sender:(id)sender{
-    [self.userHeadImage setImageWithURL:[NSURL fileURLWithPath:path]];
-    
-    [[NSUserDefaults standardUserDefaults] setObject:[NSData dataWithContentsOfURL:[NSURL fileURLWithPath:path]] forKey:[NSString stringWithFormat:@"%@_head",[[UserHelper shareInstance] getMemberID]]];
-    [[NSUserDefaults standardUserDefaults] synchronize];
+//    [self.userHeadImage setImageWithURL:[NSURL fileURLWithPath:path]];
+//    
+//    [[NSUserDefaults standardUserDefaults] setObject:[NSData dataWithContentsOfURL:[NSURL fileURLWithPath:path]] forKey:[NSString stringWithFormat:@"%@_head",[[UserHelper shareInstance] getMemberID]]];
+//    [[NSUserDefaults standardUserDefaults] synchronize];
     
     
 //    [self commitRequestWithParams:@{

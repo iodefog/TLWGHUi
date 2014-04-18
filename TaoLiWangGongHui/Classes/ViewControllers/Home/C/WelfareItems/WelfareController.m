@@ -38,19 +38,32 @@
 {
     [super viewDidLoad];
     self.navigationItem.title = self.welfareType?@"节日福利领取":@"生日福利领取";
-    if (!self.model) {
-        NSDictionary *param = @{
-                                @"id":[[UserHelper shareInstance] getMemberID],
-                                (self.welfareType?@"type":@"productType"):self.welfareType?@"2":@"1",
-                                @"pageNo":@"0",
-                                @"pageSize":PAGESIZE
-                                };
-        [self commitRequestWithParams:param withUrl:[GlobalRequest productAction_QueryProductListByType_Url] withView:self.view];
-    }
-   
     [self.tableView setTableFooterView:[[UIView alloc] init]];
+    
+    [self addHeader];
+    [self addFooter];
 }
 
+
+#pragma mark - MJRefresh
+- (void)refreshHeaderView{
+    NSDictionary *param = @{
+                            @"memberId":[[UserHelper shareInstance] getMemberID],
+                            @"productType":self.welfareType?@"2":@"1",
+                            @"pageNo":@"0",
+                            @"pageSize":PAGESIZE
+                            };
+    [self commitRequestWithParams:param withUrl:[GlobalRequest productAction_QueryProductListByType_Url] withView:self.view];
+}
+
+- (void)refreshFooterView{
+    NSDictionary *params = @{
+                             @"memberId": [[UserHelper shareInstance] getMemberID],
+                             @"pageNo": [NSString stringWithFormat:@"%d", [self.model count]/PAGESIZEINT],
+                             @"productType":self.welfareType?@"2":@"1",
+                             @"pageSize": PAGESIZE,};
+    [self commitRequestWithParams:params withUrl:[GlobalRequest productAction_QueryProductListByType_Url] withView:self.view];
+}
 
 - (void)didReceiveMemoryWarning
 {
@@ -81,8 +94,8 @@ static GoodsListModel *goodsModel = nil;
     if (!cell) {
         cell = [[[NSBundle mainBundle] loadNibNamed:@"WelfareCell" owner:nil options:nil] lastObject];
     }
-    [cell setObject:self.model[indexPath.row]];
     cell.welfareType = self.welfareType;
+    [cell setObject:self.model[indexPath.row]];
     return cell;
 }
 

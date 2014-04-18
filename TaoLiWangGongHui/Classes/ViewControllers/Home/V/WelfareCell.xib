@@ -26,7 +26,7 @@
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <fontDescription key="fontDescription" type="system" pointSize="15"/>
                         <state key="normal" title="立即领取" backgroundImage="welfare_normal.png"/>
-                        <state key="disabled" title="已领取" backgroundImage="department_bg.png"/>
+                        <state key="disabled" title="已领取" backgroundImage="shopping_receive.png"/>
                         <state key="selected" backgroundImage="login_Select.png"/>
                         <connections>
                             <action selector="GetNowClicked:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="jgV-6h-cfX"/>
@@ -61,9 +61,9 @@
         </tableViewCell>
     </objects>
     <resources>
-        <image name="department_bg.png" width="78" height="17"/>
         <image name="login_Select.png" width="300" height="35"/>
         <image name="shopping_placeholder.png" width="75" height="75"/>
+        <image name="shopping_receive.png" width="105" height="25"/>
         <image name="welfare_normal.png" width="89" height="26"/>
     </resources>
 </document>

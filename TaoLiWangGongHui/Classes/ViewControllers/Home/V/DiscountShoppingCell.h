@@ -15,6 +15,7 @@
 @property (strong, nonatomic) IBOutlet UILabel *goodsTitle;
 @property (strong, nonatomic) IBOutlet UILabel *goodsPrice;
 @property (strong, nonatomic) IBOutlet UILabel *goodsPrePrice;
+@property (strong, nonatomic) IBOutlet UIView *coverView; // 覆盖物
 @property (strong, nonatomic) GoodsListModel *discountModel;
 
 - (void)setObject:(NSDictionary *)dict;

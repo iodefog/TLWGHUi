@@ -45,9 +45,9 @@
                            @"price":[NSString stringWithFormat:@"%@",self.goodsListModel.costPrice],
                            @"score":@"0",};
 
-    NSDictionary *goodsDict = @{@"orderType":@"3",
+    NSDictionary *goodsDict = @{@"orderType":(self.goodsListModel.productType.intValue==1)?@"1":@"2",
                                 @"totalMoney":@"0",
-                                @"totalScore":[NSString stringWithFormat:@"%@f",self.goodsListModel.costPrice],
+                                @"totalScore":[NSString stringWithFormat:@"%@",self.goodsListModel.costPrice],
                                 @"orderProducts":@[dict],};
     
     NSData *jsonData = [NSJSONSerialization dataWithJSONObject:goodsDict options:NSJSONWritingPrettyPrinted error:nil];
@@ -76,7 +76,7 @@
                              @"orderCode":orderCode,
                              @"payFlowNo":payFlowNo,
                              @"totalMoney":@"0",
-                             @"totalScore":self.goodsListModel.costPrice,};
+                             @"totalScore":@"0"};
     [self commitRequestWithParams:params withUrl:[GlobalRequest orderAction_Submit_Url]];
     
     /****

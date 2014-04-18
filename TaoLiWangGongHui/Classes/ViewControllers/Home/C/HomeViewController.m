@@ -130,7 +130,9 @@
                 [UIAlertView popupAlertByDelegate:nil andTag:0 title:nil message:@"\n\n亲，福利的时间还没有到。\n\n"];
             }else{
                 WelfareController *welfareController = [[WelfareController alloc] initWithWelfareType:isBirthDay?WelfareBirthDay:WelfareHoliday];
-                welfareController.model = resultDic[@"result"];
+                if ([resultDic[@"result"] isKindOfClass:[NSArray class]]) {
+                    welfareController.model = [NSMutableArray arrayWithArray:resultDic[@"result"]];
+                }
                 [welfareController setHidesBottomBarWhenPushed:YES];
                 [self.navigationController pushViewController:welfareController animated:YES];
             }
@@ -185,7 +187,7 @@
         welfareDataHaveData = YES;
         isBirthDay = (200==sender.tag)?YES:NO;
         NSDictionary *param = @{
-                                @"id":[[UserHelper shareInstance] getMemberID],
+                                @"memberId":[[UserHelper shareInstance] getMemberID],
                                 @"productType":(200==sender.tag)?@"1":@"2",
                                 @"pageNo":@"0",
                                 @"pageSize":PAGESIZE

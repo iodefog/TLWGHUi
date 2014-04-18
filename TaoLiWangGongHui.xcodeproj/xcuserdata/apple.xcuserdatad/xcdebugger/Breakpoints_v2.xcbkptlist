@@ -100,11 +100,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "TaoLiWangGongHui/Classes/ViewControllers/Home/C/WelfareItems/WelfareController.m"
-            timestampString = "418702026.488017"
+            timestampString = "419429184.22765"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "84"
-            endingLineNumber = "84"
+            startingLineNumber = "98"
+            endingLineNumber = "98"
             landmarkName = "-tableView:cellForRowAtIndexPath:"
             landmarkType = "5">
          </BreakpointContent>
@@ -946,11 +946,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "TaoLiWangGongHui/Classes/ViewControllers/GoodsInfo/Controller/GoodsInfoController.m"
-            timestampString = "419399010.637006"
+            timestampString = "419416869.628323"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "78"
-            endingLineNumber = "78"
+            startingLineNumber = "79"
+            endingLineNumber = "79"
             landmarkName = "-reloadNewData"
             landmarkType = "5">
          </BreakpointContent>
@@ -1199,22 +1199,6 @@
             shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "TaoLiWangGongHui/Classes/ViewControllers/Person/Controller/ConfirmInfo/WelfareConfirmViewController.m"
-            timestampString = "419156184.555044"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "129"
-            endingLineNumber = "129"
-            landmarkName = "-setDataDic:withRequest:"
-            landmarkType = "5">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
             filePath = "TaoLiWangGongHui/Classes/ViewControllers/Person/Controller/MyOrder/MyOrderDetailViewController.m"
             timestampString = "418634396.954301"
             startingColumnNumber = "9223372036854775807"
@@ -1328,11 +1312,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "TaoLiWangGongHui/Classes/ViewControllers/Home/C/HomeViewController.m"
-            timestampString = "419406485.316772"
+            timestampString = "419429282.441988"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "176"
-            endingLineNumber = "176"
+            startingLineNumber = "178"
+            endingLineNumber = "178"
             landmarkName = "-delicateLifeClicked:"
             landmarkType = "5">
          </BreakpointContent>
@@ -1578,17 +1562,17 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            shouldBeEnabled = "Yes"
+            shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "TaoLiWangGongHui/Classes/ViewControllers/GoodsInfo/Controller/GoodsInfoController.m"
-            timestampString = "419399010.637006"
+            timestampString = "419416966.661551"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "280"
-            endingLineNumber = "280"
-            landmarkName = "@implementation GoodsInfoController"
-            landmarkType = "3">
+            startingLineNumber = "284"
+            endingLineNumber = "284"
+            landmarkName = "-InsertCardButtonClick:"
+            landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -1770,16 +1754,16 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            shouldBeEnabled = "Yes"
+            shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "TaoLiWangGongHui/Classes/ViewControllers/GoodsInfo/Controller/GoodsInfoController.m"
-            timestampString = "419399010.637006"
+            timestampString = "419416966.661551"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "146"
-            endingLineNumber = "146"
-            landmarkName = "-JoinCarButtonClick:"
+            startingLineNumber = "150"
+            endingLineNumber = "150"
+            landmarkName = "-viewDidLoad"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
@@ -1790,13 +1774,13 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "TaoLiWangGongHui/Classes/ViewControllers/GoodsInfo/Controller/GoodsInfoController.m"
-            timestampString = "419399010.637006"
+            timestampString = "419416966.661551"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "249"
-            endingLineNumber = "249"
-            landmarkName = "-InsertCardButtonClick:"
-            landmarkType = "5">
+            startingLineNumber = "253"
+            endingLineNumber = "253"
+            landmarkName = "@implementation GoodsInfoController"
+            landmarkType = "3">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -1886,11 +1870,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "TaoLiWangGongHui/Classes/ViewControllers/GoodsInfo/Controller/GoodsInfoController.m"
-            timestampString = "419399010.637006"
+            timestampString = "419416966.661551"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "262"
-            endingLineNumber = "262"
+            startingLineNumber = "266"
+            endingLineNumber = "266"
             landmarkName = "-InsertCardButtonClick:"
             landmarkType = "5">
          </BreakpointContent>
@@ -2020,6 +2004,212 @@
             startingLineNumber = "35"
             endingLineNumber = "35"
             landmarkName = "-setObject:"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "TaoLiWangGongHui/Classes/ViewControllers/Home/V/WelfareCell.m"
+            timestampString = "419415726.072024"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "40"
+            endingLineNumber = "40"
+            landmarkName = "-setObject:"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "TaoLiWangGongHui/Classes/ViewControllers/Home/V/WelfareCell.m"
+            timestampString = "419415729.917618"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "42"
+            endingLineNumber = "42"
+            landmarkName = "-setObject:"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "TaoLiWangGongHui/Classes/ViewControllers/Home/V/WelfareCell.m"
+            timestampString = "419416516.015047"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "43"
+            endingLineNumber = "43"
+            landmarkName = "-setObject:"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "TaoLiWangGongHui/Classes/ViewControllers/GoodsInfo/Controller/GoodsInfoController.m"
+            timestampString = "419416974.613465"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "110"
+            endingLineNumber = "110"
+            landmarkName = "-addImageArray:"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "TaoLiWangGongHui/Classes/ViewControllers/Person/Controller/ConfirmInfo/WelfareConfirmViewController.m"
+            timestampString = "419418660.407617"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "131"
+            endingLineNumber = "131"
+            landmarkName = "-setDataDic:withRequest:"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "TaoLiWangGongHui/Classes/ViewControllers/GoodsInfo/Controller/GoodsInfoController.m"
+            timestampString = "419426573.327047"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "263"
+            endingLineNumber = "263"
+            landmarkName = "-InsertCardButtonClick:"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "TaoLiWangGongHui/Classes/ViewControllers/Home/C/DiscountShopping/DiscountShoppingController.m"
+            timestampString = "419428975.43287"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "56"
+            endingLineNumber = "56"
+            landmarkName = "-refreshHeaderView"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "TaoLiWangGongHui/Classes/ViewControllers/Home/C/WelfareItems/WelfareController.m"
+            timestampString = "419429344.048765"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "65"
+            endingLineNumber = "65"
+            landmarkName = "-refreshFooterView"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "TaoLiWangGongHui/Classes/ViewControllers/Base/Controller/TableViewController.m"
+            timestampString = "419429460.8723"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "112"
+            endingLineNumber = "112"
+            landmarkName = "-setDataDic:withRequest:"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "TaoLiWangGongHui/Classes/ViewControllers/Base/Controller/TableViewController.m"
+            timestampString = "419429517.361346"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "55"
+            endingLineNumber = "55"
+            landmarkName = "-commitRequestWithParams:withUrl:withView:"
+            landmarkType = "5">
+            <Locations>
+               <Location
+                  shouldBeEnabled = "No"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "-[TableViewController commitRequestWithParams:withUrl:withView:]"
+                  moduleName = "TaoLiWangGongHui"
+                  urlString = "file:///Users/apple/Documents/taoligonghui/taoligonghui/TaoLiWangGongHui/TaoLiWangGongHui/Classes/ViewControllers/Base/Controller/TableViewController.m"
+                  timestampString = "419429630.003495"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "55"
+                  endingLineNumber = "55"
+                  offsetFromSymbolStart = "150">
+               </Location>
+               <Location
+                  shouldBeEnabled = "No"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "__64-[TableViewController commitRequestWithParams:withUrl:withView:]_block_invoke"
+                  moduleName = "TaoLiWangGongHui"
+                  urlString = "file:///Users/apple/Documents/taoligonghui/taoligonghui/TaoLiWangGongHui/TaoLiWangGongHui/Classes/ViewControllers/Base/Controller/TableViewController.m"
+                  timestampString = "419429630.003811"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "55"
+                  endingLineNumber = "55"
+                  offsetFromSymbolStart = "59">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "TaoLiWangGongHui/Classes/ViewControllers/Home/C/DiscountShopping/DiscountShoppingController.m"
+            timestampString = "419429860.054555"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "70"
+            endingLineNumber = "70"
+            landmarkName = "-refreshFooterView"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>

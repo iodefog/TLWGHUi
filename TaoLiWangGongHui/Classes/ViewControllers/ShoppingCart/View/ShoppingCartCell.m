@@ -76,7 +76,7 @@
     self.GoodDescription.text = self.shoppingModel.productName;
     [self.goodImage setImageWithURL:[NSURL URLWithString:self.shoppingModel.previewPicPath]];
     NSString *procuctQuantity = [[GoodsDetailDataBase shareDataBase]readTableQualityWithProductID:self.shoppingModel.productId];
-    CGFloat tempPrice = self.shoppingModel.costPrice.floatValue * ((procuctQuantity.intValue==0)?1:procuctQuantity.intValue);
+    CGFloat tempPrice = self.shoppingModel.costPrice.floatValue ;
     self.GoodPrice.text = [NSString stringWithFormat:@"%.2f元",tempPrice];
     self.GoodQuantity.text = procuctQuantity?procuctQuantity:@"1";
 }

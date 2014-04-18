@@ -69,20 +69,21 @@
 
 
 - (void)reloadNewData{
+    self.PayOrJoinCartBtn.hidden = NO;
     if ([self.model isKindOfClass:[NSDictionary class]]) {
         self.goodsInfoModel = [[GoodsInfoModel alloc] initWithDataDic:self.model];
     }
     if ((self.goodsInfoType==GoodsType_BirthDay) || (self.goodsInfoType==GoodsType_Holiday)) {
         [self.PayOrJoinCartBtn setTitle:@"立即领取" forState:UIControlStateNormal];
         [self.PayOrJoinCartBtn setTitle:@"已领取" forState:UIControlStateDisabled];
-        [self.PayOrJoinCartBtn setBackgroundImage:[UIImage imageNamed:@"department_bg.png"] forState:UIControlStateDisabled];
+        [self.PayOrJoinCartBtn setBackgroundImage:[UIImage imageNamed:@"shopping_receive.png"] forState:UIControlStateDisabled];
         if (self.goodsListModel.theHolidayReceiveType.boolValue && (self.goodsInfoType==GoodsType_Holiday)) {
-            self.PayOrJoinCartBtn.enabled = YES;
+            self.PayOrJoinCartBtn.enabled = NO;
         }else if(self.goodsListModel.birthdayReceiveType.boolValue && (self.goodsInfoType==GoodsType_BirthDay)){
-            self.PayOrJoinCartBtn.enabled = YES;
+            self.PayOrJoinCartBtn.enabled = NO;
         }
         else{
-            self.PayOrJoinCartBtn.enabled = NO;
+            self.PayOrJoinCartBtn.enabled = YES;
         }
         self.GoodsOrderId.hidden = NO;
         self.GoodsPriceSperate.hidden = self.GoodsNewPriceLable.hidden = self.GoodsOldPriceLable.hidden = YES;
@@ -94,7 +95,7 @@
     self.ShowImageNumberLable.text = [NSString stringWithFormat:@"1/%d",[self.goodsInfoModel.productPictures count]];
     self.GoodsNameLable.text = self.goodsInfoModel.productName;
     self.GoodsNewPriceLable.text = [NSString stringWithFormat:@"%@元",self.goodsInfoModel.costPrice];
-    self.GoodsOrderId.text = [NSString stringWithFormat:@"订单编号:%@元",self.goodsInfoModel.productId];
+    self.GoodsOrderId.text = [NSString stringWithFormat:@"订单编号:%@",self.goodsInfoModel.productId];
     self.GoodsOldPriceLable.text = [NSString stringWithFormat:@"%@元",self.goodsInfoModel.basicPrice];
     [self addImageArray:self.goodsInfoModel.productPictures];
 }
@@ -104,7 +105,10 @@
     self.ShowImageScrollView.contentSize = CGSizeMake(self.view.width * [imagesArray count], self.ShowImageScrollView.height);
     for (int i = 0; i < [imagesArray count]; i ++) {
         UIImageView *imageView = [[UIImageView alloc] initWithFrame:CGRectMake(self.view.width * i, 0, self.view.width, self.ShowImageScrollView.height)];
-        [imageView setImageWithURL:[NSURL URLWithString:imagesArray[i]]];
+        NSDictionary *imageDict = imagesArray[i];
+        if ([imageDict isKindOfClass:[NSDictionary class]]) {
+            [imageView setImageWithURL:[NSURL URLWithString:imageDict[@"previewPicPath"]]];
+        }
         [self.ShowImageScrollView addSubview:imageView];
     }
 }

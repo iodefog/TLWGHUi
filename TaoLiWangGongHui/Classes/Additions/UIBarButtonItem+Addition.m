@@ -52,7 +52,7 @@
 {
     UIButton *button = [[UIButton alloc] initWithFrame:CGRectMake(10, 5, 60, 30)];
     [button setImage:[UIImage imageNamed:imageName] forState:UIControlStateNormal];
-    if (!right) {
+    if (!right && isIOS7) {
         [button setImageEdgeInsets:UIEdgeInsetsMake(0, -14, 0, 14)];
     }else{
     

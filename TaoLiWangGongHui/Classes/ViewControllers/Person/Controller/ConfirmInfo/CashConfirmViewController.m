@@ -41,7 +41,7 @@ static bool shoppingShow = NO;
 
 - (void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
-    self.totalPrice.text = [NSString stringWithFormat:@"%.2f元",self.goodsSumPrice];
+    self.totalPrice.text = [NSString stringWithFormat:@"总计:%.2f元",self.goodsSumPrice];
     [self commitRequestWithParams:@{@"memberId": [[UserHelper shareInstance] getMemberID]} withUrl:[GlobalRequest addressAction_QueryAddressList_Url]];
 
 //    NSArray *dbArray = [[UserAddressDataBase shareDataBase] readTableName];
